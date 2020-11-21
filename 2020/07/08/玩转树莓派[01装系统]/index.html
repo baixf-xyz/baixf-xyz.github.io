@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>文章标题 - Hexo</title>
+  <title>玩转树莓派[01:装系统] - Hexo</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
@@ -169,12 +169,12 @@
 </nav>
 
     <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
+         style="background: url('https://api.ixiaowai.cn/mcapi/mcapi.php') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="文章标题">
+            <span class="h2" id="subtitle" title="玩转树莓派[01:装系统]">
               
             </span>
 
@@ -184,8 +184,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2019-11-11 11:11" pubdate>
-        2019年11月11日 上午
+      <time datetime="2020-07-08 11:11" pubdate>
+        2020年7月8日 上午
       </time>
     </span>
   
@@ -196,7 +196,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      19 字
+      791 字
     </span>
   
 
@@ -206,7 +206,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      10
        分钟
     </span>
   
@@ -236,16 +236,46 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">文章标题</h1>
+            <h1 style="display: none">玩转树莓派[01:装系统]</h1>
             
             <div class="markdown-body">
-              <p>正文</p>
-<p><p class="note note-primary">标签</p><br><span class="label label-primary">Label</span><br>
-            <input type="checkbox" disabled checked="checked">text
-          <br><a class="btn" href="url" title="title">text</a></p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>参考资料1
-<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span>参考资料2
-<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+              <h3 id="一-格式化以及烤录系统"><a href="#一-格式化以及烤录系统" class="headerlink" title="一.格式化以及烤录系统"></a>一.格式化以及烤录系统</h3><p class="note note-primary">
+  镜像选择：树莓派爱好者基地
+  2020-06-17-OPENFANS-Debian-Buster-Desktop-Aarch64-ext4-v2019-2.0-U3-Release.img.xz
+</p>
+
+<h5 id="1-1格式化储存卡"><a href="#1-1格式化储存卡" class="headerlink" title="1.1格式化储存卡"></a>1.1格式化储存卡</h5><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201121201303.png" srcset="/img/loading.gif"  border="0" /></p>
+<h5 id="1-2烤录镜像"><a href="#1-2烤录镜像" class="headerlink" title="1.2烤录镜像"></a>1.2烤录镜像</h5><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201121201352.png" srcset="/img/loading.gif"  border="0" /></p>
+<h3 id="二-查看官方文档"><a href="#二-查看官方文档" class="headerlink" title="二.查看官方文档"></a>二.查看官方文档</h3><p><a class="wp-editor-md-post-content-link" target="_blank" rel="noopener" href="https://gitee.com/openfans-community/Debian-Pi-Aarch64">https://gitee.com/openfans-community/Debian-Pi-Aarch64/</a></p>
+<h4 id="2-1服务开关："><a href="#2-1服务开关：" class="headerlink" title="2.1服务开关："></a>2.1服务开关：</h4><h5 id="2-1-1-Docker容器"><a href="#2-1-1-Docker容器" class="headerlink" title="2.1.1 Docker容器"></a>2.1.1 Docker容器</h5><p><span class="label label-primary"><br>  手动开启：systemctl start docker.service<br>  手动停止：systemctl stop docker.service<br>  启用开机启动：systemctl enable docker.service<br>  禁用开机启动：systemctl disable docker.service
+</span></p>
+<h5 id="2-1-2-CecOS-CaaS容器云（服务端口：8443）"><a href="#2-1-2-CecOS-CaaS容器云（服务端口：8443）" class="headerlink" title="2.1.2 CecOS CaaS容器云（服务端口：8443）"></a>2.1.2 CecOS CaaS容器云（服务端口：8443）</h5><p><span class="label label-primary"><br>  手动开启：systemctl start cecos-caas.service<br>  手动停止：systemctl stop cecos-caas.service<br>  启用开机启动：systemctl enable cecos-caas.service<br>  禁用开机启动：systemctl disable cecos-caas.service
+</span></p>
+<h5 id="2-1-3-WebGUI管理平台（服务端口：9090"><a href="#2-1-3-WebGUI管理平台（服务端口：9090" class="headerlink" title="2.1.3 WebGUI管理平台（服务端口：9090)"></a>2.1.3 WebGUI管理平台（服务端口：9090)</h5><p><span class="label label-primary"><br>  手动开启：systemctl start cockpit.socket<br>  手动停止：systemctl stop cockpit.socket<br>  启用开机启动：systemctl enable cockpit.socket<br>  禁用开机启动：systemctl disable cockpit.socket
+</span></p>
+<h5 id="2-1-4-Web-SSH客户端（服务端口：4200）"><a href="#2-1-4-Web-SSH客户端（服务端口：4200）" class="headerlink" title="2.1.4 Web SSH客户端（服务端口：4200）"></a>2.1.4 Web SSH客户端（服务端口：4200）</h5><p><span class="label label-primary"><br>  手动开启：systemctl start shellinabox.service<br>  手动停止：systemctl stop shellinabox.service<br>  启用开机启动：systemctl enable shellinabox.service<br>  禁用开机启动：systemctl disable shellinabox.service
+</span></p>
+<h5 id="2-1-5-默认的VNC访问密码为-raspberry"><a href="#2-1-5-默认的VNC访问密码为-raspberry" class="headerlink" title="2.1.5 默认的VNC访问密码为: raspberry"></a>2.1.5 默认的VNC访问密码为: raspberry</h5><p><span class="label label-primary"><br>默认的WEB VNC访问地址为: <a target="_blank" rel="noopener" href="http://你树莓派的IP地址:5901">http://你树莓派的IP地址:5901</a><br>默认的客户端访问地址为: 你树莓派的IP地址:5900
+</span></p>
+<h4 id="2-2账户及密码"><a href="#2-2账户及密码" class="headerlink" title="2.2账户及密码"></a>2.2账户及密码</h4><p><span class="label label-primary"><br>  系统默认账户：pi ，默认密码：raspberry<br>  默认账户pi账户支持ssh登录，root账户密码请登陆后使用命令 “sudo passwd root” 执行设置，<br>  或使用命令 “sudo -i” 来切换到root用户。
+</span></p>
+<h4 id="2-3Web登录接口说明"><a href="#2-3Web登录接口说明" class="headerlink" title="2.3Web登录接口说明"></a>2.3Web登录接口说明</h4><h5 id="2-3-1-Web可视化管理界面"><a href="#2-3-1-Web可视化管理界面" class="headerlink" title="2.3.1 Web可视化管理界面"></a>2.3.1 Web可视化管理界面</h5><p><span class="label label-primary"><br>登录地址 <a target="_blank" rel="noopener" href="https://你树莓派的IP地址:9090">https://你树莓派的IP地址:9090</a><br>说明：请使用系统默认账户pi登录
+</span></p>
+<h5 id="2-3-2-WEB-SSH-客户端-入口界面"><a href="#2-3-2-WEB-SSH-客户端-入口界面" class="headerlink" title="2.3.2 WEB SSH 客户端 入口界面"></a>2.3.2 WEB SSH 客户端 入口界面</h5><p><span class="label label-primary"><br>登录地址 <a target="_blank" rel="noopener" href="https://你树莓派的IP地址:4200">https://你树莓派的IP地址:4200</a><br>说明：使用具有控制台登录权限的帐户登录，例如：pi
+</span></p>
+<h5 id="2-3-3-CecOS-CaaS-容器云管理平台-登录界面"><a href="#2-3-3-CecOS-CaaS-容器云管理平台-登录界面" class="headerlink" title="2.3.3 CecOS CaaS 容器云管理平台 登录界面"></a>2.3.3 CecOS CaaS 容器云管理平台 登录界面</h5><p><span class="label label-primary"><br>登录地址 <a target="_blank" rel="noopener" href="https://你树莓派的IP地址:8443">https://你树莓派的IP地址:8443</a><br>说明：默认管理账户 admin , 默认密码：password 。请登录后立即修改默认密码！！
+</span></p>
+<h4 id="2-4启用和运行Docker服务"><a href="#2-4启用和运行Docker服务" class="headerlink" title="2.4启用和运行Docker服务"></a>2.4启用和运行Docker服务</h4><p><span class="label label-primary"><br>  启用 Docker服务，需要手动启动。<br>  开机自动启动Docker服务<br>  systemctl enable docker.service<br>  启动Docker服务<br>  systemctl start docker.service<br>  停止Docker服务<br>  systemctl stop docker.service<br>  禁止Docker服务开机启动<br>  systemctl disable docker.service
+</span></p>
+<h4 id="2-5启用CecOS-CaaS容器云"><a href="#2-5启用CecOS-CaaS容器云" class="headerlink" title="2.5启用CecOS-CaaS容器云"></a>2.5启用CecOS-CaaS容器云</h4><p><span class="label label-primary"><br>  默认没有启用 CecOS CaaS容器云 服务，需要手动启动。<br>  注意：要启用CecOS CaaS容器云服务，必须要先启用和启动docker服务！！<br>  开机自动启动 CecOS CaaS容器云 服务<br>  systemctl enable cecos-caas.service<br>  启动 CecOS CaaS容器云 服务<br>  systemctl start cecos-caas.service<br>  停止 CecOS CaaS容器云 服务<br>  systemctl stop cecos-caas.service<br>  禁止 CecOS CaaS容器云 服务开机启动<br>  systemctl disable cecos-caas.service
+</span></p>
+<h4 id="2-6启用和退出Docker集群"><a href="#2-6启用和退出Docker集群" class="headerlink" title="2.6启用和退出Docker集群"></a>2.6启用和退出Docker集群</h4><p><span class="label label-primary"><br>  初始化并加入一个 Docker Swarm集群<br>  docker swarm init</p>
+<h1 id="查看集群节点状态"><a href="#查看集群节点状态" class="headerlink" title="查看集群节点状态"></a>查看集群节点状态</h1><p>  docker node ls</p>
+<h1 id="退出Docker-Swarm集群"><a href="#退出Docker-Swarm集群" class="headerlink" title="退出Docker Swarm集群"></a>退出Docker Swarm集群</h1><p>  docker swarm leave —force<br>&lt;/span&gt;</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://gitee.com/openfans-community/Debian-Pi-Aarch64/">Debian-Pi-Aarch64 ★ 全新树莓派64位系统2.0正式版 - 说明文档</a>
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://raspberrypi.club/">树莓派俱乐部</a>
+<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:3" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://shumeipai.nxez.com/">树莓派实验</a>
+<a href="#fnref:3" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
             </div>
             <hr>
             <div>
@@ -254,13 +284,9 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Diary/">Diary</a>
+                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
                     
-                      <a class="hover-with-bg" href="/categories/Diary/PlayStation/">PlayStation</a>
-                    
-                      <a class="hover-with-bg" href="/categories/Diary/Games/">Games</a>
-                    
-                      <a class="hover-with-bg" href="/categories/Life/">Life</a>
+                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0/raspberry/">raspberry</a>
                     
                   </div>
                 
@@ -268,9 +294,11 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Hexo/">Hexo</a>
+                      <a class="hover-with-bg" href="/tags/raspberry/">raspberry</a>
                     
-                      <a class="hover-with-bg" href="/tags/Fluid/">Fluid</a>
+                      <a class="hover-with-bg" href="/tags/%E5%9F%BA%E5%9C%B02-0/">基地2.0</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%B3%BB%E7%BB%9F/">系统</a>
                     
                   </div>
                 
@@ -283,15 +311,21 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/07/08/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B02%E6%A0%91%E8%8E%93%E6%B4%BE+u%E7%9B%98%E6%90%AD%E5%BB%BA%E5%AE%B6%E5%BA%AD%E5%85%B1%E4%BA%AB%5D/">
+                      <a href="/2020/11/13/hello-world/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">玩转树莓派[02:树莓派+u盘搭建家庭共享]</span>
+                        <span class="hidden-mobile">Hello World</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/2020/07/08/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B02%E6%A0%91%E8%8E%93%E6%B4%BE+u%E7%9B%98%E6%90%AD%E5%BB%BA%E5%AE%B6%E5%BA%AD%E5%85%B1%E4%BA%AB%5D/">
+                        <span class="hidden-mobile">玩转树莓派[02:树莓派+u盘搭建家庭共享]</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
