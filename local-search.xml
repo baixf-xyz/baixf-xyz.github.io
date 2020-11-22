@@ -4,7 +4,75 @@
   
   
   <entry>
-    <title>玩转树莓派[06USB摄像头和motion实现监控]</title>
+    <title>玩转树莓派[08:安装x11vnc并设置开机自动启动]</title>
+    <link href="/2020/07/15/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B08%E5%AE%89%E8%A3%85x11vnc%E5%B9%B6%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E8%87%AA%E5%8A%A8%E5%90%AF%E5%8A%A8%5D/"/>
+    <url>/2020/07/15/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B08%E5%AE%89%E8%A3%85x11vnc%E5%B9%B6%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E8%87%AA%E5%8A%A8%E5%90%AF%E5%8A%A8%5D/</url>
+    
+    <content type="html"><![CDATA[<p class="note note-primary">  最近基地新更新了'raspberry-uos-happy版',本着好奇就开始了。但是这个版本没有预设的9090和vnc等配置，所以手动装一个x11vnc实现远程操作。</p><h4 id="1-安装x11vnc"><a href="#1-安装x11vnc" class="headerlink" title="1.安装x11vnc"></a>1.安装x11vnc</h4><p>打开终端，使用如下命令安装x11vnc</p><pre><code class="hljs shell">sudo apt-get install x11vnc</code></pre><h4 id="2-设置密码"><a href="#2-设置密码" class="headerlink" title="2.设置密码"></a>2.设置密码</h4><p><span class="label label-primary"><br>  默认保存在 /home/“user”/.vnc/passwd</span></p><pre><code class="hljs shell">sudo x11vnc -storepasswd</code></pre><h4 id="3-设置密码保存位置"><a href="#3-设置密码保存位置" class="headerlink" title="3.设置密码保存位置"></a>3.设置密码保存位置</h4><pre><code class="hljs shell">sudo x11vnc -storepasswd in /etc/x11vnc.pass</code></pre><h4 id="4-拷贝密码文件"><a href="#4-拷贝密码文件" class="headerlink" title="4.拷贝密码文件"></a>4.拷贝密码文件</h4><p><span class="label label-primary"><br>  将用户目录下的passwd文件内容copy到 /etc/x11vnc.pass下</span></p><pre><code class="hljs shell">sudo cp /home/&quot;user&quot;/.vnc/passwd /etc/x11vnc.pass</code></pre><h4 id="5-手动连接"><a href="#5-手动连接" class="headerlink" title="5.手动连接"></a>5.手动连接</h4><p><span class="label label-primary"><br>  需每次开机手动启动连接</span></p><pre><code class="hljs shell">sudo /usr/bin/x11vnc -display :0 -auth /var/run/lightdm/root/:0 -forever -bg -o /var/log/x11vnc.log -rfbauth /etc/x11vnc.pass -rfbport 5900</code></pre><h4 id="6-关闭x11vnc"><a href="#6-关闭x11vnc" class="headerlink" title="6.关闭x11vnc"></a>6.关闭x11vnc</h4><pre><code class="hljs shell">pi@raspbian:~$ ps -ef|grep -i vncroot     18008     1  0 11:27 ?        00:00:11 /usr/bin/x11vnc -display :0 -auth /var/run/lightdm/root/:0 -forever -bg -o /var/log/x11vnc.log -rfbauth /etc/x11vnc.pass -rfbport 5900pi       27883  1482  0 11:49 pts/0    00:00:00 grep -i vncpi@raspbian:~$ sudo kill -9 18008pi@raspbian:~$ ps -ef|grep -i vncpi       28431  1482  0 11:51 pts/0    00:00:00 grep -i vnc</code></pre><h4 id="7-设置开机启动"><a href="#7-设置开机启动" class="headerlink" title="7.设置开机启动"></a>7.设置开机启动</h4><h5 id="配置x11vnc为跟随系统自动启动"><a href="#配置x11vnc为跟随系统自动启动" class="headerlink" title="配置x11vnc为跟随系统自动启动"></a>配置x11vnc为跟随系统自动启动</h5><p><span class="label label-primary">需要新建一个文件/etc/init/x11vnc.conf</span></p><pre><code class="hljs shell">sudo touch /etc/init/x11vnc.conf</code></pre><p><span class="label label-primary"><br>对文件修改需要权限才能修改</span></p><pre><code class="hljs shell">sudo chmod a+w /etc/init/x11vnc.conf</code></pre><p><span class="label label-primary"><br>在x11vnc.conf文件里加入：</span></p><pre><code class="hljs shell">start on login-session-startscriptx11vnc -display :0 -auth /var/run/lightdm/root/:0 -forever -bg -o /var/log/x11vnc.log -rfbauth /etc/x11vnc.pass -rfbport 5900end script</code></pre><p><span class="label label-primary"><br>保存</span></p><p><span class="label label-primary"><br>  到此 开机自动启动就设置好了</span></p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a href="https://blog.csdn.net/han609768249/article/details/78759590">ubuntu安装vnc server-x11vnc并设置开机自动启动</a><a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a href="https://blog.csdn.net/techsupporter/article/details/52887199">Linux上VNC 启动和关闭 已经常见问题</a><a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>]]></content>
+    
+    
+    <categories>
+      
+      <category>学习</category>
+      
+      <category>raspberry</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>raspberry</tag>
+      
+      <tag>基地2.0</tag>
+      
+      <tag>系统</tag>
+      
+      <tag>uos</tag>
+      
+      <tag>x11vnc</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>玩转树莓派[07:开机后将 IP 地址信息自动推送到微信]</title>
+    <link href="/2020/07/14/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B07%E5%BC%80%E6%9C%BA%E5%90%8E%E5%B0%86%20IP%20%E5%9C%B0%E5%9D%80%E4%BF%A1%E6%81%AF%E8%87%AA%E5%8A%A8%E6%8E%A8%E9%80%81%E5%88%B0%E5%BE%AE%E4%BF%A1%5D/"/>
+    <url>/2020/07/14/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B07%E5%BC%80%E6%9C%BA%E5%90%8E%E5%B0%86%20IP%20%E5%9C%B0%E5%9D%80%E4%BF%A1%E6%81%AF%E8%87%AA%E5%8A%A8%E6%8E%A8%E9%80%81%E5%88%B0%E5%BE%AE%E4%BF%A1%5D/</url>
+    
+    <content type="html"><![CDATA[<p class="note note-primary">树莓派经常会用到查看本机的IP，知道了 IP 地址才能进行 ssh 远程连接。以前用过使用Python 获取树莓派地址+Email 发送到自己的邮箱，方法是可行的。但是这里使用了更加简便的方法，使用 Python 加上 Server酱服务， Server酱 服务实现了通过请求 URL + 推送信息，的方式来把消息推送到微信。省去了去配置邮箱参数的麻烦，而且通过微信可以更加快捷的查看到推送到微信的IP信息。</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre><code class="hljs shell">import timeimport socketimport requestsdef getLocalIP():    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)    s.connect((&#x27;1.1.1.1&#x27;, 80))    ipaddr = s.getsockname()[0]    s.close()    return ipaddrdef post(ip):    url = &quot;https://sc.ftqq.com/your~sckey.send&quot;    data = &quot;text=%s&quot; % ip    results = requests.get(url, data)    print(results)if __name__ == &#x27;__main__&#x27;:    time.sleep(20)    while True:        ip = getLocalIP()        if ip == False:            post(&#x27;finding ip ~&#x27;)        else:            print(ip)            post(ip)            time.sleep(5)        break</code></pre><h2 id="配置开机自启动"><a href="#配置开机自启动" class="headerlink" title="配置开机自启动"></a>配置开机自启动</h2><pre><code class="hljs shell">pi@raspbian:/$ cat /boot/rc-local<span class="hljs-meta">#</span><span class="bash">!/bin/bash</span><span class="hljs-meta">#</span><span class="bash"> Print the IP address</span>_IP=$(hostname -I) || trueif [ &quot;$_IP&quot; ]; then  printf &quot;IP address is %s\n&quot; &quot;$_IP&quot;fiecho &quot;rc-local bash echo test.&quot;sleep 1mpython /home/pi/ip_send.pyexit 0</code></pre><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a href="https://www.cnblogs.com/kekeoutlook/p/12723833.html">树莓派python获取自身IP</a><a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a href="https://www.z10.xin/archives/771">树莓派开机后把 IP 地址信息，自动推送到微信的方法 | 中心线</a><a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:3" class="footnote-text"><span><a href="http://sc.ftqq.com/3.version">Server酱</a><a href="#fnref:3" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>]]></content>
+    
+    
+    <categories>
+      
+      <category>学习</category>
+      
+      <category>raspberry</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>raspberry</tag>
+      
+      <tag>微信</tag>
+      
+      <tag>server酱</tag>
+      
+      <tag>ip发送</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>玩转树莓派[06:USB摄像头和motion实现监控]</title>
     <link href="/2020/07/13/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B06USB%E6%91%84%E5%83%8F%E5%A4%B4%E5%92%8Cmotion%E5%AE%9E%E7%8E%B0%E7%9B%91%E6%8E%A7%5D/"/>
     <url>/2020/07/13/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B06USB%E6%91%84%E5%83%8F%E5%A4%B4%E5%92%8Cmotion%E5%AE%9E%E7%8E%B0%E7%9B%91%E6%8E%A7%5D/</url>
     
@@ -72,7 +140,7 @@
   
   
   <entry>
-    <title>玩转树莓派[04pi-dashboard实时监控]</title>
+    <title>玩转树莓派[04:pi-dashboard实时监控]</title>
     <link href="/2020/07/11/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B04pi-dashboard%E5%AE%9E%E6%97%B6%E7%9B%91%E6%8E%A7%5D/"/>
     <url>/2020/07/11/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B04pi-dashboard%E5%AE%9E%E6%97%B6%E7%9B%91%E6%8E%A7%5D/</url>
     
@@ -115,7 +183,7 @@
   
   
   <entry>
-    <title>玩转树莓派[03安装宝塔]</title>
+    <title>玩转树莓派[03:安装宝塔]</title>
     <link href="/2020/07/10/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B03%E5%AE%89%E8%A3%85%E5%AE%9D%E5%A1%94%5D/"/>
     <url>/2020/07/10/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B03%E5%AE%89%E8%A3%85%E5%AE%9D%E5%A1%94%5D/</url>
     
@@ -202,6 +270,82 @@
       <tag>基地2.0</tag>
       
       <tag>系统</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>玩转树莓派[09:使用Ngrok进行内网穿透，在公网上搭建个人博客]</title>
+    <link href="/2020/07/08/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B09%E4%BD%BF%E7%94%A8Ngrok%E8%BF%9B%E8%A1%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%EF%BC%8C%E5%9C%A8%E5%85%AC%E7%BD%91%E4%B8%8A%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%5D/"/>
+    <url>/2020/07/08/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B09%E4%BD%BF%E7%94%A8Ngrok%E8%BF%9B%E8%A1%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%EF%BC%8C%E5%9C%A8%E5%85%AC%E7%BD%91%E4%B8%8A%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%5D/</url>
+    
+    <content type="html"><![CDATA[<p class="note note-primary">  树莓派性能虽然比不上家用电脑或者服务器，但是搭建个人博客网站足够了。我使用树莓派4B，在树莓派上安装了宝塔面板，利用wordpress在本地搭建了一个个人博客。博客搭建好了，树莓派网站只能在局域网内访问，存在外网无法访问的问题。为解决这个问题，经过一番搜索，终于发现树莓派可以使用Ngrok进行内网穿透，从而在公网上也可以访问树莓派上的博客网站。以下是教程。</p><h3 id="一、Ngrok-介绍和选择服务商"><a href="#一、Ngrok-介绍和选择服务商" class="headerlink" title="一、Ngrok 介绍和选择服务商"></a>一、Ngrok 介绍和选择服务商</h3><p><span class="label label-primary"><br>  首先，什么是Ngrok?</span></p><p><span class="label label-primary">ngrok 通过安全隧道将位于NAT和防火墙后面的本地服务器公开到公共Internet，即将没有公网IP地址的服务器公开到公网，从而可以在任何地方访问局域网内的服务器。</span></p><p><span class="label label-primary"><br>  其次，Ngrok是怎么运行的？</span></p><p><span class="label label-primary">您可以在计算机上下载并运行客户端程序，并为客户端提供网络服务（通常是Web服务器）的端口。</span></p><p><span class="label label-primary">客户端连接到ngrok云服务，该服务在公网上接受流量，并将该流量转发到计算机上运行的ngrok进程，然后再转发到您指定的本地地址，从而实现内网穿透。</span></p><p><span class="label label-primary">最后如何选择Ngrok云服务，如果你有云服务器，那么你可以自己搭建Ngrok云服务，也可以选择Ngrok服务商，因为方便就没有自建服务。对比了Ngrok官方和 Sunny Ngrok之后，最终选择了Sunny Ngrok，因为从两个服务商提供的服务来说，官方的不能自定义域名，虽然提供4个通道，但是每分钟有40次连接的限制。</span></p><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122224244.png" alt=""></p><h4 id="Ngrok-提供的服务价格"><a href="#Ngrok-提供的服务价格" class="headerlink" title="Ngrok 提供的服务价格"></a>Ngrok 提供的服务价格</h4><p><span class="label label-primary">而我只需要一个通道就够了，并且我有个人的域名，所以选择了可以自定义域名的Sunny Ngrok。</span></p><h3 id="二、注册Sunny-Ngrok，并开通隧道"><a href="#二、注册Sunny-Ngrok，并开通隧道" class="headerlink" title="二、注册Sunny-Ngrok，并开通隧道"></a>二、注册Sunny-Ngrok，并开通隧道</h3><p><span class="label label-primary">在Sunny-Ngrok上注册一个账号，然后进入后台，开通一个隧道。</span></p><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122224918.png" alt=""></p><p>开通Sunny-Ngrok 隧道</p><h3 id="三、在宝塔面板中绑定新的域名"><a href="#三、在宝塔面板中绑定新的域名" class="headerlink" title="三、在宝塔面板中绑定新的域名"></a>三、在宝塔面板中绑定新的域名</h3><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122224956.png" alt=""></p><h3 id="四、下载客户端，并启动隧道"><a href="#四、下载客户端，并启动隧道" class="headerlink" title="四、下载客户端，并启动隧道"></a>四、下载客户端，并启动隧道</h3><h4 id="1-在树莓派上下载Ngrok客户端"><a href="#1-在树莓派上下载Ngrok客户端" class="headerlink" title="1.在树莓派上下载Ngrok客户端"></a>1.在树莓派上下载Ngrok客户端</h4><p><a href="http://hls.ctopus.com/sunny/linux_arm.zip?v=2">下载地址</a></p><p>下载完成之后将客户端执行文件移动到 /use/local/bin 目录下并给予可执行权限。</p><pre><code class="hljs shell">sudo mv sunny /usr/local/bin/sunnysudo chmod +x /usr/local/bin/sunny</code></pre><h4 id="2、编写启动脚本"><a href="#2、编写启动脚本" class="headerlink" title="2、编写启动脚本"></a>2、编写启动脚本</h4><pre><code class="hljs shell">sudo nano /etc/init.d/sunny/etc/init.d/sunny 启动脚本代码</code></pre><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">!/bin/sh -e</span><span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">## BEGIN INIT INFO</span></span><span class="hljs-meta">#</span><span class="bash"> Provides:          ngrok.cc</span><span class="hljs-meta">#</span><span class="bash"> Required-Start:    <span class="hljs-variable">$network</span> <span class="hljs-variable">$remote_fs</span> <span class="hljs-variable">$local_fs</span></span><span class="hljs-meta">#</span><span class="bash"> Required-Stop:     <span class="hljs-variable">$network</span> <span class="hljs-variable">$remote_fs</span> <span class="hljs-variable">$local_fs</span></span><span class="hljs-meta">#</span><span class="bash"> Default-Start:     2 3 4 5</span><span class="hljs-meta">#</span><span class="bash"> Default-Stop:      0 1 6</span><span class="hljs-meta">#</span><span class="bash"> Short-Description: autostartup of ngrok <span class="hljs-keyword">for</span> Linux</span><span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">## END INIT INFO</span></span>NAME=sunnyDAEMON=/usr/local/bin/$NAMEPIDFILE=/var/run/$NAME.pid[ -x &quot;$DAEMON&quot; ] || exit 0case &quot;$1&quot; in  start)      if [ -f $PIDFILE ]; then        echo &quot;$NAME already running...&quot;        echo -e &quot;\033[1;35mStart Fail\033[0m&quot;      else        echo &quot;Starting $NAME...&quot;        start-stop-daemon -S -p $PIDFILE -m -b -o -q -x $DAEMON -- clientid 隧道id || return 2        echo -e &quot;\033[1;32mStart Success\033[0m&quot;    fi    ;;  stop)        echo &quot;Stoping $NAME...&quot;        start-stop-daemon -K -p $PIDFILE -s TERM -o -q || return 2        rm -rf $PIDFILE        echo -e &quot;\033[1;32mStop Success\033[0m&quot;    ;;  restart)    $0 stop &amp;&amp; sleep 2 &amp;&amp; $0 start    ;;  *)    echo &quot;Usage: $0 &#123;start|stop|restart&#125;&quot;    exit 1    ;;esacexit 0</code></pre><p><span class="label label-primary">⚠️注意：</span></p><p><span class="label label-primary">把代码里面的【隧道id】替换成自己的隧道id</span></p><h4 id="3、测试可执行代码"><a href="#3、测试可执行代码" class="headerlink" title="3、测试可执行代码"></a>3、测试可执行代码</h4><pre><code class="hljs shell">sudo chmod 755 /etc/init.d/sunnysudo /etc/init.d/sunny startsudo /etc/init.d/sunny start    #启动sudo /etc/init.d/sunny stop     #停止sudo /etc/init.d/sunny restart  #重启</code></pre><h4 id="4、设置开机启动"><a href="#4、设置开机启动" class="headerlink" title="4、设置开机启动"></a>4、设置开机启动</h4><pre><code class="hljs shell">cd /etc/init.dsudo update-rc.d sunny defaults 90    #加入开机启动sudo update-rc.d -f sunny remove  #取消开机启动</code></pre><h4 id="5、隧道启动官方文档说明"><a href="#5、隧道启动官方文档说明" class="headerlink" title="5、隧道启动官方文档说明"></a>5、隧道启动官方文档说明</h4><h6 id="启动隧道"><a href="#启动隧道" class="headerlink" title="启动隧道"></a>启动隧道</h6><p><span class="label label-primary"><br>  Mac、Linux、树莓派的使用方式是一样的。Windows才会不一样。但是它们的启动方式都是通过隧道id启动，隧道id可以在隧道管理的列表里面获得。这里以映射http服务为例。</span></p><p><span class="label label-primary">注意 下方代码仅供参考，sunny执行文件位置还得对应自己安装位置</span></p><p><span class="label label-primary">Mac、Linux、树莓派</span></p><pre><code class="hljs shell">./sunny clientid 隧道id</code></pre><p><span class="label label-primary">启动多个隧道</span></p><pre><code class="hljs shell">./sunny clientid 隧道id,隧道id</code></pre><p><span class="label label-primary">要想后台运行可以使用 setsid 命令</span></p><pre><code class="hljs shell">setsid ./sunny clientid 隧道id &amp;</code></pre><h4 id="五、完成"><a href="#五、完成" class="headerlink" title="五、完成"></a>五、完成</h4><p><span class="label label-primary">启动Ngrok 隧道，可以看到服务器已经上线了。</span></p><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122225032.png" alt=""></p><h4 id="六、树莓派内网穿透"><a href="#六、树莓派内网穿透" class="headerlink" title="六、树莓派内网穿透"></a>六、树莓派内网穿透</h4><p><span class="label label-primary">再打开赠送的域名<a href="http://bxf.free.idcfengye.com/">http://bxf.free.idcfengye.com/</a> ，就可以看到运行在树莓派上的博客网站啦，树莓派内网穿透成功！</span></p><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122225101.png" alt=""></p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a href="https://www.lxx1.com/3709">科技爱好者博客-树莓派使用Ngrok进行内网穿透，在公网上搭建个人博客</a><a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>]]></content>
+    
+    
+    <categories>
+      
+      <category>学习</category>
+      
+      <category>raspberry</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>raspberry</tag>
+      
+      <tag>基地2.0</tag>
+      
+      <tag>内网穿透</tag>
+      
+      <tag>公网</tag>
+      
+      <tag>个人博客</tag>
+      
+      <tag>suny-ngrok</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>玩转树莓派[10:基地2.0开启9090端口和VNC内网穿透]</title>
+    <link href="/2020/07/08/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B10%E5%9F%BA%E5%9C%B02.0%E5%BC%80%E5%90%AF9090%E7%AB%AF%E5%8F%A3%E5%92%8CVNC%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%5D/"/>
+    <url>/2020/07/08/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B10%E5%9F%BA%E5%9C%B02.0%E5%BC%80%E5%90%AF9090%E7%AB%AF%E5%8F%A3%E5%92%8CVNC%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%5D/</url>
+    
+    <content type="html"><![CDATA[<p class="note note-primary">  之前做过本地搭的网站的内网穿透，但是想利用内网穿透把基地2.0的管理界面和vnc界面集成进去。之前也做过尝试，但是可能都由于安装的系统不完整等等原因导致无法穿透，今天尝试了一下vnc发现可以，但是9090管理端口可能由于安全连接导致无法实现……</p><h4 id="vnc"><a href="#vnc" class="headerlink" title="vnc"></a>vnc</h4><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122222722.png" alt=""></p><p><span class="label label-primary">这个端口没有安全设置，只需要按照sunny-ngrok官方文档设置就可以。</span></p><p><a href="http://www.baixf.xyz/index.php/2020/06/12/%e6%a0%91%e8%8e%93%e6%b4%be%e4%bd%bf%e7%94%a8ngrok%e8%bf%9b%e8%a1%8c%e5%86%85%e7%bd%91%e7%a9%bf%e9%80%8f%ef%bc%8c%e5%9c%a8%e5%85%ac%e7%bd%91%e4%b8%8a%e6%90%ad%e5%bb%ba%e4%b8%aa%e4%ba%ba%e5%8d%9a/">设置参考链接</a></p><h4 id="9090"><a href="#9090" class="headerlink" title="9090"></a>9090</h4><p><span class="label label-primary"><br>  错误显示如下：<br>  此网站无法提供安全连接，localhost 发送的响应无效</span></p><p><span class="label label-primary">在设置9090管理端口内网穿透时发现由于安全性无法进行连接，因此寻找方法，发现如下文章：</span></p><p><a href="https://blog.csdn.net/wang_xiaoniao/article/details/107280638">csdn原文链接</a></p><p><span class="label label-primary"><br>  三、错误原因<br>  使用了https作为网络协议，应用http代替https。<br>  HTTPS和HTTP的区别<br>  1、https协议需要到ca申请证书，一般免费证书较少，因而需要一定费用。<br>  2、http是超文本传输1653协议，信息是明文传输，https则是具有安全性的ssl加密传输协议<br>  3、http和https使用的是完全不同的连接方式，用的端口也不一样，前者是80，后者是443<br>  4、http的连接很简单，是无状态的；HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，比http协议安全。</p><p>  其实网站的报错就已经提示了错误原因，此网站无法提供安全连接。因为我本地搭建的服务器并没有申请ssl数字证书，只是简单的作为项目运行时的临时服务器，所以无法用https进行访问。<br>  ————————————————<br>  版权声明：本文为CSDN博主「wang_xiaoniao」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>&lt;/span&gt;</p><p><span class="label label-primary">⚠即解决办法就是将内网穿透的http换成https协议</span></p><p><span class="label label-primary">修改后的效果如下</span></p><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122223141.png" alt=""></p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a href="http://www.ngrok.cc/_book/">Sunny-Ngrok使用教程</a><a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a href="https://www.ngrok.cc/">Sunny-Ngrok官网</a><a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>]]></content>
+    
+    
+    <categories>
+      
+      <category>学习</category>
+      
+      <category>raspberry</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>raspberry</tag>
+      
+      <tag>基地2.0</tag>
+      
+      <tag>内网穿透</tag>
+      
+      <tag>9090端口</tag>
+      
+      <tag>vnc</tag>
+      
+      <tag>http协议</tag>
+      
+      <tag>sunny-ngrok</tag>
       
     </tags>
     
