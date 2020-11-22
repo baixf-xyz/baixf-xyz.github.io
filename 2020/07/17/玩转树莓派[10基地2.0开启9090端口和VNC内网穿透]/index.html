@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>玩转树莓派[09:使用Ngrok进行内网穿透，在公网上搭建个人博客] - Hexo</title>
+  <title>玩转树莓派[10:基地2.0开启9090端口和VNC内网穿透] - Hexo</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
@@ -174,7 +174,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="玩转树莓派[09:使用Ngrok进行内网穿透，在公网上搭建个人博客]">
+            <span class="h2" id="subtitle" title="玩转树莓派[10:基地2.0开启9090端口和VNC内网穿透]">
               
             </span>
 
@@ -184,8 +184,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-07-08 11:11" pubdate>
-        2020年7月8日 上午
+      <time datetime="2020-07-17 11:11" pubdate>
+        2020年7月17日 上午
       </time>
     </span>
   
@@ -196,7 +196,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.2k 字
+      530 字
     </span>
   
 
@@ -206,7 +206,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      14
+      5
        分钟
     </span>
   
@@ -236,100 +236,28 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">玩转树莓派[09:使用Ngrok进行内网穿透，在公网上搭建个人博客]</h1>
+            <h1 style="display: none">玩转树莓派[10:基地2.0开启9090端口和VNC内网穿透]</h1>
             
             <div class="markdown-body">
               <p class="note note-primary">
-  树莓派性能虽然比不上家用电脑或者服务器，但是搭建个人博客网站足够了。我使用树莓派4B，在树莓派上安装了宝塔面板，利用wordpress在本地搭建了一个个人博客。博客搭建好了，树莓派网站只能在局域网内访问，存在外网无法访问的问题。为解决这个问题，经过一番搜索，终于发现树莓派可以使用Ngrok进行内网穿透，从而在公网上也可以访问树莓派上的博客网站。以下是教程。
+  之前做过本地搭的网站的内网穿透，但是想利用内网穿透把基地2.0的管理界面和vnc界面集成进去。之前也做过尝试，但是可能都由于安装的系统不完整等等原因导致无法穿透，今天尝试了一下vnc发现可以，但是9090管理端口可能由于安全连接导致无法实现……
 </p>
 
-<h3 id="一、Ngrok-介绍和选择服务商"><a href="#一、Ngrok-介绍和选择服务商" class="headerlink" title="一、Ngrok 介绍和选择服务商"></a>一、Ngrok 介绍和选择服务商</h3><p><span class="label label-primary"><br>  首先，什么是Ngrok?
+<h4 id="vnc"><a href="#vnc" class="headerlink" title="vnc"></a>vnc</h4><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122222722.png" srcset="/img/loading.gif" alt=""></p>
+<p><span class="label label-primary">这个端口没有安全设置，只需要按照sunny-ngrok官方文档设置就可以。</span></p>
+<p><a target="_blank" rel="noopener" href="http://www.baixf.xyz/index.php/2020/06/12/%e6%a0%91%e8%8e%93%e6%b4%be%e4%bd%bf%e7%94%a8ngrok%e8%bf%9b%e8%a1%8c%e5%86%85%e7%bd%91%e7%a9%bf%e9%80%8f%ef%bc%8c%e5%9c%a8%e5%85%ac%e7%bd%91%e4%b8%8a%e6%90%ad%e5%bb%ba%e4%b8%aa%e4%ba%ba%e5%8d%9a/">设置参考链接</a></p>
+<h4 id="9090"><a href="#9090" class="headerlink" title="9090"></a>9090</h4><p><span class="label label-primary"><br>  错误显示如下：<br>  此网站无法提供安全连接，localhost 发送的响应无效
 </span></p>
-<p><span class="label label-primary">ngrok 通过安全隧道将位于NAT和防火墙后面的本地服务器公开到公共Internet，即将没有公网IP地址的服务器公开到公网，从而可以在任何地方访问局域网内的服务器。</span></p>
-<p><span class="label label-primary"><br>  其次，Ngrok是怎么运行的？
-</span></p>
-<p><span class="label label-primary">您可以在计算机上下载并运行客户端程序，并为客户端提供网络服务（通常是Web服务器）的端口。</span></p>
-<p><span class="label label-primary">客户端连接到ngrok云服务，该服务在公网上接受流量，并将该流量转发到计算机上运行的ngrok进程，然后再转发到您指定的本地地址，从而实现内网穿透。</span></p>
-<p><span class="label label-primary">最后如何选择Ngrok云服务，如果你有云服务器，那么你可以自己搭建Ngrok云服务，也可以选择Ngrok服务商，因为方便就没有自建服务。对比了Ngrok官方和 Sunny Ngrok之后，最终选择了Sunny Ngrok，因为从两个服务商提供的服务来说，官方的不能自定义域名，虽然提供4个通道，但是每分钟有40次连接的限制。</span></p>
-<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122224244.png" srcset="/img/loading.gif" alt=""></p>
-<h4 id="Ngrok-提供的服务价格"><a href="#Ngrok-提供的服务价格" class="headerlink" title="Ngrok 提供的服务价格"></a>Ngrok 提供的服务价格</h4><p><span class="label label-primary">而我只需要一个通道就够了，并且我有个人的域名，所以选择了可以自定义域名的Sunny Ngrok。</span></p>
-<h3 id="二、注册Sunny-Ngrok，并开通隧道"><a href="#二、注册Sunny-Ngrok，并开通隧道" class="headerlink" title="二、注册Sunny-Ngrok，并开通隧道"></a>二、注册Sunny-Ngrok，并开通隧道</h3><p><span class="label label-primary">在Sunny-Ngrok上注册一个账号，然后进入后台，开通一个隧道。</span></p>
-<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122224918.png" srcset="/img/loading.gif" alt=""></p>
-<p>开通Sunny-Ngrok 隧道</p>
-<h3 id="三、在宝塔面板中绑定新的域名"><a href="#三、在宝塔面板中绑定新的域名" class="headerlink" title="三、在宝塔面板中绑定新的域名"></a>三、在宝塔面板中绑定新的域名</h3><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122224956.png" srcset="/img/loading.gif" alt=""></p>
-<h3 id="四、下载客户端，并启动隧道"><a href="#四、下载客户端，并启动隧道" class="headerlink" title="四、下载客户端，并启动隧道"></a>四、下载客户端，并启动隧道</h3><h4 id="1-在树莓派上下载Ngrok客户端"><a href="#1-在树莓派上下载Ngrok客户端" class="headerlink" title="1.在树莓派上下载Ngrok客户端"></a>1.在树莓派上下载Ngrok客户端</h4><p><a target="_blank" rel="noopener" href="http://hls.ctopus.com/sunny/linux_arm.zip?v=2">下载地址</a></p>
-<p>下载完成之后将客户端执行文件移动到 /use/local/bin 目录下并给予可执行权限。</p>
-<pre><code class="hljs shell">sudo mv sunny /usr/local/bin/sunny
-sudo chmod +x /usr/local/bin/sunny</code></pre>
-<h4 id="2、编写启动脚本"><a href="#2、编写启动脚本" class="headerlink" title="2、编写启动脚本"></a>2、编写启动脚本</h4><pre><code class="hljs shell">sudo nano /etc/init.d/sunny
-/etc/init.d/sunny 启动脚本代码</code></pre>
-<pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">!/bin/sh -e</span>
-<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">## BEGIN INIT INFO</span></span>
-<span class="hljs-meta">#</span><span class="bash"> Provides:          ngrok.cc</span>
-<span class="hljs-meta">#</span><span class="bash"> Required-Start:    <span class="hljs-variable">$network</span> <span class="hljs-variable">$remote_fs</span> <span class="hljs-variable">$local_fs</span></span>
-<span class="hljs-meta">#</span><span class="bash"> Required-Stop:     <span class="hljs-variable">$network</span> <span class="hljs-variable">$remote_fs</span> <span class="hljs-variable">$local_fs</span></span>
-<span class="hljs-meta">#</span><span class="bash"> Default-Start:     2 3 4 5</span>
-<span class="hljs-meta">#</span><span class="bash"> Default-Stop:      0 1 6</span>
-<span class="hljs-meta">#</span><span class="bash"> Short-Description: autostartup of ngrok <span class="hljs-keyword">for</span> Linux</span>
-<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">## END INIT INFO</span></span>
-
-NAME=sunny
-DAEMON=/usr/local/bin/$NAME
-PIDFILE=/var/run/$NAME.pid
-
-[ -x &quot;$DAEMON&quot; ] || exit 0
-
-case &quot;$1&quot; in
-  start)
-      if [ -f $PIDFILE ]; then
-        echo &quot;$NAME already running...&quot;
-        echo -e &quot;\033[1;35mStart Fail\033[0m&quot;
-      else
-        echo &quot;Starting $NAME...&quot;
-        start-stop-daemon -S -p $PIDFILE -m -b -o -q -x $DAEMON -- clientid 隧道id || return 2
-        echo -e &quot;\033[1;32mStart Success\033[0m&quot;
-    fi
-    ;;
-  stop)
-        echo &quot;Stoping $NAME...&quot;
-        start-stop-daemon -K -p $PIDFILE -s TERM -o -q || return 2
-        rm -rf $PIDFILE
-        echo -e &quot;\033[1;32mStop Success\033[0m&quot;
-    ;;
-  restart)
-    $0 stop &amp;&amp; sleep 2 &amp;&amp; $0 start
-    ;;
-  *)
-    echo &quot;Usage: $0 &#123;start|stop|restart&#125;&quot;
-    exit 1
-    ;;
-esac
-exit 0</code></pre>
-<p><span class="label label-primary">⚠️注意：</span></p>
-<p><span class="label label-primary">把代码里面的【隧道id】替换成自己的隧道id</span></p>
-<h4 id="3、测试可执行代码"><a href="#3、测试可执行代码" class="headerlink" title="3、测试可执行代码"></a>3、测试可执行代码</h4><pre><code class="hljs shell">sudo chmod 755 /etc/init.d/sunny
-sudo /etc/init.d/sunny start
-sudo /etc/init.d/sunny start    #启动
-sudo /etc/init.d/sunny stop     #停止
-sudo /etc/init.d/sunny restart  #重启</code></pre>
-<h4 id="4、设置开机启动"><a href="#4、设置开机启动" class="headerlink" title="4、设置开机启动"></a>4、设置开机启动</h4><pre><code class="hljs shell">cd /etc/init.d
-sudo update-rc.d sunny defaults 90    #加入开机启动
-sudo update-rc.d -f sunny remove  #取消开机启动</code></pre>
-<h4 id="5、隧道启动官方文档说明"><a href="#5、隧道启动官方文档说明" class="headerlink" title="5、隧道启动官方文档说明"></a>5、隧道启动官方文档说明</h4><h6 id="启动隧道"><a href="#启动隧道" class="headerlink" title="启动隧道"></a>启动隧道</h6><p><span class="label label-primary"><br>  Mac、Linux、树莓派的使用方式是一样的。Windows才会不一样。但是它们的启动方式都是通过隧道id启动，隧道id可以在隧道管理的列表里面获得。这里以映射http服务为例。
-</span></p>
-<p><span class="label label-primary">注意 下方代码仅供参考，sunny执行文件位置还得对应自己安装位置</span></p>
-<p><span class="label label-primary">Mac、Linux、树莓派</span></p>
-<pre><code class="hljs shell">./sunny clientid 隧道id</code></pre>
-<p><span class="label label-primary">启动多个隧道</span></p>
-<pre><code class="hljs shell">./sunny clientid 隧道id,隧道id</code></pre>
-<p><span class="label label-primary">要想后台运行可以使用 setsid 命令</span></p>
-<pre><code class="hljs shell">setsid ./sunny clientid 隧道id &amp;</code></pre>
-<h4 id="五、完成"><a href="#五、完成" class="headerlink" title="五、完成"></a>五、完成</h4><p><span class="label label-primary">启动Ngrok 隧道，可以看到服务器已经上线了。</span></p>
-<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122225032.png" srcset="/img/loading.gif" alt=""></p>
-<h4 id="六、树莓派内网穿透"><a href="#六、树莓派内网穿透" class="headerlink" title="六、树莓派内网穿透"></a>六、树莓派内网穿透</h4><p><span class="label label-primary">再打开赠送的域名<a target="_blank" rel="noopener" href="http://bxf.free.idcfengye.com/">http://bxf.free.idcfengye.com/</a> ，就可以看到运行在树莓派上的博客网站啦，树莓派内网穿透成功！</span></p>
-<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122225101.png" srcset="/img/loading.gif" alt=""></p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://www.lxx1.com/3709">科技爱好者博客-树莓派使用Ngrok进行内网穿透，在公网上搭建个人博客</a>
-<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+<p><span class="label label-primary">在设置9090管理端口内网穿透时发现由于安全性无法进行连接，因此寻找方法，发现如下文章：</span></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/wang_xiaoniao/article/details/107280638">csdn原文链接</a></p>
+<p><span class="label label-primary"><br>  三、错误原因<br>  使用了https作为网络协议，应用http代替https。<br>  HTTPS和HTTP的区别<br>  1、https协议需要到ca申请证书，一般免费证书较少，因而需要一定费用。<br>  2、http是超文本传输1653协议，信息是明文传输，https则是具有安全性的ssl加密传输协议<br>  3、http和https使用的是完全不同的连接方式，用的端口也不一样，前者是80，后者是443<br>  4、http的连接很简单，是无状态的；HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，比http协议安全。</p>
+<p>  其实网站的报错就已经提示了错误原因，此网站无法提供安全连接。因为我本地搭建的服务器并没有申请ssl数字证书，只是简单的作为项目运行时的临时服务器，所以无法用https进行访问。<br>  ————————————————<br>  版权声明：本文为CSDN博主「wang_xiaoniao」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>&lt;/span&gt;</p>
+<p><span class="label label-primary">⚠即解决办法就是将内网穿透的http换成https协议</span></p>
+<p><span class="label label-primary">修改后的效果如下</span></p>
+<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122223141.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="http://www.ngrok.cc/_book/">Sunny-Ngrok使用教程</a>
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://www.ngrok.cc/">Sunny-Ngrok官网</a>
+<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
             </div>
             <hr>
             <div>
@@ -354,11 +282,13 @@ sudo update-rc.d -f sunny remove  #取消开机启动</code></pre>
                     
                       <a class="hover-with-bg" href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">内网穿透</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%85%AC%E7%BD%91/">公网</a>
+                      <a class="hover-with-bg" href="/tags/9090%E7%AB%AF%E5%8F%A3/">9090端口</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">个人博客</a>
+                      <a class="hover-with-bg" href="/tags/vnc/">vnc</a>
                     
-                      <a class="hover-with-bg" href="/tags/suny-ngrok/">suny-ngrok</a>
+                      <a class="hover-with-bg" href="/tags/http%E5%8D%8F%E8%AE%AE/">http协议</a>
+                    
+                      <a class="hover-with-bg" href="/tags/sunny-ngrok/">sunny-ngrok</a>
                     
                   </div>
                 
@@ -371,9 +301,9 @@ sudo update-rc.d -f sunny remove  #取消开机启动</code></pre>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/07/08/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B01%E8%A3%85%E7%B3%BB%E7%BB%9F%5D/">
+                      <a href="/2020/07/18/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B11%E9%9D%A2%E5%90%91%E5%88%9D%E5%AD%A6%E8%80%85%E7%9A%8420%E4%B8%AA%E6%A0%91%E8%8E%93%E6%B4%BE%E5%91%BD%E4%BB%A4%5D/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">玩转树莓派[01:装系统]</span>
+                        <span class="hidden-mobile">玩转树莓派[11:面向初学者的20个树莓派命令]</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -381,8 +311,8 @@ sudo update-rc.d -f sunny remove  #取消开机启动</code></pre>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/07/08/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B10%E5%9F%BA%E5%9C%B02.0%E5%BC%80%E5%90%AF9090%E7%AB%AF%E5%8F%A3%E5%92%8CVNC%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%5D/">
-                        <span class="hidden-mobile">玩转树莓派[10:基地2.0开启9090端口和VNC内网穿透]</span>
+                      <a href="/2020/07/16/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B09%E4%BD%BF%E7%94%A8Ngrok%E8%BF%9B%E8%A1%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%EF%BC%8C%E5%9C%A8%E5%85%AC%E7%BD%91%E4%B8%8A%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%5D/">
+                        <span class="hidden-mobile">玩转树莓派[09:使用Ngrok进行内网穿透，在公网上搭建个人博客]</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

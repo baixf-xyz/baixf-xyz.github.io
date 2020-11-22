@@ -4,6 +4,113 @@
   
   
   <entry>
+    <title>玩转树莓派[11:面向初学者的20个树莓派命令]</title>
+    <link href="/2020/07/18/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B11%E9%9D%A2%E5%90%91%E5%88%9D%E5%AD%A6%E8%80%85%E7%9A%8420%E4%B8%AA%E6%A0%91%E8%8E%93%E6%B4%BE%E5%91%BD%E4%BB%A4%5D/"/>
+    <url>/2020/07/18/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B11%E9%9D%A2%E5%90%91%E5%88%9D%E5%AD%A6%E8%80%85%E7%9A%8420%E4%B8%AA%E6%A0%91%E8%8E%93%E6%B4%BE%E5%91%BD%E4%BB%A4%5D/</url>
+    
+    <content type="html"><![CDATA[<p class="note note-primary">  您可能从快乐的Windows GUI用户变为没有按钮或双击任何东西的怀旧黑屏和绿屏。自从您的第一台PC开始使用GUI以来，这可能是令人恐惧的事情。  但是，有许多小技巧和命令可以帮助用户获得使用该系统的信心。  这里没有高级或突破性的内容，只有日常的基本命令可以帮助您从终端窗口浏览和执行Raspberry Pi的简单任务。随着时间的推移，您会发现更多的东西，但这是一个很好的起点。</p><h3 id="01-sudo-apt-get更新-更新程序包列表"><a href="#01-sudo-apt-get更新-更新程序包列表" class="headerlink" title="01.[sudo apt-get更新]-更新程序包列表"></a>01.[sudo apt-get更新]-更新程序包列表</h3><p><span class="label label-primary">终端中的更新命令<br><pre><code class="hljs shell">sudo apt-get update</code></pre><br><span class="label label-primary">这是更新Raspberry Pi的第一阶段（有关其他步骤，请参阅此列表中的下两个项目）。</span></p><p>“ sudo apt-get update”命令 从存储库下载软件包列表，并获取有关这些软件包的最新版本以及任何相关软件包的信息。</p><p>因此，它实际上并没有进行传统意义上的任何实际更新。在整个过程中，它更是一个必需的步骤。</p><h3 id="02-sudo-apt-get-upgrade-下载并安装更新的软件包"><a href="#02-sudo-apt-get-upgrade-下载并安装更新的软件包" class="headerlink" title="02.[sudo apt-get upgrade]-下载并安装更新的软件包"></a>02.[sudo apt-get upgrade]-下载并安装更新的软件包</h3><p><span class="label label-primary">终端中的升级命令</span><br><pre><code class="hljs shell">sudo apt-get upgrade</code></pre><br><span class="label label-primary">此命令从我们更新软件包列表的上一个项目开始。</span></p><p>有了我们更新的软件包列表后，“ sudo apt-get upgrade”命令将查看当前安装的软件包，然后查看最新的软件包列表（我们刚刚升级的软件包），然后最后安装所有尚未安装的新软件包。</p><h3 id="03-sudo-apt-get-clean-清理旧程序包文件"><a href="#03-sudo-apt-get-clean-清理旧程序包文件" class="headerlink" title="03.[sudo apt-get clean]-清理旧程序包文件"></a>03.[sudo apt-get clean]-清理旧程序包文件</h3><p><span class="label label-primary">终端中的清理命令</span><br><pre><code class="hljs shell">sudo apt-get clean</code></pre><br><span class="label label-primary">更新和升级过程的最后阶段，如果您有足够的磁盘空间，那么这并非总是必不可少的。</span></p><p>“ sudo apt-get clean”命令删除在更新过程中下载的冗余软件包文件（.deb文件）。</p><p>如果您空间有限或只想进行良好的清理，这是一个方便的命令。</p><h3 id="04-sudo-raspi-config-Raspberry-Pi配置工具"><a href="#04-sudo-raspi-config-Raspberry-Pi配置工具" class="headerlink" title="04.[sudo raspi-config]-Raspberry Pi配置工具"></a>04.[sudo raspi-config]-Raspberry Pi配置工具</h3><p><span class="label label-primary">Raspberry Pi配置工具</span></p><p><span class="label label-primary">这应该是您首次开始使用Raspberry Pi时要采取的第一步，以确保已针对您的语言，硬件和项目进行了设置。</span></p><p>配置工具就像一个“设置”窗口，可让您设置语言，时间/日期，启用摄像头模块，对处理器进行超频，启用设备，更改密码以及许多其他选项。</p><p>您可以通过键入“ sudo raspi-config”然后按回车来访问它。根据您所做的更改，之后可能会提示您重新启动Pi。</p><h3 id="05-ls-列出目录内容"><a href="#05-ls-列出目录内容" class="headerlink" title="05.[ls]-列出目录内容"></a>05.[ls]-列出目录内容</h3><p><span class="label label-primary">终端中的ls命令</span></p><pre><code class="hljs shell">ls 目录</code></pre><p><span class="label label-primary">Linux的“目录”与Windows中的“文件夹”相同。这可能是您（Windows用户）必须习惯的。</span></p><p>当然，终端中没有浏览器，因此要查看您在任何给定时间所在目录的内容，只需键入“ ls”并按回车即可。</p><p>您将看到列出该目录中的每个文件和目录，并且通常为不同项目使用颜色编码。</p><h3 id="06-cd-更改目录"><a href="#06-cd-更改目录" class="headerlink" title="06.[cd]-更改目录"></a>06.[cd]-更改目录</h3><p><span class="label label-primary">终端中的cd命令</span><br><pre><code class="hljs shell">cd 目录</code></pre><br><span class="label label-primary">如果要跳转到某个目录，可以使用“ cd”命令。</span></p><p>如果您已经在其中的目录中有目录，则可以简单地使用“ cd directoryname”（用目录名替换“ directoryname”）。</p><p>如果它在文件系统中的其他位置，只需在命令后输入路径，例如“ cd / home / pi / directoryname”。</p><p>此命令的另一个方便用法是“ cd ..”，它使您返回一个文件夹级别，类似于“返回”按钮。</p><h3 id="07-mkdir-创建目录"><a href="#07-mkdir-创建目录" class="headerlink" title="07.[mkdir]-创建目录"></a>07.[mkdir]-创建目录</h3><p><span class="label label-primary">终端中的mkdir命令</span></p><p><span class="label label-primary">mkdir 目录名</span></p><p><span class="label label-primary">如果需要在已经存在的目录中创建一个新目录，则可以使用“ mkdir”命令。这是 相当于终端世界的新&gt; 文件夹。</span></p><p>要创建新目录，只需在命令后添加目录名称，例如’mkdir new_directory’。</p><h3 id="08-rmdir-删除目录"><a href="#08-rmdir-删除目录" class="headerlink" title="08.[rmdir]-删除目录"></a>08.[rmdir]-删除目录</h3><p><span class="label label-primary">您已经了解了如何创建新目录，但是如果要删除一个目录该怎么办？</span></p><pre><code class="hljs shell">rmdir 目录名</code></pre><p><span class="label label-primary">这是删除目录的非常相似的命令，只需使用“ rmdir”然后输入目录名称即可。</span></p><p>例如，“ rmdir directory_name”将删除目录“ directory_name”。值得注意的是，该目录必须为空才能执行此命令。</p><h3 id="09-mv-移动文件"><a href="#09-mv-移动文件" class="headerlink" title="09.[mv]-移动文件"></a>09.[mv]-移动文件</h3><p><span class="label label-primary">使用“ mv”命令移动文件</span><br><pre><code class="hljs shell">mv 文件名 移动位置</code></pre><br><span class="label label-primary">通过使用“ mv”命令可在目录之间移动文件。</span></p><p>要移动文件，请使用“ mv”，然后是文件名，然后是目标目录。</p><p>例如“ mv my_file.txt / home / pi / destination_directory”，它将“ my_file.txt”文件移动到“ / home / pi / destination_directory”。</p><h3 id="10-tree-d-显示目录树"><a href="#10-tree-d-显示目录树" class="headerlink" title="10.[tree -d]-显示目录树"></a>10.[tree -d]-显示目录树</h3><pre><code class="hljs shell">tree -d</code></pre><p><span class="label label-primary">Tree命令是查看目录结构的便捷方法</span><br>创建少量新目录后，您可能会缺少Windows文件资源管理器的可视文件夹结构视图。如果无法看到目录的直观布局，事情可能会很快变得混乱。</p><p>可以帮助您更清楚地了解目录的命令之一是“ tree -d”。它在终端内以树状布局显示所有目录。</p><h3 id="11-pwd-显示当前目录"><a href="#11-pwd-显示当前目录" class="headerlink" title="11.[pwd]-显示当前目录"></a>11.[pwd]-显示当前目录</h3><pre><code class="hljs shell">pwd</code></pre><p><span class="label label-primary">当您开始感到有点迷茫时，使用“ pwd”可以为您提供帮助！</span></p><p>当您迷路时，另一个帮助您的便捷命令是’pwd’命令。如果您只想知道自己在任何给定时间的位置，这将非常方便。</p><p>只需随时输入“ pwd”以显示您所在的当前目录路径。</p><h3 id="12-clear-清除终端窗口"><a href="#12-clear-清除终端窗口" class="headerlink" title="12.[clear]-清除终端窗口"></a>12.[clear]-清除终端窗口</h3><pre><code class="hljs shell">clear</code></pre><p><span class="label label-primary">在终端中清除命令</span></p><p>当您开始使用终端机时，您会发现它会变得很混乱。在执行一些命令之后，您会在屏幕上留下一小段文字，对于我们中的某些人来说可能有点烦人。</p><p>如果要擦拭屏幕干净，只需使用“ clear”命令。屏幕将被清除，为下一个命令做好准备。</p><h3 id="13-sudo-half-关闭您的Raspberry-Pi"><a href="#13-sudo-half-关闭您的Raspberry-Pi" class="headerlink" title="13.[sudo half]-关闭您的Raspberry Pi"></a>13.[sudo half]-关闭您的Raspberry Pi</h3><p><span class="label label-primary">使用“ half”命令安全关闭Raspberry Pi</span></p><p>安全地关闭Raspberry Pi可以避免SD卡损坏等问题。您有时可以通过快速拉动电源线来逃脱，但是最终，您将杀死您的卡。</p><p>要正确关闭树莓派，请使用“ sudo halt”。在Pi的LED上最后闪烁一次之后，您可以拔下电源线。</p><h3 id="14-sudo-reboot-重新启动Raspberry-Pi"><a href="#14-sudo-reboot-重新启动Raspberry-Pi" class="headerlink" title="14.[sudo reboot]-重新启动Raspberry Pi"></a>14.[sudo reboot]-重新启动Raspberry Pi</h3><p><span class="label label-primary">在终端中使用重新启动来重新启动Pi</span></p><pre><code class="hljs shell">sudo reboot</code></pre><p>与shutdown命令类似，如果您想以安全的方式重启Raspberry Pi，则可以使用“ reboot”命令。</p><p>只需键入“ sudo reboot”，Pi就会自行重启。</p><h3 id="15-startx-启动桌面环境（LXDE）"><a href="#15-startx-启动桌面环境（LXDE）" class="headerlink" title="15.[startx]-启动桌面环境（LXDE）"></a>15.[startx]-启动桌面环境（LXDE）</h3><p><span class="label label-primary">终端中的startx命令</span></p><pre><code class="hljs shell">startx</code></pre><p><span class="label label-primary">如果您将Pi设置为始终在终端中启动，则您可能想知道如何启动桌面（如果需要使用它）。</span></p><p>使用“ startx”启动LXDE（轻便X11桌面环境）。应该注意的是，这将无法通过SSH会话进行。</p><h3 id="16-ifconfig-查找您的Raspberry-Pi的IP地址"><a href="#16-ifconfig-查找您的Raspberry-Pi的IP地址" class="headerlink" title="16.[ifconfig]-查找您的Raspberry Pi的IP地址"></a>16.[ifconfig]-查找您的Raspberry Pi的IP地址</h3><pre><code class="hljs shell">ifconfig</code></pre><p><span class="label label-primary">ifconfig可以为您提供有用的网络信息</span><br>在很多情况下，可能需要您知道Raspberry Pi 的IP地址。许多人在配置SSH会话以远程访问其Pi时使用它。</p><p>要查找您的IP地址，请在终端中键入“ ifconfig”，然后按Enter。您也可以使用“主机名-I”自行查找IP地址。</p><h3 id="17-nano-编辑文件"><a href="#17-nano-编辑文件" class="headerlink" title="17.[nano]-编辑文件"></a>17.[nano]-编辑文件</h3><p><span class="label label-primary">终端中的Nano，是Raspberry Pi的首选文本编辑器</span><br>Linux有许多不同的文本编辑器，由于各种原因，您会发现有些人喜欢使用另一种。</p><p>要编辑文件，只需键入“ nano”，然后键入文件名，例如“ nano myfile.txt”。编辑完成后，按Ctrl + X保存文件。</p><h3 id="18-cat-显示文件的内容"><a href="#18-cat-显示文件的内容" class="headerlink" title="18.[cat]-显示文件的内容"></a>18.[cat]-显示文件的内容</h3><pre><code class="hljs shell">cat</code></pre><p><span class="label label-primary">终端中的cat</span></p><p>虽然可以使用“ nano”（上方）打开文件进行编辑，但是可以使用单独的命令在终端中简单列出文件的内容。</p><p>使用“ cat”后跟文件名来执行此操作，例如，“ cat myfile.txt”。</p><h3 id="19-rm-删除文件"><a href="#19-rm-删除文件" class="headerlink" title="19.[rm]-删除文件"></a>19.[rm]-删除文件</h3><p><span class="label label-primary">终端中的rm命令有助于轻松删除文件</span><br><pre><code class="hljs shell">rm 文件名</code></pre><br>在Raspberry Pi上，删除文件很容易，并且在编写代码麻烦的同时制作许多版本的Python文件时，您会做很多事情。</p><p>要删除文件，我们使用“ rm”命令，后跟文件名。例如“ rm myfile.txt”。</p><h3 id="20-cp-复制文件或目录"><a href="#20-cp-复制文件或目录" class="headerlink" title="20.[cp]-复制文件或目录"></a>20.[cp]-复制文件或目录</h3><pre><code class="hljs shell">cp 文件名或目录名</code></pre><p><span class="label label-primary">终端中的cp命令可帮助复制文件</span><br><span class="label label-primary">当需要复制文件或目录时，请使用“ cp”命令。</span></p><p>要在同一目录中复制文件，请输入命令“ cp original_file new_file”</p><p>要在另一个具有相同名称的目录中进行复制，请输入命令“ cp original_file home / pi / subdirectory”</p><p>要复制整个目录（及其内容），请输入命令“ cp -R home / pi / folder_one home / pi / folder_two”。这会将“ folder_one”复制到“ folder_two”。</p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a href="https://www.lxx1.com/3985">面向初学者的20个树莓派命令</a><a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a href="https://www.lifewire.com/raspberry-pi-terminal-commands-4054108">20 Handy Raspberry Pi Terminal Commands for Beginners</a><a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>]]></content>
+    
+    
+    <categories>
+      
+      <category>学习</category>
+      
+      <category>raspberry</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>raspberry</tag>
+      
+      <tag>基地2.0</tag>
+      
+      <tag>系统</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>玩转树莓派[10:基地2.0开启9090端口和VNC内网穿透]</title>
+    <link href="/2020/07/17/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B10%E5%9F%BA%E5%9C%B02.0%E5%BC%80%E5%90%AF9090%E7%AB%AF%E5%8F%A3%E5%92%8CVNC%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%5D/"/>
+    <url>/2020/07/17/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B10%E5%9F%BA%E5%9C%B02.0%E5%BC%80%E5%90%AF9090%E7%AB%AF%E5%8F%A3%E5%92%8CVNC%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%5D/</url>
+    
+    <content type="html"><![CDATA[<p class="note note-primary">  之前做过本地搭的网站的内网穿透，但是想利用内网穿透把基地2.0的管理界面和vnc界面集成进去。之前也做过尝试，但是可能都由于安装的系统不完整等等原因导致无法穿透，今天尝试了一下vnc发现可以，但是9090管理端口可能由于安全连接导致无法实现……</p><h4 id="vnc"><a href="#vnc" class="headerlink" title="vnc"></a>vnc</h4><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122222722.png" alt=""></p><p><span class="label label-primary">这个端口没有安全设置，只需要按照sunny-ngrok官方文档设置就可以。</span></p><p><a href="http://www.baixf.xyz/index.php/2020/06/12/%e6%a0%91%e8%8e%93%e6%b4%be%e4%bd%bf%e7%94%a8ngrok%e8%bf%9b%e8%a1%8c%e5%86%85%e7%bd%91%e7%a9%bf%e9%80%8f%ef%bc%8c%e5%9c%a8%e5%85%ac%e7%bd%91%e4%b8%8a%e6%90%ad%e5%bb%ba%e4%b8%aa%e4%ba%ba%e5%8d%9a/">设置参考链接</a></p><h4 id="9090"><a href="#9090" class="headerlink" title="9090"></a>9090</h4><p><span class="label label-primary"><br>  错误显示如下：<br>  此网站无法提供安全连接，localhost 发送的响应无效</span></p><p><span class="label label-primary">在设置9090管理端口内网穿透时发现由于安全性无法进行连接，因此寻找方法，发现如下文章：</span></p><p><a href="https://blog.csdn.net/wang_xiaoniao/article/details/107280638">csdn原文链接</a></p><p><span class="label label-primary"><br>  三、错误原因<br>  使用了https作为网络协议，应用http代替https。<br>  HTTPS和HTTP的区别<br>  1、https协议需要到ca申请证书，一般免费证书较少，因而需要一定费用。<br>  2、http是超文本传输1653协议，信息是明文传输，https则是具有安全性的ssl加密传输协议<br>  3、http和https使用的是完全不同的连接方式，用的端口也不一样，前者是80，后者是443<br>  4、http的连接很简单，是无状态的；HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，比http协议安全。</p><p>  其实网站的报错就已经提示了错误原因，此网站无法提供安全连接。因为我本地搭建的服务器并没有申请ssl数字证书，只是简单的作为项目运行时的临时服务器，所以无法用https进行访问。<br>  ————————————————<br>  版权声明：本文为CSDN博主「wang_xiaoniao」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>&lt;/span&gt;</p><p><span class="label label-primary">⚠即解决办法就是将内网穿透的http换成https协议</span></p><p><span class="label label-primary">修改后的效果如下</span></p><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122223141.png" alt=""></p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a href="http://www.ngrok.cc/_book/">Sunny-Ngrok使用教程</a><a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a href="https://www.ngrok.cc/">Sunny-Ngrok官网</a><a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>]]></content>
+    
+    
+    <categories>
+      
+      <category>学习</category>
+      
+      <category>raspberry</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>raspberry</tag>
+      
+      <tag>基地2.0</tag>
+      
+      <tag>内网穿透</tag>
+      
+      <tag>9090端口</tag>
+      
+      <tag>vnc</tag>
+      
+      <tag>http协议</tag>
+      
+      <tag>sunny-ngrok</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>玩转树莓派[09:使用Ngrok进行内网穿透，在公网上搭建个人博客]</title>
+    <link href="/2020/07/16/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B09%E4%BD%BF%E7%94%A8Ngrok%E8%BF%9B%E8%A1%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%EF%BC%8C%E5%9C%A8%E5%85%AC%E7%BD%91%E4%B8%8A%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%5D/"/>
+    <url>/2020/07/16/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B09%E4%BD%BF%E7%94%A8Ngrok%E8%BF%9B%E8%A1%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%EF%BC%8C%E5%9C%A8%E5%85%AC%E7%BD%91%E4%B8%8A%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%5D/</url>
+    
+    <content type="html"><![CDATA[<p class="note note-primary">  树莓派性能虽然比不上家用电脑或者服务器，但是搭建个人博客网站足够了。我使用树莓派4B，在树莓派上安装了宝塔面板，利用wordpress在本地搭建了一个个人博客。博客搭建好了，树莓派网站只能在局域网内访问，存在外网无法访问的问题。为解决这个问题，经过一番搜索，终于发现树莓派可以使用Ngrok进行内网穿透，从而在公网上也可以访问树莓派上的博客网站。以下是教程。</p><h3 id="一、Ngrok-介绍和选择服务商"><a href="#一、Ngrok-介绍和选择服务商" class="headerlink" title="一、Ngrok 介绍和选择服务商"></a>一、Ngrok 介绍和选择服务商</h3><p><span class="label label-primary"><br>  首先，什么是Ngrok?</span></p><p><span class="label label-primary">ngrok 通过安全隧道将位于NAT和防火墙后面的本地服务器公开到公共Internet，即将没有公网IP地址的服务器公开到公网，从而可以在任何地方访问局域网内的服务器。</span></p><p><span class="label label-primary"><br>  其次，Ngrok是怎么运行的？</span></p><p><span class="label label-primary">您可以在计算机上下载并运行客户端程序，并为客户端提供网络服务（通常是Web服务器）的端口。</span></p><p><span class="label label-primary">客户端连接到ngrok云服务，该服务在公网上接受流量，并将该流量转发到计算机上运行的ngrok进程，然后再转发到您指定的本地地址，从而实现内网穿透。</span></p><p><span class="label label-primary">最后如何选择Ngrok云服务，如果你有云服务器，那么你可以自己搭建Ngrok云服务，也可以选择Ngrok服务商，因为方便就没有自建服务。对比了Ngrok官方和 Sunny Ngrok之后，最终选择了Sunny Ngrok，因为从两个服务商提供的服务来说，官方的不能自定义域名，虽然提供4个通道，但是每分钟有40次连接的限制。</span></p><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122224244.png" alt=""></p><h4 id="Ngrok-提供的服务价格"><a href="#Ngrok-提供的服务价格" class="headerlink" title="Ngrok 提供的服务价格"></a>Ngrok 提供的服务价格</h4><p><span class="label label-primary">而我只需要一个通道就够了，并且我有个人的域名，所以选择了可以自定义域名的Sunny Ngrok。</span></p><h3 id="二、注册Sunny-Ngrok，并开通隧道"><a href="#二、注册Sunny-Ngrok，并开通隧道" class="headerlink" title="二、注册Sunny-Ngrok，并开通隧道"></a>二、注册Sunny-Ngrok，并开通隧道</h3><p><span class="label label-primary">在Sunny-Ngrok上注册一个账号，然后进入后台，开通一个隧道。</span></p><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122224918.png" alt=""></p><p>开通Sunny-Ngrok 隧道</p><h3 id="三、在宝塔面板中绑定新的域名"><a href="#三、在宝塔面板中绑定新的域名" class="headerlink" title="三、在宝塔面板中绑定新的域名"></a>三、在宝塔面板中绑定新的域名</h3><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122224956.png" alt=""></p><h3 id="四、下载客户端，并启动隧道"><a href="#四、下载客户端，并启动隧道" class="headerlink" title="四、下载客户端，并启动隧道"></a>四、下载客户端，并启动隧道</h3><h4 id="1-在树莓派上下载Ngrok客户端"><a href="#1-在树莓派上下载Ngrok客户端" class="headerlink" title="1.在树莓派上下载Ngrok客户端"></a>1.在树莓派上下载Ngrok客户端</h4><p><a href="http://hls.ctopus.com/sunny/linux_arm.zip?v=2">下载地址</a></p><p>下载完成之后将客户端执行文件移动到 /use/local/bin 目录下并给予可执行权限。</p><pre><code class="hljs shell">sudo mv sunny /usr/local/bin/sunnysudo chmod +x /usr/local/bin/sunny</code></pre><h4 id="2、编写启动脚本"><a href="#2、编写启动脚本" class="headerlink" title="2、编写启动脚本"></a>2、编写启动脚本</h4><pre><code class="hljs shell">sudo nano /etc/init.d/sunny/etc/init.d/sunny 启动脚本代码</code></pre><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">!/bin/sh -e</span><span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">## BEGIN INIT INFO</span></span><span class="hljs-meta">#</span><span class="bash"> Provides:          ngrok.cc</span><span class="hljs-meta">#</span><span class="bash"> Required-Start:    <span class="hljs-variable">$network</span> <span class="hljs-variable">$remote_fs</span> <span class="hljs-variable">$local_fs</span></span><span class="hljs-meta">#</span><span class="bash"> Required-Stop:     <span class="hljs-variable">$network</span> <span class="hljs-variable">$remote_fs</span> <span class="hljs-variable">$local_fs</span></span><span class="hljs-meta">#</span><span class="bash"> Default-Start:     2 3 4 5</span><span class="hljs-meta">#</span><span class="bash"> Default-Stop:      0 1 6</span><span class="hljs-meta">#</span><span class="bash"> Short-Description: autostartup of ngrok <span class="hljs-keyword">for</span> Linux</span><span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">## END INIT INFO</span></span>NAME=sunnyDAEMON=/usr/local/bin/$NAMEPIDFILE=/var/run/$NAME.pid[ -x &quot;$DAEMON&quot; ] || exit 0case &quot;$1&quot; in  start)      if [ -f $PIDFILE ]; then        echo &quot;$NAME already running...&quot;        echo -e &quot;\033[1;35mStart Fail\033[0m&quot;      else        echo &quot;Starting $NAME...&quot;        start-stop-daemon -S -p $PIDFILE -m -b -o -q -x $DAEMON -- clientid 隧道id || return 2        echo -e &quot;\033[1;32mStart Success\033[0m&quot;    fi    ;;  stop)        echo &quot;Stoping $NAME...&quot;        start-stop-daemon -K -p $PIDFILE -s TERM -o -q || return 2        rm -rf $PIDFILE        echo -e &quot;\033[1;32mStop Success\033[0m&quot;    ;;  restart)    $0 stop &amp;&amp; sleep 2 &amp;&amp; $0 start    ;;  *)    echo &quot;Usage: $0 &#123;start|stop|restart&#125;&quot;    exit 1    ;;esacexit 0</code></pre><p><span class="label label-primary">⚠️注意：</span></p><p><span class="label label-primary">把代码里面的【隧道id】替换成自己的隧道id</span></p><h4 id="3、测试可执行代码"><a href="#3、测试可执行代码" class="headerlink" title="3、测试可执行代码"></a>3、测试可执行代码</h4><pre><code class="hljs shell">sudo chmod 755 /etc/init.d/sunnysudo /etc/init.d/sunny startsudo /etc/init.d/sunny start    #启动sudo /etc/init.d/sunny stop     #停止sudo /etc/init.d/sunny restart  #重启</code></pre><h4 id="4、设置开机启动"><a href="#4、设置开机启动" class="headerlink" title="4、设置开机启动"></a>4、设置开机启动</h4><pre><code class="hljs shell">cd /etc/init.dsudo update-rc.d sunny defaults 90    #加入开机启动sudo update-rc.d -f sunny remove  #取消开机启动</code></pre><h4 id="5、隧道启动官方文档说明"><a href="#5、隧道启动官方文档说明" class="headerlink" title="5、隧道启动官方文档说明"></a>5、隧道启动官方文档说明</h4><h6 id="启动隧道"><a href="#启动隧道" class="headerlink" title="启动隧道"></a>启动隧道</h6><p><span class="label label-primary"><br>  Mac、Linux、树莓派的使用方式是一样的。Windows才会不一样。但是它们的启动方式都是通过隧道id启动，隧道id可以在隧道管理的列表里面获得。这里以映射http服务为例。</span></p><p><span class="label label-primary">注意 下方代码仅供参考，sunny执行文件位置还得对应自己安装位置</span></p><p><span class="label label-primary">Mac、Linux、树莓派</span></p><pre><code class="hljs shell">./sunny clientid 隧道id</code></pre><p><span class="label label-primary">启动多个隧道</span></p><pre><code class="hljs shell">./sunny clientid 隧道id,隧道id</code></pre><p><span class="label label-primary">要想后台运行可以使用 setsid 命令</span></p><pre><code class="hljs shell">setsid ./sunny clientid 隧道id &amp;</code></pre><h4 id="五、完成"><a href="#五、完成" class="headerlink" title="五、完成"></a>五、完成</h4><p><span class="label label-primary">启动Ngrok 隧道，可以看到服务器已经上线了。</span></p><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122225032.png" alt=""></p><h4 id="六、树莓派内网穿透"><a href="#六、树莓派内网穿透" class="headerlink" title="六、树莓派内网穿透"></a>六、树莓派内网穿透</h4><p><span class="label label-primary">再打开赠送的域名<a href="http://bxf.free.idcfengye.com/">http://bxf.free.idcfengye.com/</a> ，就可以看到运行在树莓派上的博客网站啦，树莓派内网穿透成功！</span></p><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122225101.png" alt=""></p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a href="https://www.lxx1.com/3709">科技爱好者博客-树莓派使用Ngrok进行内网穿透，在公网上搭建个人博客</a><a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>]]></content>
+    
+    
+    <categories>
+      
+      <category>学习</category>
+      
+      <category>raspberry</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>raspberry</tag>
+      
+      <tag>基地2.0</tag>
+      
+      <tag>内网穿透</tag>
+      
+      <tag>公网</tag>
+      
+      <tag>个人博客</tag>
+      
+      <tag>suny-ngrok</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>玩转树莓派[08:安装x11vnc并设置开机自动启动]</title>
     <link href="/2020/07/15/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B08%E5%AE%89%E8%A3%85x11vnc%E5%B9%B6%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E8%87%AA%E5%8A%A8%E5%90%AF%E5%8A%A8%5D/"/>
     <url>/2020/07/15/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B08%E5%AE%89%E8%A3%85x11vnc%E5%B9%B6%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E8%87%AA%E5%8A%A8%E5%90%AF%E5%8A%A8%5D/</url>
@@ -270,82 +377,6 @@
       <tag>基地2.0</tag>
       
       <tag>系统</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>玩转树莓派[09:使用Ngrok进行内网穿透，在公网上搭建个人博客]</title>
-    <link href="/2020/07/08/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B09%E4%BD%BF%E7%94%A8Ngrok%E8%BF%9B%E8%A1%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%EF%BC%8C%E5%9C%A8%E5%85%AC%E7%BD%91%E4%B8%8A%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%5D/"/>
-    <url>/2020/07/08/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B09%E4%BD%BF%E7%94%A8Ngrok%E8%BF%9B%E8%A1%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%EF%BC%8C%E5%9C%A8%E5%85%AC%E7%BD%91%E4%B8%8A%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%5D/</url>
-    
-    <content type="html"><![CDATA[<p class="note note-primary">  树莓派性能虽然比不上家用电脑或者服务器，但是搭建个人博客网站足够了。我使用树莓派4B，在树莓派上安装了宝塔面板，利用wordpress在本地搭建了一个个人博客。博客搭建好了，树莓派网站只能在局域网内访问，存在外网无法访问的问题。为解决这个问题，经过一番搜索，终于发现树莓派可以使用Ngrok进行内网穿透，从而在公网上也可以访问树莓派上的博客网站。以下是教程。</p><h3 id="一、Ngrok-介绍和选择服务商"><a href="#一、Ngrok-介绍和选择服务商" class="headerlink" title="一、Ngrok 介绍和选择服务商"></a>一、Ngrok 介绍和选择服务商</h3><p><span class="label label-primary"><br>  首先，什么是Ngrok?</span></p><p><span class="label label-primary">ngrok 通过安全隧道将位于NAT和防火墙后面的本地服务器公开到公共Internet，即将没有公网IP地址的服务器公开到公网，从而可以在任何地方访问局域网内的服务器。</span></p><p><span class="label label-primary"><br>  其次，Ngrok是怎么运行的？</span></p><p><span class="label label-primary">您可以在计算机上下载并运行客户端程序，并为客户端提供网络服务（通常是Web服务器）的端口。</span></p><p><span class="label label-primary">客户端连接到ngrok云服务，该服务在公网上接受流量，并将该流量转发到计算机上运行的ngrok进程，然后再转发到您指定的本地地址，从而实现内网穿透。</span></p><p><span class="label label-primary">最后如何选择Ngrok云服务，如果你有云服务器，那么你可以自己搭建Ngrok云服务，也可以选择Ngrok服务商，因为方便就没有自建服务。对比了Ngrok官方和 Sunny Ngrok之后，最终选择了Sunny Ngrok，因为从两个服务商提供的服务来说，官方的不能自定义域名，虽然提供4个通道，但是每分钟有40次连接的限制。</span></p><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122224244.png" alt=""></p><h4 id="Ngrok-提供的服务价格"><a href="#Ngrok-提供的服务价格" class="headerlink" title="Ngrok 提供的服务价格"></a>Ngrok 提供的服务价格</h4><p><span class="label label-primary">而我只需要一个通道就够了，并且我有个人的域名，所以选择了可以自定义域名的Sunny Ngrok。</span></p><h3 id="二、注册Sunny-Ngrok，并开通隧道"><a href="#二、注册Sunny-Ngrok，并开通隧道" class="headerlink" title="二、注册Sunny-Ngrok，并开通隧道"></a>二、注册Sunny-Ngrok，并开通隧道</h3><p><span class="label label-primary">在Sunny-Ngrok上注册一个账号，然后进入后台，开通一个隧道。</span></p><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122224918.png" alt=""></p><p>开通Sunny-Ngrok 隧道</p><h3 id="三、在宝塔面板中绑定新的域名"><a href="#三、在宝塔面板中绑定新的域名" class="headerlink" title="三、在宝塔面板中绑定新的域名"></a>三、在宝塔面板中绑定新的域名</h3><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122224956.png" alt=""></p><h3 id="四、下载客户端，并启动隧道"><a href="#四、下载客户端，并启动隧道" class="headerlink" title="四、下载客户端，并启动隧道"></a>四、下载客户端，并启动隧道</h3><h4 id="1-在树莓派上下载Ngrok客户端"><a href="#1-在树莓派上下载Ngrok客户端" class="headerlink" title="1.在树莓派上下载Ngrok客户端"></a>1.在树莓派上下载Ngrok客户端</h4><p><a href="http://hls.ctopus.com/sunny/linux_arm.zip?v=2">下载地址</a></p><p>下载完成之后将客户端执行文件移动到 /use/local/bin 目录下并给予可执行权限。</p><pre><code class="hljs shell">sudo mv sunny /usr/local/bin/sunnysudo chmod +x /usr/local/bin/sunny</code></pre><h4 id="2、编写启动脚本"><a href="#2、编写启动脚本" class="headerlink" title="2、编写启动脚本"></a>2、编写启动脚本</h4><pre><code class="hljs shell">sudo nano /etc/init.d/sunny/etc/init.d/sunny 启动脚本代码</code></pre><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">!/bin/sh -e</span><span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">## BEGIN INIT INFO</span></span><span class="hljs-meta">#</span><span class="bash"> Provides:          ngrok.cc</span><span class="hljs-meta">#</span><span class="bash"> Required-Start:    <span class="hljs-variable">$network</span> <span class="hljs-variable">$remote_fs</span> <span class="hljs-variable">$local_fs</span></span><span class="hljs-meta">#</span><span class="bash"> Required-Stop:     <span class="hljs-variable">$network</span> <span class="hljs-variable">$remote_fs</span> <span class="hljs-variable">$local_fs</span></span><span class="hljs-meta">#</span><span class="bash"> Default-Start:     2 3 4 5</span><span class="hljs-meta">#</span><span class="bash"> Default-Stop:      0 1 6</span><span class="hljs-meta">#</span><span class="bash"> Short-Description: autostartup of ngrok <span class="hljs-keyword">for</span> Linux</span><span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">## END INIT INFO</span></span>NAME=sunnyDAEMON=/usr/local/bin/$NAMEPIDFILE=/var/run/$NAME.pid[ -x &quot;$DAEMON&quot; ] || exit 0case &quot;$1&quot; in  start)      if [ -f $PIDFILE ]; then        echo &quot;$NAME already running...&quot;        echo -e &quot;\033[1;35mStart Fail\033[0m&quot;      else        echo &quot;Starting $NAME...&quot;        start-stop-daemon -S -p $PIDFILE -m -b -o -q -x $DAEMON -- clientid 隧道id || return 2        echo -e &quot;\033[1;32mStart Success\033[0m&quot;    fi    ;;  stop)        echo &quot;Stoping $NAME...&quot;        start-stop-daemon -K -p $PIDFILE -s TERM -o -q || return 2        rm -rf $PIDFILE        echo -e &quot;\033[1;32mStop Success\033[0m&quot;    ;;  restart)    $0 stop &amp;&amp; sleep 2 &amp;&amp; $0 start    ;;  *)    echo &quot;Usage: $0 &#123;start|stop|restart&#125;&quot;    exit 1    ;;esacexit 0</code></pre><p><span class="label label-primary">⚠️注意：</span></p><p><span class="label label-primary">把代码里面的【隧道id】替换成自己的隧道id</span></p><h4 id="3、测试可执行代码"><a href="#3、测试可执行代码" class="headerlink" title="3、测试可执行代码"></a>3、测试可执行代码</h4><pre><code class="hljs shell">sudo chmod 755 /etc/init.d/sunnysudo /etc/init.d/sunny startsudo /etc/init.d/sunny start    #启动sudo /etc/init.d/sunny stop     #停止sudo /etc/init.d/sunny restart  #重启</code></pre><h4 id="4、设置开机启动"><a href="#4、设置开机启动" class="headerlink" title="4、设置开机启动"></a>4、设置开机启动</h4><pre><code class="hljs shell">cd /etc/init.dsudo update-rc.d sunny defaults 90    #加入开机启动sudo update-rc.d -f sunny remove  #取消开机启动</code></pre><h4 id="5、隧道启动官方文档说明"><a href="#5、隧道启动官方文档说明" class="headerlink" title="5、隧道启动官方文档说明"></a>5、隧道启动官方文档说明</h4><h6 id="启动隧道"><a href="#启动隧道" class="headerlink" title="启动隧道"></a>启动隧道</h6><p><span class="label label-primary"><br>  Mac、Linux、树莓派的使用方式是一样的。Windows才会不一样。但是它们的启动方式都是通过隧道id启动，隧道id可以在隧道管理的列表里面获得。这里以映射http服务为例。</span></p><p><span class="label label-primary">注意 下方代码仅供参考，sunny执行文件位置还得对应自己安装位置</span></p><p><span class="label label-primary">Mac、Linux、树莓派</span></p><pre><code class="hljs shell">./sunny clientid 隧道id</code></pre><p><span class="label label-primary">启动多个隧道</span></p><pre><code class="hljs shell">./sunny clientid 隧道id,隧道id</code></pre><p><span class="label label-primary">要想后台运行可以使用 setsid 命令</span></p><pre><code class="hljs shell">setsid ./sunny clientid 隧道id &amp;</code></pre><h4 id="五、完成"><a href="#五、完成" class="headerlink" title="五、完成"></a>五、完成</h4><p><span class="label label-primary">启动Ngrok 隧道，可以看到服务器已经上线了。</span></p><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122225032.png" alt=""></p><h4 id="六、树莓派内网穿透"><a href="#六、树莓派内网穿透" class="headerlink" title="六、树莓派内网穿透"></a>六、树莓派内网穿透</h4><p><span class="label label-primary">再打开赠送的域名<a href="http://bxf.free.idcfengye.com/">http://bxf.free.idcfengye.com/</a> ，就可以看到运行在树莓派上的博客网站啦，树莓派内网穿透成功！</span></p><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122225101.png" alt=""></p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a href="https://www.lxx1.com/3709">科技爱好者博客-树莓派使用Ngrok进行内网穿透，在公网上搭建个人博客</a><a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>]]></content>
-    
-    
-    <categories>
-      
-      <category>学习</category>
-      
-      <category>raspberry</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>raspberry</tag>
-      
-      <tag>基地2.0</tag>
-      
-      <tag>内网穿透</tag>
-      
-      <tag>公网</tag>
-      
-      <tag>个人博客</tag>
-      
-      <tag>suny-ngrok</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>玩转树莓派[10:基地2.0开启9090端口和VNC内网穿透]</title>
-    <link href="/2020/07/08/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B10%E5%9F%BA%E5%9C%B02.0%E5%BC%80%E5%90%AF9090%E7%AB%AF%E5%8F%A3%E5%92%8CVNC%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%5D/"/>
-    <url>/2020/07/08/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B10%E5%9F%BA%E5%9C%B02.0%E5%BC%80%E5%90%AF9090%E7%AB%AF%E5%8F%A3%E5%92%8CVNC%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%5D/</url>
-    
-    <content type="html"><![CDATA[<p class="note note-primary">  之前做过本地搭的网站的内网穿透，但是想利用内网穿透把基地2.0的管理界面和vnc界面集成进去。之前也做过尝试，但是可能都由于安装的系统不完整等等原因导致无法穿透，今天尝试了一下vnc发现可以，但是9090管理端口可能由于安全连接导致无法实现……</p><h4 id="vnc"><a href="#vnc" class="headerlink" title="vnc"></a>vnc</h4><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122222722.png" alt=""></p><p><span class="label label-primary">这个端口没有安全设置，只需要按照sunny-ngrok官方文档设置就可以。</span></p><p><a href="http://www.baixf.xyz/index.php/2020/06/12/%e6%a0%91%e8%8e%93%e6%b4%be%e4%bd%bf%e7%94%a8ngrok%e8%bf%9b%e8%a1%8c%e5%86%85%e7%bd%91%e7%a9%bf%e9%80%8f%ef%bc%8c%e5%9c%a8%e5%85%ac%e7%bd%91%e4%b8%8a%e6%90%ad%e5%bb%ba%e4%b8%aa%e4%ba%ba%e5%8d%9a/">设置参考链接</a></p><h4 id="9090"><a href="#9090" class="headerlink" title="9090"></a>9090</h4><p><span class="label label-primary"><br>  错误显示如下：<br>  此网站无法提供安全连接，localhost 发送的响应无效</span></p><p><span class="label label-primary">在设置9090管理端口内网穿透时发现由于安全性无法进行连接，因此寻找方法，发现如下文章：</span></p><p><a href="https://blog.csdn.net/wang_xiaoniao/article/details/107280638">csdn原文链接</a></p><p><span class="label label-primary"><br>  三、错误原因<br>  使用了https作为网络协议，应用http代替https。<br>  HTTPS和HTTP的区别<br>  1、https协议需要到ca申请证书，一般免费证书较少，因而需要一定费用。<br>  2、http是超文本传输1653协议，信息是明文传输，https则是具有安全性的ssl加密传输协议<br>  3、http和https使用的是完全不同的连接方式，用的端口也不一样，前者是80，后者是443<br>  4、http的连接很简单，是无状态的；HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，比http协议安全。</p><p>  其实网站的报错就已经提示了错误原因，此网站无法提供安全连接。因为我本地搭建的服务器并没有申请ssl数字证书，只是简单的作为项目运行时的临时服务器，所以无法用https进行访问。<br>  ————————————————<br>  版权声明：本文为CSDN博主「wang_xiaoniao」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>&lt;/span&gt;</p><p><span class="label label-primary">⚠即解决办法就是将内网穿透的http换成https协议</span></p><p><span class="label label-primary">修改后的效果如下</span></p><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122223141.png" alt=""></p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a href="http://www.ngrok.cc/_book/">Sunny-Ngrok使用教程</a><a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a href="https://www.ngrok.cc/">Sunny-Ngrok官网</a><a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>]]></content>
-    
-    
-    <categories>
-      
-      <category>学习</category>
-      
-      <category>raspberry</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>raspberry</tag>
-      
-      <tag>基地2.0</tag>
-      
-      <tag>内网穿透</tag>
-      
-      <tag>9090端口</tag>
-      
-      <tag>vnc</tag>
-      
-      <tag>http协议</tag>
-      
-      <tag>sunny-ngrok</tag>
       
     </tags>
     
