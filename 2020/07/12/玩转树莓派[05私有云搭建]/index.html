@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>玩转树莓派[02:树莓派+u盘搭建家庭共享] - Hexo</title>
+  <title>玩转树莓派[05:私有云搭建] - Hexo</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
@@ -174,7 +174,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="玩转树莓派[02:树莓派+u盘搭建家庭共享]">
+            <span class="h2" id="subtitle" title="玩转树莓派[05:私有云搭建]">
               
             </span>
 
@@ -184,8 +184,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-07-09 11:11" pubdate>
-        2020年7月9日 上午
+      <time datetime="2020-07-12 11:11" pubdate>
+        2020年7月12日 上午
       </time>
     </span>
   
@@ -196,7 +196,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.4k 字
+      613 字
     </span>
   
 
@@ -206,7 +206,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      23
+      8
        分钟
     </span>
   
@@ -236,146 +236,58 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">玩转树莓派[02:树莓派+u盘搭建家庭共享]</h1>
+            <h1 style="display: none">玩转树莓派[05:私有云搭建]</h1>
             
             <div class="markdown-body">
-              <h4 id="1-硬盘挂载"><a href="#1-硬盘挂载" class="headerlink" title="1.硬盘挂载"></a>1.硬盘挂载</h4><h5 id="1-1-使用fdisk-l-查看硬盘的详细信息"><a href="#1-1-使用fdisk-l-查看硬盘的详细信息" class="headerlink" title="1.1 使用fdisk -l 查看硬盘的详细信息"></a>1.1 使用fdisk -l 查看硬盘的详细信息</h5><pre><code class="hljs shell">pi@raspbian:~$ sudo fdisk -l
-Disk /dev/ram0: 4 MiB, 4194304 bytes, 8192 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 4096 bytes
-I/O size (minimum/optimal): 4096 bytes / 4096 bytes
-Disk /dev/ram1: 4 MiB, 4194304 bytes, 8192 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 4096 bytes
-I/O size (minimum/optimal): 4096 bytes / 4096 bytes
-Disk /dev/ram2: 4 MiB, 4194304 bytes, 8192 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 4096 bytes
-I/O size (minimum/optimal): 4096 bytes / 4096 bytes
-Disk /dev/ram3: 4 MiB, 4194304 bytes, 8192 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 4096 bytes
-I/O size (minimum/optimal): 4096 bytes / 4096 bytes
-Disk /dev/ram4: 4 MiB, 4194304 bytes, 8192 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 4096 bytes
-I/O size (minimum/optimal): 4096 bytes / 4096 bytes
-Disk /dev/ram5: 4 MiB, 4194304 bytes, 8192 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 4096 bytes
-I/O size (minimum/optimal): 4096 bytes / 4096 bytes
-Disk /dev/ram6: 4 MiB, 4194304 bytes, 8192 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 4096 bytes
-I/O size (minimum/optimal): 4096 bytes / 4096 bytes
-Disk /dev/ram7: 4 MiB, 4194304 bytes, 8192 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 4096 bytes
-I/O size (minimum/optimal): 4096 bytes / 4096 bytes
-Disk /dev/ram8: 4 MiB, 4194304 bytes, 8192 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 4096 bytes
-I/O size (minimum/optimal): 4096 bytes / 4096 bytes
-Disk /dev/ram9: 4 MiB, 4194304 bytes, 8192 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 4096 bytes
-I/O size (minimum/optimal): 4096 bytes / 4096 bytes
-Disk /dev/ram10: 4 MiB, 4194304 bytes, 8192 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 4096 bytes
-I/O size (minimum/optimal): 4096 bytes / 4096 bytes
-Disk /dev/ram11: 4 MiB, 4194304 bytes, 8192 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 4096 bytes
-I/O size (minimum/optimal): 4096 bytes / 4096 bytes
-Disk /dev/ram12: 4 MiB, 4194304 bytes, 8192 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 4096 bytes
-I/O size (minimum/optimal): 4096 bytes / 4096 bytes
-Disk /dev/ram13: 4 MiB, 4194304 bytes, 8192 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 4096 bytes
-I/O size (minimum/optimal): 4096 bytes / 4096 bytes
-Disk /dev/ram14: 4 MiB, 4194304 bytes, 8192 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 4096 bytes
-I/O size (minimum/optimal): 4096 bytes / 4096 bytes
-Disk /dev/ram15: 4 MiB, 4194304 bytes, 8192 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 4096 bytes
-I/O size (minimum/optimal): 4096 bytes / 4096 bytes
-Disk /dev/mmcblk0: 29.9 GiB, 32105299968 bytes, 62705664 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 512 bytes
-I/O size (minimum/optimal): 512 bytes / 512 bytes
-Disklabel type: dos
-Disk identifier: 0x68339dda
-Device         Boot  Start      End  Sectors  Size Id Type
-/dev/mmcblk0p1 *      8192   524287   516096  252M  c W95 FAT32 (LBA)
-/dev/mmcblk0p2      524288 62705663 62181376 29.7G 83 Linux
-Disk /dev/sda: 30 GiB, 32212254720 bytes, 62914560 sectors
-Disk model: U310
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 512 bytes
-I/O size (minimum/optimal): 512 bytes / 512 bytes
-Disklabel type: dos
-Disk identifier: 0xb64d29a8
-Device     Boot Start      End  Sectors Size Id Type
-/dev/sda1        8192 62914559 62906368  30G  7 HPFS/NTFS/exFAT</code></pre>
-<h5 id="1-2-挂载到指定位置"><a href="#1-2-挂载到指定位置" class="headerlink" title="1.2 挂载到指定位置"></a>1.2 挂载到指定位置</h5><pre><code class="hljs shell">pi@raspbian:~$ mkdir share
-pi@raspbian:~$ ls
-share
-pi@raspbian:~$ sudo mount /dev/sda1 share</code></pre>
-<h5 id="1-3-查看挂载情况"><a href="#1-3-查看挂载情况" class="headerlink" title="1.3 查看挂载情况"></a>1.3 查看挂载情况</h5><pre><code class="hljs shell">df -h</code></pre>
-<pre><code class="hljs shell">pi@raspbian:~$ df -h
-Filesystem      Size  Used Avail Use% Mounted on
-/dev/root        30G  4.2G   24G  15% /
-devtmpfs        918M     0  918M   0% /dev
-tmpfs           950M     0  950M   0% /dev/shm
-tmpfs           950M  8.9M  941M   1% /run
-tmpfs           5.0M     0  5.0M   0% /run/lock
-tmpfs           950M     0  950M   0% /sys/fs/cgroup
-/dev/mmcblk0p1  252M   71M  181M  29% /boot
-tmpfs           190M     0  190M   0% /run/user/1000
-/dev/sda1        30G   19G  9.9G  65% /home/pi/share</code></pre>
-<p class="note note-primary">  取消挂载 : sudo umount /dev/sda1</p>
-
-<h5 id="1-4-解决硬盘的自动挂载"><a href="#1-4-解决硬盘的自动挂载" class="headerlink" title="1.4 解决硬盘的自动挂载"></a>1.4 解决硬盘的自动挂载</h5><p>每次树莓派重启或者硬盘插拔都需要对硬盘进行重新挂载，比较麻烦，因此需要自动挂载。这里要修改/etc/fstab文件。</p>
-<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201121203001.png" srcset="/img/loading.gif" alt=""></p>
-<p>可以看到，fstab文件其实就是一个表格，表格各列的含意如下：<br>第一列：磁盘分区名/卷标，一般是/dev/sdaN（N表示正整数）<br>第二列：挂载点，我们在这里把/dev/sda1挂到/samba上。<br>第三列：缺省设置，一般用defautls。<br>第四列：是否备份：0——表示不做 dump 备份；1——表示要将整个 fie sysytem 里的内容备份；2 也表示要做 dump 备份，但该分区的重要性比 1 小。<br>第五列：检测顺序：0——不进行检测；根分区（/），必须填写 1，其它的都不能填写 1。如果有分区填写大于 1 的话，则在检查完根分区后，从小到大依次检查下去。<br>具体填写方法在图中已注明。</p>
-<h4 id="2-df-h查看盘符挂载情况"><a href="#2-df-h查看盘符挂载情况" class="headerlink" title="2.df -h查看盘符挂载情况"></a>2.df -h查看盘符挂载情况</h4><pre><code class="hljs shell">pi@raspbian:~$ df -h
-Filesystem      Size  Used Avail Use% Mounted on
-udev            788M     0  788M   0% /dev
-tmpfs           185M   12M  173M   7% /run
-/dev/mmcblk0p2   30G  8.8G   20G  32% /
-tmpfs           925M     0  925M   0% /dev/shm
-tmpfs           5.0M  4.0K  5.0M   1% /run/lock
-tmpfs           925M     0  925M   0% /sys/fs/cgroup
-/dev/mmcblk0p1  252M   89M  163M  36% /boot
-tmpfs           185M   16K  185M   1% /run/user/1000
-/dev/sda        500G   28G  473G   6% /media/pi/AE57-581F</code></pre>
-<h4 id="3-已知盘符已自动挂载在-home-pi-share文件夹下"><a href="#3-已知盘符已自动挂载在-home-pi-share文件夹下" class="headerlink" title="3.已知盘符已自动挂载在/home/pi/share文件夹下"></a>3.已知盘符已自动挂载在/home/pi/share文件夹下</h4><h4 id="4-安装samba"><a href="#4-安装samba" class="headerlink" title="4.安装samba"></a>4.安装samba</h4><p><span class="label label-primary">更新一下源 ：sudo apt-get update</span></p>
-<p><span class="label label-primary">安装samba : sudo apt-get install samba samba-common-bin</span></p>
-<h4 id="5-安装完成后，配置-etc-samba-smb-conf文件"><a href="#5-安装完成后，配置-etc-samba-smb-conf文件" class="headerlink" title="5.安装完成后，配置/etc/samba/smb.conf文件"></a>5.安装完成后，配置/etc/samba/smb.conf文件</h4><pre><code class="hljs shell">sudo vim /etc/samba/smb.conf</code></pre>
-<p>&lt;span class=label label-primary”&gt;在其最后添加以下命令：&lt;/span&gt;</p>
-<pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">共享文件的名称，将在网络上以此名称显示</span>
-path = /home/pi/share #共享文件的路径
-valid users = root pi #允许访问的用户，这里我用的是root 和 pi 两个用户
-browseable = yes  #允许浏览
-public = yes  #共享开放
-writable = yes  #可写</code></pre>
-<h4 id="6-保存后，重启samba服务"><a href="#6-保存后，重启samba服务" class="headerlink" title="6.保存后，重启samba服务"></a>6.保存后，重启samba服务</h4><pre><code class="hljs shell">sudo /usr/sbin/samba restart</code></pre>
-<p>(可通过 whereis samba 寻找 samba 所在位置)</p>
-<h4 id="7-最后使用root用户添加共享用户："><a href="#7-最后使用root用户添加共享用户：" class="headerlink" title="7.最后使用root用户添加共享用户："></a>7.最后使用root用户添加共享用户：</h4><p>smbpasswd –a pi #这里我用的pi。</p>
-<pre><code class="hljs shell">pi@raspbian:~$ sudo su
-root@raspbian:/home/pi# smbpasswd -a pi
-New SMB password:
-Retype new SMB password:
-Added user pi</code></pre>
-<h4 id="8-ok-完成"><a href="#8-ok-完成" class="headerlink" title="8.ok 完成"></a>8.ok 完成</h4><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201121203707.png" srcset="/img/loading.gif" alt=""></p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://gitee.com/openfans-community/Debian-Pi-Aarch64/">Debian-Pi-Aarch64 ★ 全新树莓派64位系统2.0正式版 - 说明文档</a>
-<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://raspberrypi.club/">树莓派俱乐部</a>
-<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:3" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://shumeipai.nxez.com/">树莓派实验</a>
+              <p><span class="label label-primary"><br>  之前已经做过关于树莓派的私有云搭建，只不过都是在宝塔直接完成的，在宝塔搭建固然容易，但是宝塔作为虚拟机，储存的东西只是虚拟内存，无法实现本机的访问，现在在本地搭建的Nginx上搭建一下私有云。
+</span></p>
+<h3 id="一-owncloud"><a href="#一-owncloud" class="headerlink" title="一.owncloud"></a>一.owncloud</h3><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122210506.jpg" srcset="/img/loading.gif" alt=""></p>
+<h4 id="1-下载ownCloud"><a href="#1-下载ownCloud" class="headerlink" title="1. 下载ownCloud"></a>1. 下载ownCloud</h4><p>按照下面的指令依次执行</p>
+<pre><code class="hljs shell">sudo wget https://download.owncloud.org/community/owncloud-10.2.0.zip
+sudo unzip owncloud-10.2.0.zip -d /var/www/html/
+cd /var/www/html/owncloud
+sudo mkdir data</code></pre>
+<h4 id="2-修改目录权限"><a href="#2-修改目录权限" class="headerlink" title="2. 修改目录权限"></a>2. 修改目录权限</h4><p><span class="label label-primary"><br>  OwnCloud在安装的过程中需要对一些目录有写的权限,为此，web服务器用户（www-data对于基于Debian的系统）必须要拥有apps、data、config目录的权限。
+</span></p>
+<pre><code class="hljs shell">依次执行下面的指令
+sudo chown -R www-data:www-data data
+sudo chown -R www-data:www-data config
+sudo chown -R www-data:www-data apps</code></pre>
+<h4 id="3-设置mysql账户密码"><a href="#3-设置mysql账户密码" class="headerlink" title="3. 设置mysql账户密码"></a>3. 设置mysql账户密码</h4><p>输入下面指令</p>
+<pre><code class="hljs shell">sudo mysql -u root -p</code></pre>
+<p>然后随便输密码点击回车就能登录进去</p>
+<p>输入下面指令点击回车</p>
+<pre><code class="hljs shell">update mysql.user set plugin=&#x27;mysql_native_password&#x27;;</code></pre>
+<p>输入下面指令在newpassword处输入你想设置的密码</p>
+<pre><code class="hljs shell">update mysql.user set password=PASSWORD(&quot;newpassword&quot;) where User=&#x27;root&#x27;;</code></pre>
+<p>用下面指令刷新信息</p>
+<pre><code class="hljs shell">flush privileges;</code></pre>
+<p>刷新以后点击ctrl-c退出</p>
+<h4 id="4-配置owncloud"><a href="#4-配置owncloud" class="headerlink" title="4. 配置owncloud"></a>4. 配置owncloud</h4><p>打开浏览器，输入 树莓派IP/owncloud ,进入设置安装界面</p>
+<h4 id="5-问题"><a href="#5-问题" class="headerlink" title="5. 问题"></a>5. 问题</h4><pre><code class="hljs shell">error:
+This version of ownCloud is not compatible with PHP 7.3
+You are currently running PHP 7.3.19-1~deb10u1.</code></pre>
+<p>解决方案：（呃，解决不了）<br><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122210801.png" srcset="/img/loading.gif" alt=""></p>
+<h4 id="二-nextcloud"><a href="#二-nextcloud" class="headerlink" title="二.nextcloud"></a>二.nextcloud</h4><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122210845.jpg" srcset="/img/loading.gif" alt=""></p>
+<h4 id="1-下载nextcloud"><a href="#1-下载nextcloud" class="headerlink" title="1. 下载nextcloud"></a>1. 下载nextcloud</h4><p>按照下面的指令依次执行</p>
+<pre><code class="hljs shell">sudo wget https://download.nextcloud.com/server/releases/nextcloud-19.0.0.zip
+sudo unzip nextcloud-19.0.0.zip -d /var/www/html/
+cd /var/www/html/nextcloud
+sudo mkdir data</code></pre>
+<h4 id="2-修改目录权限-1"><a href="#2-修改目录权限-1" class="headerlink" title="2. 修改目录权限"></a>2. 修改目录权限</h4><p><span class="label label-primary"><br>  nextcloud在安装的过程中需要对一些目录有写的权限,为此，web服务器用户（www-data对于基于Debian的系统）必须要拥有apps、data、config目录的权限。
+</span></p>
+<pre><code class="hljs shell">依次执行下面的指令
+sudo chown -R www-data:www-data data
+sudo chown -R www-data:www-data config
+sudo chown -R www-data:www-data apps</code></pre>
+<h4 id="3-为nextcloud创建数据库"><a href="#3-为nextcloud创建数据库" class="headerlink" title="3. 为nextcloud创建数据库"></a>3. 为nextcloud创建数据库</h4><p>进入phpmyadmin页面</p>
+<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122211024.png" srcset="/img/loading.gif" alt=""></p>
+<h4 id="4-配置nextcloud"><a href="#4-配置nextcloud" class="headerlink" title="4. 配置nextcloud"></a>4. 配置nextcloud</h4><p>打开浏览器，输入 树莓派IP/nextcloud ,进入设置安装界面</p>
+<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122211108.png" srcset="/img/loading.gif" alt=""></p>
+<h4 id="5-问题-1"><a href="#5-问题-1" class="headerlink" title="5. 问题"></a>5. 问题</h4><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122211153.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/IKMIYHsRsvVzoaBF89byBw">树莓派爱好者基地：树莓派搭建私有云盘教程</a>
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://central.owncloud.org/t/this-version-of-owncloud-is-not-compatible-with-php-7-3/17531">This version of ownCloud is not compatible with PHP 7.3</a>
+<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:3" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://www.orgleaf.com/2891.html?replytocom=2711">解决CentOS中安装Nextcloud出现“内部服务器错误</a>
 <a href="#fnref:3" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
             </div>
             <hr>
@@ -397,11 +309,9 @@ Added user pi</code></pre>
                     
                       <a class="hover-with-bg" href="/tags/raspberry/">raspberry</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%9F%BA%E5%9C%B02-0/">基地2.0</a>
+                      <a class="hover-with-bg" href="/tags/%E7%A7%81%E6%9C%89%E4%BA%91/">私有云</a>
                     
-                      <a class="hover-with-bg" href="/tags/samba/">samba</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E5%AE%B6%E5%BA%AD%E5%85%B1%E4%BA%AB%EF%BC%8CU%E7%9B%98%EF%BC%8C%E6%8C%82%E8%BD%BD/">家庭共享，U盘，挂载</a>
+                      <a class="hover-with-bg" href="/tags/nextcloud/">nextcloud</a>
                     
                   </div>
                 
@@ -414,9 +324,9 @@ Added user pi</code></pre>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/07/10/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B03%E5%AE%89%E8%A3%85%E5%AE%9D%E5%A1%94%5D/">
+                      <a href="/2020/07/13/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B06USB%E6%91%84%E5%83%8F%E5%A4%B4%E5%92%8Cmotion%E5%AE%9E%E7%8E%B0%E7%9B%91%E6%8E%A7%5D/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">玩转树莓派[03安装宝塔]</span>
+                        <span class="hidden-mobile">玩转树莓派[06USB摄像头和motion实现监控]</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -424,8 +334,8 @@ Added user pi</code></pre>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/07/08/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B01%E8%A3%85%E7%B3%BB%E7%BB%9F%5D/">
-                        <span class="hidden-mobile">玩转树莓派[01:装系统]</span>
+                      <a href="/2020/07/11/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B04pi-dashboard%E5%AE%9E%E6%97%B6%E7%9B%91%E6%8E%A7%5D/">
+                        <span class="hidden-mobile">玩转树莓派[04pi-dashboard实时监控]</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

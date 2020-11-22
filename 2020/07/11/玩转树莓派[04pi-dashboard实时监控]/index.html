@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>玩转树莓派[02:树莓派+u盘搭建家庭共享] - Hexo</title>
+  <title>玩转树莓派[04pi-dashboard实时监控] - Hexo</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
@@ -174,7 +174,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="玩转树莓派[02:树莓派+u盘搭建家庭共享]">
+            <span class="h2" id="subtitle" title="玩转树莓派[04pi-dashboard实时监控]">
               
             </span>
 
@@ -184,8 +184,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-07-09 11:11" pubdate>
-        2020年7月9日 上午
+      <time datetime="2020-07-11 11:11" pubdate>
+        2020年7月11日 上午
       </time>
     </span>
   
@@ -196,7 +196,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.4k 字
+      890 字
     </span>
   
 
@@ -206,7 +206,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      23
+      12
        分钟
     </span>
   
@@ -236,147 +236,88 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">玩转树莓派[02:树莓派+u盘搭建家庭共享]</h1>
+            <h1 style="display: none">玩转树莓派[04pi-dashboard实时监控]</h1>
             
             <div class="markdown-body">
-              <h4 id="1-硬盘挂载"><a href="#1-硬盘挂载" class="headerlink" title="1.硬盘挂载"></a>1.硬盘挂载</h4><h5 id="1-1-使用fdisk-l-查看硬盘的详细信息"><a href="#1-1-使用fdisk-l-查看硬盘的详细信息" class="headerlink" title="1.1 使用fdisk -l 查看硬盘的详细信息"></a>1.1 使用fdisk -l 查看硬盘的详细信息</h5><pre><code class="hljs shell">pi@raspbian:~$ sudo fdisk -l
-Disk /dev/ram0: 4 MiB, 4194304 bytes, 8192 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 4096 bytes
-I/O size (minimum/optimal): 4096 bytes / 4096 bytes
-Disk /dev/ram1: 4 MiB, 4194304 bytes, 8192 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 4096 bytes
-I/O size (minimum/optimal): 4096 bytes / 4096 bytes
-Disk /dev/ram2: 4 MiB, 4194304 bytes, 8192 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 4096 bytes
-I/O size (minimum/optimal): 4096 bytes / 4096 bytes
-Disk /dev/ram3: 4 MiB, 4194304 bytes, 8192 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 4096 bytes
-I/O size (minimum/optimal): 4096 bytes / 4096 bytes
-Disk /dev/ram4: 4 MiB, 4194304 bytes, 8192 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 4096 bytes
-I/O size (minimum/optimal): 4096 bytes / 4096 bytes
-Disk /dev/ram5: 4 MiB, 4194304 bytes, 8192 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 4096 bytes
-I/O size (minimum/optimal): 4096 bytes / 4096 bytes
-Disk /dev/ram6: 4 MiB, 4194304 bytes, 8192 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 4096 bytes
-I/O size (minimum/optimal): 4096 bytes / 4096 bytes
-Disk /dev/ram7: 4 MiB, 4194304 bytes, 8192 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 4096 bytes
-I/O size (minimum/optimal): 4096 bytes / 4096 bytes
-Disk /dev/ram8: 4 MiB, 4194304 bytes, 8192 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 4096 bytes
-I/O size (minimum/optimal): 4096 bytes / 4096 bytes
-Disk /dev/ram9: 4 MiB, 4194304 bytes, 8192 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 4096 bytes
-I/O size (minimum/optimal): 4096 bytes / 4096 bytes
-Disk /dev/ram10: 4 MiB, 4194304 bytes, 8192 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 4096 bytes
-I/O size (minimum/optimal): 4096 bytes / 4096 bytes
-Disk /dev/ram11: 4 MiB, 4194304 bytes, 8192 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 4096 bytes
-I/O size (minimum/optimal): 4096 bytes / 4096 bytes
-Disk /dev/ram12: 4 MiB, 4194304 bytes, 8192 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 4096 bytes
-I/O size (minimum/optimal): 4096 bytes / 4096 bytes
-Disk /dev/ram13: 4 MiB, 4194304 bytes, 8192 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 4096 bytes
-I/O size (minimum/optimal): 4096 bytes / 4096 bytes
-Disk /dev/ram14: 4 MiB, 4194304 bytes, 8192 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 4096 bytes
-I/O size (minimum/optimal): 4096 bytes / 4096 bytes
-Disk /dev/ram15: 4 MiB, 4194304 bytes, 8192 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 4096 bytes
-I/O size (minimum/optimal): 4096 bytes / 4096 bytes
-Disk /dev/mmcblk0: 29.9 GiB, 32105299968 bytes, 62705664 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 512 bytes
-I/O size (minimum/optimal): 512 bytes / 512 bytes
-Disklabel type: dos
-Disk identifier: 0x68339dda
-Device         Boot  Start      End  Sectors  Size Id Type
-/dev/mmcblk0p1 *      8192   524287   516096  252M  c W95 FAT32 (LBA)
-/dev/mmcblk0p2      524288 62705663 62181376 29.7G 83 Linux
-Disk /dev/sda: 30 GiB, 32212254720 bytes, 62914560 sectors
-Disk model: U310
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 512 bytes
-I/O size (minimum/optimal): 512 bytes / 512 bytes
-Disklabel type: dos
-Disk identifier: 0xb64d29a8
-Device     Boot Start      End  Sectors Size Id Type
-/dev/sda1        8192 62914559 62906368  30G  7 HPFS/NTFS/exFAT</code></pre>
-<h5 id="1-2-挂载到指定位置"><a href="#1-2-挂载到指定位置" class="headerlink" title="1.2 挂载到指定位置"></a>1.2 挂载到指定位置</h5><pre><code class="hljs shell">pi@raspbian:~$ mkdir share
-pi@raspbian:~$ ls
-share
-pi@raspbian:~$ sudo mount /dev/sda1 share</code></pre>
-<h5 id="1-3-查看挂载情况"><a href="#1-3-查看挂载情况" class="headerlink" title="1.3 查看挂载情况"></a>1.3 查看挂载情况</h5><pre><code class="hljs shell">df -h</code></pre>
-<pre><code class="hljs shell">pi@raspbian:~$ df -h
-Filesystem      Size  Used Avail Use% Mounted on
-/dev/root        30G  4.2G   24G  15% /
-devtmpfs        918M     0  918M   0% /dev
-tmpfs           950M     0  950M   0% /dev/shm
-tmpfs           950M  8.9M  941M   1% /run
-tmpfs           5.0M     0  5.0M   0% /run/lock
-tmpfs           950M     0  950M   0% /sys/fs/cgroup
-/dev/mmcblk0p1  252M   71M  181M  29% /boot
-tmpfs           190M     0  190M   0% /run/user/1000
-/dev/sda1        30G   19G  9.9G  65% /home/pi/share</code></pre>
-<p class="note note-primary">  取消挂载 : sudo umount /dev/sda1</p>
+              <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p><span class="label label-primary"><br>  树莓派作为一台Linux主机，要是有一个可视化界面能实时显示树莓派的状态信息那该有多棒啊。<br>  最近找到一个有趣的项目，我们只需要给树莓派配置好lnmp环境后，就可以装上一个类似于仪表盘的状态监控的工具。<br>  通过炫酷的WebUI的界面显示当前树莓派的各种数据：<br>  CPU的基本信息，状态和使用率树莓派当前IP地址、使用的时间、操作系统内存、缓存、SWAP分区的实时数据TF卡磁盘的占用情况网络接口实时数据
+</span></p>
+<p>以下是在树莓派上安装pi-dashboard的详细过程：</p>
+<h4 id="安装方法"><a href="#安装方法" class="headerlink" title="安装方法"></a>安装方法</h4><h5 id="1-安装Nginx"><a href="#1-安装Nginx" class="headerlink" title="1. 安装Nginx"></a>1. 安装Nginx</h5><p>ssh登录树莓派，输入：</p>
+<pre><code class="hljs shell">sudo apt-get update
+sudo apt-get install nginx</code></pre>
+<h5 id="2-安装php"><a href="#2-安装php" class="headerlink" title="2. 安装php"></a>2. 安装php</h5><pre><code class="hljs shell">sudo apt-get install php7.3-fpm</code></pre>
+<h5 id="3-配置Nginx"><a href="#3-配置Nginx" class="headerlink" title="3. 配置Nginx"></a>3. 配置Nginx</h5><p>安装好Nginx后，为了让Nginx能够处理PHP网页，需要修改/etc/nginx/sites-available/default文件</p>
+<pre><code class="hljs shell">sudo vim /etc/nginx/sites-available/default</code></pre>
+<p>将default文件修改为以下内容：</p>
+<pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> Default server configuration</span>
+<span class="hljs-meta">#</span>
+server &#123;
+        listen 80 default_server;
+        listen [::]:80 default_server;
+        root /var/www/html;
+        # Add index.php to the list if you are using PHP
+        index index.html index.htm index.nginx-debian.html index.php;
+        server_name _;
+        location / &#123;
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+                try_files $uri $uri/ =404;
+        &#125;
+        # pass PHP scripts to FastCGI server
+        #
+        location ~ \.php$ &#123;
+        #       include snippets/fastcgi-php.conf;
+        #
+        #       # With php-fpm (or other unix sockets):
+                fastcgi_pass unix:/run/php/php7.3-fpm.sock;
+        #       # With php-cgi (or other tcp sockets):
+        #       fastcgi_pass 127.0.0.1:9000;
+        # 设置脚本文件请求的路径
+                fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        # 引入fastcgi的配置文件
+                include fastcgi_params;
+        &#125;
+&#125;</code></pre>
+<h5 id="4-重启Nginx"><a href="#4-重启Nginx" class="headerlink" title="4. 重启Nginx"></a>4. 重启Nginx</h5><pre><code class="hljs shell">sudo nginx -s reload</code></pre>
+<p>这时我们可以查看Nginx与PHP是否配置成功，我们可以在网站根目录下 /var/www/html创建一个index.php文件，内容如下：</p>
+<pre><code class="hljs shell">&lt;?php phpinfo(); ?&gt;</code></pre>
+<p>保存后退出，在局域网下浏览器地址栏输入：<a target="_blank" rel="noopener" href="http://你的树莓派ip/index.php，查看PHPinfo信息，如果显示说明PHP与Nginx配置成功。">http://你的树莓派ip/index.php，查看PHPinfo信息，如果显示说明PHP与Nginx配置成功。</a></p>
+<h5 id="5-树莓派安装MariaDB和phpMyAdmin"><a href="#5-树莓派安装MariaDB和phpMyAdmin" class="headerlink" title="5. 树莓派安装MariaDB和phpMyAdmin"></a>5. 树莓派安装MariaDB和phpMyAdmin</h5><pre><code class="hljs shell">sudo apt-get install mariadb-server-10.3 phpmyadmin</code></pre>
+<pre><code class="hljs shell">error:
+pi@raspbian:~$ sudo apt-get install mariadb-server-10.3 phpmyadmin
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+Some packages could not be installed. This may mean that you have
+requested an impossible situation or if you are using the unstable
+distribution that some required packages have not yet been created
+or been moved out of Incoming.
+The following information may help to resolve the situation:
 
-<h5 id="1-4-解决硬盘的自动挂载"><a href="#1-4-解决硬盘的自动挂载" class="headerlink" title="1.4 解决硬盘的自动挂载"></a>1.4 解决硬盘的自动挂载</h5><p>每次树莓派重启或者硬盘插拔都需要对硬盘进行重新挂载，比较麻烦，因此需要自动挂载。这里要修改/etc/fstab文件。</p>
-<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201121203001.png" srcset="/img/loading.gif" alt=""></p>
-<p>可以看到，fstab文件其实就是一个表格，表格各列的含意如下：<br>第一列：磁盘分区名/卷标，一般是/dev/sdaN（N表示正整数）<br>第二列：挂载点，我们在这里把/dev/sda1挂到/samba上。<br>第三列：缺省设置，一般用defautls。<br>第四列：是否备份：0——表示不做 dump 备份；1——表示要将整个 fie sysytem 里的内容备份；2 也表示要做 dump 备份，但该分区的重要性比 1 小。<br>第五列：检测顺序：0——不进行检测；根分区（/），必须填写 1，其它的都不能填写 1。如果有分区填写大于 1 的话，则在检查完根分区后，从小到大依次检查下去。<br>具体填写方法在图中已注明。</p>
-<h4 id="2-df-h查看盘符挂载情况"><a href="#2-df-h查看盘符挂载情况" class="headerlink" title="2.df -h查看盘符挂载情况"></a>2.df -h查看盘符挂载情况</h4><pre><code class="hljs shell">pi@raspbian:~$ df -h
-Filesystem      Size  Used Avail Use% Mounted on
-udev            788M     0  788M   0% /dev
-tmpfs           185M   12M  173M   7% /run
-/dev/mmcblk0p2   30G  8.8G   20G  32% /
-tmpfs           925M     0  925M   0% /dev/shm
-tmpfs           5.0M  4.0K  5.0M   1% /run/lock
-tmpfs           925M     0  925M   0% /sys/fs/cgroup
-/dev/mmcblk0p1  252M   89M  163M  36% /boot
-tmpfs           185M   16K  185M   1% /run/user/1000
-/dev/sda        500G   28G  473G   6% /media/pi/AE57-581F</code></pre>
-<h4 id="3-已知盘符已自动挂载在-home-pi-share文件夹下"><a href="#3-已知盘符已自动挂载在-home-pi-share文件夹下" class="headerlink" title="3.已知盘符已自动挂载在/home/pi/share文件夹下"></a>3.已知盘符已自动挂载在/home/pi/share文件夹下</h4><h4 id="4-安装samba"><a href="#4-安装samba" class="headerlink" title="4.安装samba"></a>4.安装samba</h4><p><span class="label label-primary">更新一下源 ：sudo apt-get update</span></p>
-<p><span class="label label-primary">安装samba : sudo apt-get install samba samba-common-bin</span></p>
-<h4 id="5-安装完成后，配置-etc-samba-smb-conf文件"><a href="#5-安装完成后，配置-etc-samba-smb-conf文件" class="headerlink" title="5.安装完成后，配置/etc/samba/smb.conf文件"></a>5.安装完成后，配置/etc/samba/smb.conf文件</h4><pre><code class="hljs shell">sudo vim /etc/samba/smb.conf</code></pre>
-<p>&lt;span class=label label-primary”&gt;在其最后添加以下命令：&lt;/span&gt;</p>
-<pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">共享文件的名称，将在网络上以此名称显示</span>
-path = /home/pi/share #共享文件的路径
-valid users = root pi #允许访问的用户，这里我用的是root 和 pi 两个用户
-browseable = yes  #允许浏览
-public = yes  #共享开放
-writable = yes  #可写</code></pre>
-<h4 id="6-保存后，重启samba服务"><a href="#6-保存后，重启samba服务" class="headerlink" title="6.保存后，重启samba服务"></a>6.保存后，重启samba服务</h4><pre><code class="hljs shell">sudo /usr/sbin/samba restart</code></pre>
-<p>(可通过 whereis samba 寻找 samba 所在位置)</p>
-<h4 id="7-最后使用root用户添加共享用户："><a href="#7-最后使用root用户添加共享用户：" class="headerlink" title="7.最后使用root用户添加共享用户："></a>7.最后使用root用户添加共享用户：</h4><p>smbpasswd –a pi #这里我用的pi。</p>
-<pre><code class="hljs shell">pi@raspbian:~$ sudo su
-root@raspbian:/home/pi# smbpasswd -a pi
-New SMB password:
-Retype new SMB password:
-Added user pi</code></pre>
-<h4 id="8-ok-完成"><a href="#8-ok-完成" class="headerlink" title="8.ok 完成"></a>8.ok 完成</h4><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201121203707.png" srcset="/img/loading.gif" alt=""></p>
+The following packages have unmet dependencies:
+ phpmyadmin : Depends: php-twig (&gt;= 2.9) but 2.6.2-2 is to be installed
+              Recommends: php-curl
+              Recommends: php-gd
+              Recommends: php-bz2
+              Recommends: php-zip
+              Recommends: php-tcpdf but it is not going to be installed
+E: Unable to correct problems, you have held broken packages.</code></pre>
+<p>解决办法：</p>
+<pre><code class="hljs shell">sudo apt-get install aptitude
+sudo aptitude install xxxxx
+第一选项no
+第二个选项yes</code></pre>
+<p>控制台安装phpMyAdmin过程中会出现配置phpMyAdmin的选项<br><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122205629.png" srcset="/img/loading.gif" alt=""><br>它让我们自动重新配置网络服务器Apache或者lighttpd，因为我们用的是Nginx所以按 esc键取消选择，安装结束时会出现一个配置选项，点击 yes进行配置，之后要求输入一个密码，注册到MySQL服务器上<br><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122205634.png" srcset="/img/loading.gif" alt=""></p>
+<h5 id="6-建立软链接："><a href="#6-建立软链接：" class="headerlink" title="6. 建立软链接："></a>6. 建立软链接：</h5><pre><code class="hljs shell">sudo ln -s /usr/share/phpmyadmin /var/www/html</code></pre>
+<h5 id="7-pi-dashboard项目部署"><a href="#7-pi-dashboard项目部署" class="headerlink" title="7.pi-dashboard项目部署"></a>7.pi-dashboard项目部署</h5><p>我们先在本地下载pi-dashboard项目，下载地址：<a target="_blank" rel="noopener" href="https://github.com/spoonysonny/pi">https://github.com/spoonysonny/pi</a><br>解压后用xftp软件传送到树莓派上，然后运行命令</p>
+<pre><code class="hljs shell">sudo mv pi-dashboard /var/www/html</code></pre>
+<h6 id="8-重启后浏览器输入http-你的树莓派ip-pi-dashboard"><a href="#8-重启后浏览器输入http-你的树莓派ip-pi-dashboard" class="headerlink" title="8.重启后浏览器输入http://你的树莓派ip/pi-dashboard/"></a>8.重启后浏览器输入<a target="_blank" rel="noopener" href="http://你的树莓派ip/pi-dashboard/">http://你的树莓派ip/pi-dashboard/</a></h6><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122205117.png" srcset="/img/loading.gif" alt=""></p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://gitee.com/openfans-community/Debian-Pi-Aarch64/">Debian-Pi-Aarch64 ★ 全新树莓派64位系统2.0正式版 - 说明文档</a>
 <a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://raspberrypi.club/">树莓派俱乐部</a>
 <a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:3" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://shumeipai.nxez.com/">树莓派实验</a>
-<a href="#fnref:3" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+<a href="#fnref:3" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:4" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/h--AL0TiA-2J551Vn0A3Ow">小雨编程</a>
+<a href="#fnref:4" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:5" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://blog.csdn.net/qiqzhang/article/details/87862556">ubuntu安装软件时出现The following packages have unmet dependencies，有依赖关系</a>
+<a href="#fnref:5" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
             </div>
             <hr>
             <div>
@@ -399,9 +340,19 @@ Added user pi</code></pre>
                     
                       <a class="hover-with-bg" href="/tags/%E5%9F%BA%E5%9C%B02-0/">基地2.0</a>
                     
-                      <a class="hover-with-bg" href="/tags/samba/">samba</a>
+                      <a class="hover-with-bg" href="/tags/%E7%B3%BB%E7%BB%9F/">系统</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%AE%B6%E5%BA%AD%E5%85%B1%E4%BA%AB%EF%BC%8CU%E7%9B%98%EF%BC%8C%E6%8C%82%E8%BD%BD/">家庭共享，U盘，挂载</a>
+                      <a class="hover-with-bg" href="/tags/mariadb/">mariadb</a>
+                    
+                      <a class="hover-with-bg" href="/tags/myadmin/">myadmin</a>
+                    
+                      <a class="hover-with-bg" href="/tags/mysql-mysql/">mysql mysql</a>
+                    
+                      <a class="hover-with-bg" href="/tags/nginx-nginx/">nginx nginx</a>
+                    
+                      <a class="hover-with-bg" href="/tags/php/">php</a>
+                    
+                      <a class="hover-with-bg" href="/tags/pi-dashboard/">pi-dashboard</a>
                     
                   </div>
                 
@@ -414,9 +365,9 @@ Added user pi</code></pre>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/07/10/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B03%E5%AE%89%E8%A3%85%E5%AE%9D%E5%A1%94%5D/">
+                      <a href="/2020/07/12/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B05%E7%A7%81%E6%9C%89%E4%BA%91%E6%90%AD%E5%BB%BA%5D/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">玩转树莓派[03安装宝塔]</span>
+                        <span class="hidden-mobile">玩转树莓派[05:私有云搭建]</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -424,8 +375,8 @@ Added user pi</code></pre>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/07/08/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B01%E8%A3%85%E7%B3%BB%E7%BB%9F%5D/">
-                        <span class="hidden-mobile">玩转树莓派[01:装系统]</span>
+                      <a href="/2020/07/10/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B03%E5%AE%89%E8%A3%85%E5%AE%9D%E5%A1%94%5D/">
+                        <span class="hidden-mobile">玩转树莓派[03安装宝塔]</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
