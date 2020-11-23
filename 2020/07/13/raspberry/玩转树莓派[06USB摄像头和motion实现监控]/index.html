@@ -1,0 +1,1355 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/pi.jpg">
+  <link rel="icon" type="image/png" href="/img/pi.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>玩转树莓派[06:USB摄像头和motion实现监控] - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"32cfe221d23ea3ac2ca847f1e865c570","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>白小飞のBlog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://api.ixiaowai.cn/mcapi/mcapi.php') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="玩转树莓派[06:USB摄像头和motion实现监控]">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-07-13 11:11" pubdate>
+        2020年7月13日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      88
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">玩转树莓派[06:USB摄像头和motion实现监控]</h1>
+            
+            <div class="markdown-body">
+              <p><span class="label label-primary"><br>  这篇文章主要为大家详细介绍了树莓派使用USB摄像头和motion实现监控，具有一定的参考价值，感兴趣的小伙伴们可以参考一下。
+</span></p>
+<p>本文实例为大家分享了树莓派使用USB摄像头和motion实现监控的具体代码，供大家参考，具体内容如下</p>
+<h4 id="一、工具"><a href="#一、工具" class="headerlink" title="一、工具"></a>一、工具</h4><p>1、树莓派<br>2、USB摄像头</p>
+<h4 id="二、操作步骤"><a href="#二、操作步骤" class="headerlink" title="二、操作步骤"></a>二、操作步骤</h4><h5 id="0、连接并测试USB摄像头"><a href="#0、连接并测试USB摄像头" class="headerlink" title="0、连接并测试USB摄像头"></a>0、连接并测试USB摄像头</h5><p>树莓派接USB摄像头十分简单，毕竟树莓派是Linux系统的卡片电脑，将买来的USB摄像头直接连在树莓派的USB口上，然后我们看看摄像头是否被识别，有两种方法：</p>
+<pre><code class="hljs shell">1. 使用lsusb命令
+
+pi@raspbian:~$ lsusb
+Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 001 Device 003: ID 1871:0101 Aveo Technology Corp. UVC camera (Bresser microscope)
+Bus 001 Device 002: ID 2109:3431 VIA Labs, Inc. Hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub</code></pre>
+<p>SSH终端会显示树莓派当前接入的USB设备列表，我们可以先不插摄像头，lsusb，然后插上摄像头lsusb，就可以看到USB摄像头对应的是哪个设备了。</p>
+<pre><code class="hljs shell">2. 查看设备文件
+
+
+也可以查看设备文件，输入命令：
+
+pi@raspbian:~$ ls /dev/video*
+/dev/video0  /dev/video1  /dev/video10  /dev/video11  /dev/video12  /dev/video13  /dev/video14  /dev/video15  /dev/video16</code></pre>
+<pre><code class="hljs shell">3、本人实测摄像画面。
+
+安装mplayer，终端运行：
+
+sudo apt-get install mplayer
+sudo mplayer tv://</code></pre>
+<p><span class="label label-primary">注意事项：须在安装vnc桌面情况下查看⚠</span></p>
+<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122214638.png" srcset="/img/loading.gif" alt=""></p>
+<h5 id="1、安装motion"><a href="#1、安装motion" class="headerlink" title="1、安装motion"></a>1、安装motion</h5><pre><code class="hljs shell">sudo apt-get install motion</code></pre>
+<h5 id="2、配置motion"><a href="#2、配置motion" class="headerlink" title="2、配置motion"></a>2、配置motion</h5><p>(1)让motion可以一直在后台运行</p>
+<pre><code class="hljs shell">sudo nano /etc/default/motion</code></pre>
+<p>将里面的no修改成yes，让motion可以一直在后台运行：start_motion_daemon=yes</p>
+<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122214717.jpg" srcset="/img/loading.gif" alt=""></p>
+<p>(2)修改其他配置</p>
+<pre><code class="hljs shell">一些常见参数：
+daemon on                        #开启守护进程（选配）
+target_dir /home/pi/motion-images    #图片保存的路径
+<span class="hljs-meta">#</span><span class="bash">videodevice /dev/video0            <span class="hljs-comment">#摄像头设备（默认）可修改            </span></span>
+stream_localhost off                 #允许通过网页查看摄像头
+stream_auth_method 2               #开启密码认证
+stream_authentication 用户名:密码    #网页查看摄像头的用户名和密码
+</code></pre>
+<p>具体修改如下：</p>
+<pre><code class="hljs shell">sudo nano /etc/motion/motion.conf</code></pre>
+<p>修改配置文件，这个文件比较长，请确保一下参数的配置。在nano编辑器下，可以使用^w快速查找到如下配置内容。也可以使用^v向下翻页。</p>
+<h5 id="开启终端启动和后台模式"><a href="#开启终端启动和后台模式" class="headerlink" title="开启终端启动和后台模式"></a>开启终端启动和后台模式</h5><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122214900.jpg" srcset="/img/loading.gif" alt=""></p>
+<h5 id="网页端口"><a href="#网页端口" class="headerlink" title="网页端口"></a>网页端口</h5><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122214917.jpg" srcset="/img/loading.gif" alt=""></p>
+<h5 id="监控宽度高度"><a href="#监控宽度高度" class="headerlink" title="监控宽度高度"></a>监控宽度高度</h5><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122214933.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122214948.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122215002.jpg" srcset="/img/loading.gif" alt=""></p>
+<h5 id="3、启动motion"><a href="#3、启动motion" class="headerlink" title="3、启动motion"></a>3、启动motion</h5><pre><code class="hljs shell">sudo motion</code></pre>
+<h5 id="4、查看视频数据"><a href="#4、查看视频数据" class="headerlink" title="4、查看视频数据"></a>4、查看视频数据</h5><p>在局域网内的设备，不管是手机还是电脑，均可打开浏览器访问树莓派IP:8081</p>
+<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122215035.png" srcset="/img/loading.gif" alt=""></p>
+<h5 id="5、退出motion"><a href="#5、退出motion" class="headerlink" title="5、退出motion"></a>5、退出motion</h5><pre><code class="hljs shell">killall -TERM motion</code></pre>
+<p>或者</p>
+<pre><code class="hljs shell">service motion stop</code></pre>
+<h5 id="6、-设置为开机运行（选配）"><a href="#6、-设置为开机运行（选配）" class="headerlink" title="6、 设置为开机运行（选配）"></a>6、 设置为开机运行（选配）</h5><pre><code class="hljs shell">sudo vim /etc/rc.local</code></pre>
+<p>在exit 0前添加 motion , 保存，就会开机自动运行了。</p>
+<h4 id="附件一-motion-conf"><a href="#附件一-motion-conf" class="headerlink" title="附件一 motion.conf"></a>附件一 motion.conf</h4><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> Rename this distribution example file to motion.conf</span>
+<span class="hljs-meta">#</span>
+<span class="hljs-meta">#</span><span class="bash"> This config file was generated by motion 4.1.1</span>
+<span class="hljs-meta">#</span><span class="bash"> Documentation:  /usr/share/doc/motion/motion_guide.html</span>
+
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">###########################################################</span></span>
+<span class="hljs-meta">#</span><span class="bash"> Daemon</span>
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">###########################################################</span></span>
+
+<span class="hljs-meta">#</span><span class="bash"> Start <span class="hljs-keyword">in</span> daemon (background) mode and release terminal (default: off)</span>
+daemon on
+
+<span class="hljs-meta">#</span><span class="bash"> File to store the process ID, also called pid file. (default: not defined)</span>
+process_id_file /var/run/motion/motion.pid
+
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">###########################################################</span></span>
+<span class="hljs-meta">#</span><span class="bash"> Basic Setup Mode</span>
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">###########################################################</span></span>
+
+<span class="hljs-meta">#</span><span class="bash"> Start <span class="hljs-keyword">in</span> Setup-Mode, daemon disabled. (default: off)</span>
+setup_mode off
+
+
+<span class="hljs-meta">#</span><span class="bash"> Use a file to save logs messages, <span class="hljs-keyword">if</span> not defined stderr and syslog is used. (default: not defined)</span>
+logfile /var/log/motion/motion.log
+
+<span class="hljs-meta">#</span><span class="bash"> Level of <span class="hljs-built_in">log</span> messages [1..9] (EMG, ALR, CRT, ERR, WRN, NTC, INF, DBG, ALL). (default: 6 / NTC)</span>
+log_level 6
+
+<span class="hljs-meta">#</span><span class="bash"> Filter to <span class="hljs-built_in">log</span> messages by <span class="hljs-built_in">type</span> (COR, STR, ENC, NET, DBL, EVT, TRK, VID, ALL). (default: ALL)</span>
+log_type all
+
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">##########################################################</span></span>
+<span class="hljs-meta">#</span><span class="bash"> Capture device options</span>
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">###########################################################</span></span>
+
+<span class="hljs-meta">#</span><span class="bash"> Videodevice to be used <span class="hljs-keyword">for</span> capturing  (default /dev/video0)</span>
+<span class="hljs-meta">#</span><span class="bash"> <span class="hljs-keyword">for</span> FreeBSD default is /dev/bktr0</span>
+videodevice /dev/video0
+
+<span class="hljs-meta">#</span><span class="bash"> v4l2_palette allows one to choose preferable palette to be use by motion</span>
+<span class="hljs-meta">#</span><span class="bash"> See motion_guide.html <span class="hljs-keyword">for</span> the valid options and values.  (default: 17)</span>
+v4l2_palette 17
+
+<span class="hljs-meta">#</span><span class="bash"> Tuner device to be used <span class="hljs-keyword">for</span> capturing using tuner as <span class="hljs-built_in">source</span> (default /dev/tuner0)</span>
+<span class="hljs-meta">#</span><span class="bash"> This is ONLY used <span class="hljs-keyword">for</span> FreeBSD. Leave it commented out <span class="hljs-keyword">for</span> Linux</span>
+; tunerdevice /dev/tuner0
+
+<span class="hljs-meta">#</span><span class="bash"> The video input to be used (default: -1)</span>
+<span class="hljs-meta">#</span><span class="bash"> Should normally be <span class="hljs-built_in">set</span> to 0 or 1 <span class="hljs-keyword">for</span> video/TV cards, and -1 <span class="hljs-keyword">for</span> USB cameras</span>
+<span class="hljs-meta">#</span><span class="bash"> Set to 0 <span class="hljs-keyword">for</span> uvideo(4) on OpenBSD</span>
+input -1
+
+<span class="hljs-meta">#</span><span class="bash"> The video norm to use (only <span class="hljs-keyword">for</span> video capture and TV tuner cards)</span>
+<span class="hljs-meta">#</span><span class="bash"> Values: 0 (PAL), 1 (NTSC), 2 (SECAM), 3 (PAL NC no colour). Default: 0 (PAL)</span>
+norm 0
+
+<span class="hljs-meta">#</span><span class="bash"> The frequency to <span class="hljs-built_in">set</span> the tuner to (kHz) (only <span class="hljs-keyword">for</span> TV tuner cards) (default: 0)</span>
+frequency 0
+
+<span class="hljs-meta">#</span><span class="bash"> Override the power line frequency <span class="hljs-keyword">for</span> the webcam. (normally not necessary)</span>
+<span class="hljs-meta">#</span><span class="bash"> Values:</span>
+<span class="hljs-meta">#</span><span class="bash"> -1 : Do not modify device setting</span>
+<span class="hljs-meta">#</span><span class="bash"> 0  : Power line frequency Disabled</span>
+<span class="hljs-meta">#</span><span class="bash"> 1  : 50hz</span>
+<span class="hljs-meta">#</span><span class="bash"> 2  : 60hz</span>
+<span class="hljs-meta">#</span><span class="bash"> 3  : Auto</span>
+power_line_frequency -1
+
+<span class="hljs-meta">#</span><span class="bash"> Rotate image this number of degrees. The rotation affects all saved images as</span>
+<span class="hljs-meta">#</span><span class="bash"> well as movies. Valid values: 0 (default = no rotation), 90, 180 and 270.</span>
+rotate 0
+
+<span class="hljs-meta">#</span><span class="bash"> Flip image over a given axis (vertical or horizontal), vertical means from left to right</span>
+<span class="hljs-meta">#</span><span class="bash"> horizontal means top to bottom. Valid values: none, v and h.</span>
+flip_axis none
+
+<span class="hljs-meta">#</span><span class="bash"> Image width (pixels). Valid range: Camera dependent, default: 320</span>
+width 800
+
+<span class="hljs-meta">#</span><span class="bash"> Image height (pixels). Valid range: Camera dependent, default: 240</span>
+height 600
+
+<span class="hljs-meta">#</span><span class="bash"> Maximum number of frames to be captured per second.</span>
+<span class="hljs-meta">#</span><span class="bash"> Valid range: 2-100. Default: 100 (almost no <span class="hljs-built_in">limit</span>).</span>
+framerate 2
+
+<span class="hljs-meta">#</span><span class="bash"> Minimum time <span class="hljs-keyword">in</span> seconds between capturing picture frames from the camera.</span>
+<span class="hljs-meta">#</span><span class="bash"> Default: 0 = disabled - the capture rate is given by the camera framerate.</span>
+<span class="hljs-meta">#</span><span class="bash"> This option is used when you want to capture images at a rate lower than 2 per second.</span>
+minimum_frame_time 0
+
+<span class="hljs-meta">#</span><span class="bash"> Full Network Camera URL.  Valid Services: http:// ftp:// mjpg:// rtsp:// mjpeg:// file:// rtmp://</span>
+; netcam_url value
+
+<span class="hljs-meta">#</span><span class="bash"> Username and password <span class="hljs-keyword">for</span> network camera <span class="hljs-keyword">if</span> required. Syntax is user:password</span>
+; netcam_userpass value
+
+<span class="hljs-meta">#</span><span class="bash"> The setting <span class="hljs-keyword">for</span> keep-alive of network socket, should improve performance on compatible net cameras.</span>
+<span class="hljs-meta">#</span><span class="bash"> off:   The historical implementation using HTTP/1.0, closing the socket after each http request.</span>
+<span class="hljs-meta">#</span><span class="bash"> force: Use HTTP/1.0 requests with keep alive header to reuse the same connection.</span>
+<span class="hljs-meta">#</span><span class="bash"> on:    Use HTTP/1.1 requests that support keep alive as default.</span>
+<span class="hljs-meta">#</span><span class="bash"> Default: off</span>
+netcam_keepalive off
+
+<span class="hljs-meta">#</span><span class="bash"> URL to use <span class="hljs-keyword">for</span> a netcam proxy server, <span class="hljs-keyword">if</span> required, e.g. <span class="hljs-string">&quot;http://myproxy&quot;</span>.</span>
+<span class="hljs-meta">#</span><span class="bash"> If a port number other than 80 is needed, use <span class="hljs-string">&quot;http://myproxy:1234&quot;</span>.</span>
+<span class="hljs-meta">#</span><span class="bash"> Default: not defined</span>
+; netcam_proxy value
+
+<span class="hljs-meta">#</span><span class="bash"> Set less strict jpeg checks <span class="hljs-keyword">for</span> network cameras with a poor/buggy firmware.</span>
+<span class="hljs-meta">#</span><span class="bash"> Default: off</span>
+netcam_tolerant_check off
+
+<span class="hljs-meta">#</span><span class="bash"> RTSP connection uses TCP to communicate to the camera. Can prevent image corruption.</span>
+<span class="hljs-meta">#</span><span class="bash"> Default: on</span>
+rtsp_uses_tcp on
+
+<span class="hljs-meta">#</span><span class="bash"> Name of camera to use <span class="hljs-keyword">if</span> you are using a camera accessed through OpenMax/MMAL</span>
+<span class="hljs-meta">#</span><span class="bash"> Default: Not defined</span>
+; mmalcam_name vc.ril.camera
+
+<span class="hljs-meta">#</span><span class="bash"> Camera control parameters (see raspivid/raspistill tool documentation)</span>
+<span class="hljs-meta">#</span><span class="bash"> Default: Not defined</span>
+; mmalcam_control_params -hf
+
+<span class="hljs-meta">#</span><span class="bash"> Let motion regulate the brightness of a video device (default: off).</span>
+<span class="hljs-meta">#</span><span class="bash"> The auto_brightness feature uses the brightness option as its target value.</span>
+<span class="hljs-meta">#</span><span class="bash"> If brightness is zero auto_brightness will adjust to average brightness value 128.</span>
+<span class="hljs-meta">#</span><span class="bash"> Only recommended <span class="hljs-keyword">for</span> cameras without auto brightness</span>
+auto_brightness off
+
+<span class="hljs-meta">#</span><span class="bash"> Set the initial brightness of a video device.</span>
+<span class="hljs-meta">#</span><span class="bash"> If auto_brightness is enabled, this value defines the average brightness level</span>
+<span class="hljs-meta">#</span><span class="bash"> <span class="hljs-built_in">which</span> Motion will try and adjust to.</span>
+<span class="hljs-meta">#</span><span class="bash"> Valid range 0-255, default 0 = disabled</span>
+brightness 0
+
+<span class="hljs-meta">#</span><span class="bash"> Set the contrast of a video device.</span>
+<span class="hljs-meta">#</span><span class="bash"> Valid range 0-255, default 0 = disabled</span>
+contrast 0
+
+<span class="hljs-meta">#</span><span class="bash"> Set the saturation of a video device.</span>
+<span class="hljs-meta">#</span><span class="bash"> Valid range 0-255, default 0 = disabled</span>
+saturation 0
+
+<span class="hljs-meta">#</span><span class="bash"> Set the hue of a video device (NTSC feature).</span>
+<span class="hljs-meta">#</span><span class="bash"> Valid range 0-255, default 0 = disabled</span>
+hue 0
+
+
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">###########################################################</span></span>
+<span class="hljs-meta">#</span><span class="bash"> Round Robin (multiple inputs on same video device name)</span>
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">###########################################################</span></span>
+
+<span class="hljs-meta">#</span><span class="bash"> Number of frames to capture <span class="hljs-keyword">in</span> each roundrobin step (default: 1)</span>
+roundrobin_frames 1
+
+<span class="hljs-meta">#</span><span class="bash"> Number of frames to skip before each roundrobin step (default: 1)</span>
+roundrobin_skip 1
+
+<span class="hljs-meta">#</span><span class="bash"> Try to filter out noise generated by roundrobin (default: off)</span>
+switchfilter off
+
+
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">###########################################################</span></span>
+<span class="hljs-meta">#</span><span class="bash"> Motion Detection Settings:</span>
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">###########################################################</span></span>
+
+<span class="hljs-meta">#</span><span class="bash"> Threshold <span class="hljs-keyword">for</span> number of changed pixels <span class="hljs-keyword">in</span> an image that</span>
+<span class="hljs-meta">#</span><span class="bash"> triggers motion detection (default: 1500)</span>
+threshold 1500
+
+<span class="hljs-meta">#</span><span class="bash"> Automatically tune the threshold down <span class="hljs-keyword">if</span> possible (default: off)</span>
+threshold_tune off
+
+<span class="hljs-meta">#</span><span class="bash"> Noise threshold <span class="hljs-keyword">for</span> the motion detection (default: 32)</span>
+noise_level 32
+
+<span class="hljs-meta">#</span><span class="bash"> Automatically tune the noise threshold (default: on)</span>
+noise_tune on
+
+<span class="hljs-meta">#</span><span class="bash"> Despeckle motion image using (e)rode or (d)ilate or (l)abel (Default: not defined)</span>
+<span class="hljs-meta">#</span><span class="bash"> Recommended value is EedDl. Any combination (and number of) of E, e, d, and D is valid.</span>
+<span class="hljs-meta">#</span><span class="bash"> (l)abeling must only be used once and the <span class="hljs-string">&#x27;l&#x27;</span> must be the last letter.</span>
+<span class="hljs-meta">#</span><span class="bash"> Comment out to <span class="hljs-built_in">disable</span></span>
+despeckle_filter EedDl
+
+<span class="hljs-meta">#</span><span class="bash"> Detect motion <span class="hljs-keyword">in</span> predefined areas (1 - 9). Areas are numbered like that:  1 2 3</span>
+<span class="hljs-meta">#</span><span class="bash"> A script (on_area_detected) is started immediately when motion is         4 5 6</span>
+<span class="hljs-meta">#</span><span class="bash"> detected <span class="hljs-keyword">in</span> one of the given areas, but only once during an event.        7 8 9</span>
+<span class="hljs-meta">#</span><span class="bash"> One or more areas can be specified with this option. Take care: This option</span>
+<span class="hljs-meta">#</span><span class="bash"> does NOT restrict detection to these areas! (Default: not defined)</span>
+; area_detect value
+
+<span class="hljs-meta">#</span><span class="bash"> PGM file to use as a sensitivity mask.</span>
+<span class="hljs-meta">#</span><span class="bash"> Full path name to. (Default: not defined)</span>
+; mask_file value
+
+<span class="hljs-meta">#</span><span class="bash"> PGM file to completely mask out a area of image.</span>
+<span class="hljs-meta">#</span><span class="bash"> Full path name to. (Default: not defined)</span>
+<span class="hljs-meta">#</span><span class="bash"> mask_privacy value</span>
+
+<span class="hljs-meta">#</span><span class="bash"> Dynamically create a mask file during operation (default: 0)</span>
+<span class="hljs-meta">#</span><span class="bash"> Adjust speed of mask changes from 0 (off) to 10 (fast)</span>
+smart_mask_speed 0
+
+<span class="hljs-meta">#</span><span class="bash"> Ignore sudden massive light intensity changes given as a percentage of the picture</span>
+<span class="hljs-meta">#</span><span class="bash"> area that changed intensity. Valid range: 0 - 100 , default: 0 = disabled</span>
+lightswitch 0
+
+<span class="hljs-meta">#</span><span class="bash"> Picture frames must contain motion at least the specified number of frames</span>
+<span class="hljs-meta">#</span><span class="bash"> <span class="hljs-keyword">in</span> a row before they are detected as <span class="hljs-literal">true</span> motion. At the default of 1, all</span>
+<span class="hljs-meta">#</span><span class="bash"> motion is detected. Valid range: 1 to thousands, recommended 1-5</span>
+minimum_motion_frames 1
+
+<span class="hljs-meta">#</span><span class="bash"> Specifies the number of pre-captured (buffered) pictures from before motion</span>
+<span class="hljs-meta">#</span><span class="bash"> was detected that will be output at motion detection.</span>
+<span class="hljs-meta">#</span><span class="bash"> Recommended range: 0 to 5 (default: 0)</span>
+<span class="hljs-meta">#</span><span class="bash"> Do not use large values! Large values will cause Motion to skip video frames and</span>
+<span class="hljs-meta">#</span><span class="bash"> cause unsmooth movies. To smooth movies use larger values of post_capture instead.</span>
+pre_capture 0
+
+<span class="hljs-meta">#</span><span class="bash"> Number of frames to capture after motion is no longer detected (default: 0)</span>
+post_capture 0
+
+<span class="hljs-meta">#</span><span class="bash"> Event Gap is the seconds of no motion detection that triggers the end of an event.</span>
+<span class="hljs-meta">#</span><span class="bash"> An event is defined as a series of motion images taken within a short timeframe.</span>
+<span class="hljs-meta">#</span><span class="bash"> Recommended value is 60 seconds (Default). The value -1 is allowed and disables</span>
+<span class="hljs-meta">#</span><span class="bash"> events causing all Motion to be written to one single movie file and no pre_capture.</span>
+<span class="hljs-meta">#</span><span class="bash"> If <span class="hljs-built_in">set</span> to 0, motion is running <span class="hljs-keyword">in</span> gapless mode. Movies don<span class="hljs-string">&#x27;t have gaps anymore. An</span></span>
+<span class="hljs-meta">#</span><span class="bash"> event ends right after no more motion is detected and post_capture is over.</span>
+event_gap 60
+
+<span class="hljs-meta">#</span><span class="bash"> Maximum length <span class="hljs-keyword">in</span> seconds of a movie</span>
+<span class="hljs-meta">#</span><span class="bash"> When value is exceeded a new movie file is created. (Default: 0 = infinite)</span>
+max_movie_time 0
+
+<span class="hljs-meta">#</span><span class="bash"> Always save images even <span class="hljs-keyword">if</span> there was no motion (default: off)</span>
+emulate_motion off
+
+
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">###########################################################</span></span>
+<span class="hljs-meta">#</span><span class="bash"> Image File Output</span>
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">###########################################################</span></span>
+
+<span class="hljs-meta">#</span><span class="bash"> Output <span class="hljs-string">&#x27;normal&#x27;</span> pictures when motion is detected (default: off)</span>
+<span class="hljs-meta">#</span><span class="bash"> Valid values: on, off, first, best, center</span>
+<span class="hljs-meta">#</span><span class="bash"> When <span class="hljs-built_in">set</span> to <span class="hljs-string">&#x27;first&#x27;</span>, only the first picture of an event is saved.</span>
+<span class="hljs-meta">#</span><span class="bash"> Picture with most motion of an event is saved when <span class="hljs-built_in">set</span> to <span class="hljs-string">&#x27;best&#x27;</span>.</span>
+<span class="hljs-meta">#</span><span class="bash"> Picture with motion nearest center of picture is saved when <span class="hljs-built_in">set</span> to <span class="hljs-string">&#x27;center&#x27;</span>.</span>
+<span class="hljs-meta">#</span><span class="bash"> Can be used as preview shot <span class="hljs-keyword">for</span> the corresponding movie.</span>
+output_pictures off
+
+<span class="hljs-meta">#</span><span class="bash"> Output pictures with only the pixels moving object (ghost images) (default: off)</span>
+output_debug_pictures off
+
+<span class="hljs-meta">#</span><span class="bash"> The quality (<span class="hljs-keyword">in</span> percent) to be used by the jpeg and webp compression (default: 75)</span>
+quality 75
+
+<span class="hljs-meta">#</span><span class="bash"> Type of output images</span>
+<span class="hljs-meta">#</span><span class="bash"> Valid values: jpeg, ppm or webp (default: jpeg)</span>
+picture_type jpeg
+
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">###########################################################</span></span>
+
+<span class="hljs-meta">#</span><span class="bash"> Use ffmpeg to encode videos of motion (default: off)</span>
+ffmpeg_output_movies on
+
+<span class="hljs-meta">#</span><span class="bash"> Use ffmpeg to make videos showing the moving pixels (ghost images) (default: off)</span>
+ffmpeg_output_debug_movies off
+
+<span class="hljs-meta">#</span><span class="bash"> Bitrate to be used by the ffmpeg encoder (default: 400000)</span>
+<span class="hljs-meta">#</span><span class="bash"> This option is ignored <span class="hljs-keyword">if</span> ffmpeg_variable_bitrate is not 0 (disabled)</span>
+ffmpeg_bps 400000
+
+<span class="hljs-meta">#</span><span class="bash"> Enables and defines variable bitrate <span class="hljs-keyword">for</span> the ffmpeg encoder.</span>
+<span class="hljs-meta">#</span><span class="bash"> ffmpeg_bps is ignored <span class="hljs-keyword">if</span> variable bitrate is enabled.</span>
+<span class="hljs-meta">#</span><span class="bash"> Valid values: 0 (default) = fixed bitrate defined by ffmpeg_bps,</span>
+<span class="hljs-meta">#</span><span class="bash"> or the range 1 - 100 <span class="hljs-built_in">where</span> 1 means worst quality and 100 is best.</span>
+ffmpeg_variable_bitrate 0
+
+<span class="hljs-meta">#</span><span class="bash"> Container/Codec output videos</span>
+<span class="hljs-meta">#</span><span class="bash"> Valid values: mpeg4, msmpeg4, swf,flv, ffv1, mov, mp4, mkv, hevc</span>
+ffmpeg_video_codec mkv
+
+<span class="hljs-meta">#</span><span class="bash"> When creating videos, should frames be duplicated <span class="hljs-keyword">in</span> order</span>
+<span class="hljs-meta">#</span><span class="bash"> to keep up with the requested frames per second</span>
+<span class="hljs-meta">#</span><span class="bash"> (default: <span class="hljs-literal">true</span>)</span>
+ffmpeg_duplicate_frames true
+
+<span class="hljs-meta">#</span><span class="bash"> Interval <span class="hljs-keyword">in</span> seconds between timelapse captures.  Default: 0 = off</span>
+timelapse_interval 0
+
+<span class="hljs-meta">#</span><span class="bash"> Timelapse file rollover mode. See motion_guide.html <span class="hljs-keyword">for</span> options and uses.</span>
+timelapse_mode daily
+
+<span class="hljs-meta">#</span><span class="bash"> Frame rate <span class="hljs-keyword">for</span> timelapse playback</span>
+timelapse_fps 30
+
+<span class="hljs-meta">#</span><span class="bash"> Container/Codec <span class="hljs-keyword">for</span> timelapse video. Valid values: mpg or mpeg4</span>
+timelapse_codec mpg
+
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">###########################################################</span></span>
+<span class="hljs-meta">#</span><span class="bash"> External pipe to video encoder</span>
+<span class="hljs-meta">#</span><span class="bash"> Replacement <span class="hljs-keyword">for</span> FFMPEG <span class="hljs-built_in">builtin</span> encoder <span class="hljs-keyword">for</span> ffmpeg_output_movies only.</span>
+<span class="hljs-meta">#</span><span class="bash"> The options movie_filename and timelapse_filename are also used</span>
+<span class="hljs-meta">#</span><span class="bash"> by the ffmpeg feature</span>
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">############################################################</span></span>
+
+<span class="hljs-meta">#</span><span class="bash"> Bool to <span class="hljs-built_in">enable</span> or <span class="hljs-built_in">disable</span> extpipe (default: off)</span>
+use_extpipe off
+
+<span class="hljs-meta">#</span><span class="bash"> External program (full path and opts) to pipe raw video to</span>
+<span class="hljs-meta">#</span><span class="bash"> Generally, use <span class="hljs-string">&#x27;-&#x27;</span> <span class="hljs-keyword">for</span> STDIN...</span>
+;extpipe mencoder -demuxer rawvideo -rawvideo w=%w:h=%h:i420 -ovc x264 -x264encopts bframes=4:frameref=1:subq=1:scenecut=-1:nob_adapt:threads=1:keyint=1000:8x8dct:vbv_bufsize=4000:crf=24:partitions=i8x8,i4x4:vbv_maxrate=800:no-chroma-me -vf denoise3d=16:12:48:4,pp=lb -of   avi -o %f.avi - -fps %fps
+;extpipe x264 - --input-res %wx%h --fps %fps --bitrate 2000 --preset ultrafast --quiet -o %f.mp4
+;extpipe mencoder -demuxer rawvideo -rawvideo w=%w:h=%h:fps=%fps -ovc x264 -x264encopts preset=ultrafast -of lavf -o %f.mp4 - -fps %fps
+;extpipe ffmpeg -y -f rawvideo -pix_fmt yuv420p -video_size %wx%h -framerate %fps -i pipe:0 -vcodec libx264 -preset ultrafast -f mp4 %f.mp4
+
+
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">###########################################################</span></span>
+<span class="hljs-meta">#</span><span class="bash"> Snapshots (Traditional Periodic Webcam File Output)</span>
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">###########################################################</span></span>
+
+<span class="hljs-meta">#</span><span class="bash"> Make automated snapshot every N seconds (default: 0 = disabled)</span>
+snapshot_interval 0
+
+
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">###########################################################</span></span>
+<span class="hljs-meta">#</span><span class="bash"> Text Display</span>
+<span class="hljs-meta">#</span><span class="bash"> %Y = year, %m = month, %d = date,</span>
+<span class="hljs-meta">#</span><span class="bash"> %H = hour, %M = minute, %S = second, %T = HH:MM:SS,</span>
+<span class="hljs-meta">#</span><span class="bash"> %v = event, %q = frame number, %t = camera id number,</span>
+<span class="hljs-meta">#</span><span class="bash"> %D = changed pixels, %N = noise level, \n = new line,</span>
+<span class="hljs-meta">#</span><span class="bash"> %i and %J = width and height of motion area,</span>
+<span class="hljs-meta">#</span><span class="bash"> %K and %L = X and Y coordinates of motion center</span>
+<span class="hljs-meta">#</span><span class="bash"> %C = value defined by text_event - <span class="hljs-keyword">do</span> not use with text_event!</span>
+<span class="hljs-meta">#</span><span class="bash"> You can put quotation marks around the text to allow</span>
+<span class="hljs-meta">#</span><span class="bash"> leading spaces</span>
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">###########################################################</span></span>
+
+<span class="hljs-meta">#</span><span class="bash"> Locate and draw a box around the moving object.</span>
+<span class="hljs-meta">#</span><span class="bash"> Valid values: on, off, preview (default: off)</span>
+<span class="hljs-meta">#</span><span class="bash"> Set to <span class="hljs-string">&#x27;preview&#x27;</span> will only draw a box <span class="hljs-keyword">in</span> preview_shot pictures.</span>
+locate_motion_mode off
+
+<span class="hljs-meta">#</span><span class="bash"> Set the look and style of the locate box <span class="hljs-keyword">if</span> enabled.</span>
+<span class="hljs-meta">#</span><span class="bash"> Valid values: box, redbox, cross, redcross (default: box)</span>
+<span class="hljs-meta">#</span><span class="bash"> Set to <span class="hljs-string">&#x27;box&#x27;</span> will draw the traditional box.</span>
+<span class="hljs-meta">#</span><span class="bash"> Set to <span class="hljs-string">&#x27;redbox&#x27;</span> will draw a red box.</span>
+<span class="hljs-meta">#</span><span class="bash"> Set to <span class="hljs-string">&#x27;cross&#x27;</span> will draw a little cross to mark center.</span>
+<span class="hljs-meta">#</span><span class="bash"> Set to <span class="hljs-string">&#x27;redcross&#x27;</span> will draw a little red cross to mark center.</span>
+locate_motion_style box
+
+<span class="hljs-meta">#</span><span class="bash"> Draws the timestamp using same options as C <span class="hljs-keyword">function</span> strftime(3)</span>
+<span class="hljs-meta">#</span><span class="bash"> Default: %Y-%m-%d\n%T = date <span class="hljs-keyword">in</span> ISO format and time <span class="hljs-keyword">in</span> 24 hour clock</span>
+<span class="hljs-meta">#</span><span class="bash"> Text is placed <span class="hljs-keyword">in</span> lower right corner</span>
+text_right %Y-%m-%d\n%T-%q
+
+<span class="hljs-meta">#</span><span class="bash"> Draw a user defined text on the images using same options as C <span class="hljs-keyword">function</span> strftime(3)</span>
+<span class="hljs-meta">#</span><span class="bash"> Default: Not defined = no text</span>
+<span class="hljs-meta">#</span><span class="bash"> Text is placed <span class="hljs-keyword">in</span> lower left corner</span>
+; text_left CAMERA %t
+
+<span class="hljs-meta">#</span><span class="bash"> Draw the number of changed pixed on the images (default: off)</span>
+<span class="hljs-meta">#</span><span class="bash"> Will normally be <span class="hljs-built_in">set</span> to off except when you setup and adjust the motion settings</span>
+<span class="hljs-meta">#</span><span class="bash"> Text is placed <span class="hljs-keyword">in</span> upper right corner</span>
+text_changes off
+
+<span class="hljs-meta">#</span><span class="bash"> This option defines the value of the special event conversion specifier %C</span>
+<span class="hljs-meta">#</span><span class="bash"> You can use any conversion specifier <span class="hljs-keyword">in</span> this option except %C. Date and time</span>
+<span class="hljs-meta">#</span><span class="bash"> values are from the timestamp of the first image <span class="hljs-keyword">in</span> the current event.</span>
+<span class="hljs-meta">#</span><span class="bash"> Default: %Y%m%d%H%M%S</span>
+<span class="hljs-meta">#</span><span class="bash"> The idea is that %C can be used filenames and text_left/right <span class="hljs-keyword">for</span> creating</span>
+<span class="hljs-meta">#</span><span class="bash"> a unique identifier <span class="hljs-keyword">for</span> each event.</span>
+text_event %Y%m%d%H%M%S
+
+<span class="hljs-meta">#</span><span class="bash"> Draw characters at twice normal size on images. (default: off)</span>
+text_double off
+
+
+<span class="hljs-meta">#</span><span class="bash"> Text to include <span class="hljs-keyword">in</span> a JPEG EXIF comment</span>
+<span class="hljs-meta">#</span><span class="bash"> May be any text, including conversion specifiers.</span>
+<span class="hljs-meta">#</span><span class="bash"> The EXIF timestamp is included independent of this text.</span>
+;exif_text %i%J/%K%L
+
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">###########################################################</span></span>
+<span class="hljs-meta">#</span><span class="bash"> Target Directories and filenames For Images And Films</span>
+<span class="hljs-meta">#</span><span class="bash"> For the options snapshot_, picture_, movie_ and timelapse_filename</span>
+<span class="hljs-meta">#</span><span class="bash"> you can use conversion specifiers</span>
+<span class="hljs-meta">#</span><span class="bash"> %Y = year, %m = month, %d = date,</span>
+<span class="hljs-meta">#</span><span class="bash"> %H = hour, %M = minute, %S = second,</span>
+<span class="hljs-meta">#</span><span class="bash"> %v = event, %q = frame number, %t = camera id number,</span>
+<span class="hljs-meta">#</span><span class="bash"> %D = changed pixels, %N = noise level,</span>
+<span class="hljs-meta">#</span><span class="bash"> %i and %J = width and height of motion area,</span>
+<span class="hljs-meta">#</span><span class="bash"> %K and %L = X and Y coordinates of motion center</span>
+<span class="hljs-meta">#</span><span class="bash"> %C = value defined by text_event</span>
+<span class="hljs-meta">#</span><span class="bash"> Quotation marks round string are allowed.</span>
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">###########################################################</span></span>
+
+<span class="hljs-meta">#</span><span class="bash"> Target base directory <span class="hljs-keyword">for</span> pictures and films</span>
+<span class="hljs-meta">#</span><span class="bash"> Recommended to use absolute path. (Default: current working directory)</span>
+target_dir /var/lib/motion
+
+<span class="hljs-meta">#</span><span class="bash"> File path <span class="hljs-keyword">for</span> snapshots (jpeg, ppm or webp) relative to target_dir</span>
+<span class="hljs-meta">#</span><span class="bash"> Default: %v-%Y%m%d%H%M%S-snapshot</span>
+<span class="hljs-meta">#</span><span class="bash"> Default value is equivalent to legacy oldlayout option</span>
+<span class="hljs-meta">#</span><span class="bash"> For Motion 3.0 compatible mode choose: %Y/%m/%d/%H/%M/%S-snapshot</span>
+<span class="hljs-meta">#</span><span class="bash"> File extension .jpg, .ppm or .webp is automatically added so <span class="hljs-keyword">do</span> not include this.</span>
+<span class="hljs-meta">#</span><span class="bash"> Note: A symbolic link called lastsnap.jpg created <span class="hljs-keyword">in</span> the target_dir will always</span>
+<span class="hljs-meta">#</span><span class="bash"> point to the latest snapshot, unless snapshot_filename is exactly <span class="hljs-string">&#x27;lastsnap&#x27;</span></span>
+snapshot_filename %v-%Y%m%d%H%M%S-snapshot
+
+<span class="hljs-meta">#</span><span class="bash"> File path <span class="hljs-keyword">for</span> motion triggered images (jpeg, ppm or .webp) relative to target_dir</span>
+<span class="hljs-meta">#</span><span class="bash"> Default: %v-%Y%m%d%H%M%S-%q</span>
+<span class="hljs-meta">#</span><span class="bash"> Default value is equivalent to legacy oldlayout option</span>
+<span class="hljs-meta">#</span><span class="bash"> For Motion 3.0 compatible mode choose: %Y/%m/%d/%H/%M/%S-%q</span>
+<span class="hljs-meta">#</span><span class="bash"> File extension .jpg, .ppm or .webp is automatically added so <span class="hljs-keyword">do</span> not include this</span>
+<span class="hljs-meta">#</span><span class="bash"> Set to <span class="hljs-string">&#x27;preview&#x27;</span> together with best-preview feature enables special naming</span>
+<span class="hljs-meta">#</span><span class="bash"> convention <span class="hljs-keyword">for</span> preview shots. See motion guide <span class="hljs-keyword">for</span> details</span>
+picture_filename %v-%Y%m%d%H%M%S-%q
+
+<span class="hljs-meta">#</span><span class="bash"> File path <span class="hljs-keyword">for</span> motion triggered ffmpeg films (movies) relative to target_dir</span>
+<span class="hljs-meta">#</span><span class="bash"> Default: %v-%Y%m%d%H%M%S</span>
+<span class="hljs-meta">#</span><span class="bash"> File extensions(.mpg .avi) are automatically added so <span class="hljs-keyword">do</span> not include them</span>
+movie_filename %v-%Y%m%d%H%M%S
+
+<span class="hljs-meta">#</span><span class="bash"> File path <span class="hljs-keyword">for</span> timelapse movies relative to target_dir</span>
+<span class="hljs-meta">#</span><span class="bash"> Default: %Y%m%d-timelapse</span>
+<span class="hljs-meta">#</span><span class="bash"> File extensions(.mpg .avi) are automatically added so <span class="hljs-keyword">do</span> not include them</span>
+timelapse_filename %Y%m%d-timelapse
+
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">###########################################################</span></span>
+<span class="hljs-meta">#</span><span class="bash"> Global Network Options</span>
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">###########################################################</span></span>
+<span class="hljs-meta">#</span><span class="bash"> Enable IPv6 (default: off)</span>
+ipv6_enabled off
+
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">###########################################################</span></span>
+<span class="hljs-meta">#</span><span class="bash"> Live Stream Server</span>
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">###########################################################</span></span>
+
+<span class="hljs-meta">#</span><span class="bash"> The mini-http server listens to this port <span class="hljs-keyword">for</span> requests (default: 0 = disabled)</span>
+stream_port 8081
+
+<span class="hljs-meta">#</span><span class="bash"> 50% scaled down substream (default: 0 = disabled)</span>
+<span class="hljs-meta">#</span><span class="bash"> substream_port 8082</span>
+
+<span class="hljs-meta">#</span><span class="bash"> Quality of the jpeg (<span class="hljs-keyword">in</span> percent) images produced (default: 50)</span>
+stream_quality 50
+
+<span class="hljs-meta">#</span><span class="bash"> Output frames at 1 fps when no motion is detected and increase to the</span>
+<span class="hljs-meta">#</span><span class="bash"> rate given by stream_maxrate when motion is detected (default: off)</span>
+stream_motion off
+
+<span class="hljs-meta">#</span><span class="bash"> Maximum framerate <span class="hljs-keyword">for</span> stream streams (default: 1)</span>
+stream_maxrate 1
+
+<span class="hljs-meta">#</span><span class="bash"> Restrict stream connections to localhost only (default: on)</span>
+stream_localhost off
+
+<span class="hljs-meta">#</span><span class="bash"> Limits the number of images per connection (default: 0 = unlimited)</span>
+<span class="hljs-meta">#</span><span class="bash"> Number can be defined by multiplying actual stream rate by desired number of seconds</span>
+<span class="hljs-meta">#</span><span class="bash"> Actual stream rate is the smallest of the numbers framerate and stream_maxrate</span>
+stream_limit 0
+
+<span class="hljs-meta">#</span><span class="bash"> Set the authentication method (default: 0)</span>
+<span class="hljs-meta">#</span><span class="bash"> 0 = disabled</span>
+<span class="hljs-meta">#</span><span class="bash"> 1 = Basic authentication</span>
+<span class="hljs-meta">#</span><span class="bash"> 2 = MD5 digest (the safer authentication)</span>
+stream_auth_method 0
+
+<span class="hljs-meta">#</span><span class="bash"> Authentication <span class="hljs-keyword">for</span> the stream. Syntax username:password</span>
+<span class="hljs-meta">#</span><span class="bash"> Default: not defined (Disabled)</span>
+; stream_authentication username:password
+
+<span class="hljs-meta">#</span><span class="bash"> Percentage to scale the stream image <span class="hljs-keyword">for</span> preview</span>
+<span class="hljs-meta">#</span><span class="bash"> This is scaled on the browser side, motion will keep sending full frames</span>
+<span class="hljs-meta">#</span><span class="bash"> Default: 25</span>
+; stream_preview_scale 25
+
+<span class="hljs-meta">#</span><span class="bash"> Have stream preview image start on a new line</span>
+<span class="hljs-meta">#</span><span class="bash"> Default: no</span>
+; stream_preview_newline no
+
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">###########################################################</span></span>
+<span class="hljs-meta">#</span><span class="bash"> HTTP Based Control</span>
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">###########################################################</span></span>
+
+<span class="hljs-meta">#</span><span class="bash"> TCP/IP port <span class="hljs-keyword">for</span> the http server to listen on (default: 0 = disabled)</span>
+webcontrol_port 8080
+
+<span class="hljs-meta">#</span><span class="bash"> Restrict control connections to localhost only (default: on)</span>
+webcontrol_localhost off
+
+<span class="hljs-meta">#</span><span class="bash"> Output <span class="hljs-keyword">for</span> http server, select off to choose raw text plain (default: on)</span>
+webcontrol_html_output on
+
+<span class="hljs-meta">#</span><span class="bash"> Authentication <span class="hljs-keyword">for</span> the http based control. Syntax username:password</span>
+<span class="hljs-meta">#</span><span class="bash"> Default: not defined (Disabled)</span>
+; webcontrol_authentication username:password
+
+<span class="hljs-meta">#</span><span class="bash"> Parameters to include on webcontrol.  0=none, 1=limited, 2=advanced, 3=restricted</span>
+<span class="hljs-meta">#</span><span class="bash"> Default: 0 (none)</span>
+webcontrol_parms 0
+
+
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">###########################################################</span></span>
+<span class="hljs-meta">#</span><span class="bash"> Tracking (Pan/Tilt)</span>
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">############################################################</span></span>
+
+<span class="hljs-meta">#</span><span class="bash"> Type of tracker (0=none (default), 1=stepper, 2=iomojo, 3=pwc, 4=generic, 5=uvcvideo, 6=servo)</span>
+<span class="hljs-meta">#</span><span class="bash"> The generic <span class="hljs-built_in">type</span> enables the definition of motion center and motion size to</span>
+<span class="hljs-meta">#</span><span class="bash"> be used with the conversion specifiers <span class="hljs-keyword">for</span> options like on_motion_detected</span>
+track_type 0
+
+<span class="hljs-meta">#</span><span class="bash"> Enable auto tracking (default: off)</span>
+track_auto off
+
+<span class="hljs-meta">#</span><span class="bash"> Serial port of motor (default: none)</span>
+;track_port /dev/ttyS0
+
+<span class="hljs-meta">#</span><span class="bash"> Motor number <span class="hljs-keyword">for</span> x-axis (default: 0)</span>
+;track_motorx 0
+
+<span class="hljs-meta">#</span><span class="bash"> Set motorx reverse (default: 0)</span>
+;track_motorx_reverse 0
+
+<span class="hljs-meta">#</span><span class="bash"> Motor number <span class="hljs-keyword">for</span> y-axis (default: 0)</span>
+;track_motory 1
+
+<span class="hljs-meta">#</span><span class="bash"> Set motory reverse (default: 0)</span>
+;track_motory_reverse 0
+
+<span class="hljs-meta">#</span><span class="bash"> Maximum value on x-axis (default: 0)</span>
+;track_maxx 200
+
+<span class="hljs-meta">#</span><span class="bash"> Minimum value on x-axis (default: 0)</span>
+;track_minx 50
+
+<span class="hljs-meta">#</span><span class="bash"> Maximum value on y-axis (default: 0)</span>
+;track_maxy 200
+
+<span class="hljs-meta">#</span><span class="bash"> Minimum value on y-axis (default: 0)</span>
+;track_miny 50
+
+<span class="hljs-meta">#</span><span class="bash"> Center value on x-axis (default: 0)</span>
+;track_homex 128
+
+<span class="hljs-meta">#</span><span class="bash"> Center value on y-axis (default: 0)</span>
+;track_homey 128
+
+<span class="hljs-meta">#</span><span class="bash"> ID of an iomojo camera <span class="hljs-keyword">if</span> used (default: 0)</span>
+track_iomojo_id 0
+
+<span class="hljs-meta">#</span><span class="bash"> Angle <span class="hljs-keyword">in</span> degrees the camera moves per step on the X-axis</span>
+<span class="hljs-meta">#</span><span class="bash"> with auto-track (default: 10)</span>
+<span class="hljs-meta">#</span><span class="bash"> Currently only used with pwc <span class="hljs-built_in">type</span> cameras</span>
+track_step_angle_x 10
+
+<span class="hljs-meta">#</span><span class="bash"> Angle <span class="hljs-keyword">in</span> degrees the camera moves per step on the Y-axis</span>
+<span class="hljs-meta">#</span><span class="bash"> with auto-track (default: 10)</span>
+<span class="hljs-meta">#</span><span class="bash"> Currently only used with pwc <span class="hljs-built_in">type</span> cameras</span>
+track_step_angle_y 10
+
+<span class="hljs-meta">#</span><span class="bash"> Delay to <span class="hljs-built_in">wait</span> <span class="hljs-keyword">for</span> after tracking movement as number</span>
+<span class="hljs-meta">#</span><span class="bash"> of picture frames (default: 10)</span>
+track_move_wait 10
+
+<span class="hljs-meta">#</span><span class="bash"> Speed to <span class="hljs-built_in">set</span> the motor to (stepper motor option) (default: 255)</span>
+track_speed 255
+
+<span class="hljs-meta">#</span><span class="bash"> Number of steps to make (stepper motor option) (default: 40)</span>
+track_stepsize 40
+
+
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">###########################################################</span></span>
+<span class="hljs-meta">#</span><span class="bash"> External Commands, Warnings and Logging:</span>
+<span class="hljs-meta">#</span><span class="bash"> You can use conversion specifiers <span class="hljs-keyword">for</span> the on_xxxx commands</span>
+<span class="hljs-meta">#</span><span class="bash"> %Y = year, %m = month, %d = date,</span>
+<span class="hljs-meta">#</span><span class="bash"> %H = hour, %M = minute, %S = second,</span>
+<span class="hljs-meta">#</span><span class="bash"> %v = event, %q = frame number, %t = camera id number,</span>
+<span class="hljs-meta">#</span><span class="bash"> %D = changed pixels, %N = noise level,</span>
+<span class="hljs-meta">#</span><span class="bash"> %i and %J = width and height of motion area,</span>
+<span class="hljs-meta">#</span><span class="bash"> %K and %L = X and Y coordinates of motion center</span>
+<span class="hljs-meta">#</span><span class="bash"> %C = value defined by text_event</span>
+<span class="hljs-meta">#</span><span class="bash"> %f = filename with full path</span>
+<span class="hljs-meta">#</span><span class="bash"> %n = number indicating filetype</span>
+<span class="hljs-meta">#</span><span class="bash"> Both %f and %n are only defined <span class="hljs-keyword">for</span> on_picture_save,</span>
+<span class="hljs-meta">#</span><span class="bash"> on_movie_start and on_movie_end</span>
+<span class="hljs-meta">#</span><span class="bash"> Quotation marks round string are allowed.</span>
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">###########################################################</span></span>
+
+<span class="hljs-meta">#</span><span class="bash"> Do not sound beeps when detecting motion (default: on)</span>
+<span class="hljs-meta">#</span><span class="bash"> Note: Motion never beeps when running <span class="hljs-keyword">in</span> daemon mode.</span>
+quiet on
+
+<span class="hljs-meta">#</span><span class="bash"> Command to be executed when an event starts. (default: none)</span>
+<span class="hljs-meta">#</span><span class="bash"> An event starts at first motion detected after a period of no motion defined by event_gap</span>
+; on_event_start value
+
+<span class="hljs-meta">#</span><span class="bash"> Command to be executed when an event ends after a period of no motion</span>
+<span class="hljs-meta">#</span><span class="bash"> (default: none). The period of no motion is defined by option event_gap.</span>
+; on_event_end value
+
+<span class="hljs-meta">#</span><span class="bash"> Command to be executed when a picture (.ppm|.jpg) is saved (default: none)</span>
+<span class="hljs-meta">#</span><span class="bash"> To give the filename as an argument to a <span class="hljs-built_in">command</span> append it with %f</span>
+; on_picture_save value
+
+<span class="hljs-meta">#</span><span class="bash"> Command to be executed when a motion frame is detected (default: none)</span>
+; on_motion_detected value
+
+<span class="hljs-meta">#</span><span class="bash"> Command to be executed when motion <span class="hljs-keyword">in</span> a predefined area is detected</span>
+<span class="hljs-meta">#</span><span class="bash"> Check option <span class="hljs-string">&#x27;area_detect&#x27;</span>.   (default: none)</span>
+; on_area_detected value
+
+<span class="hljs-meta">#</span><span class="bash"> Command to be executed when a movie file (.mpg|.avi) is created. (default: none)</span>
+<span class="hljs-meta">#</span><span class="bash"> To give the filename as an argument to a <span class="hljs-built_in">command</span> append it with %f</span>
+; on_movie_start value
+
+<span class="hljs-meta">#</span><span class="bash"> Command to be executed when a movie file (.mpg|.avi) is closed. (default: none)</span>
+<span class="hljs-meta">#</span><span class="bash"> To give the filename as an argument to a <span class="hljs-built_in">command</span> append it with %f</span>
+; on_movie_end value
+
+<span class="hljs-meta">#</span><span class="bash"> Command to be executed when a camera can<span class="hljs-string">&#x27;t be opened or if it is lost</span></span>
+<span class="hljs-meta">#</span><span class="bash"> NOTE: There is situations when motion don<span class="hljs-string">&#x27;t detect a lost camera!</span></span>
+<span class="hljs-meta">#</span><span class="bash"> It depends on the driver, some drivers dosn<span class="hljs-string">&#x27;t detect a lost camera at all</span></span>
+<span class="hljs-meta">#</span><span class="bash"> Some hangs the motion thread. Some even hangs the PC! (default: none)</span>
+; on_camera_lost value
+
+<span class="hljs-meta">#</span><span class="bash"> Command to be executed when a camera that was lost has been found (default: none)</span>
+<span class="hljs-meta">#</span><span class="bash"> NOTE: If motion doesn<span class="hljs-string">&#x27;t properly detect a lost camera, it also won&#x27;</span>t know it found one.</span>
+; on_camera_found value
+
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">####################################################################</span></span>
+<span class="hljs-meta">#</span><span class="bash"> Common Options <span class="hljs-keyword">for</span> database features.</span>
+<span class="hljs-meta">#</span><span class="bash"> Options require database options to be active also.</span>
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">####################################################################</span></span>
+
+<span class="hljs-meta">#</span><span class="bash"> Log to the database when creating motion triggered picture file  (default: on)</span>
+; sql_log_picture on
+
+<span class="hljs-meta">#</span><span class="bash"> Log to the database when creating a snapshot image file (default: on)</span>
+; sql_log_snapshot on
+
+<span class="hljs-meta">#</span><span class="bash"> Log to the database when creating motion triggered movie file (default: off)</span>
+; sql_log_movie off
+
+<span class="hljs-meta">#</span><span class="bash"> Log to the database when creating timelapse movies file (default: off)</span>
+; sql_log_timelapse off
+
+<span class="hljs-meta">#</span><span class="bash"> SQL query string that is sent to the database</span>
+<span class="hljs-meta">#</span><span class="bash"> Use same conversion specifiers has <span class="hljs-keyword">for</span> text features</span>
+<span class="hljs-meta">#</span><span class="bash"> Additional special conversion specifiers are</span>
+<span class="hljs-meta">#</span><span class="bash"> %n = the number representing the file_type</span>
+<span class="hljs-meta">#</span><span class="bash"> %f = filename with full path</span>
+<span class="hljs-meta">#</span><span class="bash"> Default value:</span>
+<span class="hljs-meta">#</span><span class="bash"> Create tables :</span>
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">#</span></span>
+<span class="hljs-meta">#</span><span class="bash"> Mysql</span>
+<span class="hljs-meta">#</span><span class="bash"> CREATE TABLE security (camera int, filename char(80) not null, frame int, file_type int, time_stamp timestamp(14), event_time_stamp timestamp(14));</span>
+<span class="hljs-meta">#</span>
+<span class="hljs-meta">#</span><span class="bash"> Postgresql</span>
+<span class="hljs-meta">#</span><span class="bash"> CREATE TABLE security (camera int, filename char(80) not null, frame int, file_type int, time_stamp timestamp without time zone, event_time_stamp timestamp without time zone);</span>
+<span class="hljs-meta">#</span>
+<span class="hljs-meta">#</span><span class="bash"> insert into security(camera, filename, frame, file_type, time_stamp, text_event) values(<span class="hljs-string">&#x27;%t&#x27;</span>, <span class="hljs-string">&#x27;%f&#x27;</span>, <span class="hljs-string">&#x27;%q&#x27;</span>, <span class="hljs-string">&#x27;%n&#x27;</span>, <span class="hljs-string">&#x27;%Y-%m-%d %T&#x27;</span>, <span class="hljs-string">&#x27;%C&#x27;</span>)</span>
+; sql_query insert into security(camera, filename, frame, file_type, time_stamp, event_time_stamp) values(&#x27;%t&#x27;, &#x27;%f&#x27;, &#x27;%q&#x27;, &#x27;%n&#x27;, &#x27;%Y-%m-%d %T&#x27;, &#x27;%C&#x27;)
+
+
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">###########################################################</span></span>
+<span class="hljs-meta">#</span><span class="bash"> Database Options</span>
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">###########################################################</span></span>
+
+<span class="hljs-meta">#</span><span class="bash"> database <span class="hljs-built_in">type</span> : mysql, postgresql, sqlite3 (default : not defined)</span>
+; database_type value
+
+<span class="hljs-meta">#</span><span class="bash"> database to <span class="hljs-built_in">log</span> to (default: not defined)</span>
+<span class="hljs-meta">#</span><span class="bash"> <span class="hljs-keyword">for</span> sqlite3, the full path and name <span class="hljs-keyword">for</span> the database.</span>
+; database_dbname value
+
+<span class="hljs-meta">#</span><span class="bash"> The host on <span class="hljs-built_in">which</span> the database is located (default: localhost)</span>
+; database_host value
+
+<span class="hljs-meta">#</span><span class="bash"> User account name <span class="hljs-keyword">for</span> database (default: not defined)</span>
+; database_user value
+
+<span class="hljs-meta">#</span><span class="bash"> User password <span class="hljs-keyword">for</span> database (default: not defined)</span>
+; database_password value
+
+<span class="hljs-meta">#</span><span class="bash"> Port on <span class="hljs-built_in">which</span> the database is located</span>
+<span class="hljs-meta">#</span><span class="bash">  mysql 3306 , postgresql 5432 (default: not defined)</span>
+; database_port value
+
+<span class="hljs-meta">#</span><span class="bash"> Database <span class="hljs-built_in">wait</span> time <span class="hljs-keyword">in</span> milliseconds <span class="hljs-keyword">for</span> locked database to</span>
+<span class="hljs-meta">#</span><span class="bash"> be unlocked before returning database locked error (default 0)</span>
+; database_busy_timeout 0
+
+
+
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">###########################################################</span></span>
+<span class="hljs-meta">#</span><span class="bash"> Video Loopback Device (vloopback project)</span>
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">###########################################################</span></span>
+
+<span class="hljs-meta">#</span><span class="bash"> Output images to a video4linux loopback device</span>
+<span class="hljs-meta">#</span><span class="bash"> Specify the device associated with the loopback device</span>
+<span class="hljs-meta">#</span><span class="bash"> For example /dev/video1 (default: not defined)</span>
+; video_pipe value
+
+<span class="hljs-meta">#</span><span class="bash"> Output motion images to a video4linux loopback device</span>
+<span class="hljs-meta">#</span><span class="bash"> Specify the device associated with the loopback device</span>
+<span class="hljs-meta">#</span><span class="bash"> For example /dev/video1 (default: not defined)</span>
+; motion_video_pipe value
+
+
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">#############################################################</span></span>
+<span class="hljs-meta">#</span><span class="bash"> camera config files - One <span class="hljs-keyword">for</span> each camera.</span>
+<span class="hljs-meta">#</span><span class="bash"> Except <span class="hljs-keyword">if</span> only one camera - You only need this config file.</span>
+<span class="hljs-meta">#</span><span class="bash"> If you have more than one camera you MUST define one camera</span>
+<span class="hljs-meta">#</span><span class="bash"> config file <span class="hljs-keyword">for</span> each camera <span class="hljs-keyword">in</span> addition to this config file.</span>
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">#############################################################</span></span>
+
+<span class="hljs-meta">#</span><span class="bash"> Remember: If you have more than one camera you must have one</span>
+<span class="hljs-meta">#</span><span class="bash"> camera file <span class="hljs-keyword">for</span> each camera. E.g. 2 cameras requires 3 files:</span>
+<span class="hljs-meta">#</span><span class="bash"> This motion.conf file AND camera1.conf and camera2.conf.</span>
+<span class="hljs-meta">#</span><span class="bash"> Only put the options that are unique to each camera <span class="hljs-keyword">in</span> the</span>
+<span class="hljs-meta">#</span><span class="bash"> camera config files.</span>
+; camera /etc/motion/camera1.conf
+; camera /etc/motion/camera2.conf
+; camera /etc/motion/camera3.conf
+; camera /etc/motion/camera4.conf
+
+
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">#############################################################</span></span>
+<span class="hljs-meta">#</span><span class="bash"> Camera config directory</span>
+<span class="hljs-meta">#</span><span class="bash"> Any files ending <span class="hljs-keyword">in</span> <span class="hljs-string">&#x27;.conf&#x27;</span> <span class="hljs-keyword">in</span> this directory will be <span class="hljs-built_in">read</span></span>
+<span class="hljs-meta">#</span><span class="bash"> as a camera config file.</span>
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">#############################################################</span></span>
+
+; camera_dir /etc/motion/conf.d
+</code></pre>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://www.jb51.net/article/163690.htm">树莓派使用USB摄像头和motion实现监控</a>
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_30509393/article/details/99396622?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.nonecase&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.nonecase">linux下的开源移动图像监测程序—motion编译与配置</a>
+<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:3" class="footnote-text"><span><a target="_blank" rel="noopener" href="http://lavrsen.dk/foswiki/bin/view/Motion/ConfigFileOptions">（看不懂qwqの）Motion官方配置文件</a>
+<a href="#fnref:3" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:4" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013162035/article/details/78580486">第6章 树莓派摄像头操作</a>
+<a href="#fnref:4" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0/raspberry/">raspberry</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/raspberry/">raspberry</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%9F%BA%E5%9C%B02-0/">基地2.0</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%AE%9E%E6%97%B6/">实时</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%9B%91%E6%8E%A7/">监控</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%BD%91%E9%A1%B5/">网页</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/">树莓派</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/07/14/raspberry/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B07%E5%BC%80%E6%9C%BA%E5%90%8E%E5%B0%86%20IP%20%E5%9C%B0%E5%9D%80%E4%BF%A1%E6%81%AF%E8%87%AA%E5%8A%A8%E6%8E%A8%E9%80%81%E5%88%B0%E5%BE%AE%E4%BF%A1%5D/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">玩转树莓派[07:开机后将 IP 地址信息自动推送到微信]</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/07/12/raspberry/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE%5B05%E7%A7%81%E6%9C%89%E4%BA%91%E6%90%AD%E5%BB%BA%5D/">
+                        <span class="hidden-mobile">玩转树莓派[05:私有云搭建]</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "gn6pMOQ2Y8601y9txmR9s4DN-gzGzoHsz",
+          app_key: "KYnH8MyyiQBXK8hMwO7HevEw",
+          placeholder: "说点什么",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?32cfe221d23ea3ac2ca847f1e865c570";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
