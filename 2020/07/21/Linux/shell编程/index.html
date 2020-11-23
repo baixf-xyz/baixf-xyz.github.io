@@ -239,8 +239,7 @@
             <h1 style="display: none">shell编程</h1>
             
             <div class="markdown-body">
-              <p>1.计算机组成：</p>
-<ul>
+              <h3 id="一、计算机组成："><a href="#一、计算机组成：" class="headerlink" title="一、计算机组成："></a>一、计算机组成：</h3><ul>
 <li><p>内核在中间位置，连接软件与硬件（雷纳斯开发）</p>
 </li>
 <li><p>内核功能：</p>
@@ -253,10 +252,7 @@
 </ul>
 <p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201123221706.png" srcset="/img/loading.gif" alt=""></p>
 <p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201123221733.png" srcset="/img/loading.gif" alt=""></p>
-<ol>
-<li>shell 编程基础</li>
-</ol>
-<ul>
+<h3 id="二、-shell-编程基础"><a href="#二、-shell-编程基础" class="headerlink" title="二、 shell 编程基础"></a>二、 shell 编程基础</h3><ul>
 <li><p>“；” 可以放在两个毫不相关的之间       例：date ; who</p>
 </li>
 <li><p>脚本格式要求：脚本以 <strong>#!/Bin/bash</strong> 开头；脚本需要有可执行权限</p>
@@ -268,16 +264,12 @@
 <li>命令行进入脚本的绝对路径或相对路径</li>
 <li><p>●方式1<br>1)首先要<strong>chmod 744  helloworld.sh</strong> 改变权限(变绿为可执行文件)<br>2)执行脚本<br>●方式2(bash/bash+脚本)<br>说明:不用赋予脚本+x权限，直接执行即可。</p>
 <pre><code class="hljs shell">例:输出“hello world”  
-
 <span class="hljs-meta">#</span><span class="bash">!/bin/bash</span>
 echo &quot;hello world&quot;
-
 <span class="hljs-meta">#</span><span class="bash"> 注意：<span class="hljs-built_in">echo</span>命令中想输出单引号用双引号包裹，双引号同理</span></code></pre>
 </li>
-<li><p>shell的变量</p>
-</li>
 </ol>
-<ul>
+<h3 id="三、shell的变量"><a href="#三、shell的变量" class="headerlink" title="三、shell的变量"></a>三、shell的变量</h3><ul>
 <li><p>系统变量</p>
 <p>$HOME、$USER、$UID、$PWD等等</p>
 </li>
@@ -311,23 +303,18 @@ unset var
 echo &quot;第一个值是：$var&quot;
 echo &quot;第二个值是：$var1&quot;
 echo &quot;第三个值是：$var2&quot;</code></pre>
-<ol>
-<li>显示消息<pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">!/bin/bash</span>
+<h3 id="四、-显示消息"><a href="#四、-显示消息" class="headerlink" title="四、 显示消息"></a>四、 显示消息</h3><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">!/bin/bash</span>
 A=`ls -la`
 echo $A
 B=$(ls -la)
 echo $B</code></pre>
-</li>
-</ol>
-<p>一、设置环境变量</p>
-<ol>
+<h3 id="五、设置环境变量"><a href="#五、设置环境变量" class="headerlink" title="五、设置环境变量"></a>五、设置环境变量</h3><ol>
 <li><p>基本语法<br>1) export变量名=变量值(功能描述: 将shell变量输出为环境变量)<br>2) source配置文件(功能描述:让修改后的配置信息立即生效)..<br>3) echo $变量名(功能描述: 查询环境变量的值)</p>
 </li>
 <li><p>快速入门<br>1)在/etc/profile文件中定义TOMCAT HOME环境变量<br>2)查看环境变量TOMCAT<em> HOME的值<br>3)在另外-一个shell程序中使用TOMCAT</em> HOME<br>注意:在输出TOMCAT_ HOME环境变量前，需要让其生效<br>source /etc/profile</p>
 </li>
 </ol>
-<p>二、位置参数变量</p>
-<ol>
+<h3 id="六、位置参数变量"><a href="#六、位置参数变量" class="headerlink" title="六、位置参数变量"></a>六、位置参数变量</h3><ol>
 <li><p>介绍<br>   当我们执行一个shelI脚本时，如果希望获取到命令行的参数信息，就可以使用到位置参<br>   数变量比如: ./myshell.sh 100200 ,这个就是一 个执行shell的命令行，可以在<br>   myshell脚本中获取到参数信息</p>
 </li>
 <li><p>基本语法</p>
@@ -348,11 +335,11 @@ test.sh 1</code></pre></li>
 <li>$@ (功能描述:这个变量也代表命令行中所有的参数,不过$@把每个参数区分对待)</li>
 <li>$# (功能描述:这个量代表命令行中所有参数的个数)<br>位置参数变量<br>●应用实例<br>案例:编写一个shel脚本positionPara.sh，在脚本中获取到命 令行的各个参数信息。</li>
 </ul>
-<p>三、运算符</p>
+<h3 id="七、运算符"><a href="#七、运算符" class="headerlink" title="七、运算符"></a>七、运算符</h3><ol>
+<li>基本介绍<br>学习如何在shell中进行各种运算操作。</li>
+</ol>
+<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201123223132.png" srcset="/img/loading.gif" alt=""></p>
 <ol>
-<li><p>基本介绍<br>学习如何在shell中进行各种运算操作。</p>
-<p><img src="C:\Users\Bai\AppData\Roaming\Typora\typora-user-images\image-20200528100408827.png" srcset="/img/loading.gif" alt="image-20200528100408827" style="zoom: 80%;" /></p>
-</li>
 <li><p>基本语法<br>   1) i “$(运算式)” 或“$[运算式]”<br>   2)expr m + n<br>   <strong>注意:expr运算符间要有空格</strong><br>   3) expr m - n<br>   4) expr \*,/, % (乘，除，取余)</p>
 </li>
 <li><p>应用实例.<br>   案例1:计算(2+3) X4的值<br>   案例2:请求出命令行的两个参数[整数]的和</p>
@@ -400,8 +387,7 @@ var1=$(echo &quot;scale=4;3.777 / 5&quot; | bc)
 var2=3
 var3=$(echo &quot;scale=4; $var1 *$var2&quot; | bc)
 echo var3</code></pre>
-<p>四、判断语句</p>
-<ol>
+<h3 id="八、判断语句"><a href="#八、判断语句" class="headerlink" title="八、判断语句"></a>八、判断语句</h3><ol>
 <li>两个整数的比较<br>=字符串比较<br>-lt小于<br>-le小于等于<br>-eq等于<br>-gt大于<br>-ge大于等于<br>-ne不等于</li>
 <li>按照文件权限进行判断-r有读的权限<br> -w有写的权限<br>-x有执行的权限</li>
 <li>按照文件类型进行判断-f 文件存在并且是一个常规的文件<br>-e文件存在<br>-d文件存在并是一个目录</li>
@@ -416,8 +402,7 @@ echo $?
 
 [ &quot;qust&quot; = &quot;gmqust&quot;]
 echo $?</code></pre>
-<p>五、流程控制</p>
-<ol>
+<h3 id="九、流程控制"><a href="#九、流程控制" class="headerlink" title="九、流程控制"></a>九、流程控制</h3><ol>
 <li>if-then</li>
 </ol>
 <pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">！/bin/bash</span>
@@ -444,11 +429,11 @@ test.sh: line 1: waasdad: command not found</code></pre>
 if pwd;then
 	echo &quot;相等&quot;
 fi</code></pre>
-<h3 id="六、复习："><a href="#六、复习：" class="headerlink" title="六、复习："></a>六、复习：</h3><h4 id="1-位置参数变量"><a href="#1-位置参数变量" class="headerlink" title="1.位置参数变量"></a>1.位置参数变量</h4><h4 id="n-0-9-0表示其本身-10以上用大括号表示-10"><a href="#n-0-9-0表示其本身-10以上用大括号表示-10" class="headerlink" title="$n(0-9) : $0表示其本身;10以上用大括号表示${10};$*;$#;"></a>$n(0-9) : $0表示其本身;10以上用大括号表示${10};$*;$#;</h4><h4 id="2-预定义变量"><a href="#2-预定义变量" class="headerlink" title="2.预定义变量"></a>2.预定义变量</h4><h4 id="进程号PID-最后一个进程号"><a href="#进程号PID-最后一个进程号" class="headerlink" title="$$(进程号PID);$!(最后一个进程号);$?"></a>$$(进程号PID);$!(最后一个进程号);$?</h4><h4 id="3-运算符（不支持浮点数）"><a href="#3-运算符（不支持浮点数）" class="headerlink" title="3.运算符（不支持浮点数）"></a>3.运算符（不支持浮点数）</h4><h4 id="expr-m-n-注：空格"><a href="#expr-m-n-注：空格" class="headerlink" title="expr m + (/ - \* \)  n (注：空格);"></a>expr m + (/ - \* \)  n (注：空格);</h4><h4 id="运算式"><a href="#运算式" class="headerlink" title="${运算式}"></a>${运算式}</h4><h4 id="4-条件判断"><a href="#4-条件判断" class="headerlink" title="4.条件判断"></a>4.条件判断</h4><pre><code class="hljs shell">if command
+<h3 id="十、复习："><a href="#十、复习：" class="headerlink" title="十、复习："></a>十、复习：</h3><h4 id="1-位置参数变量"><a href="#1-位置参数变量" class="headerlink" title="1.位置参数变量"></a>1.位置参数变量</h4><h4 id="n-0-9-0表示其本身-10以上用大括号表示-10"><a href="#n-0-9-0表示其本身-10以上用大括号表示-10" class="headerlink" title="$n(0-9) : $0表示其本身;10以上用大括号表示${10};$*;$#;"></a>$n(0-9) : $0表示其本身;10以上用大括号表示${10};$*;$#;</h4><h4 id="2-预定义变量"><a href="#2-预定义变量" class="headerlink" title="2.预定义变量"></a>2.预定义变量</h4><h4 id="进程号PID-最后一个进程号"><a href="#进程号PID-最后一个进程号" class="headerlink" title="$$(进程号PID);$!(最后一个进程号);$?"></a>$$(进程号PID);$!(最后一个进程号);$?</h4><h4 id="3-运算符（不支持浮点数）"><a href="#3-运算符（不支持浮点数）" class="headerlink" title="3.运算符（不支持浮点数）"></a>3.运算符（不支持浮点数）</h4><h4 id="expr-m-n-注：空格"><a href="#expr-m-n-注：空格" class="headerlink" title="expr m + (/ - \* \)  n (注：空格);"></a>expr m + (/ - \* \)  n (注：空格);</h4><h4 id="运算式"><a href="#运算式" class="headerlink" title="${运算式}"></a>${运算式}</h4><h4 id="4-条件判断"><a href="#4-条件判断" class="headerlink" title="4.条件判断"></a>4.条件判断</h4><pre><code class="hljs shell">if command
 then
   commands
 fi</code></pre>
-<h3 id="七、if语句"><a href="#七、if语句" class="headerlink" title="七、if语句"></a>七、if语句</h3><h4 id="example-01-if—else流程"><a href="#example-01-if—else流程" class="headerlink" title="example 01: if—else流程"></a>example 01: if—else流程</h4><pre><code class="hljs shell">example 01:if——else流程
+<h3 id="十一、if语句"><a href="#十一、if语句" class="headerlink" title="十一、if语句"></a>十一、if语句</h3><h4 id="example-01-if—else流程"><a href="#example-01-if—else流程" class="headerlink" title="example 01: if—else流程"></a>example 01: if—else流程</h4><pre><code class="hljs shell">example 01:if——else流程
 <span class="hljs-meta">#</span><span class="bash">!/bin/bash</span>
 testuser=pi
 if grep $testuser /etc/passwd
@@ -589,7 +574,7 @@ pi@raspbian:~/bash$ . test.sh 80
 及格了
 pi@raspbian:~/bash$ . test.sh 59
 不及格</code></pre>
-<h3 id="八、循环语句"><a href="#八、循环语句" class="headerlink" title="八、循环语句"></a>八、循环语句</h3><h4 id="1、for命令"><a href="#1、for命令" class="headerlink" title="1、for命令"></a>1、for命令</h4><pre><code class="hljs shell">for var in list
+<h3 id="十二、循环语句"><a href="#十二、循环语句" class="headerlink" title="十二、循环语句"></a>十二、循环语句</h3><h4 id="1、for命令"><a href="#1、for命令" class="headerlink" title="1、for命令"></a>1、for命令</h4><pre><code class="hljs shell">for var in list
 do 
   commands
 done</code></pre>
@@ -659,7 +644,7 @@ pi@raspbian:~&#x2F;bash$ . test.sh 1 2 3
 第二种显示的：1
 第二种显示的：2
 第二种显示的：3</code></pre>
-<h3 id="九、while循环"><a href="#九、while循环" class="headerlink" title="九、while循环"></a>九、while循环</h3><pre><code class="hljs shell"></code></pre>
+<h3 id="十三、while循环"><a href="#十三、while循环" class="headerlink" title="十三、while循环"></a>十三、while循环</h3><pre><code class="hljs shell"></code></pre>
 <pre><code class="hljs shell">example 01:简单例子
 var=10
 while [ $var -gt 0 ]
@@ -716,7 +701,7 @@ echo $sum
 结果：
 pi@raspbian:~/bash$ . test1.sh
 5050</code></pre>
-<h3 id="十、read读取控制台输入"><a href="#十、read读取控制台输入" class="headerlink" title="十、read读取控制台输入"></a>十、read读取控制台输入</h3><h4 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h4><pre><code class="hljs shell">sample 01 简单例子
+<h3 id="十四、read读取控制台输入"><a href="#十四、read读取控制台输入" class="headerlink" title="十四、read读取控制台输入"></a>十四、read读取控制台输入</h3><h4 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h4><pre><code class="hljs shell">sample 01 简单例子
 <span class="hljs-meta">#</span><span class="bash">! /bin/bash</span>
 echo -n &quot;Enter your nane:&quot;
 read name
@@ -773,7 +758,7 @@ do
 	count=$[ $count + 1]
 done
 echo &quot;end.....&quot;</code></pre>
-<h3 id="十一、函数"><a href="#十一、函数" class="headerlink" title="十一、函数"></a>十一、函数</h3><h5 id="1-系统函数：driname-basename"><a href="#1-系统函数：driname-basename" class="headerlink" title="1.系统函数：driname basename"></a>1.系统函数：driname basename</h5><ul>
+<h3 id="十五、函数"><a href="#十五、函数" class="headerlink" title="十五、函数"></a>十五、函数</h3><h5 id="1-系统函数：driname-basename"><a href="#1-系统函数：driname-basename" class="headerlink" title="1.系统函数：driname basename"></a>1.系统函数：driname basename</h5><ul>
 <li>dirname基本语法<br>功能:返回完整路径最后的前面的部分，常用于返回路径部分</li>
 <li>dirname文件绝对路径(功能描述: 从给定的包含绝对路径的文件名中去除文件名(非然后返回剩下的路径(目录的部分) )<pre><code class="hljs shell">sample ： 终端
 pi@raspbian:~$ dirname bash/test1.sh
@@ -840,7 +825,7 @@ function func1 &#123;
 &#125;
 func1
 echo &quot;结束脚本</code></pre>
-<h3 id="十二、函数"><a href="#十二、函数" class="headerlink" title="十二、函数"></a>十二、函数</h3><h4 id="1-返回值"><a href="#1-返回值" class="headerlink" title="1.返回值"></a>1.返回值</h4><p><strong>bash shell会把函数当作一个小型脚本，运行结束时会返回一个退出状态码。bash shell使用return命令来退出函数并返回特定的退出状态码。</strong></p>
+<h3 id="十六、函数"><a href="#十六、函数" class="headerlink" title="十六、函数"></a>十六、函数</h3><h4 id="1-返回值"><a href="#1-返回值" class="headerlink" title="1.返回值"></a>1.返回值</h4><p><strong>bash shell会把函数当作一个小型脚本，运行结束时会返回一个退出状态码。bash shell使用return命令来退出函数并返回特定的退出状态码。</strong></p>
 <p><strong>⚠函数结束后需要立刻取回返回值⚠</strong></p>
 <pre><code class="hljs shell">sample 01
 <span class="hljs-meta">#</span><span class="bash">!/bin/bash</span>
@@ -965,7 +950,7 @@ func1()&#123;
 read -p &quot;请输入一个数字：&quot; value
 result=$(func1 $value)
 echo $result</code></pre>
-<h3 id="二、创建一个菜单"><a href="#二、创建一个菜单" class="headerlink" title="二、创建一个菜单"></a>二、创建一个菜单</h3><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">!/bin/bash</span>
+<h3 id="十七、创建一个菜单"><a href="#十七、创建一个菜单" class="headerlink" title="十七、创建一个菜单"></a>十七、创建一个菜单</h3><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">!/bin/bash</span>
 func1()&#123;
 	df -hl
 &#125;
