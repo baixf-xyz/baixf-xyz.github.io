@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>Class 4 使用PolarDB和ECS搭建门户网站 - Hexo</title>
+  <title>Class 5 搭建个人Leanote云笔记本 - Hexo</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
@@ -174,7 +174,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Class 4 使用PolarDB和ECS搭建门户网站">
+            <span class="h2" id="subtitle" title="Class 5 搭建个人Leanote云笔记本">
               
             </span>
 
@@ -184,8 +184,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-11-30 11:11" pubdate>
-        2020年11月30日 上午
+      <time datetime="2020-12-01 11:11" pubdate>
+        2020年12月1日 上午
       </time>
     </span>
   
@@ -196,7 +196,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      698 字
+      764 字
     </span>
   
 
@@ -236,60 +236,55 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Class 4 使用PolarDB和ECS搭建门户网站</h1>
+            <h1 style="display: none">Class 5 搭建个人Leanote云笔记本</h1>
             
             <div class="markdown-body">
-              <h1 id="一、创建资源"><a href="#一、创建资源" class="headerlink" title="一、创建资源"></a>一、创建资源</h1><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201127173814.png" srcset="/img/loading.gif" alt=""></p>
-<h1 id="二、创建PolarDB数据库账号"><a href="#二、创建PolarDB数据库账号" class="headerlink" title="二、创建PolarDB数据库账号"></a>二、创建PolarDB数据库账号</h1><p>1.一键复制登录url。<br>2.依次单击 产品与服务 &gt; 云数据库PolarDB ，进入 云数据库PolarDB管理控制台 。<br>3.单击左侧 集群列表 ，然后选择云产品资源提供的地域。<br>4.创建数据库账号。</p>
-<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201127175709.png" srcset="/img/loading.gif" alt=""></p>
-<p>5.创建数据库。</p>
-<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201127175828.png" srcset="/img/loading.gif" alt=""></p>
-<p>6.设置数据库白名单。<br>在白名单界面将默认的白名单地址127.0.0.1更改为 0.0.0.0/0，然后点击 [确定] 使白名单地址生效。<br><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201127180018.png" srcset="/img/loading.gif" alt=""></p>
-<h1 id="三、连接ECS服务器"><a href="#三、连接ECS服务器" class="headerlink" title="三、连接ECS服务器"></a>三、连接ECS服务器</h1><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201127180305.png" srcset="/img/loading.gif" alt=""></p>
-<h1 id="四、安装LAMP环境"><a href="#四、安装LAMP环境" class="headerlink" title="四、安装LAMP环境"></a>四、安装LAMP环境</h1><p>LAMP是指运行在Linux下的Apache、MySQL和PHP的环境。</p>
-<h2 id="1-安装Apache服务及其扩展包。"><a href="#1-安装Apache服务及其扩展包。" class="headerlink" title="1.安装Apache服务及其扩展包。"></a>1.安装Apache服务及其扩展包。</h2><pre><code class="hljs shell">yum -y install httpd httpd-manual mod_ssl mod_perl mod_auth_mysql</code></pre>
-<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201127180804.png" srcset="/img/loading.gif" alt=""></p>
-<h2 id="2-PbootCMS是使用PHP语言开发的CMS系统。"><a href="#2-PbootCMS是使用PHP语言开发的CMS系统。" class="headerlink" title="2. PbootCMS是使用PHP语言开发的CMS系统。"></a>2. PbootCMS是使用PHP语言开发的CMS系统。</h2><p>执行以下命令，安装PHP。</p>
-<pre><code class="hljs shell">yum -y install php php-mysql gd php-gd gd-devel php-xml php-common php-mbstring php-ldap php-pear php-xmlrpc php-imap</code></pre>
-<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201127180904.png" srcset="/img/loading.gif" alt=""></p>
-<h2 id="3-执行以下命令下载并安装MySQL。"><a href="#3-执行以下命令下载并安装MySQL。" class="headerlink" title="3.执行以下命令下载并安装MySQL。"></a>3.执行以下命令下载并安装MySQL。</h2><pre><code class="hljs shell">wget http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm
-yum -y install mysql57-community-release-el7-10.noarch.rpm
-yum -y install mysql-community-server</code></pre>
-<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201127181158.png" srcset="/img/loading.gif" alt=""></p>
-<h2 id="4-执行以下命令启动MySQL数据库。"><a href="#4-执行以下命令启动MySQL数据库。" class="headerlink" title="4. 执行以下命令启动MySQL数据库。"></a>4. 执行以下命令启动MySQL数据库。</h2><pre><code class="hljs shell">systemctl start mysqld</code></pre>
-<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201127181237.png" srcset="/img/loading.gif" alt=""></p>
-<h1 id="五、搭建门户网站"><a href="#五、搭建门户网站" class="headerlink" title="五、搭建门户网站"></a>五、搭建门户网站</h1><h2 id="1-安装Git。"><a href="#1-安装Git。" class="headerlink" title="1.安装Git。"></a>1.安装Git。</h2><pre><code class="hljs shell">yum -y install git</code></pre>
-<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201127182251.png" srcset="/img/loading.gif" alt=""></p>
-<h2 id="2-下载PbootCMS源码文件。"><a href="#2-下载PbootCMS源码文件。" class="headerlink" title="2.下载PbootCMS源码文件。"></a>2.下载PbootCMS源码文件。</h2><pre><code class="hljs shell">cd ~ &amp;&amp; git clone https://gitee.com/hnaoyun/PbootCMS.git</code></pre>
-<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201127182405.png" srcset="/img/loading.gif" alt=""></p>
-<h2 id="3-将安装包拷贝到Apache的wwwroot目录下。"><a href="#3-将安装包拷贝到Apache的wwwroot目录下。" class="headerlink" title="3.将安装包拷贝到Apache的wwwroot目录下。"></a>3.将安装包拷贝到Apache的wwwroot目录下。</h2><pre><code class="hljs shell">cp -r PbootCMS/* /var/www/html/</code></pre>
-<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201127182439.png" srcset="/img/loading.gif" alt=""></p>
-<h2 id="4-执行以下命令修改站点根目录文件权限。"><a href="#4-执行以下命令修改站点根目录文件权限。" class="headerlink" title="4.  执行以下命令修改站点根目录文件权限。"></a>4.  执行以下命令修改站点根目录文件权限。</h2><pre><code class="hljs shell">chmod -R a+w /var/www/html</code></pre>
-<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201127182507.png" srcset="/img/loading.gif" alt=""></p>
-<h1 id="六、向数据库中导入CMS的初始数据"><a href="#六、向数据库中导入CMS的初始数据" class="headerlink" title="六、向数据库中导入CMS的初始数据"></a>六、向数据库中导入CMS的初始数据</h1><h2 id="1-初始化数据库pbootcms的表结构和数据。"><a href="#1-初始化数据库pbootcms的表结构和数据。" class="headerlink" title="1.初始化数据库pbootcms的表结构和数据。"></a>1.初始化数据库pbootcms的表结构和数据。</h2><pre><code class="hljs shell">sql_file=&quot;/var/www/html/static/backup/sql/&quot;$(ls /var/www/html/static/backup/sql/) &amp;&amp;
-mysql -hpc-uf6489kn437r57p59.mysql.polardb.rds.aliyuncs.com -utest_user -pPassword1213 -Dpbootcms &lt; $sql_file</code></pre>
-<p>经过一番周折，终于可以了。<br><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201127185258.png" srcset="/img/loading.gif" alt=""></p>
-<h2 id="2-修改CMS系统数据库配置。"><a href="#2-修改CMS系统数据库配置。" class="headerlink" title="2.修改CMS系统数据库配置。"></a>2.修改CMS系统数据库配置。</h2><pre><code class="hljs shell">cat &gt; /var/www/html/config/database.php &lt;&lt; EOF
-&lt;?php
-return array(
-    &#x27;database&#x27; =&gt; array(
-        &#x27;type&#x27; =&gt; &#x27;mysqli&#x27;, // 数据库连接驱动类型: mysqli,sqlite,pdo_mysql,pdo_sqlite
-        &#x27;host&#x27; =&gt; &#x27;pc-uf6489kn437r57p59.mysql.polardb.rds.aliyuncs.com&#x27;, // PolarDB数据库链接地址
-        &#x27;user&#x27; =&gt; &#x27;test_user&#x27;, // PolarDB数据库的用户名
-        &#x27;passwd&#x27; =&gt; &#x27;Password1213&#x27;, // PolarDB数据库的密码
-        &#x27;port&#x27; =&gt; &#x27;3306&#x27;, // 数据库端口
-        &#x27;dbname&#x27; =&gt; &#x27;pbootcms&#x27; //数据库名称
-    )
-);
-EOF</code></pre>
-<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201127185432.png" srcset="/img/loading.gif" alt=""></p>
-<h2 id="3-查看安全组"><a href="#3-查看安全组" class="headerlink" title="3.查看安全组"></a>3.查看安全组</h2><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201127185800.png" srcset="/img/loading.gif" alt=""><br>本实验使用的ECS默认是打开所有的端口，-1/-1 ，故不用单独设置。</p>
-<h2 id="4-访问程序。"><a href="#4-访问程序。" class="headerlink" title="4.访问程序。"></a>4.访问程序。</h2><p>执行以下命令重启 Apache服务。</p>
-<pre><code class="hljs shell">systemctl restart httpd</code></pre>
-<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201127190023.png" srcset="/img/loading.gif" alt=""></p>
-<h1 id="七、进入门户网站首页"><a href="#七、进入门户网站首页" class="headerlink" title="七、进入门户网站首页"></a>七、进入门户网站首页</h1><p>访问：<a target="_blank" rel="noopener" href="http://139.224.165.163/">http://139.224.165.163/</a><br>如图所示，访问成功。<br><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201127190022.png" srcset="/img/loading.gif" alt=""></p>
-<p>/admin.php。默认账号为admin，密码为123456。</p>
-<p>至此已完成门户网站的搭建，如此就可以根据公司的需求自定义门户网站的内容。<br><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201127190158.png" srcset="/img/loading.gif" alt=""></p>
+              <h1 id="一、创建资源"><a href="#一、创建资源" class="headerlink" title="一、创建资源"></a>一、创建资源</h1><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201127193126.png" srcset="/img/loading.gif" alt=""></p>
+<h1 id="二、连接ECS服务器"><a href="#二、连接ECS服务器" class="headerlink" title="二、连接ECS服务器"></a>二、连接ECS服务器</h1><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201127193316.png" srcset="/img/loading.gif" alt=""><br><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201127193348.png" srcset="/img/loading.gif" alt=""></p>
+<h1 id="三、MongoDB简介"><a href="#三、MongoDB简介" class="headerlink" title="三、MongoDB简介"></a>三、MongoDB简介</h1><p>MongoDB（来自于英文单词“Humongous”，中文含义为“庞大”）是可以应用于各种规模的企业、各个行业以及各类应用程序的开源数据库。作为一个适用于敏捷开发的数据库，MongoDB的数据模式可以随着应用程序的发展而灵活地更新。与此同时，它也为开发人员 提供了传统数据库的功能：二级索引，完整的查询系统以及严格一致性等等。 MongoDB能够使企业更加具有敏捷性和可扩展性，各种规模的企业都可以通过使用MongoDB来创建新的应用，提高与客户之间的工作效率，加快产品上市时间，以及降低企业成本。</p>
+<p>MongoDB是专为可扩展性，高性能和高可用性而设计的数据库。它可以从单服务器部署扩展到大型、复杂的多数据中心架构。利用内存计算的优势，MongoDB能够提供高性能的数据读写操作。 MongoDB的本地复制和自动故障转移功能使您的应用程序具有企业级的可靠性和操作灵活性。</p>
+<h1 id="四、安装MongoDB"><a href="#四、安装MongoDB" class="headerlink" title="四、安装MongoDB"></a>四、安装MongoDB</h1><p>Leanote云笔记使用MongoDB作为后端数据库，安装MongoDB数据库。</p>
+<h2 id="1-执行以下命令，安装MongoDB。"><a href="#1-执行以下命令，安装MongoDB。" class="headerlink" title="1.  执行以下命令，安装MongoDB。"></a>1.  执行以下命令，安装MongoDB。</h2><pre><code class="hljs shell">yum -y install mongodb mongodb-server.x86_64 mariadb-devel.i686</code></pre>
+<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201127193711.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="2-执行以下命令，启动MongoDB服务。"><a href="#2-执行以下命令，启动MongoDB服务。" class="headerlink" title="2.  执行以下命令，启动MongoDB服务。"></a>2.  执行以下命令，启动MongoDB服务。</h2><pre><code class="hljs shell">systemctl start mongod</code></pre>
+<p>启动遇到如图所示问题：<br><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201127194402.png" srcset="/img/loading.gif" alt=""></p>
+<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><pre><code class="hljs markdown">1.配置MongoDB的yum源
+复制代码
+复制代码
+vim /etc/yum.repos.d/mongodb-org-3.4.repo
+<span class="hljs-section">#添加以下内容：</span>
+[mongodb-org-3.4]  
+name=MongoDB Repository  
+baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.4/x86<span class="hljs-emphasis">_64/  </span>
+<span class="hljs-emphasis">gpgcheck=1  </span>
+<span class="hljs-emphasis">enabled=1  </span>
+<span class="hljs-emphasis">gpgkey=https://www.mongodb.org/static/pgp/server-3.4.asc</span>
+<span class="hljs-emphasis">#这里可以修改 gpgcheck=0, 省去gpg验证</span>
+<span class="hljs-emphasis">[root@localhost ~]# yum makecache      </span>
+<span class="hljs-emphasis">复制代码</span>
+<span class="hljs-emphasis">复制代码</span>
+<span class="hljs-emphasis">2.安装MongoDB</span>
+<span class="hljs-emphasis">安装命令：</span>
+<span class="hljs-emphasis">yum -y install mongodb-org</span></code></pre>
+<p>如图所示，启动成功，如下图所示：<br><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201127194610.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="3-查看MongoDB运行状态。"><a href="#3-查看MongoDB运行状态。" class="headerlink" title="3.  查看MongoDB运行状态。"></a>3.  查看MongoDB运行状态。</h2><pre><code class="hljs shell">systemctl status mongod</code></pre>
+<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201127194657.png" srcset="/img/loading.gif" alt=""></p>
+<h1 id="五、安装Leanote"><a href="#五、安装Leanote" class="headerlink" title="五、安装Leanote"></a>五、安装Leanote</h1><h2 id="1-下载Leanote二进制安装包。"><a href="#1-下载Leanote二进制安装包。" class="headerlink" title="1.  下载Leanote二进制安装包。"></a>1.  下载Leanote二进制安装包。</h2><pre><code class="hljs shell">wget https://nchc.dl.sourceforge.net/project/leanote-bin/2.6.1/leanote-linux-amd64-v2.6.1.bin.tar.gz</code></pre>
+<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201127195301.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="2-解压安装包。"><a href="#2-解压安装包。" class="headerlink" title="2.  解压安装包。"></a>2.  解压安装包。</h2><pre><code class="hljs shell">tar -zxvf leanote-linux-amd64-v2.6.1.bin.tar.gz</code></pre>
+<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201127195302.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="3-编辑文件leanote-conf-app-conf，在文件中找到app-secret项，将该项的值改为任意字符串。（如不修改将会有安全风险）。"><a href="#3-编辑文件leanote-conf-app-conf，在文件中找到app-secret项，将该项的值改为任意字符串。（如不修改将会有安全风险）。" class="headerlink" title="3.  编辑文件leanote/conf/app.conf，在文件中找到app.secret项，将该项的值改为任意字符串。（如不修改将会有安全风险）。"></a>3.  编辑文件leanote/conf/app.conf，在文件中找到app.secret项，将该项的值改为任意字符串。（如不修改将会有安全风险）。</h2><p>说明： 根据Leanote官方文档，如不修改app.secret项的值，将会有安全隐患。</p>
+<pre><code class="hljs shell">vim leanote/conf/app.conf</code></pre>
+<p>输入:/app.secret=并按下回车查找app.secret位置。修改该项的值为任意字符串。</p>
+<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201127195303.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="4-初始化数据库。"><a href="#4-初始化数据库。" class="headerlink" title="4.  初始化数据库。"></a>4.  初始化数据库。</h2><pre><code class="hljs shell">mongorestore -h localhost -d leanote --dir /root/leanote/mongodb_backup/leanote_install_data/</code></pre>
+<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201127195408.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="5-启动服务。"><a href="#5-启动服务。" class="headerlink" title="5.  启动服务。"></a>5.  启动服务。</h2><pre><code class="hljs shell">nohup bash /root/leanote/bin/run.sh &gt; /root/leanote/run.log 2&gt;&amp;1 &amp;</code></pre>
+<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201127195436.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="6-访问云笔记。"><a href="#6-访问云笔记。" class="headerlink" title="6.  访问云笔记。"></a>6.  访问云笔记。</h2><p>在浏览器中访问<a target="_blank" rel="noopener" href="http://101.132.44.137:9000">http://101.132.44.137:9000</a></p>
+<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201127195528.png" srcset="/img/loading.gif" alt=""></p>
+<p>默认管理用户为admin，密码为abc123。登录成功后如下图所示。</p>
+<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201127195635.png" srcset="/img/loading.gif" alt=""></p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://developer.aliyun.com/adc/student/bootcamp/?spm=a2c6h.13788107.J_3120529270.3.450750a3CaVHui">云上实践 云上成长 ECS 7天实践训练营</a>
 <a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
             </div>
@@ -316,11 +311,9 @@ EOF</code></pre>
                     
                       <a class="hover-with-bg" href="/tags/%E8%BF%9B%E9%98%B6%E7%8F%AD/">进阶班</a>
                     
-                      <a class="hover-with-bg" href="/tags/mysql/">mysql</a>
+                      <a class="hover-with-bg" href="/tags/%E4%BA%91%E7%AC%94%E8%AE%B0%E6%9C%AC/">云笔记本</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/">网站搭建</a>
+                      <a class="hover-with-bg" href="/tags/Leanote%EF%BC%8C%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/">Leanote，网站搭建</a>
                     
                   </div>
                 
@@ -333,18 +326,12 @@ EOF</code></pre>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/12/01/%E9%98%BF%E9%87%8C%E4%BA%91/Class%205%20%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BALeanote%E4%BA%91%E7%AC%94%E8%AE%B0%E6%9C%AC/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Class 5 搭建个人Leanote云笔记本</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/11/29/%E9%98%BF%E9%87%8C%E4%BA%91/Class%203%20SLB%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E5%AE%9E%E8%B7%B5/">
-                        <span class="hidden-mobile">Class 3 SLB负载均衡实践</span>
+                      <a href="/2020/11/30/%E9%98%BF%E9%87%8C%E4%BA%91/Class%204%20%E4%BD%BF%E7%94%A8PolarDB%E5%92%8CECS%E6%90%AD%E5%BB%BA%E9%97%A8%E6%88%B7%E7%BD%91%E7%AB%99/">
+                        <span class="hidden-mobile">Class 4 使用PolarDB和ECS搭建门户网站</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
