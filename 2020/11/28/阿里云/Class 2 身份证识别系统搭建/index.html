@@ -1,0 +1,943 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/pi.jpg">
+  <link rel="icon" type="image/png" href="/img/pi.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>Class 2 身份证识别系统搭建 - 白小飞のblog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"32cfe221d23ea3ac2ca847f1e865c570","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>白小飞のBlog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201127163148.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Class 2 身份证识别系统搭建">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-11-28 11:11" pubdate>
+        2020年11月28日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      47
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Class 2 身份证识别系统搭建</h1>
+            
+            <div class="markdown-body">
+              <h1 id="一、基本诉求"><a href="#一、基本诉求" class="headerlink" title="一、基本诉求"></a>一、基本诉求</h1><p>能够通过调用阿里达摩院视觉平台提供的API来识别出二代身份证关键字段内容，关键字段包括：姓名、性别、民族、身份证号、出生日期、地址信息、有效起始时间、签发机关，同时可输出身份证区域位置和人脸位置信息。</p>
+<h1 id="二、项目预览"><a href="#二、项目预览" class="headerlink" title="二、项目预览"></a>二、项目预览</h1><h2 id="1-进入页面"><a href="#1-进入页面" class="headerlink" title="1.进入页面"></a>1.进入页面</h2><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/2020-11-28/1606551110652-QQ%E6%88%AA%E5%9B%BE20201128161135.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="2-上传身份证照片信息界面。"><a href="#2-上传身份证照片信息界面。" class="headerlink" title="2.上传身份证照片信息界面。"></a>2.上传身份证照片信息界面。</h2><h2 id="3-识别之后的页面"><a href="#3-识别之后的页面" class="headerlink" title="3.识别之后的页面"></a>3.识别之后的页面</h2><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/2020-11-28/1606551110652-QQ%E6%88%AA%E5%9B%BE20201128161208.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="4-源码展示"><a href="#4-源码展示" class="headerlink" title="4.源码展示"></a>4.源码展示</h2><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/2020-11-28/1606551256215-QQ%E6%88%AA%E5%9B%BE20201128161349.png" srcset="/img/loading.gif" alt=""></p>
+<h1 id="三、前期准备"><a href="#三、前期准备" class="headerlink" title="三、前期准备"></a>三、前期准备</h1><h2 id="1-查看官方说明文档"><a href="#1-查看官方说明文档" class="headerlink" title="1.查看官方说明文档"></a>1.查看官方说明文档</h2><p>进入阿里达摩院视觉识别平台（<a target="_blank" rel="noopener" href="https://vision.aliyun.com/），选择能力广场&gt;文字识别&gt;身份证识别。">https://vision.aliyun.com/），选择能力广场&gt;文字识别&gt;身份证识别。</a></p>
+<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/2020-11-28/1606551777378-QQ%E6%88%AA%E5%9B%BE20201128162237.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/2020-11-28/1606551482261-QQ%E6%88%AA%E5%9B%BE20201128161735.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="2-查看SDK实例文档"><a href="#2-查看SDK实例文档" class="headerlink" title="2.查看SDK实例文档"></a>2.查看SDK实例文档</h2><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/2020-11-28/1606551567680-QQ%E6%88%AA%E5%9B%BE20201128161840.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="3-获取OCR的SDK的Maven坐标（Java）"><a href="#3-获取OCR的SDK的Maven坐标（Java）" class="headerlink" title="3.获取OCR的SDK的Maven坐标（Java）"></a>3.获取OCR的SDK的Maven坐标（Java）</h2><p><a target="_blank" rel="noopener" href="https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-ocr/1.0.3">传送门</a><br><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/2020-11-28/1606551666848-QQ%E6%88%AA%E5%9B%BE20201128162017.png" srcset="/img/loading.gif" alt=""></p>
+<p>通过文字识别中查看产品文档，得知SDK支持包括Java、Java（本地接入）、Python、Node.js、PHP四种常用语言。通过检索Java（支持本地上传）的SDK，获取OCR的Maven代码（version=1.0.3）:</p>
+<pre><code class="hljs shell">&lt;artifactId&gt;ocr&lt;/artifactId&gt;
+&lt;version&gt;1.0.3&lt;/version&gt;</code></pre>
+<h1 id="四、框架分析"><a href="#四、框架分析" class="headerlink" title="四、框架分析"></a>四、框架分析</h1><p>建立Springboot项目，Application为启动类；Controller为控制器层，负责模板的渲染和路由等；Ocrservice负责通过SDK调用视觉识别的能力。上传表单只允许后缀为.jpg，.jpeg，.png的文件，且不为空。</p>
+<h2 id="1-输入限制："><a href="#1-输入限制：" class="headerlink" title="1.输入限制："></a>1.输入限制：</h2><ul>
+<li>图片格式：JPEG、JPG、PNG、BMP、GIF。</li>
+<li>图像大小：图像大小不超过3M。</li>
+<li>图像分辨率：不限制图片分辨率，但图片分辨率太高可能会导致API识别超时，超时时间为5秒。</li>
+<li>URL地址中不能包含中文字符。</li>
+</ul>
+<h1 id="五、示例代码"><a href="#五、示例代码" class="headerlink" title="五、示例代码"></a>五、示例代码</h1><pre><code class="hljs shell">import com.aliyuncs.DefaultAcsClient;
+import com.aliyuncs.IAcsClient;
+import com.aliyuncs.exceptions.ClientException;
+import com.aliyuncs.exceptions.ServerException;
+import com.aliyuncs.profile.DefaultProfile;
+import com.google.gson.Gson;
+import java.util.*;
+import com.aliyuncs.ocr.model.v20191230.*;
+
+public class RecognizeIdentityCard &#123;
+
+public static void main(String[] args) &#123;
+    DefaultProfile profile = DefaultProfile.getProfile(&quot;cn-shanghai&quot;, &quot;&lt;accessKeyId&gt;&quot;, &quot;&lt;accessSecret&gt;&quot;);
+    IAcsClient client = new DefaultAcsClient(profile);
+
+    RecognizeIdentityCardRequest request = new RecognizeIdentityCardRequest();
+    request.setRegionId(&quot;cn-shanghai&quot;);
+    request.setSide(&quot;face&quot;);
+
+    try &#123;
+        RecognizeIdentityCardResponse response = client.getAcsResponse(request);
+        System.out.println(new Gson().toJson(response));
+    &#125; catch (ServerException e) &#123;
+        e.printStackTrace();
+    &#125; catch (ClientException e) &#123;
+        System.out.println(&quot;ErrCode:&quot; + e.getErrCode());
+        System.out.println(&quot;ErrMsg:&quot; + e.getErrMsg());
+        System.out.println(&quot;RequestId:&quot; + e.getRequestId());
+    &#125;
+
+&#125;
+&#125;</code></pre>
+<p>代码是Java的srping-boot项目</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/aliyun/alibabacloud-viapi-demo?spm=a2c6h.12873639.0.0.c08529f2JzpdtR">项目代码下载地址：https://github.com/aliyun/alibabacloud-viapi-demo?spm=a2c6h.12873639.0.0.c08529f2JzpdtR</a></p>
+<h1 id="六、python代码"><a href="#六、python代码" class="headerlink" title="六、python代码"></a>六、python代码</h1><h2 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1.准备工作"></a>1.准备工作</h2><p>在安装和使用阿里云SDK前，确保已经注册阿里云账号并生成访问密钥（AccessKey）。</p>
+<h2 id="2-安装Python-SDK核心库。"><a href="#2-安装Python-SDK核心库。" class="headerlink" title="2.安装Python SDK核心库。"></a>2.安装Python SDK核心库。</h2><p>该SDK包为阿里云Java核心库，无论使用哪个产品的SDK，都必须先#</p>
+<h2 id="3-安装该核心库。"><a href="#3-安装该核心库。" class="headerlink" title="3.安装该核心库。"></a>3.安装该核心库。</h2><p>使用依赖包工具安装（推荐）。</p>
+<h2 id="4-执行如下命令，安装阿里云SDK核心库。"><a href="#4-执行如下命令，安装阿里云SDK核心库。" class="headerlink" title="4.执行如下命令，安装阿里云SDK核心库。"></a>4.执行如下命令，安装阿里云SDK核心库。</h2><pre><code class="hljs shell">pip install aliyun-python-sdk-core</code></pre>
+<h2 id="5-自行下载安装：使用git-clone或其它方式从GitHub下载aliyun-python-sdk-core并自行添加解决方案。"><a href="#5-自行下载安装：使用git-clone或其它方式从GitHub下载aliyun-python-sdk-core并自行添加解决方案。" class="headerlink" title="5.自行下载安装：使用git clone或其它方式从GitHub下载aliyun-python-sdk-core并自行添加解决方案。"></a>5.自行下载安装：使用git clone或其它方式从GitHub下载aliyun-python-sdk-core并自行添加解决方案。</h2><h2 id="6-安装视觉智能API相关服务Python-SDK。"><a href="#6-安装视觉智能API相关服务Python-SDK。" class="headerlink" title="6.安装视觉智能API相关服务Python SDK。"></a>6.安装视觉智能API相关服务Python SDK。</h2><p>使用依赖包工具安装（推荐）。</p>
+<h2 id="7-执行以下命令，安装需要的SDK包。"><a href="#7-执行以下命令，安装需要的SDK包。" class="headerlink" title="7.执行以下命令，安装需要的SDK包。"></a>7.执行以下命令，安装需要的SDK包。</h2><p>仅安装所需要的SDK包即可。<br><pre><code class="hljs shell">人脸人体：pip install aliyun-python-sdk-facebody
+文字识别：pip install aliyun-python-sdk-ocr
+商品理解：pip install aliyun-python-sdk-goodstech
+内容安全：pip install aliyun-python-sdk-imageaudit
+图像识别：pip install aliyun-python-sdk-imagerecog
+图像生产：pip install aliyun-python-sdk-imageenhan
+分割抠图：pip install aliyun-python-sdk-imageseg
+目标检测：pip install aliyun-python-sdk-objectdet
+图像分析处理：pip install aliyun-python-sdk-imageprocess
+视觉搜索：pip install aliyun-python-sdk-imgsearch
+视频理解：pip install aliyun-python-sdk-videorecog
+视频生产：pip install aliyun-python-sdk-videoenhan
+视频分割：pip install aliyun-python-sdk-videoseg
+自行下载安装：使用git clone或其它方式下载SDK包并自行添加解决方案。详细下载地址如下所示。
+AI类目	SDK链接	pypi链接
+人脸人体	aliyun-python-sdk-facebody	aliyun-python-sdk-facebody
+文字识别	aliyun-python-sdk-ocr	aliyun-python-sdk-ocr
+商品理解	aliyun-python-sdk-goodstech	aliyun-python-sdk-goodstech
+内容安全	aliyun-python-sdk-imageaudit	aliyun-python-sdk-imageaudit
+图像识别	aliyun-python-sdk-imagerecog	aliyun-python-sdk-imagerecog
+图像生产	aliyun-python-sdk-imageenhan	aliyun-python-sdk-imageenhan
+分割抠图	aliyun-python-sdk-imageseg	aliyun-python-sdk-imageseg
+目标检测	aliyun-python-sdk-objectdet	aliyun-python-sdk-objectdet
+视觉搜索	aliyun-python-sdk-imgsearch	aliyun-python-sdk-imgsearch
+图像分析处理	aliyun-python-sdk-imageprocess	aliyun-python-sdk-imageprocess
+视频生产	aliyun-python-sdk-videoenhan	aliyun-python-sdk-videoenhan
+视频理解	aliyun-python-sdk-videorecog	aliyun-python-sdk-videorecog
+视频分割	aliyun-python-sdk-videoseg	aliyun-python-sdk-videoseg</code></pre></p>
+<h2 id="8-代码示例"><a href="#8-代码示例" class="headerlink" title="8.代码示例"></a>8.代码示例</h2><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> -*- coding: utf8 -*-</span>
+from aliyunsdkcore.client import AcsClient
+from aliyunsdkimageenhan.request.v20190930 import MakeSuperResolutionImageRequest
+from aliyunsdkimageenhan.request.v20190930 import ExtendImageStyleRequest
+from aliyunsdkimageenhan.request.v20190930 import RecolorImageRequest
+from aliyunsdkimageenhan.request.v20190930 import ChangeImageSizeRequest
+from aliyunsdkimagerecog.request.v20190930 import RecognizeImageColorRequest
+from aliyunsdkimagerecog.request.v20190930 import RecognizeImageStyleRequest
+from aliyunsdkimagerecog.request.v20190930 import DetectImageElementsRequest
+from aliyunsdkimagerecog.request.v20190930 import TaggingImageRequest
+from aliyunsdkimagerecog.request.v20190930 import RecognizeSceneRequest
+from aliyunsdkfacebody.request.v20191230 import DetectFaceRequest
+from aliyunsdkfacebody.request.v20191230 import RecognizeFaceRequest
+from aliyunsdkfacebody.request.v20191230 import CompareFaceRequest
+from aliyunsdkocr.request.v20191230 import RecognizeCharacterRequest
+from aliyunsdkocr.request.v20191230 import RecognizeTableRequest
+from aliyunsdkocr.request.v20191230 import RecognizeIdentityCardRequest
+from aliyunsdkocr.request.v20191230 import RecognizeBankCardRequest
+from aliyunsdkocr.request.v20191230 import RecognizeBusinessCardRequest
+from aliyunsdkocr.request.v20191230 import RecognizeAccountPageRequest
+from aliyunsdkocr.request.v20191230 import RecognizeDriverLicenseRequest
+from aliyunsdkocr.request.v20191230 import RecognizeDrivingLicenseRequest
+from aliyunsdkocr.request.v20191230 import RecognizeLicensePlateRequest
+from aliyunsdkocr.request.v20191230 import RecognizeVINCodeRequest
+from aliyunsdkocr.request.v20191230 import RecognizeTaxiInvoiceRequest
+from aliyunsdkocr.request.v20191230 import RecognizeTrainTicketRequest
+from aliyunsdkocr.request.v20191230 import RecognizeBusinessLicenseRequest
+from aliyunsdkocr.request.v20191230 import RecognizeStampRequest
+from aliyunsdkgoodstech.request.v20191230 import ClassifyCommodityRequest
+from aliyunsdkimageaudit.request.v20191230 import ScanImageRequest
+from aliyunsdkimageseg.request.v20191230 import SegmentCommonImageRequest
+from aliyunsdkimageseg.request.v20191230 import SegmentBodyRequest
+from aliyunsdkimageseg.request.v20191230 import SegmentCommodityRequest
+from aliyunsdkobjectdet.request.v20191230 import DetectMainBodyRequest
+from aliyunsdkobjectdet.request.v20191230 import DetectVehicleRequest
+
+<span class="hljs-meta">#</span><span class="bash"> 创建 AcsClient 实例</span>
+client = AcsClient(&quot;&lt;your-access-key-id&gt;&quot;, &quot;&lt;your-access-key-secret&gt;&quot;, &quot;cn-shanghai&quot;)
+
+<span class="hljs-meta">#</span><span class="bash"> 清晰化/超分辨率</span>
+request = MakeSuperResolutionImageRequest.MakeSuperResolutionImageRequest()
+request.set_Url(&quot;http://viapi-demo.oss-cn-shanghai.aliyuncs.com/viapi-demo/images/MakeSuperResolution/sup-dog.png&quot;)
+response = client.do_action_with_exception(request)
+print(response)
+
+<span class="hljs-meta">#</span><span class="bash"> 尺寸变换</span>
+request = ChangeImageSizeRequest.ChangeImageSizeRequest()
+request.set_Url(&quot;https://viapi-demo.oss-cn-shanghai.aliyuncs.com/viapi-demo/images/ChangeImageSize/change-image-size-src.png&quot;)
+request.set_Width(500)
+request.set_Height(600)
+response = client.do_action_with_exception(request)
+print(response)
+
+<span class="hljs-meta">#</span><span class="bash"> 图像元素检测</span>
+request = DetectImageElementsRequest.DetectImageElementsRequest()
+request.set_Url(&quot;http://viapi-demo.oss-cn-shanghai.aliyuncs.com/viapi-demo/images/DetectImageElements/detect-elements-src.png&quot;)
+response = client.do_action_with_exception(request)
+print(response)
+
+<span class="hljs-meta">#</span><span class="bash"> 风格迁移</span>
+request = ExtendImageStyleRequest.ExtendImageStyleRequest()
+request.set_StyleUrl(&quot;https://viapi-demo.oss-cn-shanghai.aliyuncs.com/viapi-demo/images/ExtendImageStyle/styleUrl.jpeg&quot;)
+request.set_MajorUrl(&quot;https://viapi-demo.oss-cn-shanghai.aliyuncs.com/viapi-demo/images/ExtendImageStyle/majorUrl.jpeg&quot;)
+response = client.do_action_with_exception(request)
+print(response)
+
+<span class="hljs-meta">#</span><span class="bash"> 色板识别</span>
+request = RecognizeImageColorRequest.RecognizeImageColorRequest()
+request.set_Url(&quot;https://viapi-demo.oss-cn-shanghai.aliyuncs.com/viapi-demo/images/RecolorImage/recolor-1-src.png&quot;)
+request.set_ColorCount(3)
+response = client.do_action_with_exception(request)
+print(response)
+
+<span class="hljs-meta">#</span><span class="bash"> 风格识别</span>
+request = RecognizeImageStyleRequest.RecognizeImageStyleRequest()
+request.set_Url(&quot;https://viapi-demo.oss-cn-shanghai.aliyuncs.com/viapi-demo/images/RecognizeImageStyle/technology.png&quot;)
+response = client.do_action_with_exception(request)
+print(response)
+
+<span class="hljs-meta">#</span><span class="bash"> 色彩迁移</span>
+request = RecolorImageRequest.RecolorImageRequest()
+<span class="hljs-meta">#</span><span class="bash">自动拓色</span>
+request.set_Mode(&quot;AUTO&quot;)
+request.set_Url(&quot;https://viapi-demo.oss-cn-shanghai.aliyuncs.com/viapi-demo/images/RecolorImage/recolor-1-src.png&quot;)
+request.set_ColorCount(3)
+response = client.do_action_with_exception(request)
+print(response)
+<span class="hljs-meta">#</span><span class="bash">参考图拓色</span>
+request.set_Mode(&quot;REF_PIC&quot;)
+request.set_RefUrl(&quot;https://viapi-demo.oss-cn-shanghai.aliyuncs.com/viapi-demo/images/RecolorImage/recolor-1-src.png&quot;)
+response = client.do_action_with_exception(request)
+print(response)
+<span class="hljs-meta">#</span><span class="bash">色板拓色</span>
+request.set_Mode(&quot;TEMPLATE&quot;)
+request.set_Url(&quot;https://viapi-demo.oss-cn-shanghai.aliyuncs.com/viapi-demo/images/RecolorImage/recolor-2-src.png&quot;)
+colorTemplateList = []
+colorTemplateList.append(&#123;&quot;Color&quot;: &quot;FF0000&quot;&#125;)
+colorTemplateList.append(&#123;&quot;Color&quot;: &quot;00FF00&quot;&#125;)
+colorTemplateList.append(&#123;&quot;Color&quot;: &quot;0000FF&quot;&#125;)
+request.set_ColorTemplates(colorTemplateList)
+response = client.do_action_with_exception(request)
+print(response)
+
+<span class="hljs-meta">#</span><span class="bash"> 通用图像打标</span>
+request = TaggingImageRequest.TaggingImageRequest();
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment"># 如下url替换为自有的上海region的oss文件地址</span></span>
+request.set_ImageURL(&quot;https://xxx.oss-cn-shanghai.aliyuncs.com/xxx.jpg&quot;)
+response = client.do_action_with_exception(request)
+print(response)
+
+<span class="hljs-meta">#</span><span class="bash"> 场景识别</span>
+request = RecognizeSceneRequest.RecognizeSceneRequest();
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment"># 如下url替换为自有的上海region的oss文件地址</span></span>
+request.set_ImageURL(&quot;https://xxx.oss-cn-shanghai.aliyuncs.com/xxx.jpg&quot;)
+response = client.do_action_with_exception(request)
+print(response)
+
+<span class="hljs-meta">#</span><span class="bash"> 人脸检测定位</span>
+request = DetectFaceRequest.DetectFaceRequest();
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment"># 如下url替换为自有的上海region的oss文件地址</span></span>
+request.set_ImageURL(&quot;https://viapi-demo.oss-cn-shanghai.aliyuncs.com/viapi-demo/images/SegmentCommonImage/segmengImage.png&quot;)
+response = client.do_action_with_exception(request)
+print(response)
+
+<span class="hljs-meta">#</span><span class="bash"> 人脸属性识别</span>
+request = RecognizeFaceRequest.RecognizeFaceRequest();
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment"># 如下url替换为自有的上海region的oss文件地址</span></span>
+request.set_ImageURL(&quot;https://xxx.oss-cn-shanghai.aliyuncs.com/xxx.jpg&quot;)
+response = client.do_action_with_exception(request)
+print(response)
+
+<span class="hljs-meta">#</span><span class="bash"> 人脸比对</span>
+request = CompareFaceRequest.CompareFaceRequest();
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment"># 如下url替换为自有的上海region的oss文件地址</span></span>
+request.set_ImageURLA(&quot;https://xxx.oss-cn-shanghai.aliyuncs.com/xxx.jpg&quot;)
+request.set_ImageURLB(&quot;https://xxx.oss-cn-shanghai.aliyuncs.com/xxx.jpg&quot;)
+response = client.do_action_with_exception(request)
+print(response)
+
+<span class="hljs-meta">#</span><span class="bash"> 通用识别</span>
+request = RecognizeCharacterRequest.RecognizeCharacterRequest();
+request.set_MinHeight(10);
+request.set_OutputProbability(True);
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment"># 如下url替换为自有的上海region的oss文件地址</span></span>
+request.set_ImageURL(&quot;https://viapi-demo.oss-cn-shanghai-internal.aliyuncs.com/viapi-demo/images/RecognizeCharacter/recognizeCharacter_demo.jpg&quot;)
+response = client.do_action_with_exception(request)
+print(response)
+
+<span class="hljs-meta">#</span><span class="bash"> 表格识别</span>
+request = RecognizeTableRequest.RecognizeTableRequest();
+request.set_UseFinanceModel(False);
+request.set_AssureDirection(False);
+request.set_HasLine(False);
+request.set_SkipDetection(False);
+request.set_OutputFormat(&quot;json&quot;);
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment"># 如下url替换为自有的上海region的oss文件地址</span></span>
+request.set_ImageURL(&quot;https://xxx.oss-cn-shanghai.aliyuncs.com/xxx.jpg&quot;)
+response = client.do_action_with_exception(request)
+print(response)
+
+<span class="hljs-meta">#</span><span class="bash"> 身份证识别</span>
+request = RecognizeIdentityCardRequest.RecognizeIdentityCardRequest();
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment"># 如下url替换为自有的上海region的oss文件地址</span></span>
+request.set_ImageURL(&quot;https://viapi-demo.oss-cn-shanghai.aliyuncs.com/viapi-demo/images/RecognizeIdentityCard/identityCard.jpg&quot;)
+request.set_Side(&quot;face&quot;)
+response = client.do_action_with_exception(request)
+print(response)
+
+<span class="hljs-meta">#</span><span class="bash"> 银行卡识别</span>
+request = RecognizeBankCardRequest.RecognizeBankCardRequest();
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment"># 如下url替换为自有的上海region的oss文件地址</span></span>
+request.set_ImageURL(&quot;https://viapi-demo.oss-cn-shanghai.aliyuncs.com/viapi-demo/images/RecognizeBankCard/bankcard.jpg&quot;)
+response = client.do_action_with_exception(request)
+print(response)
+
+<span class="hljs-meta">#</span><span class="bash"> 名片识别</span>
+request = RecognizeBusinessCardRequest.RecognizeBusinessCardRequest();
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment"># 如下url替换为自有的上海region的oss文件地址</span></span>
+request.set_ImageURL(&quot;https://xxx.oss-cn-shanghai.aliyuncs.com/xxx.jpg&quot;)
+response = client.do_action_with_exception(request)
+print(response)
+
+<span class="hljs-meta">#</span><span class="bash"> 户口页识别</span>
+request = RecognizeAccountPageRequest.RecognizeAccountPageRequest();
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment"># 如下url替换为自有的上海region的oss文件地址</span></span>
+request.set_ImageURL(&quot;https://xxx.oss-cn-shanghai.aliyuncs.com/xxx.jpg&quot;)
+response = client.do_action_with_exception(request)
+print(response)
+
+<span class="hljs-meta">#</span><span class="bash"> 驾驶证识别</span>
+request = RecognizeDriverLicenseRequest.RecognizeDriverLicenseRequest();
+request.set_Side(&quot;face&quot;)
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment"># 如下url替换为自有的上海region的oss文件地址</span></span>
+request.set_ImageURL(&quot;https://xxx.oss-cn-shanghai.aliyuncs.com/xxx.jpg&quot;)
+response = client.do_action_with_exception(request)
+print(response)
+
+<span class="hljs-meta">#</span><span class="bash"> 行驶证识别</span>
+request = RecognizeDrivingLicenseRequest.RecognizeDrivingLicenseRequest();
+request.set_Side(&quot;face&quot;)
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment"># 如下url替换为自有的上海region的oss文件地址</span></span>
+request.set_ImageURL(&quot;https://xxx.oss-cn-shanghai.aliyuncs.com/xxx.jpg&quot;)
+response = client.do_action_with_exception(request)
+print(response)
+
+<span class="hljs-meta">#</span><span class="bash"> 车牌识别</span>
+request = RecognizeLicensePlateRequest.RecognizeLicensePlateRequest();
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment"># 如下url替换为自有的上海region的oss文件地址</span></span>
+request.set_ImageURL(&quot;https://xxx.oss-cn-shanghai.aliyuncs.com/xxx.jpg&quot;)
+response = client.do_action_with_exception(request)
+print(response)
+
+<span class="hljs-meta">#</span><span class="bash"> VIN码识别</span>
+request = RecognizeVINCodeRequest.RecognizeVINCodeRequest();
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment"># 如下url替换为自有的上海region的oss文件地址</span></span>
+request.set_ImageURL(&quot;https://xxx.oss-cn-shanghai.aliyuncs.com/xxx.jpg&quot;)
+response = client.do_action_with_exception(request)
+print(response)
+
+<span class="hljs-meta">#</span><span class="bash"> 出租车发票识别</span>
+request = RecognizeTaxiInvoiceRequest.RecognizeTaxiInvoiceRequest();
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment"># 如下url替换为自有的上海region的oss文件地址</span></span>
+request.set_ImageURL(&quot;https://xxx.oss-cn-shanghai.aliyuncs.com/xxx.jpg&quot;)
+response = client.do_action_with_exception(request)
+print(response)
+
+<span class="hljs-meta">#</span><span class="bash"> 火车票识别</span>
+request = RecognizeTrainTicketRequest.RecognizeTrainTicketRequest();
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment"># 如下url替换为自有的上海region的oss文件地址</span></span>
+request.set_ImageURL(&quot;https://xxx.oss-cn-shanghai.aliyuncs.com/xxx.jpg&quot;)
+response = client.do_action_with_exception(request)
+print(response)
+
+<span class="hljs-meta">#</span><span class="bash"> 营业执照识别</span>
+request = RecognizeBusinessLicenseRequest.RecognizeBusinessLicenseRequest();
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment"># 如下url替换为自有的上海region的oss文件地址</span></span>
+request.set_ImageURL(&quot;https://xxx.oss-cn-shanghai.aliyuncs.com/xxx.jpg&quot;)
+response = client.do_action_with_exception(request)
+print(response)
+
+<span class="hljs-meta">#</span><span class="bash"> 公章识别</span>
+request = RecognizeStampRequest.RecognizeStampRequest();
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment"># 如下url替换为自有的上海region的oss文件地址</span></span>
+request.set_ImageURL(&quot;https://xxx.oss-cn-shanghai.aliyuncs.com/xxx.jpg&quot;)
+response = client.do_action_with_exception(request)
+print(response)
+
+<span class="hljs-meta">#</span><span class="bash"> 商品分类</span>
+request = ClassifyCommodityRequest.ClassifyCommodityRequest();
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment"># 如下url替换为自有的上海region的oss文件地址</span></span>
+request.set_ImageURL(&quot;https://viapi-demo.oss-cn-shanghai.aliyuncs.com/viapi-demo/images/SegmentCommonImage/segmentimage-src-hu.jpeg&quot;)
+response = client.do_action_with_exception(request)
+print(response)
+
+<span class="hljs-meta">#</span><span class="bash"> 图片智能鉴黄</span>
+request = ScanImageRequest.ScanImageRequest();
+scenes = []
+scenes.append(&quot;porn&quot;)
+request.set_Scenes(scenes)
+tasks = []
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment"># 如下url替换为自有的上海region的oss文件地址</span></span>
+tasks.append(&#123;&quot;DataId&quot;:&quot;&lt;your-data-id&gt;&quot;, &quot;ImageURL&quot;:&quot;https://viapi-demo.oss-cn-shanghai.aliyuncs.com/viapi-demo/images/ChangeImageSize/change-image-size-src.png&quot;&#125;)
+request.set_Tasks(tasks)
+response = client.do_action_with_exception(request)
+print(response)
+
+<span class="hljs-meta">#</span><span class="bash"> 通用分割</span>
+request = SegmentCommonImageRequest.SegmentCommonImageRequest();
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment"># 如下url替换为自有的上海region的oss文件地址</span></span>
+request.set_ImageURL(&quot;https://viapi-demo.oss-cn-shanghai.aliyuncs.com/viapi-demo/images/SegmentCommonImage/segmentimage-src-hu.jpeg&quot;)
+response = client.do_action_with_exception(request)
+print(response)
+
+<span class="hljs-meta">#</span><span class="bash"> 人像分割</span>
+request = SegmentBodyRequest.SegmentBodyRequest();
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment"># 如下url替换为自有的上海region的oss文件地址</span></span>
+request.set_ImageURL(&quot;https://viapi-demo.oss-cn-shanghai.aliyuncs.com/viapi-demo/images/SegmentBody/%E4%BA%BA%E5%83%8F%E5%88%86%E5%89%B2.png&quot;)
+response = client.do_action_with_exception(request)
+print(response)
+
+<span class="hljs-meta">#</span><span class="bash"> 商品分割</span>
+request = SegmentCommodityRequest.SegmentCommodityRequest();
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment"># 如下url替换为自有的上海region的oss文件地址</span></span>
+request.set_ImageURL(&quot;https://viapi-demo.oss-cn-shanghai.aliyuncs.com/viapi-demo/images/SegmentCommodity/%E5%95%86%E5%93%81.png&quot;)
+response = client.do_action_with_exception(request)
+print(response)
+
+<span class="hljs-meta">#</span><span class="bash"> 主体检测</span>
+request = DetectMainBodyRequest.DetectMainBodyRequest();
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment"># 如下url替换为自有的上海region的oss文件地址</span></span>
+request.set_ImageURL(&quot;https://viapi-demo.oss-cn-shanghai.aliyuncs.com/viapi-demo/images/SegmentCommonImage/segmentimage-src-hu.jpeg&quot;)
+response = client.do_action_with_exception(request)
+print(response)
+
+<span class="hljs-meta">#</span><span class="bash"> 机动车检测</span>
+request = DetectVehicleRequest.DetectVehicleRequest();
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment"># 如下url替换为自有的上海region的oss文件地址</span></span>
+request.set_ImageURL(&quot;https://xxx.oss-cn-shanghai.aliyuncs.com/xxx.jpg&quot;)
+response = client.do_action_with_exception(request)
+print(response)</code></pre>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://developer.aliyun.com/adc/student/bootcamp/ai/2?spm=a2c6h.13788107.J_3120529270.4.450750a3fjp2m1&amp;accounttraceid=9cafb5972ade4cb484e00857d47625bbdkwh">达摩院特别版-视觉AI训练营</a>
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0/%E9%98%BF%E9%87%8C%E4%BA%91/">阿里云</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/">阿里云</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%BE%BE%E6%91%A9%E9%99%A2/">达摩院</a>
+                    
+                      <a class="hover-with-bg" href="/tags/AI/">AI</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%BA%94%E7%94%A8/">应用</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%A7%86%E8%A7%89/">视觉</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%BA%AB%E4%BB%BD%E8%AF%81%E8%AF%86%E5%88%AB/">身份证识别</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%96%87%E5%AD%97%E8%AF%86%E5%88%AB/">文字识别</a>
+                    
+                      <a class="hover-with-bg" href="/tags/OCR/">OCR</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/11/28/%E9%98%BF%E9%87%8C%E4%BA%91/Class%202%20%E5%9F%BA%E4%BA%8EECS%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BADocker%E7%8E%AF%E5%A2%83/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Class 2 基于ECS快速搭建Docker环境</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/11/27/%E9%98%BF%E9%87%8C%E4%BA%91/Class%201%20%E8%BE%BE%E6%91%A9%E9%99%A2%E8%A7%86%E8%A7%89AI%E6%8A%80%E6%9C%AF%E5%BA%94%E7%94%A8%E6%8E%A2%E7%B4%A2/">
+                        <span class="hidden-mobile">Class 1 达摩院视觉AI技术应用探索</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "gn6pMOQ2Y8601y9txmR9s4DN-gzGzoHsz",
+          app_key: "KYnH8MyyiQBXK8hMwO7HevEw",
+          placeholder: "说点什么",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?32cfe221d23ea3ac2ca847f1e865c570";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
