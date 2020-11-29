@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>每日一题【20200811】 - 白小飞のblog</title>
+  <title>每日一题【20200812】 - 白小飞のblog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
@@ -174,7 +174,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="每日一题【20200811】">
+            <span class="h2" id="subtitle" title="每日一题【20200812】">
               
             </span>
 
@@ -184,8 +184,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-08-11 11:11" pubdate>
-        2020年8月11日 上午
+      <time datetime="2020-08-12 11:11" pubdate>
+        2020年8月12日 上午
       </time>
     </span>
   
@@ -196,7 +196,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      293 字
+      629 字
     </span>
   
 
@@ -206,7 +206,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4
+      10
        分钟
     </span>
   
@@ -236,45 +236,221 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">每日一题【20200811】</h1>
+            <h1 style="display: none">每日一题【20200812】</h1>
             
             <div class="markdown-body">
-              <h1 id="综合评价"><a href="#综合评价" class="headerlink" title="综合评价"></a>综合评价</h1><h2 id="灰色关联"><a href="#灰色关联" class="headerlink" title="灰色关联"></a>灰色关联</h2><h2 id="例"><a href="#例" class="headerlink" title="例"></a>例</h2><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201129223648.png" srcset="/img/loading.gif" alt=""><br>题目：分析下表中，哪一个产业对2000-2005年国内生产总值影响最大<br><pre><code class="hljs matlab">&gt;&gt; data=xlsread(<span class="hljs-string">&#x27;huiseguanlian-chanzhi.xlsx&#x27;</span>,<span class="hljs-string">&#x27;B2:E7&#x27;</span>)
-data =
-        <span class="hljs-number">1988</span>         <span class="hljs-number">386</span>         <span class="hljs-number">839</span>         <span class="hljs-number">763</span>
-        <span class="hljs-number">2061</span>         <span class="hljs-number">408</span>         <span class="hljs-number">846</span>         <span class="hljs-number">808</span>
-        <span class="hljs-number">2335</span>         <span class="hljs-number">422</span>         <span class="hljs-number">960</span>         <span class="hljs-number">953</span>
-        <span class="hljs-number">2750</span>         <span class="hljs-number">482</span>        <span class="hljs-number">1258</span>        <span class="hljs-number">1010</span>
-        <span class="hljs-number">3356</span>         <span class="hljs-number">511</span>        <span class="hljs-number">1577</span>        <span class="hljs-number">1268</span>
-        <span class="hljs-number">3806</span>         <span class="hljs-number">561</span>        <span class="hljs-number">1893</span>        <span class="hljs-number">1352</span>
-&gt;&gt; k=GRA(data)
-k =
-    <span class="hljs-number">0.5084</span>    <span class="hljs-number">0.6243</span>    <span class="hljs-number">0.7573</span>
-&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code class=<span class="hljs-string">&quot;language-matlab line-numbers&quot;</span>&gt;<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">correlationnew</span>=<span class="hljs-title">GRA</span><span class="hljs-params">(data)</span></span>
-<span class="hljs-comment">%此程序默认第一列数据为母序列比较值</span>
-[m,n]=<span class="hljs-built_in">size</span>(data);
-rou=<span class="hljs-number">0.5</span>; <span class="hljs-comment">%数据之间紧密度,越紧，数越小</span>
-<span class="hljs-comment">%（2）数据标准化去量纲</span>
-<span class="hljs-comment">%采用均值法</span>
-avedata=<span class="hljs-built_in">mean</span>(data);<span class="hljs-comment">%每列的平均值</span>
-<span class="hljs-keyword">for</span> <span class="hljs-built_in">i</span>=<span class="hljs-number">1</span>:m
-    newdata(<span class="hljs-built_in">i</span>,:)=data(<span class="hljs-built_in">i</span>,:)./avedata;
-<span class="hljs-keyword">end</span>
-<span class="hljs-comment">%(3)每一行关联系数计算</span>
-<span class="hljs-keyword">for</span> <span class="hljs-built_in">j</span>=<span class="hljs-number">2</span>:n
-    diff(:,<span class="hljs-built_in">j</span><span class="hljs-number">-1</span>)=<span class="hljs-built_in">abs</span>(newdata(:,<span class="hljs-number">1</span>)-newdata(:,<span class="hljs-built_in">j</span>));<span class="hljs-comment">%差的绝对值</span>
-<span class="hljs-keyword">end</span>
-<span class="hljs-comment">%最大最小极差-采用总极差法</span>
-maxdiff=<span class="hljs-built_in">max</span>(<span class="hljs-built_in">max</span>(diff)); <span class="hljs-comment">%最大极差</span>
-mindiff=<span class="hljs-built_in">min</span>(<span class="hljs-built_in">min</span>(diff)); <span class="hljs-comment">%最小极差</span>
-<span class="hljs-comment">%(4)关联度计算</span>
-<span class="hljs-keyword">for</span> <span class="hljs-built_in">i</span>=<span class="hljs-number">1</span>:m
-    <span class="hljs-keyword">for</span> <span class="hljs-built_in">j</span>=<span class="hljs-number">1</span>:n<span class="hljs-number">-1</span>
-        correlation(<span class="hljs-built_in">i</span>,<span class="hljs-built_in">j</span>)=(mindiff+rou*maxdiff)/(diff(<span class="hljs-built_in">i</span>,<span class="hljs-built_in">j</span>)+rou*maxdiff);
-    <span class="hljs-keyword">end</span>
-<span class="hljs-keyword">end</span>
-correlationnew=<span class="hljs-built_in">mean</span>(correlation);</code></pre><br>由此我们可以知道第三产业对2000-2005年国内生产总值影响最大。</p>
+              <h1 id="层次聚类分析、动态聚类分析"><a href="#层次聚类分析、动态聚类分析" class="headerlink" title="层次聚类分析、动态聚类分析"></a>层次聚类分析、动态聚类分析</h1><h2 id="例"><a href="#例" class="headerlink" title="例"></a>例</h2><p>尽管我个人非常不喜欢人们被划分圈子，因为这样就有了歧视、偏见、排挤和矛盾，但“物以类聚，人以群分”确实是一种客观的现实——这其中就蕴含着聚类分析的思想。</p>
+<h2 id="层次聚类分析"><a href="#层次聚类分析" class="headerlink" title="层次聚类分析"></a>层次聚类分析</h2><pre><code class="hljs matlab">X=xlsread(<span class="hljs-string">&#x27;chengji.xlsx&#x27;</span>)
+<span class="hljs-comment">%(1.标准化处理)</span>
+x=zscore(X(:,<span class="hljs-number">2</span>:<span class="hljs-number">3</span>))
+<span class="hljs-comment">%（2.计算点与点之间欧氏距离）</span>
+y=pdist(x,<span class="hljs-string">&#x27;euclidean&#x27;</span>)
+<span class="hljs-comment">%(3.类平均法进行合并过程)</span>
+Z=linkage(y,<span class="hljs-string">&#x27;average&#x27;</span>)
+obslabel=cell(<span class="hljs-number">3</span>:<span class="hljs-number">1</span>)
+<span class="hljs-comment">%（5.）</span>
+H=dendrogram(Z,<span class="hljs-number">0</span>,<span class="hljs-string">&#x27;orientation&#x27;</span>,<span class="hljs-string">&#x27;right&#x27;</span>,<span class="hljs-string">&#x27;label&#x27;</span>,obslabel)
+set(H,<span class="hljs-string">&#x27;LineWidth&#x27;</span>,<span class="hljs-number">1</span>,<span class="hljs-string">&#x27;Color&#x27;</span>,<span class="hljs-string">&#x27;k&#x27;</span>) <span class="hljs-comment">%画图要求，线宽为1，颜色为黑色</span>
+xlabel(<span class="hljs-string">&#x27;标准化距离（类平均法）&#x27;</span>)
+inconsisten0=inconsistent(Z,<span class="hljs-number">4</span>) <span class="hljs-comment">%4表示为深度</span></code></pre>
+<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201129234327.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="动态聚类分析"><a href="#动态聚类分析" class="headerlink" title="动态聚类分析"></a>动态聚类分析</h2><pre><code class="hljs matlab"><span class="hljs-number">1.</span>手动动态聚类分析
+data=xlsread(<span class="hljs-string">&#x27;chengji.xlsx&#x27;</span>)
+gc=data(:,<span class="hljs-number">1</span>)
+data=zscore(data(:,<span class="hljs-number">2</span>:<span class="hljs-number">3</span>))
+x1=data(:,<span class="hljs-number">1</span>)
+x2=data(:,<span class="hljs-number">2</span>)
+<span class="hljs-built_in">scatter</span>(x1,x2,<span class="hljs-string">&#x27;r&#x27;</span>) <span class="hljs-comment">%画散点图，观察凝点</span></code></pre>
+<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201129234431.png" srcset="/img/loading.gif" alt=""></p>
+<pre><code class="hljs matlab">startdata=data([<span class="hljs-number">7</span>,<span class="hljs-number">11</span>,<span class="hljs-number">27</span>,<span class="hljs-number">33</span>,<span class="hljs-number">22</span>],:) <span class="hljs-comment">%找四个凝点</span>
+idx=kmeans(data,<span class="hljs-number">5</span>,<span class="hljs-string">&#x27;Start&#x27;</span>,startdata) <span class="hljs-comment">%&#x27;Start为初始凝结点的标识&#x27;，startdata为具体的值</span>
+[S,H]=silhouette(data,idx)<span class="hljs-comment">%画图</span>
+gc(idx==<span class="hljs-number">1</span>),gc(idx==<span class="hljs-number">2</span>),gc(idx==<span class="hljs-number">3</span>),gc(idx==<span class="hljs-number">4</span>),gc(idx==<span class="hljs-number">5</span>)<span class="hljs-comment">%展示工厂标记</span></code></pre>
+<pre><code class="hljs matlab"><span class="hljs-built_in">ans</span> =
+     <span class="hljs-number">3</span>
+    <span class="hljs-number">12</span>
+    <span class="hljs-number">21</span>
+    <span class="hljs-number">28</span>
+    <span class="hljs-number">34</span>
+    <span class="hljs-number">36</span>
+    <span class="hljs-number">37</span>
+    <span class="hljs-number">40</span>
+<span class="hljs-built_in">ans</span> =
+    <span class="hljs-number">11</span>
+    <span class="hljs-number">13</span>
+    <span class="hljs-number">14</span>
+    <span class="hljs-number">19</span>
+    <span class="hljs-number">23</span>
+    <span class="hljs-number">24</span>
+    <span class="hljs-number">30</span>
+    <span class="hljs-number">39</span>
+<span class="hljs-built_in">ans</span> =
+     <span class="hljs-number">5</span>
+     <span class="hljs-number">8</span>
+    <span class="hljs-number">10</span>
+    <span class="hljs-number">26</span>
+    <span class="hljs-number">27</span>
+<span class="hljs-built_in">ans</span> =
+     <span class="hljs-number">6</span>
+     <span class="hljs-number">9</span>
+    <span class="hljs-number">18</span>
+    <span class="hljs-number">29</span>
+    <span class="hljs-number">33</span>
+<span class="hljs-built_in">ans</span> =
+     <span class="hljs-number">1</span>
+     <span class="hljs-number">2</span>
+     <span class="hljs-number">4</span>
+     <span class="hljs-number">7</span>
+    <span class="hljs-number">15</span>
+    <span class="hljs-number">16</span>
+    <span class="hljs-number">17</span>
+    <span class="hljs-number">20</span>
+    <span class="hljs-number">22</span>
+    <span class="hljs-number">25</span>
+    <span class="hljs-number">31</span>
+    <span class="hljs-number">32</span>
+    <span class="hljs-number">35</span>
+    <span class="hljs-number">38</span></code></pre>
+<p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201129234525.png" srcset="/img/loading.gif" alt=""><br><pre><code class="hljs matlab"><span class="hljs-number">2.</span>自动动态聚类分析
+data=xlsread(<span class="hljs-string">&#x27;chengji.xlsx&#x27;</span>)
+gc=data(:,<span class="hljs-number">1</span>)
+data=zscore(data(:,<span class="hljs-number">2</span>:<span class="hljs-number">3</span>))
+idx=kmeans(data,<span class="hljs-number">4</span>,<span class="hljs-string">&#x27;replicates&#x27;</span>,<span class="hljs-number">100</span>) <span class="hljs-comment">%自己去找凝结点，重复十次</span>
+[S,H]=silhouette(data,idx)<span class="hljs-comment">%画图</span>
+Leibie1=gc(idx==<span class="hljs-number">1</span>),Leibie2=gc(idx==<span class="hljs-number">2</span>),Leibie3=gc(idx==<span class="hljs-number">3</span>),Leibie4=gc(idx==<span class="hljs-number">4</span>)</code></pre><br><pre><code class="hljs matlab">idx =
+     <span class="hljs-number">4</span>
+     <span class="hljs-number">4</span>
+     <span class="hljs-number">4</span>
+     <span class="hljs-number">4</span>
+     <span class="hljs-number">3</span>
+     <span class="hljs-number">2</span>
+     <span class="hljs-number">4</span>
+     <span class="hljs-number">2</span>
+     <span class="hljs-number">2</span>
+     <span class="hljs-number">4</span>
+     <span class="hljs-number">1</span>
+     <span class="hljs-number">3</span>
+     <span class="hljs-number">1</span>
+     <span class="hljs-number">1</span>
+     <span class="hljs-number">4</span>
+     <span class="hljs-number">4</span>
+     <span class="hljs-number">4</span>
+     <span class="hljs-number">2</span>
+     <span class="hljs-number">1</span>
+     <span class="hljs-number">4</span>
+     <span class="hljs-number">3</span>
+     <span class="hljs-number">4</span>
+     <span class="hljs-number">1</span>
+     <span class="hljs-number">1</span>
+     <span class="hljs-number">4</span>
+     <span class="hljs-number">1</span>
+     <span class="hljs-number">2</span>
+     <span class="hljs-number">3</span>
+     <span class="hljs-number">2</span>
+     <span class="hljs-number">1</span>
+     <span class="hljs-number">4</span>
+     <span class="hljs-number">4</span>
+     <span class="hljs-number">2</span>
+     <span class="hljs-number">3</span>
+     <span class="hljs-number">4</span>
+     <span class="hljs-number">3</span>
+     <span class="hljs-number">3</span>
+     <span class="hljs-number">4</span>
+     <span class="hljs-number">1</span>
+     <span class="hljs-number">3</span>
+S =
+    <span class="hljs-number">0.8370</span>
+    <span class="hljs-number">0.8517</span>
+    <span class="hljs-number">0.2813</span>
+    <span class="hljs-number">0.6478</span>
+    <span class="hljs-number">0.5259</span>
+    <span class="hljs-number">0.2780</span>
+    <span class="hljs-number">0.7061</span>
+    <span class="hljs-number">0.3439</span>
+    <span class="hljs-number">0.5923</span>
+    <span class="hljs-number">0.3430</span>
+    <span class="hljs-number">0.8410</span>
+    <span class="hljs-number">0.8241</span>
+    <span class="hljs-number">0.4059</span>
+    <span class="hljs-number">0.6917</span>
+    <span class="hljs-number">0.7877</span>
+    <span class="hljs-number">0.4397</span>
+    <span class="hljs-number">0.5408</span>
+    <span class="hljs-number">0.3044</span>
+    <span class="hljs-number">0.6531</span>
+    <span class="hljs-number">0.7272</span>
+    <span class="hljs-number">0.5483</span>
+    <span class="hljs-number">0.5974</span>
+    <span class="hljs-number">0.6877</span>
+    <span class="hljs-number">0.5867</span>
+    <span class="hljs-number">0.7845</span>
+    <span class="hljs-number">0.2691</span>
+    <span class="hljs-number">0.1136</span>
+    <span class="hljs-number">0.8183</span>
+    <span class="hljs-number">0.5519</span>
+    <span class="hljs-number">0.8519</span>
+    <span class="hljs-number">0.8551</span>
+    <span class="hljs-number">0.6766</span>
+    <span class="hljs-number">0.5177</span>
+    <span class="hljs-number">0.8740</span>
+    <span class="hljs-number">0.6046</span>
+    <span class="hljs-number">0.7840</span>
+    <span class="hljs-number">0.7143</span>
+    <span class="hljs-number">0.6256</span>
+    <span class="hljs-number">0.7967</span>
+    <span class="hljs-number">0.8840</span>
+H =
+  Figure (<span class="hljs-number">1</span>) - 属性:
+      Number: <span class="hljs-number">1</span>
+        Name: <span class="hljs-string">&#x27;&#x27;</span>
+       Color: [<span class="hljs-number">0.9400</span> <span class="hljs-number">0.9400</span> <span class="hljs-number">0.9400</span>]
+    Position: [<span class="hljs-number">488</span> <span class="hljs-number">342</span> <span class="hljs-number">560</span> <span class="hljs-number">420</span>]
+       Units: <span class="hljs-string">&#x27;pixels&#x27;</span>
+  显示 所有属性
+Leibie1 =
+    <span class="hljs-number">11</span>
+    <span class="hljs-number">13</span>
+    <span class="hljs-number">14</span>
+    <span class="hljs-number">19</span>
+    <span class="hljs-number">23</span>
+    <span class="hljs-number">24</span>
+    <span class="hljs-number">26</span>
+    <span class="hljs-number">30</span>
+    <span class="hljs-number">39</span>
+Leibie2 =
+     <span class="hljs-number">6</span>
+     <span class="hljs-number">8</span>
+     <span class="hljs-number">9</span>
+    <span class="hljs-number">18</span>
+    <span class="hljs-number">27</span>
+    <span class="hljs-number">29</span>
+    <span class="hljs-number">33</span>
+Leibie3 =
+     <span class="hljs-number">5</span>
+    <span class="hljs-number">12</span>
+    <span class="hljs-number">21</span>
+    <span class="hljs-number">28</span>
+    <span class="hljs-number">34</span>
+    <span class="hljs-number">36</span>
+    <span class="hljs-number">37</span>
+    <span class="hljs-number">40</span>
+Leibie4 =
+     <span class="hljs-number">1</span>
+     <span class="hljs-number">2</span>
+     <span class="hljs-number">3</span>
+     <span class="hljs-number">4</span>
+     <span class="hljs-number">7</span>
+    <span class="hljs-number">10</span>
+    <span class="hljs-number">15</span>
+    <span class="hljs-number">16</span>
+    <span class="hljs-number">17</span>
+    <span class="hljs-number">20</span>
+    <span class="hljs-number">22</span>
+    <span class="hljs-number">25</span>
+    <span class="hljs-number">31</span>
+    <span class="hljs-number">32</span>
+    <span class="hljs-number">35</span>
+    <span class="hljs-number">38</span></code></pre><br><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201129234628.png" srcset="/img/loading.gif" alt=""></p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a href="">NULL</a>
 <a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
             </div>
@@ -297,15 +473,13 @@ correlationnew=<span class="hljs-built_in">mean</span>(correlation);</code></pre
                     
                       <a class="hover-with-bg" href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/">数学建模</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E7%BB%BC%E5%90%88%E8%AF%84%E4%BB%B7/">综合评价</a>
+                      <a class="hover-with-bg" href="/tags/%E5%B1%82%E6%AC%A1%E8%81%9A%E7%B1%BB%E5%88%86%E6%9E%90/">层次聚类分析</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%8E%BB%E9%87%8F%E7%BA%B2/">去量纲</a>
+                      <a class="hover-with-bg" href="/tags/%E6%89%8B%E5%8A%A8%E5%8A%A8%E6%80%81%E8%81%9A%E7%B1%BB%E5%88%86%E6%9E%90/">手动动态聚类分析</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E7%81%B0%E8%89%B2%E5%85%B3%E8%81%94/">灰色关联</a>
+                      <a class="hover-with-bg" href="/tags/%E8%87%AA%E5%8A%A8%E5%8A%A8%E6%80%81%E8%81%9A%E7%B1%BB%E5%88%86%E6%9E%90/">自动动态聚类分析</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%87%E5%87%86%E5%8C%96/">数据标准化</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E6%9E%81%E5%B7%AE/">极差</a>
+                      <a class="hover-with-bg" href="/tags/%E5%87%9D%E7%82%B9/">凝点</a>
                     
                   </div>
                 
@@ -318,9 +492,9 @@ correlationnew=<span class="hljs-built_in">mean</span>(correlation);</code></pre
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/08/12/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98%E3%80%9020200812%E3%80%91/">
+                      <a href="/2020/08/13/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98%E3%80%9020200813%E3%80%91/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">每日一题【20200812】</span>
+                        <span class="hidden-mobile">每日一题【20200813】</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -328,8 +502,8 @@ correlationnew=<span class="hljs-built_in">mean</span>(correlation);</code></pre
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/08/10/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98%E3%80%9020200810%E3%80%91/">
-                        <span class="hidden-mobile">每日一题【20200810】</span>
+                      <a href="/2020/08/11/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98%E3%80%9020200811%E3%80%91/">
+                        <span class="hidden-mobile">每日一题【20200811】</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>每日一题【20200811】 - 白小飞のblog</title>
+  <title>每日一题【20200813】 - 白小飞のblog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
@@ -174,7 +174,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="每日一题【20200811】">
+            <span class="h2" id="subtitle" title="每日一题【20200813】">
               
             </span>
 
@@ -184,8 +184,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-08-11 11:11" pubdate>
-        2020年8月11日 上午
+      <time datetime="2020-08-13 11:11" pubdate>
+        2020年8月13日 上午
       </time>
     </span>
   
@@ -196,7 +196,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      293 字
+      484 字
     </span>
   
 
@@ -206,7 +206,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4
+      8
        分钟
     </span>
   
@@ -236,45 +236,35 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">每日一题【20200811】</h1>
+            <h1 style="display: none">每日一题【20200813】</h1>
             
             <div class="markdown-body">
-              <h1 id="综合评价"><a href="#综合评价" class="headerlink" title="综合评价"></a>综合评价</h1><h2 id="灰色关联"><a href="#灰色关联" class="headerlink" title="灰色关联"></a>灰色关联</h2><h2 id="例"><a href="#例" class="headerlink" title="例"></a>例</h2><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201129223648.png" srcset="/img/loading.gif" alt=""><br>题目：分析下表中，哪一个产业对2000-2005年国内生产总值影响最大<br><pre><code class="hljs matlab">&gt;&gt; data=xlsread(<span class="hljs-string">&#x27;huiseguanlian-chanzhi.xlsx&#x27;</span>,<span class="hljs-string">&#x27;B2:E7&#x27;</span>)
-data =
-        <span class="hljs-number">1988</span>         <span class="hljs-number">386</span>         <span class="hljs-number">839</span>         <span class="hljs-number">763</span>
-        <span class="hljs-number">2061</span>         <span class="hljs-number">408</span>         <span class="hljs-number">846</span>         <span class="hljs-number">808</span>
-        <span class="hljs-number">2335</span>         <span class="hljs-number">422</span>         <span class="hljs-number">960</span>         <span class="hljs-number">953</span>
-        <span class="hljs-number">2750</span>         <span class="hljs-number">482</span>        <span class="hljs-number">1258</span>        <span class="hljs-number">1010</span>
-        <span class="hljs-number">3356</span>         <span class="hljs-number">511</span>        <span class="hljs-number">1577</span>        <span class="hljs-number">1268</span>
-        <span class="hljs-number">3806</span>         <span class="hljs-number">561</span>        <span class="hljs-number">1893</span>        <span class="hljs-number">1352</span>
-&gt;&gt; k=GRA(data)
-k =
-    <span class="hljs-number">0.5084</span>    <span class="hljs-number">0.6243</span>    <span class="hljs-number">0.7573</span>
-&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code class=<span class="hljs-string">&quot;language-matlab line-numbers&quot;</span>&gt;<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">correlationnew</span>=<span class="hljs-title">GRA</span><span class="hljs-params">(data)</span></span>
-<span class="hljs-comment">%此程序默认第一列数据为母序列比较值</span>
-[m,n]=<span class="hljs-built_in">size</span>(data);
-rou=<span class="hljs-number">0.5</span>; <span class="hljs-comment">%数据之间紧密度,越紧，数越小</span>
-<span class="hljs-comment">%（2）数据标准化去量纲</span>
-<span class="hljs-comment">%采用均值法</span>
-avedata=<span class="hljs-built_in">mean</span>(data);<span class="hljs-comment">%每列的平均值</span>
-<span class="hljs-keyword">for</span> <span class="hljs-built_in">i</span>=<span class="hljs-number">1</span>:m
-    newdata(<span class="hljs-built_in">i</span>,:)=data(<span class="hljs-built_in">i</span>,:)./avedata;
-<span class="hljs-keyword">end</span>
-<span class="hljs-comment">%(3)每一行关联系数计算</span>
-<span class="hljs-keyword">for</span> <span class="hljs-built_in">j</span>=<span class="hljs-number">2</span>:n
-    diff(:,<span class="hljs-built_in">j</span><span class="hljs-number">-1</span>)=<span class="hljs-built_in">abs</span>(newdata(:,<span class="hljs-number">1</span>)-newdata(:,<span class="hljs-built_in">j</span>));<span class="hljs-comment">%差的绝对值</span>
-<span class="hljs-keyword">end</span>
-<span class="hljs-comment">%最大最小极差-采用总极差法</span>
-maxdiff=<span class="hljs-built_in">max</span>(<span class="hljs-built_in">max</span>(diff)); <span class="hljs-comment">%最大极差</span>
-mindiff=<span class="hljs-built_in">min</span>(<span class="hljs-built_in">min</span>(diff)); <span class="hljs-comment">%最小极差</span>
-<span class="hljs-comment">%(4)关联度计算</span>
-<span class="hljs-keyword">for</span> <span class="hljs-built_in">i</span>=<span class="hljs-number">1</span>:m
-    <span class="hljs-keyword">for</span> <span class="hljs-built_in">j</span>=<span class="hljs-number">1</span>:n<span class="hljs-number">-1</span>
-        correlation(<span class="hljs-built_in">i</span>,<span class="hljs-built_in">j</span>)=(mindiff+rou*maxdiff)/(diff(<span class="hljs-built_in">i</span>,<span class="hljs-built_in">j</span>)+rou*maxdiff);
-    <span class="hljs-keyword">end</span>
-<span class="hljs-keyword">end</span>
-correlationnew=<span class="hljs-built_in">mean</span>(correlation);</code></pre><br>由此我们可以知道第三产业对2000-2005年国内生产总值影响最大。</p>
+              <h1 id="贝叶斯判别"><a href="#贝叶斯判别" class="headerlink" title="贝叶斯判别"></a>贝叶斯判别</h1><h2 id="例"><a href="#例" class="headerlink" title="例"></a>例</h2><p>6只Apf和9只Af不虫触角长度和翅膀长度数据:<br>Apf:(1.14,1.78)，(1.18,1.96)，(1.20,1.86)，(1.26,2.00)，(1.28,2.00)，(1.30,1.96) ;<br>Af:(1.24,1.72)，(1.36,1.74)，(1.38,1.64)，(1.38,1.82)，(1.38,1.90)，(1.40,1.70)，(1.48,1.82)，(1.54,1.82)，(1.56,2.08).<br>若两类虫协方差矩阵相等，假设总体Apf和Af均服从正态分布，用Bayes判别法判别三个右虫属于哪一类?<br>(1.24,1.8)，(1.28,1.84)，（1.4，2.04）<br><pre><code class="hljs matlab">pb=[<span class="hljs-number">1.14</span> <span class="hljs-number">1.18</span>;<span class="hljs-number">1.18</span> <span class="hljs-number">1.96</span>;<span class="hljs-number">1.20</span> <span class="hljs-number">1.86</span>;<span class="hljs-number">1.26</span> <span class="hljs-number">2.00</span>;<span class="hljs-number">1.28</span> <span class="hljs-number">2.00</span>;<span class="hljs-number">1.30</span> <span class="hljs-number">1.96</span>;<span class="hljs-number">1.24</span> <span class="hljs-number">1.72</span>;<span class="hljs-number">1.36</span> <span class="hljs-number">1.74</span>;<span class="hljs-number">1.38</span> <span class="hljs-number">1.64</span>;<span class="hljs-number">1.38</span> <span class="hljs-number">1.82</span>;<span class="hljs-number">1.38</span> <span class="hljs-number">1.90</span>;<span class="hljs-number">1.40</span> <span class="hljs-number">1.70</span>;<span class="hljs-number">1.48</span> <span class="hljs-number">1.82</span>;<span class="hljs-number">1.54</span> <span class="hljs-number">1.82</span>;<span class="hljs-number">1.56</span> <span class="hljs-number">2.08</span>;<span class="hljs-number">1.24</span> <span class="hljs-number">1.8</span>;<span class="hljs-number">1.28</span> <span class="hljs-number">1.84</span>;<span class="hljs-number">1.4</span> <span class="hljs-number">2.04</span>]
+xl=[<span class="hljs-number">1.14</span> <span class="hljs-number">1.18</span>;<span class="hljs-number">1.18</span> <span class="hljs-number">1.96</span>;<span class="hljs-number">1.20</span> <span class="hljs-number">1.86</span>;<span class="hljs-number">1.26</span> <span class="hljs-number">2.00</span>;<span class="hljs-number">1.28</span> <span class="hljs-number">2.00</span>;<span class="hljs-number">1.30</span> <span class="hljs-number">1.96</span>;<span class="hljs-number">1.24</span> <span class="hljs-number">1.72</span>;<span class="hljs-number">1.36</span> <span class="hljs-number">1.74</span>;<span class="hljs-number">1.38</span> <span class="hljs-number">1.64</span>;<span class="hljs-number">1.38</span> <span class="hljs-number">1.82</span>;<span class="hljs-number">1.38</span> <span class="hljs-number">1.90</span>;<span class="hljs-number">1.40</span> <span class="hljs-number">1.70</span>;<span class="hljs-number">1.48</span> <span class="hljs-number">1.82</span>;<span class="hljs-number">1.54</span> <span class="hljs-number">1.82</span>;<span class="hljs-number">1.56</span> <span class="hljs-number">2.08</span>]
+lb=[<span class="hljs-number">1</span>;<span class="hljs-number">1</span>;<span class="hljs-number">1</span>;<span class="hljs-number">1</span>;<span class="hljs-number">1</span>;<span class="hljs-number">1</span>;<span class="hljs-number">2</span>;<span class="hljs-number">2</span>;<span class="hljs-number">2</span>;<span class="hljs-number">2</span>;<span class="hljs-number">2</span>;<span class="hljs-number">2</span>;<span class="hljs-number">2</span>;<span class="hljs-number">2</span>;<span class="hljs-number">2</span>]
+[jg,wpl,gl]=classify(pb,xl,lb)
+gz=<span class="hljs-number">1</span>:<span class="hljs-number">18</span>
+[gz&#x27;,jg,gl]
+wpl</code></pre><br><pre><code class="hljs matlab"><span class="hljs-number">1.0000</span>    <span class="hljs-number">1.0000</span>    <span class="hljs-number">0.7919</span>    <span class="hljs-number">0.2081</span>
+    <span class="hljs-number">2.0000</span>    <span class="hljs-number">1.0000</span>    <span class="hljs-number">0.9981</span>    <span class="hljs-number">0.0019</span>
+    <span class="hljs-number">3.0000</span>    <span class="hljs-number">1.0000</span>    <span class="hljs-number">0.9911</span>    <span class="hljs-number">0.0089</span>
+    <span class="hljs-number">4.0000</span>    <span class="hljs-number">1.0000</span>    <span class="hljs-number">0.9754</span>    <span class="hljs-number">0.0246</span>
+    <span class="hljs-number">5.0000</span>    <span class="hljs-number">1.0000</span>    <span class="hljs-number">0.9505</span>    <span class="hljs-number">0.0495</span>
+    <span class="hljs-number">6.0000</span>    <span class="hljs-number">1.0000</span>    <span class="hljs-number">0.8703</span>    <span class="hljs-number">0.1297</span>
+    <span class="hljs-number">7.0000</span>    <span class="hljs-number">1.0000</span>    <span class="hljs-number">0.8928</span>    <span class="hljs-number">0.1072</span>
+    <span class="hljs-number">8.0000</span>    <span class="hljs-number">2.0000</span>    <span class="hljs-number">0.1124</span>    <span class="hljs-number">0.8876</span>
+    <span class="hljs-number">9.0000</span>    <span class="hljs-number">2.0000</span>    <span class="hljs-number">0.0264</span>    <span class="hljs-number">0.9736</span>
+   <span class="hljs-number">10.0000</span>    <span class="hljs-number">2.0000</span>    <span class="hljs-number">0.1055</span>    <span class="hljs-number">0.8945</span>
+   <span class="hljs-number">11.0000</span>    <span class="hljs-number">2.0000</span>    <span class="hljs-number">0.1847</span>    <span class="hljs-number">0.8153</span>
+   <span class="hljs-number">12.0000</span>    <span class="hljs-number">2.0000</span>    <span class="hljs-number">0.0210</span>    <span class="hljs-number">0.9790</span>
+   <span class="hljs-number">13.0000</span>    <span class="hljs-number">2.0000</span>    <span class="hljs-number">0.0031</span>    <span class="hljs-number">0.9969</span>
+   <span class="hljs-number">14.0000</span>    <span class="hljs-number">2.0000</span>    <span class="hljs-number">0.0004</span>    <span class="hljs-number">0.9996</span>
+   <span class="hljs-number">15.0000</span>    <span class="hljs-number">2.0000</span>    <span class="hljs-number">0.0014</span>    <span class="hljs-number">0.9986</span>
+   <span class="hljs-number">16.0000</span>    <span class="hljs-number">1.0000</span>    <span class="hljs-number">0.9411</span>    <span class="hljs-number">0.0589</span>
+   <span class="hljs-number">17.0000</span>    <span class="hljs-number">1.0000</span>    <span class="hljs-number">0.8388</span>    <span class="hljs-number">0.1612</span>
+   <span class="hljs-number">18.0000</span>    <span class="hljs-number">2.0000</span>    <span class="hljs-number">0.2559</span>    <span class="hljs-number">0.7441</span>
+wpl =
+    <span class="hljs-number">0.0556</span></code></pre><br>最后通过结果我们可以看到前两项分到Apf类，最后一项分到Af类。总误判率为0.0556。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a href="">NULL</a>
 <a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
             </div>
@@ -297,15 +287,11 @@ correlationnew=<span class="hljs-built_in">mean</span>(correlation);</code></pre
                     
                       <a class="hover-with-bg" href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/">数学建模</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E7%BB%BC%E5%90%88%E8%AF%84%E4%BB%B7/">综合评价</a>
+                      <a class="hover-with-bg" href="/tags/%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%88%A4%E5%88%AB/">贝叶斯判别</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%8E%BB%E9%87%8F%E7%BA%B2/">去量纲</a>
+                      <a class="hover-with-bg" href="/tags/%E5%8D%8F%E6%96%B9%E5%B7%AE/">协方差</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E7%81%B0%E8%89%B2%E5%85%B3%E8%81%94/">灰色关联</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%87%E5%87%86%E5%8C%96/">数据标准化</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E6%9E%81%E5%B7%AE/">极差</a>
+                      <a class="hover-with-bg" href="/tags/%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83/">正态分布</a>
                     
                   </div>
                 
@@ -318,9 +304,9 @@ correlationnew=<span class="hljs-built_in">mean</span>(correlation);</code></pre
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/08/12/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98%E3%80%9020200812%E3%80%91/">
+                      <a href="/2020/11/27/%E9%98%BF%E9%87%8C%E4%BA%91/Class%201%20%E5%9F%BA%E4%BA%8EECS%E6%90%AD%E5%BB%BAFTP%E6%9C%8D%E5%8A%A1/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">每日一题【20200812】</span>
+                        <span class="hidden-mobile">Class 1 基于ECS搭建FTP服务</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -328,8 +314,8 @@ correlationnew=<span class="hljs-built_in">mean</span>(correlation);</code></pre
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/08/10/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98%E3%80%9020200810%E3%80%91/">
-                        <span class="hidden-mobile">每日一题【20200810】</span>
+                      <a href="/2020/08/12/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98%E3%80%9020200812%E3%80%91/">
+                        <span class="hidden-mobile">每日一题【20200812】</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
