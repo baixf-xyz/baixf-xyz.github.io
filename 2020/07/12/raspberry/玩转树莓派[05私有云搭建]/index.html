@@ -241,19 +241,19 @@
             <div class="markdown-body">
               <p><span class="label label-primary"><br>  之前已经做过关于树莓派的私有云搭建，只不过都是在宝塔直接完成的，在宝塔搭建固然容易，但是宝塔作为虚拟机，储存的东西只是虚拟内存，无法实现本机的访问，现在在本地搭建的Nginx上搭建一下私有云。
 </span></p>
-<h3 id="一-owncloud"><a href="#一-owncloud" class="headerlink" title="一.owncloud"></a>一.owncloud</h3><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122210506.jpg" srcset="/img/loading.gif" alt=""></p>
-<h4 id="1-下载ownCloud"><a href="#1-下载ownCloud" class="headerlink" title="1. 下载ownCloud"></a>1. 下载ownCloud</h4><p>按照下面的指令依次执行</p>
+<h2 id="一-owncloud"><a href="#一-owncloud" class="headerlink" title="一.owncloud"></a>一.owncloud</h2><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122210506.jpg" srcset="/img/loading.gif" alt=""></p>
+<h3 id="1-下载ownCloud"><a href="#1-下载ownCloud" class="headerlink" title="1. 下载ownCloud"></a>1. 下载ownCloud</h3><p>按照下面的指令依次执行</p>
 <pre><code class="hljs shell">sudo wget https://download.owncloud.org/community/owncloud-10.2.0.zip
 sudo unzip owncloud-10.2.0.zip -d /var/www/html/
 cd /var/www/html/owncloud
 sudo mkdir data</code></pre>
-<h4 id="2-修改目录权限"><a href="#2-修改目录权限" class="headerlink" title="2. 修改目录权限"></a>2. 修改目录权限</h4><p><span class="label label-primary"><br>  OwnCloud在安装的过程中需要对一些目录有写的权限,为此，web服务器用户（www-data对于基于Debian的系统）必须要拥有apps、data、config目录的权限。
+<h3 id="2-修改目录权限"><a href="#2-修改目录权限" class="headerlink" title="2. 修改目录权限"></a>2. 修改目录权限</h3><p><span class="label label-primary"><br>  OwnCloud在安装的过程中需要对一些目录有写的权限,为此，web服务器用户（www-data对于基于Debian的系统）必须要拥有apps、data、config目录的权限。
 </span></p>
 <pre><code class="hljs shell">依次执行下面的指令
 sudo chown -R www-data:www-data data
 sudo chown -R www-data:www-data config
 sudo chown -R www-data:www-data apps</code></pre>
-<h4 id="3-设置mysql账户密码"><a href="#3-设置mysql账户密码" class="headerlink" title="3. 设置mysql账户密码"></a>3. 设置mysql账户密码</h4><p>输入下面指令</p>
+<h3 id="3-设置mysql账户密码"><a href="#3-设置mysql账户密码" class="headerlink" title="3. 设置mysql账户密码"></a>3. 设置mysql账户密码</h3><p>输入下面指令</p>
 <pre><code class="hljs shell">sudo mysql -u root -p</code></pre>
 <p>然后随便输密码点击回车就能登录进去</p>
 <p>输入下面指令点击回车</p>
@@ -263,28 +263,28 @@ sudo chown -R www-data:www-data apps</code></pre>
 <p>用下面指令刷新信息</p>
 <pre><code class="hljs shell">flush privileges;</code></pre>
 <p>刷新以后点击ctrl-c退出</p>
-<h4 id="4-配置owncloud"><a href="#4-配置owncloud" class="headerlink" title="4. 配置owncloud"></a>4. 配置owncloud</h4><p>打开浏览器，输入 树莓派IP/owncloud ,进入设置安装界面</p>
-<h4 id="5-问题"><a href="#5-问题" class="headerlink" title="5. 问题"></a>5. 问题</h4><pre><code class="hljs shell">error:
+<h3 id="4-配置owncloud"><a href="#4-配置owncloud" class="headerlink" title="4. 配置owncloud"></a>4. 配置owncloud</h3><p>打开浏览器，输入 树莓派IP/owncloud ,进入设置安装界面</p>
+<h3 id="5-问题"><a href="#5-问题" class="headerlink" title="5. 问题"></a>5. 问题</h3><pre><code class="hljs shell">error:
 This version of ownCloud is not compatible with PHP 7.3
 You are currently running PHP 7.3.19-1~deb10u1.</code></pre>
 <p>解决方案：（呃，解决不了）<br><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122210801.png" srcset="/img/loading.gif" alt=""></p>
-<h4 id="二-nextcloud"><a href="#二-nextcloud" class="headerlink" title="二.nextcloud"></a>二.nextcloud</h4><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122210845.jpg" srcset="/img/loading.gif" alt=""></p>
-<h4 id="1-下载nextcloud"><a href="#1-下载nextcloud" class="headerlink" title="1. 下载nextcloud"></a>1. 下载nextcloud</h4><p>按照下面的指令依次执行</p>
+<h2 id="二-nextcloud"><a href="#二-nextcloud" class="headerlink" title="二.nextcloud"></a>二.nextcloud</h2><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122210845.jpg" srcset="/img/loading.gif" alt=""></p>
+<h3 id="1-下载nextcloud"><a href="#1-下载nextcloud" class="headerlink" title="1. 下载nextcloud"></a>1. 下载nextcloud</h3><p>按照下面的指令依次执行</p>
 <pre><code class="hljs shell">sudo wget https://download.nextcloud.com/server/releases/nextcloud-19.0.0.zip
 sudo unzip nextcloud-19.0.0.zip -d /var/www/html/
 cd /var/www/html/nextcloud
 sudo mkdir data</code></pre>
-<h4 id="2-修改目录权限-1"><a href="#2-修改目录权限-1" class="headerlink" title="2. 修改目录权限"></a>2. 修改目录权限</h4><p><span class="label label-primary"><br>  nextcloud在安装的过程中需要对一些目录有写的权限,为此，web服务器用户（www-data对于基于Debian的系统）必须要拥有apps、data、config目录的权限。
+<h3 id="2-修改目录权限-1"><a href="#2-修改目录权限-1" class="headerlink" title="2. 修改目录权限"></a>2. 修改目录权限</h3><p><span class="label label-primary"><br>  nextcloud在安装的过程中需要对一些目录有写的权限,为此，web服务器用户（www-data对于基于Debian的系统）必须要拥有apps、data、config目录的权限。
 </span></p>
 <pre><code class="hljs shell">依次执行下面的指令
 sudo chown -R www-data:www-data data
 sudo chown -R www-data:www-data config
 sudo chown -R www-data:www-data apps</code></pre>
-<h4 id="3-为nextcloud创建数据库"><a href="#3-为nextcloud创建数据库" class="headerlink" title="3. 为nextcloud创建数据库"></a>3. 为nextcloud创建数据库</h4><p>进入phpmyadmin页面</p>
+<h3 id="3-为nextcloud创建数据库"><a href="#3-为nextcloud创建数据库" class="headerlink" title="3. 为nextcloud创建数据库"></a>3. 为nextcloud创建数据库</h3><p>进入phpmyadmin页面</p>
 <p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122211024.png" srcset="/img/loading.gif" alt=""></p>
-<h4 id="4-配置nextcloud"><a href="#4-配置nextcloud" class="headerlink" title="4. 配置nextcloud"></a>4. 配置nextcloud</h4><p>打开浏览器，输入 树莓派IP/nextcloud ,进入设置安装界面</p>
+<h3 id="4-配置nextcloud"><a href="#4-配置nextcloud" class="headerlink" title="4. 配置nextcloud"></a>4. 配置nextcloud</h3><p>打开浏览器，输入 树莓派IP/nextcloud ,进入设置安装界面</p>
 <p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122211108.png" srcset="/img/loading.gif" alt=""></p>
-<h4 id="5-问题-1"><a href="#5-问题-1" class="headerlink" title="5. 问题"></a>5. 问题</h4><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122211153.png" srcset="/img/loading.gif" alt=""></p>
+<h3 id="5-问题-1"><a href="#5-问题-1" class="headerlink" title="5. 问题"></a>5. 问题</h3><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122211153.png" srcset="/img/loading.gif" alt=""></p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/IKMIYHsRsvVzoaBF89byBw">树莓派爱好者基地：树莓派搭建私有云盘教程</a>
 <a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://central.owncloud.org/t/this-version-of-owncloud-is-not-compatible-with-php-7-3/17531">This version of ownCloud is not compatible with PHP 7.3</a>
 <a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:3" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://www.orgleaf.com/2891.html?replytocom=2711">解决CentOS中安装Nextcloud出现“内部服务器错误</a>

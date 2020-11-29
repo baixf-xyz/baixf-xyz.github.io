@@ -244,25 +244,25 @@
 </p>
 
 
-<h4 id="1-安装x11vnc"><a href="#1-安装x11vnc" class="headerlink" title="1.安装x11vnc"></a>1.安装x11vnc</h4><p>打开终端，使用如下命令安装x11vnc</p>
+<h2 id="1-安装x11vnc"><a href="#1-安装x11vnc" class="headerlink" title="1.安装x11vnc"></a>1.安装x11vnc</h2><p>打开终端，使用如下命令安装x11vnc</p>
 <pre><code class="hljs shell">sudo apt-get install x11vnc</code></pre>
-<h4 id="2-设置密码"><a href="#2-设置密码" class="headerlink" title="2.设置密码"></a>2.设置密码</h4><p><span class="label label-primary"><br>  默认保存在 /home/“user”/.vnc/passwd
+<h2 id="2-设置密码"><a href="#2-设置密码" class="headerlink" title="2.设置密码"></a>2.设置密码</h2><p><span class="label label-primary"><br>  默认保存在 /home/“user”/.vnc/passwd
 </span></p>
 <pre><code class="hljs shell">sudo x11vnc -storepasswd</code></pre>
-<h4 id="3-设置密码保存位置"><a href="#3-设置密码保存位置" class="headerlink" title="3.设置密码保存位置"></a>3.设置密码保存位置</h4><pre><code class="hljs shell">sudo x11vnc -storepasswd in /etc/x11vnc.pass</code></pre>
-<h4 id="4-拷贝密码文件"><a href="#4-拷贝密码文件" class="headerlink" title="4.拷贝密码文件"></a>4.拷贝密码文件</h4><p><span class="label label-primary"><br>  将用户目录下的passwd文件内容copy到 /etc/x11vnc.pass下
+<h2 id="3-设置密码保存位置"><a href="#3-设置密码保存位置" class="headerlink" title="3.设置密码保存位置"></a>3.设置密码保存位置</h2><pre><code class="hljs shell">sudo x11vnc -storepasswd in /etc/x11vnc.pass</code></pre>
+<h2 id="4-拷贝密码文件"><a href="#4-拷贝密码文件" class="headerlink" title="4.拷贝密码文件"></a>4.拷贝密码文件</h2><p><span class="label label-primary"><br>  将用户目录下的passwd文件内容copy到 /etc/x11vnc.pass下
 </span></p>
 <pre><code class="hljs shell">sudo cp /home/&quot;user&quot;/.vnc/passwd /etc/x11vnc.pass</code></pre>
-<h4 id="5-手动连接"><a href="#5-手动连接" class="headerlink" title="5.手动连接"></a>5.手动连接</h4><p><span class="label label-primary"><br>  需每次开机手动启动连接
+<h2 id="5-手动连接"><a href="#5-手动连接" class="headerlink" title="5.手动连接"></a>5.手动连接</h2><p><span class="label label-primary"><br>  需每次开机手动启动连接
 </span></p>
 <pre><code class="hljs shell">sudo /usr/bin/x11vnc -display :0 -auth /var/run/lightdm/root/:0 -forever -bg -o /var/log/x11vnc.log -rfbauth /etc/x11vnc.pass -rfbport 5900</code></pre>
-<h4 id="6-关闭x11vnc"><a href="#6-关闭x11vnc" class="headerlink" title="6.关闭x11vnc"></a>6.关闭x11vnc</h4><pre><code class="hljs shell">pi@raspbian:~$ ps -ef|grep -i vnc
+<h2 id="6-关闭x11vnc"><a href="#6-关闭x11vnc" class="headerlink" title="6.关闭x11vnc"></a>6.关闭x11vnc</h2><pre><code class="hljs shell">pi@raspbian:~$ ps -ef|grep -i vnc
 root     18008     1  0 11:27 ?        00:00:11 /usr/bin/x11vnc -display :0 -auth /var/run/lightdm/root/:0 -forever -bg -o /var/log/x11vnc.log -rfbauth /etc/x11vnc.pass -rfbport 5900
 pi       27883  1482  0 11:49 pts/0    00:00:00 grep -i vnc
 pi@raspbian:~$ sudo kill -9 18008
 pi@raspbian:~$ ps -ef|grep -i vnc
 pi       28431  1482  0 11:51 pts/0    00:00:00 grep -i vnc</code></pre>
-<h4 id="7-设置开机启动"><a href="#7-设置开机启动" class="headerlink" title="7.设置开机启动"></a>7.设置开机启动</h4><h5 id="配置x11vnc为跟随系统自动启动"><a href="#配置x11vnc为跟随系统自动启动" class="headerlink" title="配置x11vnc为跟随系统自动启动"></a>配置x11vnc为跟随系统自动启动</h5><p><span class="label label-primary">需要新建一个文件/etc/init/x11vnc.conf</span></p>
+<h2 id="7-设置开机启动"><a href="#7-设置开机启动" class="headerlink" title="7.设置开机启动"></a>7.设置开机启动</h2><h3 id="配置x11vnc为跟随系统自动启动"><a href="#配置x11vnc为跟随系统自动启动" class="headerlink" title="配置x11vnc为跟随系统自动启动"></a>配置x11vnc为跟随系统自动启动</h3><p><span class="label label-primary">需要新建一个文件/etc/init/x11vnc.conf</span></p>
 <pre><code class="hljs shell">sudo touch /etc/init/x11vnc.conf</code></pre>
 <p><span class="label label-primary"><br>对文件修改需要权限才能修改
 </span></p>

@@ -239,7 +239,7 @@
             <h1 style="display: none">玩转树莓派[02:树莓派+u盘搭建家庭共享]</h1>
             
             <div class="markdown-body">
-              <h4 id="1-硬盘挂载"><a href="#1-硬盘挂载" class="headerlink" title="1.硬盘挂载"></a>1.硬盘挂载</h4><h5 id="1-1-使用fdisk-l-查看硬盘的详细信息"><a href="#1-1-使用fdisk-l-查看硬盘的详细信息" class="headerlink" title="1.1 使用fdisk -l 查看硬盘的详细信息"></a>1.1 使用fdisk -l 查看硬盘的详细信息</h5><pre><code class="hljs shell">pi@raspbian:~$ sudo fdisk -l
+              <h2 id="1-硬盘挂载"><a href="#1-硬盘挂载" class="headerlink" title="1.硬盘挂载"></a>1.硬盘挂载</h2><h3 id="1-1-使用fdisk-l-查看硬盘的详细信息"><a href="#1-1-使用fdisk-l-查看硬盘的详细信息" class="headerlink" title="1.1 使用fdisk -l 查看硬盘的详细信息"></a>1.1 使用fdisk -l 查看硬盘的详细信息</h3><pre><code class="hljs shell">pi@raspbian:~$ sudo fdisk -l
 Disk /dev/ram0: 4 MiB, 4194304 bytes, 8192 sectors
 Units: sectors of 1 * 512 = 512 bytes
 Sector size (logical/physical): 512 bytes / 4096 bytes
@@ -322,11 +322,11 @@ Disklabel type: dos
 Disk identifier: 0xb64d29a8
 Device     Boot Start      End  Sectors Size Id Type
 /dev/sda1        8192 62914559 62906368  30G  7 HPFS/NTFS/exFAT</code></pre>
-<h5 id="1-2-挂载到指定位置"><a href="#1-2-挂载到指定位置" class="headerlink" title="1.2 挂载到指定位置"></a>1.2 挂载到指定位置</h5><pre><code class="hljs shell">pi@raspbian:~$ mkdir share
+<h3 id="1-2-挂载到指定位置"><a href="#1-2-挂载到指定位置" class="headerlink" title="1.2 挂载到指定位置"></a>1.2 挂载到指定位置</h3><pre><code class="hljs shell">pi@raspbian:~$ mkdir share
 pi@raspbian:~$ ls
 share
 pi@raspbian:~$ sudo mount /dev/sda1 share</code></pre>
-<h5 id="1-3-查看挂载情况"><a href="#1-3-查看挂载情况" class="headerlink" title="1.3 查看挂载情况"></a>1.3 查看挂载情况</h5><pre><code class="hljs shell">df -h</code></pre>
+<h3 id="1-3-查看挂载情况"><a href="#1-3-查看挂载情况" class="headerlink" title="1.3 查看挂载情况"></a>1.3 查看挂载情况</h3><pre><code class="hljs shell">df -h</code></pre>
 <pre><code class="hljs shell">pi@raspbian:~$ df -h
 Filesystem      Size  Used Avail Use% Mounted on
 /dev/root        30G  4.2G   24G  15% /
@@ -340,10 +340,10 @@ tmpfs           190M     0  190M   0% /run/user/1000
 /dev/sda1        30G   19G  9.9G  65% /home/pi/share</code></pre>
 <p class="note note-primary">  取消挂载 : sudo umount /dev/sda1</p>
 
-<h5 id="1-4-解决硬盘的自动挂载"><a href="#1-4-解决硬盘的自动挂载" class="headerlink" title="1.4 解决硬盘的自动挂载"></a>1.4 解决硬盘的自动挂载</h5><p>每次树莓派重启或者硬盘插拔都需要对硬盘进行重新挂载，比较麻烦，因此需要自动挂载。这里要修改/etc/fstab文件。</p>
+<h3 id="1-4-解决硬盘的自动挂载"><a href="#1-4-解决硬盘的自动挂载" class="headerlink" title="1.4 解决硬盘的自动挂载"></a>1.4 解决硬盘的自动挂载</h3><p>每次树莓派重启或者硬盘插拔都需要对硬盘进行重新挂载，比较麻烦，因此需要自动挂载。这里要修改/etc/fstab文件。</p>
 <p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201121203001.png" srcset="/img/loading.gif" alt=""></p>
 <p>可以看到，fstab文件其实就是一个表格，表格各列的含意如下：<br>第一列：磁盘分区名/卷标，一般是/dev/sdaN（N表示正整数）<br>第二列：挂载点，我们在这里把/dev/sda1挂到/samba上。<br>第三列：缺省设置，一般用defautls。<br>第四列：是否备份：0——表示不做 dump 备份；1——表示要将整个 fie sysytem 里的内容备份；2 也表示要做 dump 备份，但该分区的重要性比 1 小。<br>第五列：检测顺序：0——不进行检测；根分区（/），必须填写 1，其它的都不能填写 1。如果有分区填写大于 1 的话，则在检查完根分区后，从小到大依次检查下去。<br>具体填写方法在图中已注明。</p>
-<h4 id="2-df-h查看盘符挂载情况"><a href="#2-df-h查看盘符挂载情况" class="headerlink" title="2.df -h查看盘符挂载情况"></a>2.df -h查看盘符挂载情况</h4><pre><code class="hljs shell">pi@raspbian:~$ df -h
+<h2 id="2-df-h查看盘符挂载情况"><a href="#2-df-h查看盘符挂载情况" class="headerlink" title="2.df -h查看盘符挂载情况"></a>2.df -h查看盘符挂载情况</h2><pre><code class="hljs shell">pi@raspbian:~$ df -h
 Filesystem      Size  Used Avail Use% Mounted on
 udev            788M     0  788M   0% /dev
 tmpfs           185M   12M  173M   7% /run
@@ -354,9 +354,9 @@ tmpfs           925M     0  925M   0% /sys/fs/cgroup
 /dev/mmcblk0p1  252M   89M  163M  36% /boot
 tmpfs           185M   16K  185M   1% /run/user/1000
 /dev/sda        500G   28G  473G   6% /media/pi/AE57-581F</code></pre>
-<h4 id="3-已知盘符已自动挂载在-home-pi-share文件夹下"><a href="#3-已知盘符已自动挂载在-home-pi-share文件夹下" class="headerlink" title="3.已知盘符已自动挂载在/home/pi/share文件夹下"></a>3.已知盘符已自动挂载在/home/pi/share文件夹下</h4><h4 id="4-安装samba"><a href="#4-安装samba" class="headerlink" title="4.安装samba"></a>4.安装samba</h4><p><span class="label label-primary">更新一下源 ：sudo apt-get update</span></p>
+<h2 id="3-已知盘符已自动挂载在-home-pi-share文件夹下"><a href="#3-已知盘符已自动挂载在-home-pi-share文件夹下" class="headerlink" title="3.已知盘符已自动挂载在/home/pi/share文件夹下"></a>3.已知盘符已自动挂载在/home/pi/share文件夹下</h2><h2 id="4-安装samba"><a href="#4-安装samba" class="headerlink" title="4.安装samba"></a>4.安装samba</h2><p><span class="label label-primary">更新一下源 ：sudo apt-get update</span></p>
 <p><span class="label label-primary">安装samba : sudo apt-get install samba samba-common-bin</span></p>
-<h4 id="5-安装完成后，配置-etc-samba-smb-conf文件"><a href="#5-安装完成后，配置-etc-samba-smb-conf文件" class="headerlink" title="5.安装完成后，配置/etc/samba/smb.conf文件"></a>5.安装完成后，配置/etc/samba/smb.conf文件</h4><pre><code class="hljs shell">sudo vim /etc/samba/smb.conf</code></pre>
+<h2 id="5-安装完成后，配置-etc-samba-smb-conf文件"><a href="#5-安装完成后，配置-etc-samba-smb-conf文件" class="headerlink" title="5.安装完成后，配置/etc/samba/smb.conf文件"></a>5.安装完成后，配置/etc/samba/smb.conf文件</h2><pre><code class="hljs shell">sudo vim /etc/samba/smb.conf</code></pre>
 <p>&lt;span class=label label-primary”&gt;在其最后添加以下命令：&lt;/span&gt;</p>
 <pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">共享文件的名称，将在网络上以此名称显示</span>
 path = /home/pi/share #共享文件的路径
@@ -364,15 +364,15 @@ valid users = root pi #允许访问的用户，这里我用的是root 和 pi �
 browseable = yes  #允许浏览
 public = yes  #共享开放
 writable = yes  #可写</code></pre>
-<h4 id="6-保存后，重启samba服务"><a href="#6-保存后，重启samba服务" class="headerlink" title="6.保存后，重启samba服务"></a>6.保存后，重启samba服务</h4><pre><code class="hljs shell">sudo /usr/sbin/samba restart</code></pre>
+<h2 id="6-保存后，重启samba服务"><a href="#6-保存后，重启samba服务" class="headerlink" title="6.保存后，重启samba服务"></a>6.保存后，重启samba服务</h2><pre><code class="hljs shell">sudo /usr/sbin/samba restart</code></pre>
 <p>(可通过 whereis samba 寻找 samba 所在位置)</p>
-<h4 id="7-最后使用root用户添加共享用户："><a href="#7-最后使用root用户添加共享用户：" class="headerlink" title="7.最后使用root用户添加共享用户："></a>7.最后使用root用户添加共享用户：</h4><p>smbpasswd –a pi #这里我用的pi。</p>
+<h2 id="7-最后使用root用户添加共享用户："><a href="#7-最后使用root用户添加共享用户：" class="headerlink" title="7.最后使用root用户添加共享用户："></a>7.最后使用root用户添加共享用户：</h2><p>smbpasswd –a pi #这里我用的pi。</p>
 <pre><code class="hljs shell">pi@raspbian:~$ sudo su
 root@raspbian:/home/pi# smbpasswd -a pi
 New SMB password:
 Retype new SMB password:
 Added user pi</code></pre>
-<h4 id="8-ok-完成"><a href="#8-ok-完成" class="headerlink" title="8.ok 完成"></a>8.ok 完成</h4><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201121203707.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="8-ok-完成"><a href="#8-ok-完成" class="headerlink" title="8.ok 完成"></a>8.ok 完成</h2><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201121203707.png" srcset="/img/loading.gif" alt=""></p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://gitee.com/openfans-community/Debian-Pi-Aarch64/">Debian-Pi-Aarch64 ★ 全新树莓派64位系统2.0正式版 - 说明文档</a>
 <a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://raspberrypi.club/">树莓派俱乐部</a>
 <a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:3" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://shumeipai.nxez.com/">树莓派实验</a>

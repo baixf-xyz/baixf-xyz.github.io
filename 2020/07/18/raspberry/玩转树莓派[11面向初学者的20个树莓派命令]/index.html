@@ -245,72 +245,72 @@
   这里没有高级或突破性的内容，只有日常的基本命令可以帮助您从终端窗口浏览和执行Raspberry Pi的简单任务。随着时间的推移，您会发现更多的东西，但这是一个很好的起点。
 </p>
 
-<h3 id="01-sudo-apt-get更新-更新程序包列表"><a href="#01-sudo-apt-get更新-更新程序包列表" class="headerlink" title="01.[sudo apt-get更新]-更新程序包列表"></a>01.[sudo apt-get更新]-更新程序包列表</h3><p><span class="label label-primary">终端中的更新命令<br><pre><code class="hljs shell">sudo apt-get update</code></pre><br><span class="label label-primary">这是更新Raspberry Pi的第一阶段（有关其他步骤，请参阅此列表中的下两个项目）。</span></p>
+<h2 id="01-sudo-apt-get更新-更新程序包列表"><a href="#01-sudo-apt-get更新-更新程序包列表" class="headerlink" title="01.[sudo apt-get更新]-更新程序包列表"></a>01.[sudo apt-get更新]-更新程序包列表</h2><p><span class="label label-primary">终端中的更新命令<br><pre><code class="hljs shell">sudo apt-get update</code></pre><br><span class="label label-primary">这是更新Raspberry Pi的第一阶段（有关其他步骤，请参阅此列表中的下两个项目）。</span></p>
 <p>“ sudo apt-get update”命令 从存储库下载软件包列表，并获取有关这些软件包的最新版本以及任何相关软件包的信息。</p>
 <p>因此，它实际上并没有进行传统意义上的任何实际更新。在整个过程中，它更是一个必需的步骤。</p>
-<h3 id="02-sudo-apt-get-upgrade-下载并安装更新的软件包"><a href="#02-sudo-apt-get-upgrade-下载并安装更新的软件包" class="headerlink" title="02.[sudo apt-get upgrade]-下载并安装更新的软件包"></a>02.[sudo apt-get upgrade]-下载并安装更新的软件包</h3><p><span class="label label-primary">终端中的升级命令</span><br><pre><code class="hljs shell">sudo apt-get upgrade</code></pre><br><span class="label label-primary">此命令从我们更新软件包列表的上一个项目开始。</span></p>
+<h2 id="02-sudo-apt-get-upgrade-下载并安装更新的软件包"><a href="#02-sudo-apt-get-upgrade-下载并安装更新的软件包" class="headerlink" title="02.[sudo apt-get upgrade]-下载并安装更新的软件包"></a>02.[sudo apt-get upgrade]-下载并安装更新的软件包</h2><p><span class="label label-primary">终端中的升级命令</span><br><pre><code class="hljs shell">sudo apt-get upgrade</code></pre><br><span class="label label-primary">此命令从我们更新软件包列表的上一个项目开始。</span></p>
 <p>有了我们更新的软件包列表后，“ sudo apt-get upgrade”命令将查看当前安装的软件包，然后查看最新的软件包列表（我们刚刚升级的软件包），然后最后安装所有尚未安装的新软件包。</p>
-<h3 id="03-sudo-apt-get-clean-清理旧程序包文件"><a href="#03-sudo-apt-get-clean-清理旧程序包文件" class="headerlink" title="03.[sudo apt-get clean]-清理旧程序包文件"></a>03.[sudo apt-get clean]-清理旧程序包文件</h3><p><span class="label label-primary">终端中的清理命令</span><br><pre><code class="hljs shell">sudo apt-get clean</code></pre><br><span class="label label-primary">更新和升级过程的最后阶段，如果您有足够的磁盘空间，那么这并非总是必不可少的。</span></p>
+<h2 id="03-sudo-apt-get-clean-清理旧程序包文件"><a href="#03-sudo-apt-get-clean-清理旧程序包文件" class="headerlink" title="03.[sudo apt-get clean]-清理旧程序包文件"></a>03.[sudo apt-get clean]-清理旧程序包文件</h2><p><span class="label label-primary">终端中的清理命令</span><br><pre><code class="hljs shell">sudo apt-get clean</code></pre><br><span class="label label-primary">更新和升级过程的最后阶段，如果您有足够的磁盘空间，那么这并非总是必不可少的。</span></p>
 <p>“ sudo apt-get clean”命令删除在更新过程中下载的冗余软件包文件（.deb文件）。</p>
 <p>如果您空间有限或只想进行良好的清理，这是一个方便的命令。</p>
-<h3 id="04-sudo-raspi-config-Raspberry-Pi配置工具"><a href="#04-sudo-raspi-config-Raspberry-Pi配置工具" class="headerlink" title="04.[sudo raspi-config]-Raspberry Pi配置工具"></a>04.[sudo raspi-config]-Raspberry Pi配置工具</h3><p><span class="label label-primary">Raspberry Pi配置工具</span></p>
+<h2 id="04-sudo-raspi-config-Raspberry-Pi配置工具"><a href="#04-sudo-raspi-config-Raspberry-Pi配置工具" class="headerlink" title="04.[sudo raspi-config]-Raspberry Pi配置工具"></a>04.[sudo raspi-config]-Raspberry Pi配置工具</h2><p><span class="label label-primary">Raspberry Pi配置工具</span></p>
 <p><span class="label label-primary">这应该是您首次开始使用Raspberry Pi时要采取的第一步，以确保已针对您的语言，硬件和项目进行了设置。</span></p>
 <p>配置工具就像一个“设置”窗口，可让您设置语言，时间/日期，启用摄像头模块，对处理器进行超频，启用设备，更改密码以及许多其他选项。</p>
 <p>您可以通过键入“ sudo raspi-config”然后按回车来访问它。根据您所做的更改，之后可能会提示您重新启动Pi。</p>
-<h3 id="05-ls-列出目录内容"><a href="#05-ls-列出目录内容" class="headerlink" title="05.[ls]-列出目录内容"></a>05.[ls]-列出目录内容</h3><p><span class="label label-primary">终端中的ls命令</span></p>
+<h2 id="05-ls-列出目录内容"><a href="#05-ls-列出目录内容" class="headerlink" title="05.[ls]-列出目录内容"></a>05.[ls]-列出目录内容</h2><p><span class="label label-primary">终端中的ls命令</span></p>
 <pre><code class="hljs shell">ls 目录</code></pre>
 <p><span class="label label-primary">Linux的“目录”与Windows中的“文件夹”相同。这可能是您（Windows用户）必须习惯的。</span></p>
 <p>当然，终端中没有浏览器，因此要查看您在任何给定时间所在目录的内容，只需键入“ ls”并按回车即可。</p>
 <p>您将看到列出该目录中的每个文件和目录，并且通常为不同项目使用颜色编码。</p>
-<h3 id="06-cd-更改目录"><a href="#06-cd-更改目录" class="headerlink" title="06.[cd]-更改目录"></a>06.[cd]-更改目录</h3><p><span class="label label-primary">终端中的cd命令</span><br><pre><code class="hljs shell">cd 目录</code></pre><br><span class="label label-primary">如果要跳转到某个目录，可以使用“ cd”命令。</span></p>
+<h2 id="06-cd-更改目录"><a href="#06-cd-更改目录" class="headerlink" title="06.[cd]-更改目录"></a>06.[cd]-更改目录</h2><p><span class="label label-primary">终端中的cd命令</span><br><pre><code class="hljs shell">cd 目录</code></pre><br><span class="label label-primary">如果要跳转到某个目录，可以使用“ cd”命令。</span></p>
 <p>如果您已经在其中的目录中有目录，则可以简单地使用“ cd directoryname”（用目录名替换“ directoryname”）。</p>
 <p>如果它在文件系统中的其他位置，只需在命令后输入路径，例如“ cd / home / pi / directoryname”。</p>
 <p>此命令的另一个方便用法是“ cd ..”，它使您返回一个文件夹级别，类似于“返回”按钮。</p>
-<h3 id="07-mkdir-创建目录"><a href="#07-mkdir-创建目录" class="headerlink" title="07.[mkdir]-创建目录"></a>07.[mkdir]-创建目录</h3><p><span class="label label-primary">终端中的mkdir命令</span></p>
+<h2 id="07-mkdir-创建目录"><a href="#07-mkdir-创建目录" class="headerlink" title="07.[mkdir]-创建目录"></a>07.[mkdir]-创建目录</h2><p><span class="label label-primary">终端中的mkdir命令</span></p>
 <p><span class="label label-primary">mkdir 目录名</span></p>
 <p><span class="label label-primary">如果需要在已经存在的目录中创建一个新目录，则可以使用“ mkdir”命令。这是 相当于终端世界的新&gt; 文件夹。</span></p>
 <p>要创建新目录，只需在命令后添加目录名称，例如’mkdir new_directory’。</p>
-<h3 id="08-rmdir-删除目录"><a href="#08-rmdir-删除目录" class="headerlink" title="08.[rmdir]-删除目录"></a>08.[rmdir]-删除目录</h3><p><span class="label label-primary">您已经了解了如何创建新目录，但是如果要删除一个目录该怎么办？</span></p>
+<h2 id="08-rmdir-删除目录"><a href="#08-rmdir-删除目录" class="headerlink" title="08.[rmdir]-删除目录"></a>08.[rmdir]-删除目录</h2><p><span class="label label-primary">您已经了解了如何创建新目录，但是如果要删除一个目录该怎么办？</span></p>
 <pre><code class="hljs shell">rmdir 目录名</code></pre>
 <p><span class="label label-primary">这是删除目录的非常相似的命令，只需使用“ rmdir”然后输入目录名称即可。</span></p>
 <p>例如，“ rmdir directory_name”将删除目录“ directory_name”。值得注意的是，该目录必须为空才能执行此命令。</p>
-<h3 id="09-mv-移动文件"><a href="#09-mv-移动文件" class="headerlink" title="09.[mv]-移动文件"></a>09.[mv]-移动文件</h3><p><span class="label label-primary">使用“ mv”命令移动文件</span><br><pre><code class="hljs shell">mv 文件名 移动位置</code></pre><br><span class="label label-primary">通过使用“ mv”命令可在目录之间移动文件。</span></p>
+<h2 id="09-mv-移动文件"><a href="#09-mv-移动文件" class="headerlink" title="09.[mv]-移动文件"></a>09.[mv]-移动文件</h2><p><span class="label label-primary">使用“ mv”命令移动文件</span><br><pre><code class="hljs shell">mv 文件名 移动位置</code></pre><br><span class="label label-primary">通过使用“ mv”命令可在目录之间移动文件。</span></p>
 <p>要移动文件，请使用“ mv”，然后是文件名，然后是目标目录。</p>
 <p>例如“ mv my_file.txt / home / pi / destination_directory”，它将“ my_file.txt”文件移动到“ / home / pi / destination_directory”。</p>
-<h3 id="10-tree-d-显示目录树"><a href="#10-tree-d-显示目录树" class="headerlink" title="10.[tree -d]-显示目录树"></a>10.[tree -d]-显示目录树</h3><pre><code class="hljs shell">tree -d</code></pre>
+<h2 id="10-tree-d-显示目录树"><a href="#10-tree-d-显示目录树" class="headerlink" title="10.[tree -d]-显示目录树"></a>10.[tree -d]-显示目录树</h2><pre><code class="hljs shell">tree -d</code></pre>
 <p><span class="label label-primary">Tree命令是查看目录结构的便捷方法</span><br>创建少量新目录后，您可能会缺少Windows文件资源管理器的可视文件夹结构视图。如果无法看到目录的直观布局，事情可能会很快变得混乱。</p>
 <p>可以帮助您更清楚地了解目录的命令之一是“ tree -d”。它在终端内以树状布局显示所有目录。</p>
-<h3 id="11-pwd-显示当前目录"><a href="#11-pwd-显示当前目录" class="headerlink" title="11.[pwd]-显示当前目录"></a>11.[pwd]-显示当前目录</h3><pre><code class="hljs shell">pwd</code></pre>
+<h2 id="11-pwd-显示当前目录"><a href="#11-pwd-显示当前目录" class="headerlink" title="11.[pwd]-显示当前目录"></a>11.[pwd]-显示当前目录</h2><pre><code class="hljs shell">pwd</code></pre>
 <p><span class="label label-primary">当您开始感到有点迷茫时，使用“ pwd”可以为您提供帮助！</span></p>
 <p>当您迷路时，另一个帮助您的便捷命令是’pwd’命令。如果您只想知道自己在任何给定时间的位置，这将非常方便。</p>
 <p>只需随时输入“ pwd”以显示您所在的当前目录路径。</p>
-<h3 id="12-clear-清除终端窗口"><a href="#12-clear-清除终端窗口" class="headerlink" title="12.[clear]-清除终端窗口"></a>12.[clear]-清除终端窗口</h3><pre><code class="hljs shell">clear</code></pre>
+<h2 id="12-clear-清除终端窗口"><a href="#12-clear-清除终端窗口" class="headerlink" title="12.[clear]-清除终端窗口"></a>12.[clear]-清除终端窗口</h2><pre><code class="hljs shell">clear</code></pre>
 <p><span class="label label-primary">在终端中清除命令</span></p>
 <p>当您开始使用终端机时，您会发现它会变得很混乱。在执行一些命令之后，您会在屏幕上留下一小段文字，对于我们中的某些人来说可能有点烦人。</p>
 <p>如果要擦拭屏幕干净，只需使用“ clear”命令。屏幕将被清除，为下一个命令做好准备。</p>
-<h3 id="13-sudo-half-关闭您的Raspberry-Pi"><a href="#13-sudo-half-关闭您的Raspberry-Pi" class="headerlink" title="13.[sudo half]-关闭您的Raspberry Pi"></a>13.[sudo half]-关闭您的Raspberry Pi</h3><p><span class="label label-primary">使用“ half”命令安全关闭Raspberry Pi</span></p>
+<h2 id="13-sudo-half-关闭您的Raspberry-Pi"><a href="#13-sudo-half-关闭您的Raspberry-Pi" class="headerlink" title="13.[sudo half]-关闭您的Raspberry Pi"></a>13.[sudo half]-关闭您的Raspberry Pi</h2><p><span class="label label-primary">使用“ half”命令安全关闭Raspberry Pi</span></p>
 <p>安全地关闭Raspberry Pi可以避免SD卡损坏等问题。您有时可以通过快速拉动电源线来逃脱，但是最终，您将杀死您的卡。</p>
 <p>要正确关闭树莓派，请使用“ sudo halt”。在Pi的LED上最后闪烁一次之后，您可以拔下电源线。</p>
-<h3 id="14-sudo-reboot-重新启动Raspberry-Pi"><a href="#14-sudo-reboot-重新启动Raspberry-Pi" class="headerlink" title="14.[sudo reboot]-重新启动Raspberry Pi"></a>14.[sudo reboot]-重新启动Raspberry Pi</h3><p><span class="label label-primary">在终端中使用重新启动来重新启动Pi</span></p>
+<h2 id="14-sudo-reboot-重新启动Raspberry-Pi"><a href="#14-sudo-reboot-重新启动Raspberry-Pi" class="headerlink" title="14.[sudo reboot]-重新启动Raspberry Pi"></a>14.[sudo reboot]-重新启动Raspberry Pi</h2><p><span class="label label-primary">在终端中使用重新启动来重新启动Pi</span></p>
 <pre><code class="hljs shell">sudo reboot</code></pre>
 <p>与shutdown命令类似，如果您想以安全的方式重启Raspberry Pi，则可以使用“ reboot”命令。</p>
 <p>只需键入“ sudo reboot”，Pi就会自行重启。</p>
-<h3 id="15-startx-启动桌面环境（LXDE）"><a href="#15-startx-启动桌面环境（LXDE）" class="headerlink" title="15.[startx]-启动桌面环境（LXDE）"></a>15.[startx]-启动桌面环境（LXDE）</h3><p><span class="label label-primary">终端中的startx命令</span></p>
+<h2 id="15-startx-启动桌面环境（LXDE）"><a href="#15-startx-启动桌面环境（LXDE）" class="headerlink" title="15.[startx]-启动桌面环境（LXDE）"></a>15.[startx]-启动桌面环境（LXDE）</h2><p><span class="label label-primary">终端中的startx命令</span></p>
 <pre><code class="hljs shell">startx</code></pre>
 <p><span class="label label-primary">如果您将Pi设置为始终在终端中启动，则您可能想知道如何启动桌面（如果需要使用它）。</span></p>
 <p>使用“ startx”启动LXDE（轻便X11桌面环境）。应该注意的是，这将无法通过SSH会话进行。</p>
-<h3 id="16-ifconfig-查找您的Raspberry-Pi的IP地址"><a href="#16-ifconfig-查找您的Raspberry-Pi的IP地址" class="headerlink" title="16.[ifconfig]-查找您的Raspberry Pi的IP地址"></a>16.[ifconfig]-查找您的Raspberry Pi的IP地址</h3><pre><code class="hljs shell">ifconfig</code></pre>
+<h2 id="16-ifconfig-查找您的Raspberry-Pi的IP地址"><a href="#16-ifconfig-查找您的Raspberry-Pi的IP地址" class="headerlink" title="16.[ifconfig]-查找您的Raspberry Pi的IP地址"></a>16.[ifconfig]-查找您的Raspberry Pi的IP地址</h2><pre><code class="hljs shell">ifconfig</code></pre>
 <p><span class="label label-primary">ifconfig可以为您提供有用的网络信息</span><br>在很多情况下，可能需要您知道Raspberry Pi 的IP地址。许多人在配置SSH会话以远程访问其Pi时使用它。</p>
 <p>要查找您的IP地址，请在终端中键入“ ifconfig”，然后按Enter。您也可以使用“主机名-I”自行查找IP地址。</p>
-<h3 id="17-nano-编辑文件"><a href="#17-nano-编辑文件" class="headerlink" title="17.[nano]-编辑文件"></a>17.[nano]-编辑文件</h3><p><span class="label label-primary">终端中的Nano，是Raspberry Pi的首选文本编辑器</span><br>Linux有许多不同的文本编辑器，由于各种原因，您会发现有些人喜欢使用另一种。</p>
+<h2 id="17-nano-编辑文件"><a href="#17-nano-编辑文件" class="headerlink" title="17.[nano]-编辑文件"></a>17.[nano]-编辑文件</h2><p><span class="label label-primary">终端中的Nano，是Raspberry Pi的首选文本编辑器</span><br>Linux有许多不同的文本编辑器，由于各种原因，您会发现有些人喜欢使用另一种。</p>
 <p>要编辑文件，只需键入“ nano”，然后键入文件名，例如“ nano myfile.txt”。编辑完成后，按Ctrl + X保存文件。</p>
-<h3 id="18-cat-显示文件的内容"><a href="#18-cat-显示文件的内容" class="headerlink" title="18.[cat]-显示文件的内容"></a>18.[cat]-显示文件的内容</h3><pre><code class="hljs shell">cat</code></pre>
+<h2 id="18-cat-显示文件的内容"><a href="#18-cat-显示文件的内容" class="headerlink" title="18.[cat]-显示文件的内容"></a>18.[cat]-显示文件的内容</h2><pre><code class="hljs shell">cat</code></pre>
 <p><span class="label label-primary">终端中的cat</span></p>
 <p>虽然可以使用“ nano”（上方）打开文件进行编辑，但是可以使用单独的命令在终端中简单列出文件的内容。</p>
 <p>使用“ cat”后跟文件名来执行此操作，例如，“ cat myfile.txt”。</p>
-<h3 id="19-rm-删除文件"><a href="#19-rm-删除文件" class="headerlink" title="19.[rm]-删除文件"></a>19.[rm]-删除文件</h3><p><span class="label label-primary">终端中的rm命令有助于轻松删除文件</span><br><pre><code class="hljs shell">rm 文件名</code></pre><br>在Raspberry Pi上，删除文件很容易，并且在编写代码麻烦的同时制作许多版本的Python文件时，您会做很多事情。</p>
+<h2 id="19-rm-删除文件"><a href="#19-rm-删除文件" class="headerlink" title="19.[rm]-删除文件"></a>19.[rm]-删除文件</h2><p><span class="label label-primary">终端中的rm命令有助于轻松删除文件</span><br><pre><code class="hljs shell">rm 文件名</code></pre><br>在Raspberry Pi上，删除文件很容易，并且在编写代码麻烦的同时制作许多版本的Python文件时，您会做很多事情。</p>
 <p>要删除文件，我们使用“ rm”命令，后跟文件名。例如“ rm myfile.txt”。</p>
-<h3 id="20-cp-复制文件或目录"><a href="#20-cp-复制文件或目录" class="headerlink" title="20.[cp]-复制文件或目录"></a>20.[cp]-复制文件或目录</h3><pre><code class="hljs shell">cp 文件名或目录名</code></pre>
+<h2 id="20-cp-复制文件或目录"><a href="#20-cp-复制文件或目录" class="headerlink" title="20.[cp]-复制文件或目录"></a>20.[cp]-复制文件或目录</h2><pre><code class="hljs shell">cp 文件名或目录名</code></pre>
 <p><span class="label label-primary">终端中的cp命令可帮助复制文件</span><br><span class="label label-primary">当需要复制文件或目录时，请使用“ cp”命令。</span></p>
 <p>要在同一目录中复制文件，请输入命令“ cp original_file new_file”</p>
 <p>要在另一个具有相同名称的目录中进行复制，请输入命令“ cp original_file home / pi / subdirectory”</p>

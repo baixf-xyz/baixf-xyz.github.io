@@ -243,7 +243,7 @@
   树莓派性能虽然比不上家用电脑或者服务器，但是搭建个人博客网站足够了。我使用树莓派4B，在树莓派上安装了宝塔面板，利用wordpress在本地搭建了一个个人博客。博客搭建好了，树莓派网站只能在局域网内访问，存在外网无法访问的问题。为解决这个问题，经过一番搜索，终于发现树莓派可以使用Ngrok进行内网穿透，从而在公网上也可以访问树莓派上的博客网站。以下是教程。
 </p>
 
-<h3 id="一、Ngrok-介绍和选择服务商"><a href="#一、Ngrok-介绍和选择服务商" class="headerlink" title="一、Ngrok 介绍和选择服务商"></a>一、Ngrok 介绍和选择服务商</h3><p><span class="label label-primary"><br>  首先，什么是Ngrok?
+<h2 id="一、Ngrok-介绍和选择服务商"><a href="#一、Ngrok-介绍和选择服务商" class="headerlink" title="一、Ngrok 介绍和选择服务商"></a>一、Ngrok 介绍和选择服务商</h2><p><span class="label label-primary"><br>  首先，什么是Ngrok?
 </span></p>
 <p><span class="label label-primary">ngrok 通过安全隧道将位于NAT和防火墙后面的本地服务器公开到公共Internet，即将没有公网IP地址的服务器公开到公网，从而可以在任何地方访问局域网内的服务器。</span></p>
 <p><span class="label label-primary"><br>  其次，Ngrok是怎么运行的？
@@ -252,16 +252,16 @@
 <p><span class="label label-primary">客户端连接到ngrok云服务，该服务在公网上接受流量，并将该流量转发到计算机上运行的ngrok进程，然后再转发到您指定的本地地址，从而实现内网穿透。</span></p>
 <p><span class="label label-primary">最后如何选择Ngrok云服务，如果你有云服务器，那么你可以自己搭建Ngrok云服务，也可以选择Ngrok服务商，因为方便就没有自建服务。对比了Ngrok官方和 Sunny Ngrok之后，最终选择了Sunny Ngrok，因为从两个服务商提供的服务来说，官方的不能自定义域名，虽然提供4个通道，但是每分钟有40次连接的限制。</span></p>
 <p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122224244.png" srcset="/img/loading.gif" alt=""></p>
-<h4 id="Ngrok-提供的服务价格"><a href="#Ngrok-提供的服务价格" class="headerlink" title="Ngrok 提供的服务价格"></a>Ngrok 提供的服务价格</h4><p><span class="label label-primary">而我只需要一个通道就够了，并且我有个人的域名，所以选择了可以自定义域名的Sunny Ngrok。</span></p>
-<h3 id="二、注册Sunny-Ngrok，并开通隧道"><a href="#二、注册Sunny-Ngrok，并开通隧道" class="headerlink" title="二、注册Sunny-Ngrok，并开通隧道"></a>二、注册Sunny-Ngrok，并开通隧道</h3><p><span class="label label-primary">在Sunny-Ngrok上注册一个账号，然后进入后台，开通一个隧道。</span></p>
+<h3 id="Ngrok-提供的服务价格"><a href="#Ngrok-提供的服务价格" class="headerlink" title="Ngrok 提供的服务价格"></a>Ngrok 提供的服务价格</h3><p><span class="label label-primary">而我只需要一个通道就够了，并且我有个人的域名，所以选择了可以自定义域名的Sunny Ngrok。</span></p>
+<h2 id="二、注册Sunny-Ngrok，并开通隧道"><a href="#二、注册Sunny-Ngrok，并开通隧道" class="headerlink" title="二、注册Sunny-Ngrok，并开通隧道"></a>二、注册Sunny-Ngrok，并开通隧道</h2><p><span class="label label-primary">在Sunny-Ngrok上注册一个账号，然后进入后台，开通一个隧道。</span></p>
 <p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122224918.png" srcset="/img/loading.gif" alt=""></p>
 <p>开通Sunny-Ngrok 隧道</p>
-<h3 id="三、在宝塔面板中绑定新的域名"><a href="#三、在宝塔面板中绑定新的域名" class="headerlink" title="三、在宝塔面板中绑定新的域名"></a>三、在宝塔面板中绑定新的域名</h3><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122224956.png" srcset="/img/loading.gif" alt=""></p>
-<h3 id="四、下载客户端，并启动隧道"><a href="#四、下载客户端，并启动隧道" class="headerlink" title="四、下载客户端，并启动隧道"></a>四、下载客户端，并启动隧道</h3><h4 id="1-在树莓派上下载Ngrok客户端"><a href="#1-在树莓派上下载Ngrok客户端" class="headerlink" title="1.在树莓派上下载Ngrok客户端"></a>1.在树莓派上下载Ngrok客户端</h4><p><a target="_blank" rel="noopener" href="http://hls.ctopus.com/sunny/linux_arm.zip?v=2">下载地址</a></p>
+<h2 id="三、在宝塔面板中绑定新的域名"><a href="#三、在宝塔面板中绑定新的域名" class="headerlink" title="三、在宝塔面板中绑定新的域名"></a>三、在宝塔面板中绑定新的域名</h2><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122224956.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="四、下载客户端，并启动隧道"><a href="#四、下载客户端，并启动隧道" class="headerlink" title="四、下载客户端，并启动隧道"></a>四、下载客户端，并启动隧道</h2><h3 id="1-在树莓派上下载Ngrok客户端"><a href="#1-在树莓派上下载Ngrok客户端" class="headerlink" title="1.在树莓派上下载Ngrok客户端"></a>1.在树莓派上下载Ngrok客户端</h3><p><a target="_blank" rel="noopener" href="http://hls.ctopus.com/sunny/linux_arm.zip?v=2">下载地址</a></p>
 <p>下载完成之后将客户端执行文件移动到 /use/local/bin 目录下并给予可执行权限。</p>
 <pre><code class="hljs shell">sudo mv sunny /usr/local/bin/sunny
 sudo chmod +x /usr/local/bin/sunny</code></pre>
-<h4 id="2、编写启动脚本"><a href="#2、编写启动脚本" class="headerlink" title="2、编写启动脚本"></a>2、编写启动脚本</h4><pre><code class="hljs shell">sudo nano /etc/init.d/sunny
+<h3 id="2、编写启动脚本"><a href="#2、编写启动脚本" class="headerlink" title="2、编写启动脚本"></a>2、编写启动脚本</h3><pre><code class="hljs shell">sudo nano /etc/init.d/sunny
 /etc/init.d/sunny 启动脚本代码</code></pre>
 <pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">!/bin/sh -e</span>
 <span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">## BEGIN INIT INFO</span></span>
@@ -307,15 +307,15 @@ esac
 exit 0</code></pre>
 <p><span class="label label-primary">⚠️注意：</span></p>
 <p><span class="label label-primary">把代码里面的【隧道id】替换成自己的隧道id</span></p>
-<h4 id="3、测试可执行代码"><a href="#3、测试可执行代码" class="headerlink" title="3、测试可执行代码"></a>3、测试可执行代码</h4><pre><code class="hljs shell">sudo chmod 755 /etc/init.d/sunny
+<h3 id="3、测试可执行代码"><a href="#3、测试可执行代码" class="headerlink" title="3、测试可执行代码"></a>3、测试可执行代码</h3><pre><code class="hljs shell">sudo chmod 755 /etc/init.d/sunny
 sudo /etc/init.d/sunny start
 sudo /etc/init.d/sunny start    #启动
 sudo /etc/init.d/sunny stop     #停止
 sudo /etc/init.d/sunny restart  #重启</code></pre>
-<h4 id="4、设置开机启动"><a href="#4、设置开机启动" class="headerlink" title="4、设置开机启动"></a>4、设置开机启动</h4><pre><code class="hljs shell">cd /etc/init.d
+<h3 id="4、设置开机启动"><a href="#4、设置开机启动" class="headerlink" title="4、设置开机启动"></a>4、设置开机启动</h3><pre><code class="hljs shell">cd /etc/init.d
 sudo update-rc.d sunny defaults 90    #加入开机启动
 sudo update-rc.d -f sunny remove  #取消开机启动</code></pre>
-<h4 id="5、隧道启动官方文档说明"><a href="#5、隧道启动官方文档说明" class="headerlink" title="5、隧道启动官方文档说明"></a>5、隧道启动官方文档说明</h4><h6 id="启动隧道"><a href="#启动隧道" class="headerlink" title="启动隧道"></a>启动隧道</h6><p><span class="label label-primary"><br>  Mac、Linux、树莓派的使用方式是一样的。Windows才会不一样。但是它们的启动方式都是通过隧道id启动，隧道id可以在隧道管理的列表里面获得。这里以映射http服务为例。
+<h3 id="5、隧道启动官方文档说明"><a href="#5、隧道启动官方文档说明" class="headerlink" title="5、隧道启动官方文档说明"></a>5、隧道启动官方文档说明</h3><h5 id="启动隧道"><a href="#启动隧道" class="headerlink" title="启动隧道"></a>启动隧道</h5><p><span class="label label-primary"><br>  Mac、Linux、树莓派的使用方式是一样的。Windows才会不一样。但是它们的启动方式都是通过隧道id启动，隧道id可以在隧道管理的列表里面获得。这里以映射http服务为例。
 </span></p>
 <p><span class="label label-primary">注意 下方代码仅供参考，sunny执行文件位置还得对应自己安装位置</span></p>
 <p><span class="label label-primary">Mac、Linux、树莓派</span></p>
@@ -324,9 +324,9 @@ sudo update-rc.d -f sunny remove  #取消开机启动</code></pre>
 <pre><code class="hljs shell">./sunny clientid 隧道id,隧道id</code></pre>
 <p><span class="label label-primary">要想后台运行可以使用 setsid 命令</span></p>
 <pre><code class="hljs shell">setsid ./sunny clientid 隧道id &amp;</code></pre>
-<h4 id="五、完成"><a href="#五、完成" class="headerlink" title="五、完成"></a>五、完成</h4><p><span class="label label-primary">启动Ngrok 隧道，可以看到服务器已经上线了。</span></p>
+<h2 id="五、完成"><a href="#五、完成" class="headerlink" title="五、完成"></a>五、完成</h2><p><span class="label label-primary">启动Ngrok 隧道，可以看到服务器已经上线了。</span></p>
 <p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201122225032.png" srcset="/img/loading.gif" alt=""></p>
-<h4 id="六、树莓派内网穿透"><a href="#六、树莓派内网穿透" class="headerlink" title="六、树莓派内网穿透"></a>六、树莓派内网穿透</h4><p><span class="label label-primary">再打开赠送的域名<a target="_blank" rel="noopener" href="http://bxf.free.idcfengye.com/">http://bxf.free.idcfengye.com/</a> ，就可以看到运行在树莓派上的博客网站啦，树莓派内网穿透成功！</span></p>
+<h2 id="六、树莓派内网穿透"><a href="#六、树莓派内网穿透" class="headerlink" title="六、树莓派内网穿透"></a>六、树莓派内网穿透</h2><p><span class="label label-primary">再打开赠送的域名<a target="_blank" rel="noopener" href="http://bxf.free.idcfengye.com/">http://bxf.free.idcfengye.com/</a> ，就可以看到运行在树莓派上的博客网站啦，树莓派内网穿透成功！</span></p>
 <p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201123204628.png" srcset="/img/loading.gif" alt=""></p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://www.lxx1.com/3709">科技爱好者博客-树莓派使用Ngrok进行内网穿透，在公网上搭建个人博客</a>
 <a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
