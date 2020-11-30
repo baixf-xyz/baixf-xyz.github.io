@@ -4,9 +4,9 @@
   
   
   <entry>
-    <title>Class 7 参营总结与感想</title>
-    <link href="/2020/12/03/%E9%98%BF%E9%87%8C%E4%BA%91/Class%207%20%E5%8F%82%E8%90%A5%E6%80%BB%E7%BB%93%E4%B8%8E%E6%84%9F%E6%83%B3/"/>
-    <url>/2020/12/03/%E9%98%BF%E9%87%8C%E4%BA%91/Class%207%20%E5%8F%82%E8%90%A5%E6%80%BB%E7%BB%93%E4%B8%8E%E6%84%9F%E6%83%B3/</url>
+    <title>Class 7 ECS 7天实践训练营参营总结与感想</title>
+    <link href="/2020/12/03/%E9%98%BF%E9%87%8C%E4%BA%91/Class%207%20ECS%207%E5%A4%A9%E5%AE%9E%E8%B7%B5%E8%AE%AD%E7%BB%83%E8%90%A5%E5%8F%82%E8%90%A5%E6%80%BB%E7%BB%93%E4%B8%8E%E6%84%9F%E6%83%B3/"/>
+    <url>/2020/12/03/%E9%98%BF%E9%87%8C%E4%BA%91/Class%207%20ECS%207%E5%A4%A9%E5%AE%9E%E8%B7%B5%E8%AE%AD%E7%BB%83%E8%90%A5%E5%8F%82%E8%90%A5%E6%80%BB%E7%BB%93%E4%B8%8E%E6%84%9F%E6%83%B3/</url>
     
     <content type="html"><![CDATA[<h1 id="证书"><a href="#证书" class="headerlink" title="证书"></a>证书</h1><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/PicGo/20201127203249.png" alt=""></p><h1 id="一、课程知识点概览"><a href="#一、课程知识点概览" class="headerlink" title="一、课程知识点概览"></a>一、课程知识点概览</h1><p><a href="https://blog.baixf.tk/2020/11/27/%E9%98%BF%E9%87%8C%E4%BA%91/Class%201%20%E5%9F%BA%E4%BA%8EECS%E6%90%AD%E5%BB%BAFTP%E6%9C%8D%E5%8A%A1/">Class 1 基于ECS搭建FTP服务</a></p><p><a href="https://blog.baixf.tk/2020/11/28/%E9%98%BF%E9%87%8C%E4%BA%91/Class%202%20%E5%9F%BA%E4%BA%8EECS%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BADocker%E7%8E%AF%E5%A2%83/">Class 2 快速搭建Docker环境</a></p><p><a href="https://blog.baixf.tk/2020/11/29/%E9%98%BF%E9%87%8C%E4%BA%91/Class%203%20SLB%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E5%AE%9E%E8%B7%B5/">Class 3 ECS+SLB 负载均衡实践</a></p><p><a href="https://blog.baixf.tk/2020/11/30/%E9%98%BF%E9%87%8C%E4%BA%91/Class%204%20%E4%BD%BF%E7%94%A8PolarDB%E5%92%8CECS%E6%90%AD%E5%BB%BA%E9%97%A8%E6%88%B7%E7%BD%91%E7%AB%99/">Class 4 使用ECS和PolarDB搭建门户网站</a></p><p><a href="https://blog.baixf.tk/2020/12/01/%E9%98%BF%E9%87%8C%E4%BA%91/Class%205%20%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BALeanote%E4%BA%91%E7%AC%94%E8%AE%B0%E6%9C%AC/">Class 5 搭建个人Leanote云笔记本</a></p><p><a href="https://blog.baixf.tk/2020/12/02/%E9%98%BF%E9%87%8C%E4%BA%91/Class%206%20%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90%E2%80%9C%E9%92%89%E9%92%89%E2%80%9D/">Class 6 案例分享——钉钉</a></p><p><a href="https://blog.baixf.tk/2020/12/03/%E9%98%BF%E9%87%8C%E4%BA%91/Class%207%E5%8F%82%E8%90%A5%E6%80%BB%E7%BB%93%E4%B8%8E%E6%84%9F%E6%83%B3%20/">Class 7 参营总结与感想</a></p><h1 id="二、参营感想"><a href="#二、参营感想" class="headerlink" title="二、参营感想"></a>二、参营感想</h1><p>　　七天转瞬即逝，有不小的收获。“7天，每天30分钟，云计算技能全方位提升，为升学就业加分！但是我们不能只是一味的粘贴复制。不仅要知其然，更要知其所以然。每一个命令，我都会反复查阅，查阅其其他参数的用途，不断丰富自己的linux水平与视野。<br>　　关于笔记，自己在整理上传到开发者社区的同时，也上传到了自己的博客，顺便“水了”自己的博客内容。感觉十分有成就感。<br>　　总而言之，这次7天训练营过的还挺有意义的，收获颇丰，个人比较满意。以后也会多多关注这种活动，在课余可以提升一下自我。</p><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a href="https://developer.aliyun.com/adc/student/bootcamp/?spm=a2c6h.13788107.J_3120529270.3.450750a3CaVHui">云上实践 云上成长 ECS 7天实践训练营</a><a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>]]></content>
     
@@ -68,6 +68,49 @@
   
   
   <entry>
+    <title>Class 6 图片内容安全（图片鉴黄）</title>
+    <link href="/2020/12/02/%E9%98%BF%E9%87%8C%E4%BA%91/Class%206%20%E5%9B%BE%E7%89%87%E5%86%85%E5%AE%B9%E5%AE%89%E5%85%A8%EF%BC%88%E5%9B%BE%E7%89%87%E9%89%B4%E9%BB%84%EF%BC%89/"/>
+    <url>/2020/12/02/%E9%98%BF%E9%87%8C%E4%BA%91/Class%206%20%E5%9B%BE%E7%89%87%E5%86%85%E5%AE%B9%E5%AE%89%E5%85%A8%EF%BC%88%E5%9B%BE%E7%89%87%E9%89%B4%E9%BB%84%EF%BC%89/</url>
+    
+    <content type="html"><![CDATA[<h2 id="功能描述"><a href="#功能描述" class="headerlink" title="功能描述"></a>功能描述</h2><p>ScanImage可以检测图片中的违规内容，实时返回检测结果。</p><h2 id="支持检测的场景"><a href="#支持检测的场景" class="headerlink" title="支持检测的场景"></a>支持检测的场景</h2><p>图片智能鉴黄、图片涉恐涉政识别、图片风险人物识别、图片垃圾广告识别、图片不良场景识别、图片logo识别。</p><p>在图片审核中，对应关系如下：</p><ul><li>porn:图片智能鉴黄：适用于图片涉及色情、低俗内容检测。</li></ul><p>normal（正常图片）、sexy（性感图片）、porn（色情图片）</p><ul><li><p>terrorism:图片涉恐涉政识别：适用于图片涉及政治敏感、暴力、武器、恐怖、血腥、爆炸等内容识别。</p></li><li><p>图片风险人物识别：适用于图片涉及敏感政治人物、明星的识别。</p></li></ul><p>normal（正常图片）、bloody（血腥）、explosion（爆炸烟光）、outfit（特殊装束）、logo（特殊标识）、weapon（武器）、politics（涉政）、violence（打斗）、crowd（聚众）、parade（游行）、carcrash（车祸现场）、flag（旗帜）、location（地标）、others（其他）</p><ul><li>ad:图片垃圾广告识别：适用于图片中含有广告信息的识别，特別是针对于类似牛皮癣的文字广告有较好的识别效果。</li></ul><p>normal（正常图片）、politics（文字含涉政内容）、porn（文字含涉黄内容）、abuse（文字含辱骂内容）、terrorism（文字含涉恐内容）、contraband（文字含违禁内容）、spam（文字含其他垃圾内容）、npx（牛皮癣广告）、qrcode（包含二维码）、programCode（包含小程序码）、ad（其他广告）</p><ul><li>live:图片不良场景识别：适用于图片中涉及毒品、赌博、画中画等内容的识别。</li></ul><p>normal（正常图片）、meaningless（无意义图片）、PIP（画中画）、smoking（吸烟）、drivelive（车内直播）</p><ul><li>logo:图片logo识别：适用于图片中含有台标、水印、商标等内容的检测。</li></ul><p>normal（正常图片）、TV（带有管控logo的图片）、trademark（商标）</p><h2 id="输入限制"><a href="#输入限制" class="headerlink" title="输入限制"></a>输入限制</h2><ul><li>图片格式：PNG、JPG、JPEG、BMP、GIF、WEBP。</li><li>图片大小：图片大小不超过10MB。如果您有大图需求， 请提工单申请。</li><li>图片像素：建议大于256×256像素，像素过低可能会影响识别效果。</li><li>URL地址中不能包含中文字符。</li></ul><h2 id="检测说明"><a href="#检测说明" class="headerlink" title="检测说明"></a>检测说明</h2><p>最长检测时间是6秒，如果在该时间范围内没有完成检测，系统会返回超时错误码。<br>图片下载时间限制为3秒，如果下载时间超过3秒，则会返回下载超时。<br>图片检测接口响应时间依赖图片的下载时间。请确保被检测图片所在的存储服务稳定可靠，建议您使用阿里云OSS存储或者CDN缓存。</p><h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><pre><code class="hljs python"><span class="hljs-comment">#!/usr/bin/env python</span><span class="hljs-comment">#coding=utf-8</span><span class="hljs-keyword">from</span> aliyunsdkcore.client <span class="hljs-keyword">import</span> AcsClient<span class="hljs-keyword">from</span> aliyunsdkcore.acs_exception.exceptions <span class="hljs-keyword">import</span> ClientException<span class="hljs-keyword">from</span> aliyunsdkcore.acs_exception.exceptions <span class="hljs-keyword">import</span> ServerException<span class="hljs-keyword">from</span> aliyunsdkimageaudit.request.v20191230.IdentifyPornRequest <span class="hljs-keyword">import</span> IdentifyPornRequestclient = AcsClient(<span class="hljs-string">&#x27;&lt;accessKeyId&gt;&#x27;</span>, <span class="hljs-string">&#x27;&lt;accessSecret&gt;&#x27;</span>, <span class="hljs-string">&#x27;cn-shanghai&#x27;</span>)request = IdentifyPornRequest()request.set_accept_format(<span class="hljs-string">&#x27;json&#x27;</span>)request.set_Scenes([<span class="hljs-string">&quot;porn&quot;</span>])request.set_Tasks([  &#123;    <span class="hljs-string">&quot;ImageURL&quot;</span>: <span class="hljs-string">&quot;http://viapi-test.oss-cn-shanghai.aliyuncs.com/sanjiye-meizi/%E5%9B%BE%E7%89%87%E6%99%BA%E8%83%BD%E9%89%B4%E9%BB%84.jpg&quot;</span>  &#125;])response = client.do_action_with_exception(request)<span class="hljs-comment"># python2:  print(response) </span>print(<span class="hljs-built_in">str</span>(response, encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>))</code></pre><h2 id="在线调试"><a href="#在线调试" class="headerlink" title="在线调试"></a>在线调试</h2><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/2020-11-30/1606731135088-QQ%E6%88%AA%E5%9B%BE20201130181139.png" alt=""></p><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/2020-11-30/1606731135084-QQ%E6%88%AA%E5%9B%BE20201130181117.png" alt=""></p><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/2020-11-30/1606731135096-QQ%E6%88%AA%E5%9B%BE20201130181157.png" alt=""></p><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a href="https://developer.aliyun.com/adc/student/bootcamp/ai/2?spm=a2c6h.13788107.J_3120529270.4.450750a3fjp2m1&amp;accounttraceid=9cafb5972ade4cb484e00857d47625bbdkwh">达摩院特别版-视觉AI训练营</a><a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>]]></content>
+    
+    
+    <categories>
+      
+      <category>学习</category>
+      
+      <category>阿里云</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>阿里云</tag>
+      
+      <tag>达摩院</tag>
+      
+      <tag>AI</tag>
+      
+      <tag>应用</tag>
+      
+      <tag>视觉</tag>
+      
+      <tag>oss存储</tag>
+      
+      <tag>图片安全内容</tag>
+      
+      <tag>图片识别</tag>
+      
+      <tag>图片鉴黄</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Class 5 搭建个人Leanote云笔记本</title>
     <link href="/2020/12/01/%E9%98%BF%E9%87%8C%E4%BA%91/Class%205%20%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BALeanote%E4%BA%91%E7%AC%94%E8%AE%B0%E6%9C%AC/"/>
     <url>/2020/12/01/%E9%98%BF%E9%87%8C%E4%BA%91/Class%205%20%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BALeanote%E4%BA%91%E7%AC%94%E8%AE%B0%E6%9C%AC/</url>
@@ -95,6 +138,45 @@
       <tag>云笔记本</tag>
       
       <tag>Leanote，网站搭建</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Class 5 垃圾分类识别</title>
+    <link href="/2020/12/01/%E9%98%BF%E9%87%8C%E4%BA%91/Class%205%20%E5%9E%83%E5%9C%BE%E5%88%86%E7%B1%BB%E8%AF%86%E5%88%AB/"/>
+    <url>/2020/12/01/%E9%98%BF%E9%87%8C%E4%BA%91/Class%205%20%E5%9E%83%E5%9C%BE%E5%88%86%E7%B1%BB%E8%AF%86%E5%88%AB/</url>
+    
+    <content type="html"><![CDATA[<h2 id="功能描述"><a href="#功能描述" class="headerlink" title="功能描述"></a>功能描述</h2><p>ClassifyingRubbish可以对图片中的物品垃圾进行分类，并给出具体的物品名称。</p><h2 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h2><p>请确保您已开通图像识别服务，若未开通服务请立即开通。</p><p>图片限制</p><ul><li>图片类型：JPEG、JPG、PNG。</li><li>图片大小：图片小于等于3M。</li><li>图片分辨率：不限制图片分辨率，但图片分辨率太高可能会导致API识别超时，超时时间为5秒。<br>URL地址中不能包含中文字符。</li></ul><h2 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h2><p>在OpenAPI Explorer中直接运行该接口。</p><h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><pre><code class="hljs python"><span class="hljs-comment">#!/usr/bin/env python</span><span class="hljs-comment">#coding=utf-8</span><span class="hljs-keyword">from</span> aliyunsdkcore.client <span class="hljs-keyword">import</span> AcsClient<span class="hljs-keyword">from</span> aliyunsdkcore.acs_exception.exceptions <span class="hljs-keyword">import</span> ClientException<span class="hljs-keyword">from</span> aliyunsdkcore.acs_exception.exceptions <span class="hljs-keyword">import</span> ServerException<span class="hljs-keyword">from</span> aliyunsdkimagerecog.request.v20190930.ClassifyingRubbishRequest <span class="hljs-keyword">import</span> ClassifyingRubbishRequestclient = AcsClient(<span class="hljs-string">&#x27;&lt;accessKeyId&gt;&#x27;</span>, <span class="hljs-string">&#x27;&lt;accessSecret&gt;&#x27;</span>, <span class="hljs-string">&#x27;cn-shanghai&#x27;</span>)request = ClassifyingRubbishRequest()request.set_accept_format(<span class="hljs-string">&#x27;json&#x27;</span>)request.set_ImageURL(<span class="hljs-string">&quot;http://viapi-test.oss-cn-shanghai.aliyuncs.com/demo-center/imagerecog/ClassifyingRubbish2.jpg&quot;</span>)response = client.do_action_with_exception(request)<span class="hljs-comment"># python2:  print(response) </span>print(<span class="hljs-built_in">str</span>(response, encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>))</code></pre><h2 id="请求参数"><a href="#请求参数" class="headerlink" title="请求参数"></a>请求参数</h2><p>ImageURL    String    图片URL地址</p><h2 id="常见垃圾输出列举值如下："><a href="#常见垃圾输出列举值如下：" class="headerlink" title="常见垃圾输出列举值如下："></a>常见垃圾输出列举值如下：</h2><p>1.可回收物</p><p>废纸张：纸板箱、报纸、废弃书本、快递纸袋、打印纸、信封、广告单、纸塑铝复合包装（利乐包）。</p><p>废塑料：食品与日用品塑料瓶罐及瓶盖（饮料瓶、奶瓶、洗发水瓶、乳液罐）、食用油桶、塑料碗（盆）、塑料盒子（食品保鲜盒、收纳盒）、塑料玩具（塑料积木、塑料模型）、塑料衣架、施工安全帽、PE塑料、pvc、亚克力板、塑料卡片、密胺餐具、kt板、泡沫（泡沫塑料、水果网套）。</p><p>废玻璃制品：食品及日用品玻璃瓶罐（调料瓶、酒瓶、化妆品瓶）、玻璃杯、窗玻璃、玻璃制品（放大镜、玻璃摆件）、碎玻璃。</p><p>废金属：金属瓶罐（易拉罐、食品罐/桶）、金属厨具（菜刀、锅）、金属工具（刀片、指甲剪、螺丝刀）、金属制品（铁钉、铁皮、铝箔）。</p><p>废织物：旧衣服、床单、枕头、棉被、皮鞋、毛绒玩具（布偶）、棉袄、包、皮带、丝绸制品。</p><p>其它：电路板（主板、内存条）、充电宝、电线、插头、木制品（积木、砧板）。</p><p>2.有害垃圾</p><p>废镍镉电池和废氧化汞电池：充电电池、镉镍电池、铅酸电池、蓄电池、纽扣电池。</p><p>废荧光灯管：荧光（日光）灯管、卤素灯。</p><p>废药品及其包装物：过期药物、药物胶囊、药片、药品内包装。</p><p>废油漆和溶剂及其包装物：废油漆桶、染发剂壳、过期的指甲油、洗甲水。</p><p>废矿物油及其包装物。</p><p>废含汞温度计、废含汞血压计：水银血压计、水银体温计、水银温度计。</p><p>废杀虫剂及其包装：老鼠药（毒鼠强）、杀虫喷雾罐。</p><p>废胶片及废相纸：x光片等感光胶片、相片底片。</p><p>3.厨余垃圾（湿垃圾）</p><p>食材废料：谷物及其加工食品（米、米饭、面、面包、豆类）、肉蛋及其加工食品（鸡、鸭、猪、牛、羊肉、蛋、动物内脏、腊肉、午餐肉、蛋壳）、水产及其加工食品（鱼、鱼鳞、虾、虾壳、鱿鱼）、蔬菜（绿叶菜、根茎蔬菜、菌菇）、调料、酱料。</p><p>剩菜剩饭：火锅汤底（沥干后的固体废弃物）、鱼骨、碎骨、茶叶渣、咖啡渣。</p><p>过期食品：糕饼、糖果、风干食品（肉干、红枣、中药材）、粉末类食品（冲泡饮料、面粉）、宠物饲料。</p><p>瓜皮果核：水果果肉（椰子肉）、水果果皮（西瓜皮、桔子皮、苹果皮）、水果茎枝（葡萄枝）、果实（西瓜籽）。</p><p>花卉植物：家养绿植、花卉、花瓣、枝叶。</p><p>中药药渣。</p><p>4.其他垃圾（干垃圾）</p><p>餐巾纸、卫生间用纸、尿不湿、猫砂、狗尿垫、污损纸张、烟蒂、干燥剂、污损塑料、尼龙制品、编织袋、防碎气泡膜、大骨头、硬贝壳、硬果壳（椰子壳、榴莲壳、核桃壳、玉米衣、甘蔗皮）、硬果实（榴莲核、菠萝蜜核）、毛发、灰土、炉渣、橡皮泥、太空沙、带胶制品（胶水、胶带）、花盆、毛巾、一次性餐具、镜子、陶瓷制品、竹制品（竹篮、竹筷、牙签）、成分复杂的制品（伞、笔、眼镜、打火机）。</p><h2 id="在线调试实例"><a href="#在线调试实例" class="headerlink" title="在线调试实例"></a>在线调试实例</h2><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/2020-11-30/1606728735335-%E6%8D%95%E8%8E%B7.PNG" alt=""></p><p>至于下面这个药品。这个嘛？算法看来还待优化~</p><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/2020-11-30/1606728735342-%E6%8D%95%E8%8E%B700.PNG" alt=""></p><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a href="https://developer.aliyun.com/adc/student/bootcamp/ai/2?spm=a2c6h.13788107.J_3120529270.4.450750a3fjp2m1&amp;accounttraceid=9cafb5972ade4cb484e00857d47625bbdkwh">达摩院特别版-视觉AI训练营</a><a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>]]></content>
+    
+    
+    <categories>
+      
+      <category>学习</category>
+      
+      <category>阿里云</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>阿里云</tag>
+      
+      <tag>达摩院</tag>
+      
+      <tag>AI</tag>
+      
+      <tag>应用</tag>
+      
+      <tag>视觉</tag>
+      
+      <tag>oss存储</tag>
+      
+      <tag>垃圾分类</tag>
       
     </tags>
     
@@ -132,6 +214,61 @@
       <tag>数据库</tag>
       
       <tag>网站搭建</tag>
+      
+      <tag>Apache</tag>
+      
+      <tag>MySQL</tag>
+      
+      <tag>PHP</tag>
+      
+      <tag>PolarDB</tag>
+      
+      <tag>git</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Class 4 车辆保险应用</title>
+    <link href="/2020/11/30/%E9%98%BF%E9%87%8C%E4%BA%91/Class%204%20%E8%BD%A6%E8%BE%86%E4%BF%9D%E9%99%A9%E5%BA%94%E7%94%A8/"/>
+    <url>/2020/11/30/%E9%98%BF%E9%87%8C%E4%BA%91/Class%204%20%E8%BD%A6%E8%BE%86%E4%BF%9D%E9%99%A9%E5%BA%94%E7%94%A8/</url>
+    
+    <content type="html"><![CDATA[<h1 id="实施前准备工作"><a href="#实施前准备工作" class="headerlink" title="实施前准备工作"></a>实施前准备工作</h1><h2 id="一、本地图片上传为OSS"><a href="#一、本地图片上传为OSS" class="headerlink" title="一、本地图片上传为OSS"></a>一、本地图片上传为OSS</h2><p>1.开通oss<br><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/2020-11-30/1606722326491-2020061516095134.png" alt=""></p><p>2.创建Bucket</p><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/2020-11-30/1606722343394-20200615160951329.png" alt=""></p><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/2020-11-30/1606722363856-20200615160951505.png" alt=""></p><h2 id="二、开通目标检测服务"><a href="#二、开通目标检测服务" class="headerlink" title="二、开通目标检测服务"></a>二、开通目标检测服务</h2><p><img src="https://gitee.com/bai_xiao_fei/picture/raw/master/2020-11-30/1606722388611-20200615160952519.png" alt=""></p><h2 id="三、查看所需API"><a href="#三、查看所需API" class="headerlink" title="三、查看所需API"></a>三、查看所需API</h2><p>这里我们用到阿里云视觉智能开放平台提供的三个功能：</p><ul><li>车辆部件识别</li><li>车辆损伤识别</li><li>车险图片分类</li></ul><p>1.车辆部件识别<br>检测图片中车辆部件的位置以及名称。</p><p>2.车辆损伤识别<br>针对常见小汽车车型，识别车辆外观受损部件及损伤类型，可识别数十种车辆部件、五大类外观损伤。（刮擦、凹陷、开裂、褶皱、穿孔）</p><p>3.车险图片分类<br>对输入的车险图片进行分类。</p><h1 id="具体实施"><a href="#具体实施" class="headerlink" title="具体实施"></a>具体实施</h1><h2 id="一、本地图片上传至OSS的upload-py"><a href="#一、本地图片上传至OSS的upload-py" class="headerlink" title="一、本地图片上传至OSS的upload.py"></a>一、本地图片上传至OSS的upload.py</h2><p>1.示例代码</p><pre><code class="hljs python"><span class="hljs-comment"># -*- coding: utf-8 -*-</span><span class="hljs-keyword">import</span> os<span class="hljs-keyword">import</span> random<span class="hljs-keyword">import</span> string<span class="hljs-keyword">import</span> oss2<span class="hljs-comment"># 以下代码展示了文件上传的高级用法，如断点续传、分片上传等。</span><span class="hljs-comment"># 基本的文件上传如上传普通文件、追加文件，请参见object_basic.py</span><span class="hljs-comment"># 首先初始化AccessKeyId、AccessKeySecret、Endpoint等信息。</span><span class="hljs-comment"># 通过环境变量获取，或者把诸如“&lt;你的AccessKeyId&gt;”替换成真实的AccessKeyId等。</span><span class="hljs-comment">#</span><span class="hljs-comment"># 以杭州区域为例，Endpoint可以是：</span><span class="hljs-comment">#   http://oss-cn-hangzhou.aliyuncs.com</span><span class="hljs-comment">#   https://oss-cn-hangzhou.aliyuncs.com</span><span class="hljs-comment"># 分别以HTTP、HTTPS协议访问。</span>access_key_id = os.getenv(<span class="hljs-string">&#x27;OSS_TEST_ACCESS_KEY_ID&#x27;</span>, <span class="hljs-string">&#x27;&lt;你的AccessKeyId&gt;&#x27;</span>)access_key_secret = os.getenv(<span class="hljs-string">&#x27;OSS_TEST_ACCESS_KEY_SECRET&#x27;</span>, <span class="hljs-string">&#x27;&lt;你的AccessKeySecret&gt;&#x27;</span>)bucket_name = os.getenv(<span class="hljs-string">&#x27;OSS_TEST_BUCKET&#x27;</span>, <span class="hljs-string">&#x27;&lt;你的Bucket&gt;&#x27;</span>)endpoint = os.getenv(<span class="hljs-string">&#x27;OSS_TEST_ENDPOINT&#x27;</span>, <span class="hljs-string">&#x27;&lt;你的访问域名&gt;&#x27;</span>)<span class="hljs-comment"># 确认上面的参数都填写正确了</span><span class="hljs-keyword">for</span> param <span class="hljs-keyword">in</span> (access_key_id, access_key_secret, bucket_name, endpoint):    <span class="hljs-keyword">assert</span> <span class="hljs-string">&#x27;&lt;&#x27;</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> param, <span class="hljs-string">&#x27;请设置参数：&#x27;</span> + param<span class="hljs-comment"># 创建Bucket对象，所有Object相关的接口都可以通过Bucket对象来进行</span>bucket = oss2.Bucket(oss2.Auth(access_key_id, access_key_secret), endpoint, bucket_name)<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">random_string</span>(<span class="hljs-params">n</span>):</span>    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&#x27;</span>.join(random.choice(string.ascii_lowercase) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n))<span class="hljs-comment"># 生成一个本地文件用于测试。文件内容是bytes类型。</span>filename = random_string(<span class="hljs-number">32</span>) + <span class="hljs-string">&#x27;.txt&#x27;</span>content = oss2.to_bytes(random_string(<span class="hljs-number">1024</span> * <span class="hljs-number">1024</span>))<span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(filename, <span class="hljs-string">&#x27;wb&#x27;</span>) <span class="hljs-keyword">as</span> fileobj:    fileobj.write(content)<span class="hljs-string">&quot;&quot;&quot;</span><span class="hljs-string">断点续传上传</span><span class="hljs-string">&quot;&quot;&quot;</span><span class="hljs-comment"># 断点续传一：因为文件比较小（小于oss2.defaults.multipart_threshold），</span><span class="hljs-comment"># 所以实际上用的是oss2.Bucket.put_object</span>oss2.resumable_upload(bucket, <span class="hljs-string">&#x27;remote-normal.txt&#x27;</span>, filename)<span class="hljs-comment"># 断点续传二：为了展示的需要，我们指定multipart_threshold可选参数，确保使用分片上传</span>oss2.resumable_upload(bucket, <span class="hljs-string">&#x27;remote-multipart.txt&#x27;</span>, filename, multipart_threshold=<span class="hljs-number">100</span> * <span class="hljs-number">1024</span>)<span class="hljs-string">&quot;&quot;&quot;</span><span class="hljs-string">分片上传</span><span class="hljs-string">&quot;&quot;&quot;</span><span class="hljs-comment"># 也可以直接调用分片上传接口。</span><span class="hljs-comment"># 首先可以用帮助函数设定分片大小，设我们期望的分片大小为128KB</span>total_size = os.path.getsize(filename)part_size = oss2.determine_part_size(total_size, preferred_size=<span class="hljs-number">128</span> * <span class="hljs-number">1024</span>)<span class="hljs-comment"># 初始化分片上传，得到Upload ID。接下来的接口都要用到这个Upload ID。</span>key = <span class="hljs-string">&#x27;remote-multipart2.txt&#x27;</span>upload_id = bucket.init_multipart_upload(key).upload_id<span class="hljs-comment"># 逐个上传分片</span><span class="hljs-comment"># 其中oss2.SizedFileAdapter()把fileobj转换为一个新的文件对象，新的文件对象可读的长度等于size_to_upload</span><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(filename, <span class="hljs-string">&#x27;rb&#x27;</span>) <span class="hljs-keyword">as</span> fileobj:    parts = []    part_number = <span class="hljs-number">1</span>    offset = <span class="hljs-number">0</span>    <span class="hljs-keyword">while</span> offset &lt; total_size:        size_to_upload = <span class="hljs-built_in">min</span>(part_size, total_size - offset)        result = bucket.upload_part(key, upload_id, part_number,                                    oss2.SizedFileAdapter(fileobj, size_to_upload))        parts.append(oss2.models.PartInfo(part_number, result.etag, size = size_to_upload, part_crc = result.crc))        offset += size_to_upload        part_number += <span class="hljs-number">1</span>    <span class="hljs-comment"># 完成分片上传</span>    bucket.complete_multipart_upload(key, upload_id, parts)<span class="hljs-comment"># 验证一下</span><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(filename, <span class="hljs-string">&#x27;rb&#x27;</span>) <span class="hljs-keyword">as</span> fileobj:    <span class="hljs-keyword">assert</span> bucket.get_object(key).read() == fileobj.read()os.remove(filename)</code></pre><h2 id="二、车辆部件识别"><a href="#二、车辆部件识别" class="headerlink" title="二、车辆部件识别"></a>二、车辆部件识别</h2><p>1.请求参数</p><p>ImageURL：图片URL</p><p>2.示例代码<br><pre><code class="hljs python"><span class="hljs-comment">#!/usr/bin/env python</span><span class="hljs-comment">#coding=utf-8</span><span class="hljs-keyword">from</span> aliyunsdkcore.client <span class="hljs-keyword">import</span> AcsClient<span class="hljs-keyword">from</span> aliyunsdkcore.acs_exception.exceptions <span class="hljs-keyword">import</span> ClientException<span class="hljs-keyword">from</span> aliyunsdkcore.acs_exception.exceptions <span class="hljs-keyword">import</span> ServerException<span class="hljs-keyword">from</span> aliyunsdkobjectdet.request.v20191230.RecognizeVehiclePartsRequest <span class="hljs-keyword">import</span> RecognizeVehiclePartsRequestclient = AcsClient(<span class="hljs-string">&#x27;&lt;accessKeyId&gt;&#x27;</span>, <span class="hljs-string">&#x27;&lt;accessSecret&gt;&#x27;</span>, <span class="hljs-string">&#x27;cn-shanghai&#x27;</span>)request = RecognizeVehiclePartsRequest()request.set_accept_format(<span class="hljs-string">&#x27;json&#x27;</span>)request.set_ImageURL(<span class="hljs-string">&quot;http://viapi-test.oss-cn-shanghai.aliyuncs.com/RecognizeVehicleParts.jpg&quot;</span>)response = client.do_action_with_exception(request)<span class="hljs-comment"># python2:  print(response) </span>print(<span class="hljs-built_in">str</span>(response, encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>))</code></pre></p><h2 id="三、车辆损坏识别类"><a href="#三、车辆损坏识别类" class="headerlink" title="三、车辆损坏识别类"></a>三、车辆损坏识别类</h2><p>1.请求参数</p><p>ImageURL：图片URL</p><p>2.示例代码</p><pre><code class="hljs python"><span class="hljs-comment">#!/usr/bin/env python</span><span class="hljs-comment">#coding=utf-8</span><span class="hljs-keyword">from</span> aliyunsdkcore.client <span class="hljs-keyword">import</span> AcsClient<span class="hljs-keyword">from</span> aliyunsdkcore.acs_exception.exceptions <span class="hljs-keyword">import</span> ClientException<span class="hljs-keyword">from</span> aliyunsdkcore.acs_exception.exceptions <span class="hljs-keyword">import</span> ServerException<span class="hljs-keyword">from</span> aliyunsdkobjectdet.request.v20191230.RecognizeVehicleDamageRequest <span class="hljs-keyword">import</span> RecognizeVehicleDamageRequestclient = AcsClient(<span class="hljs-string">&#x27;&lt;accessKeyId&gt;&#x27;</span>, <span class="hljs-string">&#x27;&lt;accessSecret&gt;&#x27;</span>, <span class="hljs-string">&#x27;cn-shanghai&#x27;</span>)request = RecognizeVehicleDamageRequest()request.set_accept_format(<span class="hljs-string">&#x27;json&#x27;</span>)request.set_ImageURL(<span class="hljs-string">&quot;http://viapi-test.oss-cn-shanghai.aliyuncs.com/sanjiye-meizi/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/%E8%BD%A6%E8%BE%86%E6%8D%9F%E4%BC%A4%E8%AF%86%E5%88%AB%20.jpg&quot;</span>)response = client.do_action_with_exception(request)<span class="hljs-comment"># python2:  print(response) </span>print(<span class="hljs-built_in">str</span>(response, encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>))</code></pre><h2 id="四、车险图片分类"><a href="#四、车险图片分类" class="headerlink" title="四、车险图片分类"></a>四、车险图片分类</h2><p>1.请求参数</p><p>ImageURL：图片URL</p><p>2.示例代码</p><pre><code class="hljs python"><span class="hljs-comment">#!/usr/bin/env python</span><span class="hljs-comment">#coding=utf-8</span><span class="hljs-keyword">from</span> aliyunsdkcore.client <span class="hljs-keyword">import</span> AcsClient<span class="hljs-keyword">from</span> aliyunsdkcore.acs_exception.exceptions <span class="hljs-keyword">import</span> ClientException<span class="hljs-keyword">from</span> aliyunsdkcore.acs_exception.exceptions <span class="hljs-keyword">import</span> ServerException<span class="hljs-keyword">from</span> aliyunsdkobjectdet.request.v20191230.ClassifyVehicleInsuranceRequest <span class="hljs-keyword">import</span> ClassifyVehicleInsuranceRequestclient = AcsClient(<span class="hljs-string">&#x27;&lt;accessKeyId&gt;&#x27;</span>, <span class="hljs-string">&#x27;&lt;accessSecret&gt;&#x27;</span>, <span class="hljs-string">&#x27;cn-shanghai&#x27;</span>)request = ClassifyVehicleInsuranceRequest()request.set_accept_format(<span class="hljs-string">&#x27;json&#x27;</span>)request.set_ImageURL(<span class="hljs-string">&quot;http://viapi-test.oss-cn-shanghai.aliyuncs.com/sanjiye-meizi/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/%E8%BD%A6%E9%99%A9%E5%9B%BE%E7%89%87.jpg&quot;</span>)response = client.do_action_with_exception(request)<span class="hljs-comment"># python2:  print(response) </span>print(<span class="hljs-built_in">str</span>(response, encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>))</code></pre><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a href="https://developer.aliyun.com/adc/student/bootcamp/ai/2?spm=a2c6h.13788107.J_3120529270.4.450750a3fjp2m1&amp;accounttraceid=9cafb5972ade4cb484e00857d47625bbdkwh">达摩院特别版-视觉AI训练营</a><a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>]]></content>
+    
+    
+    <categories>
+      
+      <category>学习</category>
+      
+      <category>阿里云</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>阿里云</tag>
+      
+      <tag>达摩院</tag>
+      
+      <tag>AI</tag>
+      
+      <tag>应用</tag>
+      
+      <tag>视觉</tag>
+      
+      <tag>oss存储</tag>
+      
+      <tag>API</tag>
+      
+      <tag>车辆部件识别</tag>
+      
+      <tag>车辆损伤识别</tag>
+      
+      <tag>车险图片分类</tag>
       
     </tags>
     
