@@ -1,0 +1,1069 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head><!-- hexo injector head_begin start -->
+<link rel="stylesheet" href="/css/custom-theme.css">
+<link rel="stylesheet" href="/css/animation.css">
+<!-- hexo injector head_begin end -->
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/pi.jpg">
+  <link rel="icon" href="/img/pi.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="白小飞">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="GPT-2 tokenizer and Whisper tokenizer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GPT-2的字节级字节对编码（Byte-level BPE）深度解析">
+<meta property="og:url" content="https://blog.baixf.shop/2025/05/25/%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB%E5%AD%A6%E4%B9%A0/gpt2_tokenizer/index.html">
+<meta property="og:site_name" content="白小飞のblog">
+<meta property="og:description" content="GPT-2 tokenizer and Whisper tokenizer">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://picture-store-repository.oss-cn-hangzhou.aliyuncs.com/blog/202505251431744.png">
+<meta property="article:published_time" content="2025-05-25T13:00:11.000Z">
+<meta property="article:modified_time" content="2025-07-06T11:26:36.250Z">
+<meta property="article:author" content="白小飞">
+<meta property="article:tag" content="语音识别">
+<meta property="article:tag" content="GPT">
+<meta property="article:tag" content="tokenizer">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://picture-store-repository.oss-cn-hangzhou.aliyuncs.com/blog/202505251431744.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>GPT-2的字节级字节对编码（Byte-level BPE）深度解析 - 白小飞のblog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.baixf.shop","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"32cfe221d23ea3ac2ca847f1e865c570","google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":21061303,"cnzz":1279684341,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?32cfe221d23ea3ac2ca847f1e865c570";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  <style>ins.adsbygoogle[data-ad-status="unfilled"] { display: none !important; }</style>
+<!-- hexo injector head_end start -->
+<script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/global.js"></script>
+<script src="/js/cat/custom-utils.js"></script>
+<script src="/js/cat/onClick.js"></script>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>白小飞のBlog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://picture-store-repository.oss-cn-hangzhou.aliyuncs.com/blog/202505251432900.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="GPT-2的字节级字节对编码（Byte-level BPE）深度解析"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        白小飞
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-05-25 13:00" pubdate>
+          2025年5月25日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          41 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+<aside class="sidebar d-none d-xl-block" style="margin-right:-1rem;z-index:-1"><ins class="adsbygoogle" style="display:flex;justify-content:center;min-width:160px;max-width:300px;width:100%;height:600px;position:sticky;top:2rem" data-ad-client="ca-pub-8876055955767828" data-ad-slot="9285507003"></ins><script> (adsbygoogle = window.adsbygoogle || []).push({}); </script></aside>
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">GPT-2的字节级字节对编码（Byte-level BPE）深度解析</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>在自然语言处理领域，分词（tokenization）是模型处理文本的第一步，也是至关重要的一步。OpenAI在GPT-2中引入的字节级字节对编码（Byte-level Byte-Pair Encoding, BBPE）技术，为多语言文本处理提供了一个优雅且通用的解决方案。本文将深入探讨GPT-2 tokenizer的工作原理，并分析其与Whisper tokenizer的关系。</p>
+<h2 id="字节对编码（BPE）基础概念"><a href="#字节对编码（BPE）基础概念" class="headerlink" title="字节对编码（BPE）基础概念"></a>字节对编码（BPE）基础概念</h2><h3 id="什么是字节对编码"><a href="#什么是字节对编码" class="headerlink" title="什么是字节对编码"></a>什么是字节对编码</h3><p>字节对编码（Byte-Pair Encoding, BPE）最初由Gage在1994年提出，用于数据压缩[1]。在自然语言处理中，BPE被Sennrich等人在2016年改进并应用于神经机器翻译[2]。BPE的核心思想是通过迭代地合并最频繁出现的字符对来构建词汇表。</p>
+<p>传统BPE的工作流程：</p>
+<ol>
+<li>将文本拆分为字符序列</li>
+<li>统计所有相邻字符对的频率</li>
+<li>合并频率最高的字符对</li>
+<li>重复步骤2-3，直到达到预设的词汇表大小</li>
+</ol>
+<h3 id="字节级BPE的创新"><a href="#字节级BPE的创新" class="headerlink" title="字节级BPE的创新"></a>字节级BPE的创新</h3><p>GPT-2引入的字节级BPE（Byte-level BPE）是对传统BPE的重要改进。与传统BPE在字符级别操作不同，BBPE在字节级别操作，这带来了几个关键优势：</p>
+<ol>
+<li><strong>通用性</strong>：能够处理任何UTF-8编码的文本</li>
+<li><strong>鲁棒性</strong>：避免了未知字符（UNK）问题</li>
+<li><strong>一致性</strong>：为所有语言提供统一的处理方式</li>
+</ol>
+<p>根据Hugging Face官方文档，GPT-2的tokenizer”基于字节级字节对编码（Based on byte-level Byte-Pair-Encoding）”，词汇表大小为50,257个token。这个设计使得GPT-2能够处理任何UTF-8编码的文本，而无需担心遇到词汇表外的字符。</p>
+<h2 id="GPT-2-Tokenizer的工作原理"><a href="#GPT-2-Tokenizer的工作原理" class="headerlink" title="GPT-2 Tokenizer的工作原理"></a>GPT-2 Tokenizer的工作原理</h2><h3 id="特殊token设计"><a href="#特殊token设计" class="headerlink" title="特殊token设计"></a>特殊token设计</h3><p>根据官方文档，GPT-2采用了简洁的特殊token设计：</p>
+<ul>
+<li><strong>UNK token</strong>: <code>&lt;|endoftext|&gt;</code>（实际上GPT-2不使用UNK token，因为字节级编码能处理所有字符）</li>
+<li><strong>BOS token</strong>: <code>&lt;|endoftext|&gt;</code>（序列开始标记）</li>
+<li><strong>EOS token</strong>: <code>&lt;|endoftext|&gt;</code>（序列结束标记）</li>
+<li><strong>PAD token</strong>: None（GPT-2通常不使用padding）</li>
+</ul>
+<h3 id="空格处理的特殊机制"><a href="#空格处理的特殊机制" class="headerlink" title="空格处理的特殊机制"></a>空格处理的特殊机制</h3><p>GPT-2的tokenizer有一个重要特性：<strong>它被训练为将空格视为token的一部分</strong>。这意味着同一个词在句子开头（无前置空格）和句子中间（有前置空格）会被编码为不同的token。</p>
+<p>官方示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> transformers <span class="hljs-keyword">import</span> GPT2Tokenizer<br>tokenizer = GPT2Tokenizer.from_pretrained(<span class="hljs-string">&quot;openai-community/gpt2&quot;</span>)<br><br><span class="hljs-comment"># 无前置空格</span><br>tokenizer(<span class="hljs-string">&quot;Hello world&quot;</span>)[<span class="hljs-string">&quot;input_ids&quot;</span>]  <span class="hljs-comment"># [15496, 995]</span><br><br><span class="hljs-comment"># 有前置空格  </span><br>tokenizer(<span class="hljs-string">&quot; Hello world&quot;</span>)[<span class="hljs-string">&quot;input_ids&quot;</span>]  <span class="hljs-comment"># [18435, 995]</span><br></code></pre></td></tr></table></figure>
+
+<p>这种设计允许模型区分词在不同位置的语义差异，提高了语言建模的准确性。</p>
+<h3 id="字节到字符的映射"><a href="#字节到字符的映射" class="headerlink" title="字节到字符的映射"></a>字节到字符的映射</h3><p>GPT-2的tokenizer首先将UTF-8字节映射到Unicode字符。这个映射确保了：</p>
+<ul>
+<li>所有256个可能的字节值都有对应的字符表示</li>
+<li>可打印的ASCII字符保持不变</li>
+<li>其他字节被映射到私用区字符</li>
+</ul>
+<p>这种映射的核心思想是将字节序列转换为可以应用传统BPE算法的字符序列。具体实现中，GPT-2使用了一个精心设计的映射函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 官方实现的简化版本</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">bytes_to_unicode</span>():<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    将字节映射到Unicode字符，确保所有字节都有对应的字符表示</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-comment"># 可打印ASCII字符范围</span><br>    bs = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(<span class="hljs-built_in">ord</span>(<span class="hljs-string">&quot;!&quot;</span>), <span class="hljs-built_in">ord</span>(<span class="hljs-string">&quot;~&quot;</span>)+<span class="hljs-number">1</span>)) + \<br>         <span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(<span class="hljs-built_in">ord</span>(<span class="hljs-string">&quot;¡&quot;</span>), <span class="hljs-built_in">ord</span>(<span class="hljs-string">&quot;¬&quot;</span>)+<span class="hljs-number">1</span>)) + \<br>         <span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(<span class="hljs-built_in">ord</span>(<span class="hljs-string">&quot;®&quot;</span>), <span class="hljs-built_in">ord</span>(<span class="hljs-string">&quot;ÿ&quot;</span>)+<span class="hljs-number">1</span>))<br>    cs = bs[:]<br>    n = <span class="hljs-number">0</span><br>    <span class="hljs-comment"># 为不可打印字节分配私用区字符</span><br>    <span class="hljs-keyword">for</span> b <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">2</span>**<span class="hljs-number">8</span>):<br>        <span class="hljs-keyword">if</span> b <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> bs:<br>            bs.append(b)<br>            cs.append(<span class="hljs-number">2</span>**<span class="hljs-number">8</span>+n)<br>            n += <span class="hljs-number">1</span><br>    cs = [<span class="hljs-built_in">chr</span>(n) <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> cs]<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">dict</span>(<span class="hljs-built_in">zip</span>(bs, cs))<br></code></pre></td></tr></table></figure>
+
+<p>这种设计的巧妙之处在于它既保持了字节级的完整性，又使得可以在字符级别应用BPE算法。</p>
+<h3 id="BPE合并过程"><a href="#BPE合并过程" class="headerlink" title="BPE合并过程"></a>BPE合并过程</h3><p>GPT-2使用预训练的BPE合并规则，这些规则是通过分析大规模语料库得出的。根据官方实现，整个tokenization过程遵循以下步骤：</p>
+<ol>
+<li><strong>预处理</strong>：将输入文本按照特定模式进行正则化</li>
+<li><strong>字节转换</strong>：将文本转换为UTF-8字节序列</li>
+<li><strong>字符映射</strong>：将字节映射为可显示的Unicode字符</li>
+<li><strong>BPE应用</strong>：应用预训练的BPE合并规则</li>
+<li><strong>token化</strong>：将结果映射为token ID</li>
+</ol>
+<p><strong>重要特性</strong>：</p>
+<ul>
+<li>GPT-2的tokenizer会保留和处理空格作为token的一部分</li>
+<li>使用<code>add_prefix_space</code>参数可以控制是否在输入开始处添加空格</li>
+<li>词汇表中的token ID范围是0到50,256，其中50,256是特殊的<code>&lt;|endoftext|&gt;</code>token</li>
+</ul>
+<p>官方示例显示了这种空格敏感的特性：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 演示空格对tokenization的影响</span><br>tokenizer = GPT2Tokenizer.from_pretrained(<span class="hljs-string">&quot;openai-community/gpt2&quot;</span>)<br><br><span class="hljs-comment"># 句子开头的&quot;Hello&quot;（无前置空格）</span><br>tokens1 = tokenizer(<span class="hljs-string">&quot;Hello world&quot;</span>)[<span class="hljs-string">&quot;input_ids&quot;</span>]  <span class="hljs-comment"># [15496, 995]</span><br><br><span class="hljs-comment"># 非句子开头的&quot;Hello&quot;（有前置空格）</span><br>tokens2 = tokenizer(<span class="hljs-string">&quot; Hello world&quot;</span>)[<span class="hljs-string">&quot;input_ids&quot;</span>]  <span class="hljs-comment"># [18435, 995]</span><br></code></pre></td></tr></table></figure>
+
+<p>这种设计使得模型能够区分同一个词在句子中不同位置的语义和语法功能。</p>
+<h2 id="BBPE与其他文本单位的区别与联系"><a href="#BBPE与其他文本单位的区别与联系" class="headerlink" title="BBPE与其他文本单位的区别与联系"></a>BBPE与其他文本单位的区别与联系</h2><p>理解BBPE的一个好方法是将其与其他文本粒度进行对比：</p>
+<h3 id="与字节（Byte）的关系"><a href="#与字节（Byte）的关系" class="headerlink" title="与字节（Byte）的关系"></a>与字节（Byte）的关系</h3><p>BBPE是基于字节操作的分词方法。单个字节是BBPE能够表示的最基本单位，也可能是词汇表中的一个token。但多数BBPE token是由多个字节合并而成，代表比单个字节更大的单元（子词或常用字节模式）。这种设计使得BBPE既保持了字节级别的完整性，又实现了更高效的文本表示。</p>
+<h3 id="与ASCII的区别"><a href="#与ASCII的区别" class="headerlink" title="与ASCII的区别"></a>与ASCII的区别</h3><p>ASCII是一个非常有限的字符集，主要对应单字节（0-127）。BBPE不仅能处理ASCII对应的字节，还能处理所有通过现代编码（如UTF-8）表示的多字节序列。这使得BBPE能够无缝处理全球各种语言和符号，而不像ASCII那样局限于英文字符。</p>
+<h3 id="与字符（Character）的关系"><a href="#与字符（Character）的关系" class="headerlink" title="与字符（Character）的关系"></a>与字符（Character）的关系</h3><p>一个字符可能对应一个或多个字节（如UTF-8编码）。BBPE token是字节序列的组合，其边界不一定与字符的边界严格对齐。一个多字节字符可能被编码为一个BBPE token，也可能被分解成多个BBPE token。例如：</p>
+<ul>
+<li>简单情况：字符’A’（1字节）可能对应一个BBPE token</li>
+<li>复杂情况：字符’中’（3字节）可能被编码为一个token，或者其3个字节被分别处理</li>
+</ul>
+<h3 id="与词（Word）的关系"><a href="#与词（Word）的关系" class="headerlink" title="与词（Word）的关系"></a>与词（Word）的关系</h3><p>BBPE token通常是子词级别的单位。一个完整的词通常由一个或多个BBPE token构成。BBPE的优势在于能够处理词的变体、复合词或训练中未见过的词，通过将其分解成更小的、已知的子词token来表示。同时，BBPE还会将空格等标点纳入token本身，这与传统基于空格分割的词分词方法有显著不同。</p>
+<p>这种层次化的设计使得BBPE能够：</p>
+<ul>
+<li>处理任意的UTF-8文本（字节级保证）</li>
+<li>保持合理的词汇表大小（子词级压缩）</li>
+<li>避免未知词问题（可分解为已知子单元）</li>
+</ul>
+<h3 id="UTF-8编码与多语言支持"><a href="#UTF-8编码与多语言支持" class="headerlink" title="UTF-8编码与多语言支持"></a>UTF-8编码与多语言支持</h3><p>UTF-8是一种变长编码方案：</p>
+<ul>
+<li>ASCII字符（0-127）：1字节编码</li>
+<li>拉丁扩展字符：2字节编码</li>
+<li>中文、日文等：通常3字节编码</li>
+<li>表情符号等：可能4字节编码</li>
+</ul>
+<p>例如：</p>
+<ul>
+<li>‘A’ → 0x41 (1字节)</li>
+<li>‘中’ → 0xE4 0xB8 0xAD (3字节)</li>
+<li>‘🚀’ → 0xF0 0x9F 0x9A 0x80 (4字节)</li>
+</ul>
+<h2 id="多语言支持示例"><a href="#多语言支持示例" class="headerlink" title="多语言支持示例"></a>多语言支持示例</h2><p>GPT-2的BBPE能够有效处理世界各种语言，这得益于其字节级处理机制。以下是具体示例：</p>
+<h3 id="示例1：英文（ASCII范围）"><a href="#示例1：英文（ASCII范围）" class="headerlink" title="示例1：英文（ASCII范围）"></a>示例1：英文（ASCII范围）</h3><figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs prolog">输入: <span class="hljs-string">&quot;Hello world&quot;</span><br><span class="hljs-symbol">UTF</span><span class="hljs-number">-8</span>字节: [<span class="hljs-number">72</span>, <span class="hljs-number">101</span>, <span class="hljs-number">108</span>, <span class="hljs-number">108</span>, <span class="hljs-number">111</span>, <span class="hljs-number">32</span>, <span class="hljs-number">119</span>, <span class="hljs-number">111</span>, <span class="hljs-number">114</span>, <span class="hljs-number">108</span>, <span class="hljs-number">100</span>]<br><span class="hljs-symbol">GPT</span><span class="hljs-number">-2</span> tokens: [<span class="hljs-number">15496</span>, <span class="hljs-number">995</span>]  # [<span class="hljs-string">&quot;Hello&quot;</span>, <span class="hljs-string">&quot; world&quot;</span>]<br>特点: 英文字符大多为单字节，tokenization效率高<br></code></pre></td></tr></table></figure>
+
+<h3 id="示例2：中文（多字节字符）"><a href="#示例2：中文（多字节字符）" class="headerlink" title="示例2：中文（多字节字符）"></a>示例2：中文（多字节字符）</h3><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">输入: &quot;你好世界&quot;</span><br><span class="hljs-section">UTF-8字节: [228, 189, 160, 229, 165, 189, 228, 184, 150, 231, 149, 140]</span><br><span class="hljs-section">处理方式: 3字节/字符 × 4字符 = 12字节</span><br><span class="hljs-section">GPT-2特点: 每个汉字通常占用3个字节，可能被分解为多个BPE token</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="示例3：阿拉伯文（从右到左文字）"><a href="#示例3：阿拉伯文（从右到左文字）" class="headerlink" title="示例3：阿拉伯文（从右到左文字）"></a>示例3：阿拉伯文（从右到左文字）</h3><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">输入: &quot;مرحبا بالعالم&quot; (Hello world in Arabic)</span><br><span class="hljs-section">UTF-8字节: [217, 133, 216, 177, 216, 173, 216, 168, 216, 167, 32, 216, 168, 216, 167, 217, 132, 216, 185, 216, 167, 217, 132, 217, 133]</span><br><span class="hljs-section">特点: 支持从右到左的文字系统，每个阿拉伯字符通常占用2字节</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="示例4：表情符号（4字节字符）"><a href="#示例4：表情符号（4字节字符）" class="headerlink" title="示例4：表情符号（4字节字符）"></a>示例4：表情符号（4字节字符）</h3><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">输入: &quot;😊🌍&quot; </span><br><span class="hljs-section">UTF-8字节: [240, 159, 152, 138, 240, 159, 140, 141]</span><br><span class="hljs-section">处理方式: 4字节/表情符号</span><br><span class="hljs-section">特点: 现代Unicode表情符号，展示了BBPE对复杂字符的处理能力</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="示例5：混合语言文本"><a href="#示例5：混合语言文本" class="headerlink" title="示例5：混合语言文本"></a>示例5：混合语言文本</h3><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs gcode">输入: <span class="hljs-string">&quot;Hello 世界 🌍&quot;</span><br>字节分布: <br>- <span class="hljs-string">&quot;Hello&quot;</span>: [<span class="hljs-number">72</span>, <span class="hljs-number">101</span>, <span class="hljs-number">108</span>, <span class="hljs-number">108</span>, <span class="hljs-number">111</span>] <span class="hljs-comment">(5字节，英文)</span><br>- <span class="hljs-string">&quot; 世界&quot;</span>: [<span class="hljs-number">32</span>, <span class="hljs-number">228</span>, <span class="hljs-number">184</span>, <span class="hljs-number">150</span>, <span class="hljs-number">231</span>, <span class="hljs-number">149</span>, <span class="hljs-number">140</span>] <span class="hljs-comment">(7字节，空格+中文)</span><br>- <span class="hljs-string">&quot; 🌍&quot;</span>: [<span class="hljs-number">32</span>, <span class="hljs-number">240</span>, <span class="hljs-number">159</span>, <span class="hljs-number">140</span>, <span class="hljs-number">141</span>] <span class="hljs-comment">(5字节，空格+表情符号)</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>关键优势</strong>：</p>
+<ol>
+<li><strong>无OOV问题</strong>：任何UTF-8文本都能被处理，不存在”未知词”</li>
+<li><strong>统一处理</strong>：无论语言类型，都使用相同的字节级算法</li>
+<li><strong>压缩效率</strong>：常见的字节序列会被合并为单个token，提高处理效率</li>
+<li><strong>跨语言一致性</strong>：为多语言模型提供了统一的表示空间</li>
+</ol>
+<h2 id="GPT-2与Whisper-Tokenizer的比较"><a href="#GPT-2与Whisper-Tokenizer的比较" class="headerlink" title="GPT-2与Whisper Tokenizer的比较"></a>GPT-2与Whisper Tokenizer的比较</h2><h3 id="相似之处"><a href="#相似之处" class="headerlink" title="相似之处"></a>相似之处</h3><p>GPT-2和Whisper都来自OpenAI，在tokenizer设计上确实存在相似性：</p>
+<ol>
+<li><strong>基础架构</strong>：两者都基于BPE技术</li>
+<li><strong>子词分割</strong>：都使用子词级别的token分割策略</li>
+<li><strong>多语言支持</strong>：都能处理多种语言</li>
+<li><strong>OpenAI传承</strong>：体现了OpenAI在tokenizer设计上的技术积累</li>
+</ol>
+<h3 id="关键差异"><a href="#关键差异" class="headerlink" title="关键差异"></a>关键差异</h3><p>尽管师出同门，但两者在实现上存在重要差异：</p>
+<h4 id="1-编码方式的根本区别"><a href="#1-编码方式的根本区别" class="headerlink" title="1. 编码方式的根本区别"></a>1. 编码方式的根本区别</h4><ul>
+<li><p><strong>GPT-2</strong>：严格的字节级BPE（Byte-level BPE），所有输入都经过字节级处理</p>
+<ul>
+<li>词汇表大小：50,257个token</li>
+<li>特殊token设计简洁：主要使用<code>&lt;|endoftext|&gt;</code></li>
+<li>字节到字符的一对一映射</li>
+</ul>
+</li>
+<li><p><strong>Whisper</strong>：混合方式，虽然基于BPE但不完全是字节级</p>
+<ul>
+<li>词汇表大小：51,865个token  </li>
+<li>包含大量任务和语言特定的特殊token</li>
+<li>针对语音识别任务优化的预处理</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-特殊token系统的复杂度差异"><a href="#2-特殊token系统的复杂度差异" class="headerlink" title="2. 特殊token系统的复杂度差异"></a>2. 特殊token系统的复杂度差异</h4><p><strong>GPT-2的简洁设计</strong>：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">&lt;|endoftext|&gt; (BOS<span class="hljs-regexp">/EOS/</span>UNK通用token)<br></code></pre></td></tr></table></figure>
+
+<p><strong>Whisper的丰富token系统</strong>：</p>
+<figure class="highlight smalltalk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs smalltalk">&lt;|startoftranscript|&gt;<br>&lt;|en|&gt; &lt;|zh|&gt; &lt;|es|&gt; ... (语言标识符)<br>&lt;|transcribe|&gt; &lt;|translate|&gt; &lt;|notimestamps|&gt; (任务类型)<br>&lt;|<span class="hljs-number">0.00</span>|&gt; &lt;|<span class="hljs-number">0.02</span>|&gt; ... (时间戳token)<br></code></pre></td></tr></table></figure>
+
+<h4 id="3-预处理策略差异"><a href="#3-预处理策略差异" class="headerlink" title="3. 预处理策略差异"></a>3. 预处理策略差异</h4><p><strong>GPT-2的处理流程</strong>：</p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gauss">文本 → UTF<span class="hljs-number">-8</span>字节 → 字符映射 → BPE → <span class="hljs-built_in">token</span> IDs<br></code></pre></td></tr></table></figure>
+
+<p><strong>Whisper的处理流程</strong>：</p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gauss">文本 → 语言检测 → 正则化 → BPE → 添加特殊<span class="hljs-built_in">token</span> → <span class="hljs-built_in">token</span> IDs<br></code></pre></td></tr></table></figure>
+
+<h4 id="4-应用场景的专门化"><a href="#4-应用场景的专门化" class="headerlink" title="4. 应用场景的专门化"></a>4. 应用场景的专门化</h4><ul>
+<li><strong>GPT-2</strong>：通用文本生成，设计追求简洁和通用性</li>
+<li><strong>Whisper</strong>：语音识别专用，针对音频转文本任务进行了大量优化</li>
+</ul>
+<h3 id="技术演进关系"><a href="#技术演进关系" class="headerlink" title="技术演进关系"></a>技术演进关系</h3><p>Whisper的tokenizer可以看作是GPT-2经验的继承和发展：</p>
+<ol>
+<li><strong>技术传承</strong>：保留了BPE的核心优势和子词分割思想</li>
+<li><strong>任务适配</strong>：针对自动语音识别（ASR）任务进行了专门优化</li>
+<li><strong>多语言增强</strong>：更完善的多语言处理能力和语言标识系统</li>
+<li><strong>时间信息</strong>：增加了时间戳功能，支持对齐文本与音频</li>
+</ol>
+<h3 id="实际使用差异"><a href="#实际使用差异" class="headerlink" title="实际使用差异"></a>实际使用差异</h3><p><strong>GPT-2 tokenizer特点</strong>：</p>
+<ul>
+<li>处理纯文本，适合文本生成任务</li>
+<li>空格敏感，能区分词在句子中的位置</li>
+<li>字节级完整性，无OOV问题</li>
+</ul>
+<p><strong>Whisper tokenizer特点</strong>：</p>
+<ul>
+<li>针对语音转文本优化</li>
+<li>支持多种语言自动检测</li>
+<li>包含时间戳和任务控制功能</li>
+<li>更复杂的特殊token体系</li>
+</ul>
+<p>这种演进反映了OpenAI在不同应用场景下对tokenizer技术的持续优化和专门化发展。</p>
+<h2 id="技术演进：从GPT-2到tiktoken"><a href="#技术演进：从GPT-2到tiktoken" class="headerlink" title="技术演进：从GPT-2到tiktoken"></a>技术演进：从GPT-2到tiktoken</h2><h3 id="tiktoken：OpenAI的下一代tokenizer"><a href="#tiktoken：OpenAI的下一代tokenizer" class="headerlink" title="tiktoken：OpenAI的下一代tokenizer"></a>tiktoken：OpenAI的下一代tokenizer</h3><p>在GPT-2开创性地引入字节级BPE之后，OpenAI继续在tokenizer技术上创新，最终开发出了tiktoken——一个专为现代语言模型设计的高性能tokenizer库。</p>
+<h4 id="tiktoken的技术创新"><a href="#tiktoken的技术创新" class="headerlink" title="tiktoken的技术创新"></a>tiktoken的技术创新</h4><p><strong>1. 性能革命</strong><br>tiktoken在性能上实现了显著突破：</p>
+<ul>
+<li><strong>速度提升</strong>：比传统开源tokenizer快3-6倍</li>
+<li><strong>Rust实现</strong>：底层使用Rust语言，提供C级别的性能</li>
+<li><strong>内存效率</strong>：优化的数据结构和算法设计</li>
+</ul>
+<p><strong>2. 多编码支持</strong><br>tiktoken支持多种BPE编码方式，适应不同模型的需求：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> tiktoken<br><br><span class="hljs-comment"># GPT-4系列使用的编码</span><br>enc_gpt4 = tiktoken.encoding_for_model(<span class="hljs-string">&quot;gpt-4&quot;</span>)<br><br><span class="hljs-comment"># 不同的预定义编码</span><br>enc_o200k = tiktoken.get_encoding(<span class="hljs-string">&quot;o200k_base&quot;</span>)  <span class="hljs-comment"># 最新编码</span><br>enc_cl100k = tiktoken.get_encoding(<span class="hljs-string">&quot;cl100k_base&quot;</span>)  <span class="hljs-comment"># GPT-4编码</span><br>enc_p50k = tiktoken.get_encoding(<span class="hljs-string">&quot;p50k_base&quot;</span>)    <span class="hljs-comment"># GPT-3.5编码</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>3. 教育性和可视化</strong><br>tiktoken提供了教育模块，帮助理解BPE过程：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> tiktoken._educational <span class="hljs-keyword">import</span> *<br><br><span class="hljs-comment"># 训练一个简单的BPE tokenizer</span><br>enc = train_simple_encoding()<br><br><span class="hljs-comment"># 可视化编码过程</span><br>enc = SimpleBytePairEncoding.from_tiktoken(<span class="hljs-string">&quot;cl100k_base&quot;</span>)<br>enc.encode(<span class="hljs-string">&quot;hello world aaaaaaaaaaaa&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<h4 id="从GPT-2到tiktoken的技术演进路径"><a href="#从GPT-2到tiktoken的技术演进路径" class="headerlink" title="从GPT-2到tiktoken的技术演进路径"></a>从GPT-2到tiktoken的技术演进路径</h4><p><strong>第一阶段：GPT-2 BBPE（2019）</strong></p>
+<ul>
+<li>开创性的字节级BPE设计</li>
+<li>解决多语言统一处理问题</li>
+<li>奠定现代tokenizer基础</li>
+</ul>
+<p><strong>第二阶段：性能优化期（2020-2021）</strong></p>
+<ul>
+<li>识别Python实现的性能瓶颈</li>
+<li>探索更高效的实现方式</li>
+<li>积累大规模应用经验</li>
+</ul>
+<p><strong>第三阶段：tiktoken诞生（2022-2023）</strong></p>
+<ul>
+<li>Rust重写核心算法</li>
+<li>支持多种编码标准</li>
+<li>实现工业级性能突破</li>
+</ul>
+<h4 id="tiktoken的关键技术特性"><a href="#tiktoken的关键技术特性" class="headerlink" title="tiktoken的关键技术特性"></a>tiktoken的关键技术特性</h4><p><strong>1. 可扩展架构</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 支持自定义编码</span><br>custom_enc = tiktoken.Encoding(<br>    name=<span class="hljs-string">&quot;custom_model&quot;</span>,<br>    pat_str=base_pattern,<br>    mergeable_ranks=custom_merges,<br>    special_tokens=&#123;<br>        <span class="hljs-string">&quot;&lt;|start|&gt;&quot;</span>: <span class="hljs-number">100001</span>,<br>        <span class="hljs-string">&quot;&lt;|end|&gt;&quot;</span>: <span class="hljs-number">100002</span>,<br>    &#125;<br>)<br></code></pre></td></tr></table></figure>
+
+<p><strong>2. 插件机制</strong><br>tiktoken支持通过tiktoken_ext命名空间包来扩展新的编码：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs vim">my_tiktoken_extension/<br>├── tiktoken_ext/<br>│   └── my_encodings.<span class="hljs-keyword">py</span><br>└── setup.<span class="hljs-keyword">py</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>3. 压缩效率</strong><br>tiktoken在保持可逆性的同时实现了高效压缩：</p>
+<ul>
+<li>平均每个token对应约4个字节</li>
+<li>保持完全可逆和无损特性</li>
+<li>优化常见子词的识别</li>
+</ul>
+<h3 id="现代应用中的实践"><a href="#现代应用中的实践" class="headerlink" title="现代应用中的实践"></a>现代应用中的实践</h3><h4 id="Whisper中的tiktoken应用"><a href="#Whisper中的tiktoken应用" class="headerlink" title="Whisper中的tiktoken应用"></a>Whisper中的tiktoken应用</h4><p>Whisper作为第一个大规模使用tiktoken的OpenAI模型，展示了其在实际应用中的优势：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># Whisper的tokenization流程（简化）</span><br><span class="hljs-keyword">import</span> whisper<br><span class="hljs-keyword">import</span> tiktoken<br><br><span class="hljs-comment"># 加载模型（内部使用tiktoken）</span><br>model = whisper.load_model(<span class="hljs-string">&quot;turbo&quot;</span>)<br><br><span class="hljs-comment"># 语言检测和文本处理</span><br>audio = whisper.load_audio(<span class="hljs-string">&quot;speech.mp3&quot;</span>)<br>result = model.transcribe(audio)<br><br><span class="hljs-comment"># tiktoken确保高效的token处理</span><br><span class="hljs-built_in">print</span>(result[<span class="hljs-string">&quot;text&quot;</span>])<br></code></pre></td></tr></table></figure>
+
+<h4 id="与传统方法的性能对比"><a href="#与传统方法的性能对比" class="headerlink" title="与传统方法的性能对比"></a>与传统方法的性能对比</h4><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>传统BPE</th>
+<th>GPT-2 BBPE</th>
+<th>tiktoken</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>实现语言</td>
+<td>Python</td>
+<td>Python</td>
+<td>Rust</td>
+</tr>
+<tr>
+<td>相对速度</td>
+<td>1x</td>
+<td>1x</td>
+<td>3-6x</td>
+</tr>
+<tr>
+<td>内存使用</td>
+<td>高</td>
+<td>中</td>
+<td>低</td>
+</tr>
+<tr>
+<td>可扩展性</td>
+<td>有限</td>
+<td>中等</td>
+<td>强</td>
+</tr>
+<tr>
+<td>多编码支持</td>
+<td>无</td>
+<td>无</td>
+<td>有</td>
+</tr>
+</tbody></table>
+<h3 id="技术影响与未来趋势"><a href="#技术影响与未来趋势" class="headerlink" title="技术影响与未来趋势"></a>技术影响与未来趋势</h3><p>tiktoken的出现标志着tokenizer技术进入了新的发展阶段：</p>
+<p><strong>1. 性能标准提升</strong></p>
+<ul>
+<li>将tokenizer性能提升到新的量级</li>
+<li>为大规模语言模型应用扫清性能障碍</li>
+<li>成为行业新的性能基准</li>
+</ul>
+<p><strong>2. 标准化推动</strong></p>
+<ul>
+<li>提供统一的编码接口</li>
+<li>支持多种预训练模型</li>
+<li>促进模型间的兼容性</li>
+</ul>
+<p><strong>3. 开源生态影响</strong></p>
+<ul>
+<li>推动其他开源tokenizer的性能优化</li>
+<li>提供了高质量的参考实现</li>
+<li>降低了高性能tokenizer的使用门槛</li>
+</ul>
+<p><strong>4. 未来发展方向</strong></p>
+<ul>
+<li>支持更多模态的tokenization</li>
+<li>进一步的性能优化</li>
+<li>更好的多语言和跨领域支持</li>
+</ul>
+<p>tiktoken的成功证明了在保持算法创新的同时，工程优化同样能够带来巨大的实用价值，为整个AI领域的发展提供了重要的基础设施支持。</p>
+<h2 id="字节级BPE的优势分析"><a href="#字节级BPE的优势分析" class="headerlink" title="字节级BPE的优势分析"></a>字节级BPE的优势分析</h2><h3 id="1-无OOV问题"><a href="#1-无OOV问题" class="headerlink" title="1. 无OOV问题"></a>1. 无OOV问题</h3><p>传统分词方法经常遇到未登录词（Out-of-Vocabulary, OOV）问题。字节级BPE通过字节级处理完全消除了这个问题，因为任何UTF-8文本都可以表示为字节序列。</p>
+<h3 id="2-多语言统一性"><a href="#2-多语言统一性" class="headerlink" title="2. 多语言统一性"></a>2. 多语言统一性</h3><p>通过在字节级别操作，GPT-2的tokenizer为所有语言提供了统一的处理框架，避免了针对不同语言设计不同分词器的复杂性。</p>
+<h3 id="3-压缩效率"><a href="#3-压缩效率" class="headerlink" title="3. 压缩效率"></a>3. 压缩效率</h3><p>BPE的合并策略能够有效压缩常见的字符序列，提高了模型的处理效率。</p>
+<h3 id="4-鲁棒性"><a href="#4-鲁棒性" class="headerlink" title="4. 鲁棒性"></a>4. 鲁棒性</h3><p>即使遇到编码错误或特殊字符，字节级处理也能保证系统的稳定性。</p>
+<h2 id="实际应用中的考量"><a href="#实际应用中的考量" class="headerlink" title="实际应用中的考量"></a>实际应用中的考量</h2><h3 id="计算复杂度"><a href="#计算复杂度" class="headerlink" title="计算复杂度"></a>计算复杂度</h3><p>字节级BPE的计算复杂度主要取决于：</p>
+<ul>
+<li>文本长度</li>
+<li>BPE合并规则的数量</li>
+<li>字节到字符映射的开销</li>
+</ul>
+<h3 id="内存使用"><a href="#内存使用" class="headerlink" title="内存使用"></a>内存使用</h3><p>相比字符级分词，字节级BPE需要额外的内存来存储：</p>
+<ul>
+<li>字节到字符的映射表</li>
+<li>BPE合并规则</li>
+<li>扩展的词汇表</li>
+</ul>
+<h2 id="未来发展趋势"><a href="#未来发展趋势" class="headerlink" title="未来发展趋势"></a>未来发展趋势</h2><p>字节级BPE技术的发展方向包括：</p>
+<ol>
+<li><strong>效率优化</strong>：减少编码和解码的计算开销</li>
+<li><strong>多模态扩展</strong>：支持图像、音频等多模态数据</li>
+<li><strong>动态词汇表</strong>：根据任务动态调整词汇表</li>
+<li><strong>领域适应</strong>：针对特定领域优化分词效果</li>
+</ol>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>GPT-2的字节级字节对编码代表了分词技术的重要里程碑，通过在字节级别操作，它实现了真正的多语言通用性，为现代自然语言处理奠定了坚实基础。从GPT-2的BBPE到Whisper中使用的tiktoken，我们见证了OpenAI在tokenizer技术上的持续创新和演进。</p>
+<p><strong>技术创新的三个阶段</strong>：</p>
+<ol>
+<li><strong>开创期（GPT-2 BBPE）</strong>：解决了多语言统一处理的根本问题，消除了OOV困扰</li>
+<li><strong>优化期（Whisper集成）</strong>：针对特定任务进行专门化设计，添加了丰富的特殊token系统</li>
+<li><strong>革新期（tiktoken）</strong>：通过工程优化实现性能突破，为大规模应用铺平道路</li>
+</ol>
+<p><strong>核心技术价值</strong>：</p>
+<ul>
+<li><strong>通用性</strong>：字节级处理确保了对任何UTF-8文本的完整支持</li>
+<li><strong>效率性</strong>：从GPT-2的基础实现到tiktoken的3-6倍性能提升</li>
+<li><strong>可扩展性</strong>：支持自定义编码和插件机制，适应不同应用需求</li>
+<li><strong>标准化</strong>：为整个AI行业提供了高质量的tokenizer参考实现</li>
+</ul>
+<p><strong>对AI发展的深远影响</strong>：</p>
+<p>这种技术演进不仅体现了OpenAI在基础设施建设上的前瞻性，也为整个AI领域的发展提供了重要启示。从解决基本问题（多语言处理）到性能优化（tiktoken），再到任务专门化（Whisper），展现了技术发展的完整路径。</p>
+<p>理解字节级BPE的工作原理和演进历程，不仅有助于更好地使用现有模型，也为开发新的多语言处理系统和下一代tokenizer技术提供了重要的理论基础和实践指导。随着AI模型规模的不断扩大和应用场景的日益复杂，高效、通用、可扩展的tokenizer技术将继续发挥关键作用。</p>
+<hr>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a href="">Gage, P. (1994). A new algorithm for data compression. C Users Journal, 12(2), 23-38.</a>
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a href="">Sennrich, R., Haddow, B., &amp; Birch, A. (2016). Neural machine translation of rare words with subword units. Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), 1715-1725.</a>
+<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:3" class="footnote-text"><span><a href="">Radford, A., Wu, J., Child, R., Luan, D., Amodei, D., &amp; Sutskever, I. (2019). Language models are unsupervised multitask learners. OpenAI blog, 1(8), 9.</a>
+<a href="#fnref:3" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:4" class="footnote-text"><span><a href="">Radford, A., Kim, J. W., Xu, T., Brockman, G., McLeavey, C., &amp; Sutskever, I. (2022). Robust speech recognition via large-scale weak supervision. arXiv preprint arXiv:2212.04356.</a>
+<a href="#fnref:4" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:5" class="footnote-text"><span><a href="">Kudo, T., &amp; Richardson, J. (2018). SentencePiece: A simple and language independent subword tokenizer and detokenizer for neural text processing. Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing: System Demonstrations, 66-71.</a>
+<a href="#fnref:5" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:6" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://github.com/openai/gpt-2">GPT-2 Source Code. (2019). OpenAI. Retrieved from https://github.com/openai/gpt-2</a>
+<a href="#fnref:6" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:7" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://github.com/openai/whisper">Whisper Source Code. (2022). OpenAI. Retrieved from https://github.com/openai/whisper</a>
+<a href="#fnref:7" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:8" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers/en/model_doc/gpt2">Hugging Face Transformers Documentation. (2024). OpenAI GPT2. Retrieved from https://huggingface.co/docs/transformers/en/model_doc&#x2F;gpt2</a>
+<a href="#fnref:8" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:9" class="footnote-text"><span><a href="">Wolf, T., Debut, L., Sanh, V., Chaumond, J., Delangue, C., Moi, A., … &amp; Rush, A. M. (2020). Transformers: State-of-the-art natural language processing. Proceedings of the 2020 conference on empirical methods in natural language processing: system demonstrations, 38-45.</a>
+<a href="#fnref:9" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:10" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://github.com/openai/tiktoken">tiktoken: A fast BPE tokeniser for use with OpenAI’s models. (2023). OpenAI. Retrieved from https://github.com/openai/tiktoken</a>
+<a href="#fnref:10" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:11" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://keras.io/keras_hub/api/models/gpt2/gpt2_tokenizer/">Keras Hub Documentation. (2024). GPT2Tokenizer. Retrieved from https://keras.io/keras_hub&#x2F;api&#x2F;models&#x2F;gpt2&#x2F;gpt2_tokenizer&#x2F;</a>
+<a href="#fnref:11" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:12" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://github.com/openai/whisper/tree/main">OpenAI Whisper: Robust Speech Recognition via Large-Scale Weak Supervision. (2022). GitHub Repository. Retrieved from https://github.com/openai/whisper/tree/main</a>
+<a href="#fnref:12" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%AD%A6%E4%B9%A0/" class="category-chain-item">学习</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%AD%A6%E4%B9%A0/%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB/" class="category-chain-item">语音识别</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB/" class="print-no-link">#语音识别</a>
+      
+        <a href="/tags/GPT/" class="print-no-link">#GPT</a>
+      
+        <a href="/tags/tokenizer/" class="print-no-link">#tokenizer</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>GPT-2的字节级字节对编码（Byte-level BPE）深度解析</div>
+      <div>https://blog.baixf.shop/2025/05/25/语音识别学习/gpt2_tokenizer/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>白小飞</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年5月25日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+<div style="width:100%;display:flex;justify-content:center;margin-bottom:1.5rem"><ins class="adsbygoogle" style="display:flex;justify-content:center;max-width:845px;width:100%;height:90px" data-ad-client="ca-pub-8876055955767828" data-ad-slot="9285507003"></ins><script> (adsbygoogle = window.adsbygoogle || []).push({}); </script></div>
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/06/16/paper/overleaf%20-%3E%20arxiv%20%E4%B8%9D%E6%BB%91%E6%8F%90%E4%BA%A4%E8%BF%87%E7%A8%8B/" title="overleaf -&gt; arxiv 丝滑提交过程">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">overleaf -&gt; arxiv 丝滑提交过程</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/05/14/git/%E8%A7%A3%E5%86%B3%20Git%20%E4%B8%8D%E5%8C%BA%E5%88%86%E5%A4%A7%E5%B0%8F%E5%86%99%E5%AF%BC%E8%87%B4%E7%9A%84%E6%96%87%E4%BB%B6%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/" title="解决 Git 不区分大小写导致的文件冲突问题">
+                        <span class="hidden-mobile">解决 Git 不区分大小写导致的文件冲突问题</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8876055955767828" crossorigin="anonymous"></script>
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

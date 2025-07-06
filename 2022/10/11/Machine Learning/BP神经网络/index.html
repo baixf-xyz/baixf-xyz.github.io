@@ -1,0 +1,773 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head><!-- hexo injector head_begin start -->
+<link rel="stylesheet" href="/css/custom-theme.css">
+<link rel="stylesheet" href="/css/animation.css">
+<!-- hexo injector head_begin end -->
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/pi.jpg">
+  <link rel="icon" href="/img/pi.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="白小飞">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="😋win">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BP神经网络">
+<meta property="og:url" content="https://blog.baixf.shop/2022/10/11/Machine%20Learning/BP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/index.html">
+<meta property="og:site_name" content="白小飞のblog">
+<meta property="og:description" content="😋win">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://picture-store-repository.oss-cn-hangzhou.aliyuncs.com/blog/9602672-aac10bca9990f5ed.png">
+<meta property="article:published_time" content="2022-10-11T12:55:11.000Z">
+<meta property="article:modified_time" content="2025-07-06T11:26:36.239Z">
+<meta property="article:author" content="白小飞">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="反向传播">
+<meta property="article:tag" content="梯度下降">
+<meta property="article:tag" content="链式求导">
+<meta property="article:tag" content="正向传播">
+<meta property="article:tag" content="BP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://picture-store-repository.oss-cn-hangzhou.aliyuncs.com/blog/9602672-aac10bca9990f5ed.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>BP神经网络 - 白小飞のblog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.baixf.shop","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"32cfe221d23ea3ac2ca847f1e865c570","google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":21061303,"cnzz":1279684341,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?32cfe221d23ea3ac2ca847f1e865c570";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  <style>ins.adsbygoogle[data-ad-status="unfilled"] { display: none !important; }</style>
+<!-- hexo injector head_end start -->
+<script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/global.js"></script>
+<script src="/js/cat/custom-utils.js"></script>
+<script src="/js/cat/onClick.js"></script>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>白小飞のBlog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://picture-store-repository.oss-cn-hangzhou.aliyuncs.com/blog/111.drawio.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="BP神经网络"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        白小飞
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-10-11 12:55" pubdate>
+          2022年10月11日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          10 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+<aside class="sidebar d-none d-xl-block" style="margin-right:-1rem;z-index:-1"><ins class="adsbygoogle" style="display:flex;justify-content:center;min-width:160px;max-width:300px;width:100%;height:600px;position:sticky;top:2rem" data-ad-client="ca-pub-8876055955767828" data-ad-slot="9285507003"></ins><script> (adsbygoogle = window.adsbygoogle || []).push({}); </script></aside>
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">BP神经网络</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>BP神经网络是一种多层的前馈神经网络，其主要的特点是：信号是前向传播的，而误差是反向传播的。具体来说，对于如下的只含一个隐层的神经网络模型：</p>
+<p><img src="https://picture-store-repository.oss-cn-hangzhou.aliyuncs.com/blog/9602672-aac10bca9990f5ed.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>BP神经网络的过程主要分为两个阶段，第一阶段是信号的前向传播，从输入层经过隐含层，最后到达输出层；第二阶段是误差的反向传播，从输出层到隐含层，最后到输入层，依次调节隐含层到输出层的权重和偏置，输入层到隐含层的权重和偏置。</p>
+<h2 id="前向传播"><a href="#前向传播" class="headerlink" title="前向传播"></a>前向传播</h2><p>这是一个基础的三层神经网络，按顺序分别是输入层，隐藏层，输出层，传播公式如下图所示。</p>
+<p><img src="https://picture-store-repository.oss-cn-hangzhou.aliyuncs.com/blog/111.drawio.png" srcset="/img/loading.gif" lazyload alt="111.drawio"></p>
+<p>其中X作为输入的一个特征，在这里我们把特征数字化表示成一个数字；w代表权重；b是一个偏差；Loss是损失函数，用于梯度下降计算；a代表节点激活，这里用到了归激活函数sigmoid，sigmoid是一个归一化函数他要把归一化到0-1之间，方便收敛和标签值比较，判断误差，这样通过缩小误差来达到模型的预测功能。最后的得到的a2是前向传播的结果也就是我们模型预测结果分类标签。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">forward</span>(<span class="hljs-params">x, w1, b1, w2, b2</span>):<br>    z1 = np.dot(x, w1) + b1<br>    a1 = sigmoid(z1)<br>    z2 = np.dot(a1, w2) + b2<br>    a2 = sigmoid(z2)<br>    <span class="hljs-keyword">return</span> z1, a1, z2, a2<br></code></pre></td></tr></table></figure>
+
+<h2 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a>反向传播</h2><p>前向传播相当于是一组用来训练的数据，我们要通过这次前向传播得到的结果和我们的分类标签相减得到误差。我们希望缩小误差让我们的模型有更好的训练效果，这时候就要用到反向传播们这里用的是梯度下降法，让误差按照梯度的方向减小，最后训练打到我们预期的效果。</p>
+<p><img src="https://picture-store-repository.oss-cn-hangzhou.aliyuncs.com/blog/bgdrawio.png" srcset="/img/loading.gif" lazyload alt="bgdrawio"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">backward</span>(<span class="hljs-params">x, y, w1, b1, w2, b2, z1, a1, z2, a2</span>):<br>    dz2 = (a2 - y) * d_sigmoid(z2)<br>    dw2 = np.dot(a1.T, dz2)<br>    db2 = np.<span class="hljs-built_in">sum</span>(dz2, axis=<span class="hljs-number">0</span>)<br>    da1 = np.dot(dz2, w2.T)<br>    dz1 = da1 * d_sigmoid(z1)<br>    dw1 = np.dot(x.T, dz1)<br>    db1 = np.<span class="hljs-built_in">sum</span>(dz1, axis=<span class="hljs-number">0</span>)<br>    <span class="hljs-keyword">return</span> dw1, db1, dw2, db2<br></code></pre></td></tr></table></figure>
+
+<h2 id="参数更新"><a href="#参数更新" class="headerlink" title="参数更新"></a>参数更新</h2><p>通过一次正向传播，和一次反向传播，我们就可以将网络的参数更新一次，所谓参数更新本质就是训练网络，就是让正向传播和反向传播不断的往复进行，不断地更新网络的参数，最终使网络能够逼近真实的关系。理论上，只要网络的层数足够深，节点数足够多，可以逼近任何一个函数关系。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">update</span>(<span class="hljs-params">w1, b1, w2, b2, dw1, db1, dw2, db2, lr</span>):<br>    w1 -= lr * dw1<br>    b1 -= lr * db1<br>    w2 -= lr * dw2<br>    b2 -= lr * db2<br>    <span class="hljs-keyword">return</span> w1, b1, w2, b2<br></code></pre></td></tr></table></figure>
+
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># BP神经网络拟合非线性曲线</span><br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br>plt.rcParams[<span class="hljs-string">&#x27;axes.unicode_minus&#x27;</span>] = <span class="hljs-literal">False</span><br>plt.rcParams[<span class="hljs-string">&#x27;font.sans-serif&#x27;</span>] = [<span class="hljs-string">&#x27;SimHei&#x27;</span>]<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">sigmoid</span>(<span class="hljs-params">x</span>):<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span> / (<span class="hljs-number">1</span> + np.exp(-x))<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">d_sigmoid</span>(<span class="hljs-params">x</span>):<br>    <span class="hljs-keyword">return</span> sigmoid(x) * (<span class="hljs-number">1</span> - sigmoid(x))<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">forward</span>(<span class="hljs-params">x, w1, b1, w2, b2</span>):<br>    z1 = np.dot(x, w1) + b1<br>    a1 = sigmoid(z1)<br>    z2 = np.dot(a1, w2) + b2<br>    a2 = sigmoid(z2)<br>    <span class="hljs-keyword">return</span> z1, a1, z2, a2<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">loss</span>(<span class="hljs-params">y, a2</span>):<br>    <span class="hljs-keyword">return</span> np.mean(np.square(y - a2)/<span class="hljs-number">2</span>)<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">backward</span>(<span class="hljs-params">x, y, w1, b1, w2, b2, z1, a1, z2, a2</span>):<br>    dz2 = (a2 - y) * d_sigmoid(z2)<br>    dw2 = np.dot(a1.T, dz2)<br>    db2 = np.<span class="hljs-built_in">sum</span>(dz2, axis=<span class="hljs-number">0</span>)<br>    da1 = np.dot(dz2, w2.T)<br>    dz1 = da1 * d_sigmoid(z1)<br>    dw1 = np.dot(x.T, dz1)<br>    db1 = np.<span class="hljs-built_in">sum</span>(dz1, axis=<span class="hljs-number">0</span>)<br>    <span class="hljs-keyword">return</span> dw1, db1, dw2, db2<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">update</span>(<span class="hljs-params">w1, b1, w2, b2, dw1, db1, dw2, db2, lr</span>):<br>    w1 -= lr * dw1<br>    b1 -= lr * db1<br>    w2 -= lr * dw2<br>    b2 -= lr * db2<br>    <span class="hljs-keyword">return</span> w1, b1, w2, b2<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">train</span>(<span class="hljs-params">x, y, w1, b1, w2, b2, lr, epoch</span>):<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(epoch):<br>        z1, a1, z2, a2 = forward(x, w1, b1, w2, b2)<br>        dw1, db1, dw2, db2 = backward(x, y, w1, b1, w2, b2, z1, a1, z2, a2)<br>        w1, b1, w2, b2 = update(w1, b1, w2, b2, dw1, db1, dw2, db2, lr)<br>        <span class="hljs-keyword">if</span> i % <span class="hljs-number">10</span> == <span class="hljs-number">0</span>:<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;epoch: &#123;&#125;, loss: &#123;&#125;&#x27;</span>.<span class="hljs-built_in">format</span>(i, loss(y, a2)))<br>    <span class="hljs-keyword">return</span> w1, b1, w2, b2<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">predict</span>(<span class="hljs-params">x, w1, b1, w2, b2</span>):<br>    z1, a1, z2, a2 = forward(x, w1, b1, w2, b2)<br>    <span class="hljs-keyword">return</span> a2<br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    x = np.linspace(-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">100</span>)[:, np.newaxis]<br>    noise = np.random.normal(<span class="hljs-number">0</span>, <span class="hljs-number">0.1</span>, size=x.shape)<br>    y = np.square(x) + noise<br>    w1 = np.random.normal(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, size=(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>))<br>    b1 = np.zeros(<span class="hljs-number">10</span>)<br>    w2 = np.random.normal(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, size=(<span class="hljs-number">10</span>, <span class="hljs-number">1</span>))<br>    b2 = np.zeros(<span class="hljs-number">1</span>)<br>    w1, b1, w2, b2 = train(x, y, w1, b1, w2, b2, lr=<span class="hljs-number">0.1</span>, epoch=<span class="hljs-number">1000</span>)<br>    y_pred = predict(x, w1, b1, w2, b2)<br>    plt.scatter(x, y)<br>    plt.plot(x, y_pred, <span class="hljs-string">&#x27;r-&#x27;</span>, lw=<span class="hljs-number">3</span>)<br>    plt.show()<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://picture-store-repository.oss-cn-hangzhou.aliyuncs.com/blog/Figure_1.png" srcset="/img/loading.gif" lazyload alt="Figure_1"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>参数（包括权重、偏置）一开始是随机初始化的，具有不确定性，反向传播是基于梯度的，是为了让模型的参数接近最佳值；</p>
+<p>求导基于链式法则，找到这个权重（或偏置）是怎么影响最终的误差的，是否影响多个输出值误差；</p>
+<p><img src="https://picture-store-repository.oss-cn-hangzhou.aliyuncs.com/blog/BP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C.drawio.png" srcset="/img/loading.gif" lazyload alt="BP神经网络.drawio"></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_56619527/article/details/122483942">神经网络学习笔记1——BP神经网络原理到编程实现</a>
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/411997259">手撸神经网络（2）–BP算法</a>
+<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%AD%A6%E4%B9%A0/" class="category-chain-item">学习</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%AD%A6%E4%B9%A0/python/" class="category-chain-item">python</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/python/" class="print-no-link">#python</a>
+      
+        <a href="/tags/%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD/" class="print-no-link">#反向传播</a>
+      
+        <a href="/tags/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D/" class="print-no-link">#梯度下降</a>
+      
+        <a href="/tags/%E9%93%BE%E5%BC%8F%E6%B1%82%E5%AF%BC/" class="print-no-link">#链式求导</a>
+      
+        <a href="/tags/%E6%AD%A3%E5%90%91%E4%BC%A0%E6%92%AD/" class="print-no-link">#正向传播</a>
+      
+        <a href="/tags/BP/" class="print-no-link">#BP</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>BP神经网络</div>
+      <div>https://blog.baixf.shop/2022/10/11/Machine Learning/BP神经网络/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>白小飞</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年10月11日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+<div style="width:100%;display:flex;justify-content:center;margin-bottom:1.5rem"><ins class="adsbygoogle" style="display:flex;justify-content:center;max-width:845px;width:100%;height:90px" data-ad-client="ca-pub-8876055955767828" data-ad-slot="9285507003"></ins><script> (adsbygoogle = window.adsbygoogle || []).push({}); </script></div>
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/10/21/Data%20Structure/%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/" title="实验报告">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">实验报告</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/09/25/%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB%E5%AD%A6%E4%B9%A0/Class%2010%20%E7%AB%AF%E5%88%B0%E7%AB%AF%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB/" title="Class 10 端到端语音识别">
+                        <span class="hidden-mobile">Class 10 端到端语音识别</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8876055955767828" crossorigin="anonymous"></script>
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
